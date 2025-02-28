@@ -2,14 +2,14 @@
 {
     public class Facture 
     {
-        private Guid Id { get; set; }
-        private double Prix_admission {  get; set; }
-        private double Prix_medecin { get; set; }
-        private double Prix_medicament {  get; set; }
-        private double Prix_materiel {  get; set; }
+        public Guid Id { get; set; }
+        public double Prix_admission {  get; set; }
+        public double Prix_medecin { get; set; }
+        public double Prix_medicament {  get; set; }
+        public double Prix_materiel {  get; set; }
 
-        public int PatientId { get; set; }
+        public Guid PatientId { get; set; }
         public Patient Patient { get; set; }
-        public ICollection<FactureMedicament> FactureMedicaments { get; set; } = new List<FactureMedicament>();
+        public ICollection<Medicament> Medicaments { get; set; } = new List<Medicament>();
     }
 }

@@ -2,10 +2,10 @@
 {
     public class Visiteur
     {
-        private Guid Id {  get; set; }
-        private string Nom { get; set; }
-        private string Prenom { get; set; }
-        private string Email { get; set; }
-        private string Phone { get; set; }
+        public Guid Id {  get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
     }
 }

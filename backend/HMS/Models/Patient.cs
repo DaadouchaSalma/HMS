@@ -10,10 +10,9 @@
 
 
         public ICollection<RendezVous> RendezVous { get; set; } = new List<RendezVous>();
-        public ICollection<Facture> Factures { get; set; } = new List<Facture>();
+        public Facture Facture { get; set; }
         public DossierM DossierMedical { get; set; }
-        public int ChambreId { get; set; }
-        public Chambre Chambre { get; set; }
+        public ICollection<Chambre> Chambres { get; set; } = new List<Chambre>();
 
     }
 }

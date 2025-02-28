@@ -1,198 +1,206 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\",
+  "WorkspaceRootPath": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\med_mat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\med_mat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\facture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\facture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\facturemedicament.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\facturemedicament.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\rdvcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\rdvcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\rendezvous.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\rendezvous.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\rendezvous.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\dossierm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\dossierm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\medecin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\medecin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\medecin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\pharmacien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\pharmacien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\pharmacien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\personnelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\personnelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\chambre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\chambre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\pharmaciecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\pharmaciecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\visiteurcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\visiteurcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\medecincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\medecincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\medmatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\medmatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\facturecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\facturecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\dossiermcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\dossiermcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\controllers\\chambrecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\chambrecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\visiteurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\visiteurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\rdvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\rdvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\pharmacierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\pharmacierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\adminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\adminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\personnelrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\personnelrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\patientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\patientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\medecinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\medecinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\medmatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\medmatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\facturerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\facturerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\dossiermrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\dossiermrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\repositories\\chambrerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\chambrerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\ivisiteurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ivisiteurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\irdvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\irdvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\ipharmacierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ipharmacierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\iadminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\iadminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\ipersonnelrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ipersonnelrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\ipatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ipatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\imedecinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\imedecinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\imedmatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\imedmatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\ifacturerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ifacturerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\idossiermrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\idossiermrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\interfaces\\ichambrerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ichambrerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\visiteur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\visiteur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\personneladministrative.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\personneladministrative.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\personneladministrative.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\models\\personnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\personnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\personnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\source\\repos\\hms\\hms.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\visiteur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\visiteur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\facture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\facture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\facturemedicament.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\facturemedicament.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\medicament.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\medicament.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\chambre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\chambre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\chambrepatient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\chambrepatient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\models\\dossierm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:models\\dossierm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\hms.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:hms.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\rdvcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\rdvcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\personnelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\personnelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\pharmaciecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\pharmaciecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\visiteurcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\visiteurcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\medecincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\medecincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\medmatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\medmatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\facturecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\facturecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\dossiermcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\dossiermcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\controllers\\chambrecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:controllers\\chambrecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\visiteurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\visiteurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\rdvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\rdvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\pharmacierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\pharmacierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\adminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\adminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\personnelrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\personnelrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\patientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\patientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\medecinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\medecinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\medmatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\medmatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\facturerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\facturerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\dossiermrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\dossiermrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\repositories\\chambrerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:repositories\\chambrerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\ivisiteurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ivisiteurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\irdvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\irdvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\ipharmacierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ipharmacierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\iadminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\iadminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\ipersonnelrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ipersonnelrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\ipatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ipatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\imedecinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\imedecinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\imedmatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\imedmatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\ifacturerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ifacturerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\idossiermrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\idossiermrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|c:\\users\\daadoucha salma\\onedrive\\bureau\\hms\\backend\\hms\\interfaces\\ichambrerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B89B426D-3EB7-4EF6-A90A-FF6D12D904A1}|HMS.csproj|solutionrelative:interfaces\\ichambrerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -202,49 +210,224 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RendezVous.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\RendezVous.cs",
+              "RelativeDocumentMoniker": "Models\\RendezVous.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\RendezVous.cs",
+              "RelativeToolTip": "Models\\RendezVous.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:47:32.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Pharmacien.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Pharmacien.cs",
+              "RelativeDocumentMoniker": "Models\\Pharmacien.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Pharmacien.cs",
+              "RelativeToolTip": "Models\\Pharmacien.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:44:36.396Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "PersonnelAdministrative.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\PersonnelAdministrative.cs",
+              "RelativeDocumentMoniker": "Models\\PersonnelAdministrative.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\PersonnelAdministrative.cs",
+              "RelativeToolTip": "Models\\PersonnelAdministrative.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:43:49.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Personnel.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Personnel.cs",
+              "RelativeDocumentMoniker": "Models\\Personnel.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Personnel.cs",
+              "RelativeToolTip": "Models\\Personnel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:34:35.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Patient.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Patient.cs",
+              "RelativeDocumentMoniker": "Models\\Patient.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Patient.cs",
+              "RelativeToolTip": "Models\\Patient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:45:23.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Medecin.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Medecin.cs",
+              "RelativeDocumentMoniker": "Models\\Medecin.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Medecin.cs",
+              "RelativeToolTip": "Models\\Medecin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:39:58.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Visiteur.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Visiteur.cs",
+              "RelativeDocumentMoniker": "Models\\Visiteur.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Visiteur.cs",
+              "RelativeToolTip": "Models\\Visiteur.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T17:17:05.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Facture.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Facture.cs",
+              "RelativeDocumentMoniker": "Models\\Facture.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Facture.cs",
+              "RelativeToolTip": "Models\\Facture.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAwAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:50:52.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "FactureMedicament.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\FactureMedicament.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\FactureMedicament.cs",
               "RelativeDocumentMoniker": "Models\\FactureMedicament.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\FactureMedicament.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\FactureMedicament.cs",
               "RelativeToolTip": "Models\\FactureMedicament.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T20:12:23.119Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAYwDAAAABBAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwA4AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T17:48:48.229Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
+              "Title": "Medicament.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Medicament.cs",
+              "RelativeDocumentMoniker": "Models\\Medicament.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Medicament.cs",
+              "RelativeToolTip": "Models\\Medicament.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T17:05:17.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Chambre.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Chambre.cs",
+              "RelativeDocumentMoniker": "Models\\Chambre.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\Chambre.cs",
+              "RelativeToolTip": "Models\\Chambre.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:54:00.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ChambrePatient.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\ChambrePatient.cs",
+              "RelativeDocumentMoniker": "Models\\ChambrePatient.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\ChambrePatient.cs",
+              "RelativeToolTip": "Models\\ChambrePatient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T17:12:30.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DossierM.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\DossierM.cs",
+              "RelativeDocumentMoniker": "Models\\DossierM.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Models\\DossierM.cs",
+              "RelativeToolTip": "Models\\DossierM.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T16:55:15.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "HMS.csproj",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\HMS.csproj",
+              "RelativeDocumentMoniker": "HMS.csproj",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\HMS.csproj",
+              "RelativeToolTip": "HMS.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-26T16:26:27.745Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T19:28:32.903Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "RdvController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\RdvController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\RdvController.cs",
               "RelativeDocumentMoniker": "Controllers\\RdvController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\RdvController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\RdvController.cs",
               "RelativeToolTip": "Controllers\\RdvController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -252,98 +435,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Patient.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Patient.cs",
-              "RelativeDocumentMoniker": "Models\\Patient.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Patient.cs",
-              "RelativeToolTip": "Models\\Patient.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAzwBEAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:45:23.428Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "RendezVous.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\RendezVous.cs",
-              "RelativeDocumentMoniker": "Models\\RendezVous.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\RendezVous.cs",
-              "RelativeToolTip": "Models\\RendezVous.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:47:32.415Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Facture.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Facture.cs",
-              "RelativeDocumentMoniker": "Models\\Facture.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Facture.cs",
-              "RelativeToolTip": "Models\\Facture.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:50:52.864Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DossierM.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\DossierM.cs",
-              "RelativeDocumentMoniker": "Models\\DossierM.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\DossierM.cs",
-              "RelativeToolTip": "Models\\DossierM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:55:15.326Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Med_Mat.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Med_Mat.cs",
-              "RelativeDocumentMoniker": "Models\\Med_Mat.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Med_Mat.cs",
-              "RelativeToolTip": "Models\\Med_Mat.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T17:05:17.288Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Medecin.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Medecin.cs",
-              "RelativeDocumentMoniker": "Models\\Medecin.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Medecin.cs",
-              "RelativeToolTip": "Models\\Medecin.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:39:58.349Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Pharmacien.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Pharmacien.cs",
-              "RelativeDocumentMoniker": "Models\\Pharmacien.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Pharmacien.cs",
-              "RelativeToolTip": "Models\\Pharmacien.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:44:36.396Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 17,
               "Title": "PersonnelController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\PersonnelController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\PersonnelController.cs",
               "RelativeDocumentMoniker": "Controllers\\PersonnelController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\PersonnelController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\PersonnelController.cs",
               "RelativeToolTip": "Controllers\\PersonnelController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -351,23 +447,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Chambre.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Chambre.cs",
-              "RelativeDocumentMoniker": "Models\\Chambre.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Chambre.cs",
-              "RelativeToolTip": "Models\\Chambre.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABRAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:54:00.361Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\AdminController.cs",
               "RelativeToolTip": "Controllers\\AdminController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -375,11 +459,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 19,
               "Title": "PharmacieController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\PharmacieController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\PharmacieController.cs",
               "RelativeDocumentMoniker": "Controllers\\PharmacieController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\PharmacieController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\PharmacieController.cs",
               "RelativeToolTip": "Controllers\\PharmacieController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -387,11 +471,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 20,
               "Title": "VisiteurController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\VisiteurController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\VisiteurController.cs",
               "RelativeDocumentMoniker": "Controllers\\VisiteurController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\VisiteurController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\VisiteurController.cs",
               "RelativeToolTip": "Controllers\\VisiteurController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -399,11 +483,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 21,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\appsettings.json",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -411,11 +495,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 22,
               "Title": "PatientController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\PatientController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\PatientController.cs",
               "RelativeDocumentMoniker": "Controllers\\PatientController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\PatientController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\PatientController.cs",
               "RelativeToolTip": "Controllers\\PatientController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -423,11 +507,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 23,
               "Title": "MedecinController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\MedecinController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\MedecinController.cs",
               "RelativeDocumentMoniker": "Controllers\\MedecinController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\MedecinController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\MedecinController.cs",
               "RelativeToolTip": "Controllers\\MedecinController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -435,11 +519,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "MedMatController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\MedMatController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\MedMatController.cs",
               "RelativeDocumentMoniker": "Controllers\\MedMatController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\MedMatController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\MedMatController.cs",
               "RelativeToolTip": "Controllers\\MedMatController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -447,11 +531,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "FactureController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\FactureController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\FactureController.cs",
               "RelativeDocumentMoniker": "Controllers\\FactureController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\FactureController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\FactureController.cs",
               "RelativeToolTip": "Controllers\\FactureController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -459,11 +543,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 26,
               "Title": "DossierMController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\DossierMController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\DossierMController.cs",
               "RelativeDocumentMoniker": "Controllers\\DossierMController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\DossierMController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\DossierMController.cs",
               "RelativeToolTip": "Controllers\\DossierMController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -471,11 +555,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 27,
               "Title": "ChambreController.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\ChambreController.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\ChambreController.cs",
               "RelativeDocumentMoniker": "Controllers\\ChambreController.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Controllers\\ChambreController.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Controllers\\ChambreController.cs",
               "RelativeToolTip": "Controllers\\ChambreController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -483,11 +567,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 28,
               "Title": "VisiteurRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\VisiteurRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\VisiteurRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\VisiteurRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\VisiteurRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\VisiteurRepository.cs",
               "RelativeToolTip": "Repositories\\VisiteurRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -495,11 +579,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 29,
               "Title": "RdvRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\RdvRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\RdvRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\RdvRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\RdvRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\RdvRepository.cs",
               "RelativeToolTip": "Repositories\\RdvRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -507,11 +591,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 30,
               "Title": "PharmacieRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\PharmacieRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\PharmacieRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\PharmacieRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\PharmacieRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\PharmacieRepository.cs",
               "RelativeToolTip": "Repositories\\PharmacieRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -519,11 +603,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "AdminRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\AdminRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\AdminRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\AdminRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\AdminRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\AdminRepository.cs",
               "RelativeToolTip": "Repositories\\AdminRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -531,11 +615,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 32,
               "Title": "PersonnelRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\PersonnelRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\PersonnelRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\PersonnelRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\PersonnelRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\PersonnelRepository.cs",
               "RelativeToolTip": "Repositories\\PersonnelRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -543,11 +627,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 33,
               "Title": "PatientRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\PatientRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\PatientRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\PatientRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\PatientRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\PatientRepository.cs",
               "RelativeToolTip": "Repositories\\PatientRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -555,11 +639,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 34,
               "Title": "MedecinRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\MedecinRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\MedecinRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\MedecinRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\MedecinRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\MedecinRepository.cs",
               "RelativeToolTip": "Repositories\\MedecinRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -567,11 +651,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 35,
               "Title": "MedMatRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\MedMatRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\MedMatRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\MedMatRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\MedMatRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\MedMatRepository.cs",
               "RelativeToolTip": "Repositories\\MedMatRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -579,11 +663,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 36,
               "Title": "FactureRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\FactureRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\FactureRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FactureRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\FactureRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\FactureRepository.cs",
               "RelativeToolTip": "Repositories\\FactureRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -591,11 +675,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 37,
               "Title": "DossierMRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\DossierMRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\DossierMRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\DossierMRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\DossierMRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\DossierMRepository.cs",
               "RelativeToolTip": "Repositories\\DossierMRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -603,11 +687,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 38,
               "Title": "ChambreRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\ChambreRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\ChambreRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\ChambreRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Repositories\\ChambreRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Repositories\\ChambreRepository.cs",
               "RelativeToolTip": "Repositories\\ChambreRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -615,11 +699,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 39,
               "Title": "IVisiteurRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IVisiteurRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IVisiteurRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IVisiteurRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IVisiteurRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IVisiteurRepository.cs",
               "RelativeToolTip": "Interfaces\\IVisiteurRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -627,11 +711,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 40,
               "Title": "IRdvRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IRdvRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IRdvRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IRdvRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IRdvRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IRdvRepository.cs",
               "RelativeToolTip": "Interfaces\\IRdvRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -639,11 +723,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 41,
               "Title": "IPharmacieRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IPharmacieRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IPharmacieRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IPharmacieRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IPharmacieRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IPharmacieRepository.cs",
               "RelativeToolTip": "Interfaces\\IPharmacieRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -651,11 +735,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 42,
               "Title": "IAdminRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IAdminRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IAdminRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IAdminRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IAdminRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IAdminRepository.cs",
               "RelativeToolTip": "Interfaces\\IAdminRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -663,11 +747,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 43,
               "Title": "IPersonnelRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IPersonnelRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IPersonnelRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IPersonnelRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IPersonnelRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IPersonnelRepository.cs",
               "RelativeToolTip": "Interfaces\\IPersonnelRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -675,11 +759,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 44,
               "Title": "IPatientRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IPatientRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IPatientRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IPatientRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IPatientRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IPatientRepository.cs",
               "RelativeToolTip": "Interfaces\\IPatientRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -687,11 +771,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 45,
               "Title": "IMedecinRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IMedecinRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IMedecinRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IMedecinRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IMedecinRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IMedecinRepository.cs",
               "RelativeToolTip": "Interfaces\\IMedecinRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -699,11 +783,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 46,
               "Title": "IMedMatRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IMedMatRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IMedMatRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IMedMatRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IMedMatRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IMedMatRepository.cs",
               "RelativeToolTip": "Interfaces\\IMedMatRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -711,11 +795,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 47,
               "Title": "IFactureRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IFactureRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IFactureRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IFactureRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IFactureRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IFactureRepository.cs",
               "RelativeToolTip": "Interfaces\\IFactureRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -723,11 +807,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 48,
               "Title": "IDossierMRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IDossierMRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IDossierMRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IDossierMRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IDossierMRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IDossierMRepository.cs",
               "RelativeToolTip": "Interfaces\\IDossierMRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -735,63 +819,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 49,
               "Title": "IChambreRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IChambreRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IChambreRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IChambreRepository.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Interfaces\\IChambreRepository.cs",
+              "ToolTip": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\Interfaces\\IChambreRepository.cs",
               "RelativeToolTip": "Interfaces\\IChambreRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T17:26:40.963Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
-              "Title": "Visiteur.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Visiteur.cs",
-              "RelativeDocumentMoniker": "Models\\Visiteur.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Visiteur.cs",
-              "RelativeToolTip": "Models\\Visiteur.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T17:17:05.987Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "PersonnelAdministrative.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\PersonnelAdministrative.cs",
-              "RelativeDocumentMoniker": "Models\\PersonnelAdministrative.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\PersonnelAdministrative.cs",
-              "RelativeToolTip": "Models\\PersonnelAdministrative.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:43:49.72Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
-              "Title": "Personnel.cs",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Personnel.cs",
-              "RelativeDocumentMoniker": "Models\\Personnel.cs",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\Models\\Personnel.cs",
-              "RelativeToolTip": "Models\\Personnel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T16:34:35.544Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 47,
-              "Title": "HMS.csproj",
-              "DocumentMoniker": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\HMS.csproj",
-              "RelativeDocumentMoniker": "HMS.csproj",
-              "ToolTip": "C:\\Users\\Daadoucha Salma\\source\\repos\\HMS\\HMS.csproj",
-              "RelativeToolTip": "HMS.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-26T16:26:27.745Z"
             }
           ]
         }

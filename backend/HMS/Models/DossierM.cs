@@ -2,12 +2,12 @@
 {
     public class DossierM
     {
-        private Guid Id { get; set; }
-        private List<string> liste_pres {  get; set; }
-        private List<string> liste_analyse { get; set; }
-        private List<RendezVous> liste_rdv { get; set; }
+        public Guid Id { get; set; }
+        public List<string> liste_pres {  get; set; }
+        public List<string> liste_analyse { get; set; }
+        public List<RendezVous> liste_rdv { get; set; }
 
-        public int PatientId { get; set; }
+        public Guid PatientId { get; set; }
         public Patient Patient { get; set; }
     }
 }

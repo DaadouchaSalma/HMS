@@ -1,9 +1,12 @@
-﻿namespace HMS.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HMS.Models
 {
+    [Table("Medecins")]
     public class Medecin : Personnel
     {
-        private string Grad_med {  get; set; } 
-        private string service {  get; set; }
-
+        public string Grad_med {  get; set; }
+        public string service {  get; set; }
+        public ICollection<RendezVous> RendezVous { get; set; } = new List<RendezVous>();
     }
 }
