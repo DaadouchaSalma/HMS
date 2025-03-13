@@ -1,0 +1,50 @@
+<form cForm [formGroup]="chambreForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <c-col md="6">
+      <label cLabel for="numeroChambre">Numéro de Chambre</label>
+      <input cFormControl class="form-control" id="numeroChambre" type="number" formControlName="numeroChambre" required />
+    </c-col>
+  
+    <c-col md="6">
+      <label cLabel for="nb_lit">Nombre de Lits</label>
+      <input cFormControl class="form-control" id="nb_lit" type="number" formControlName="nb_lit" required />
+    </c-col>
+  
+    <c-col md="6">
+      <label cLabel for="etage">Étage</label>
+      <input cFormControl class="form-control" id="etage" type="number" formControlName="etage" required />
+    </c-col>
+  
+    <c-col md="6">
+      <label cLabel for="niveau_dequipement">Niveau d'équipement</label>
+      <select cSelect id="niveau_dequipement" formControlName="niveau_dequipement">
+        <option value="Basique">Basique</option>
+        <option value="Médicalisé">Médicalisé</option>
+        <option value="Soins intensifs">Soins intensifs</option>
+      </select>
+    </c-col>
+  
+    <c-col md="6">
+      <label cLabel for="services">Services</label>
+      <select cSelect id="services" formControlName="services">
+        <option value="Réanimation">Réanimation (Réa)</option>
+        <option value="Maternité">Maternité</option>
+        <option value="post-opératoires">Soins post-opératoires</option>
+        <option value="Oncologie">Oncologie</option>
+        <option value="Psychiatrie">Psychiatrie</option>
+      </select>
+    </c-col>
+  
+    <c-col md="6">
+      <label cLabel for="statut">Statut</label>
+      <select cSelect id="statut" formControlName="statut">
+        <option value="disponible">Disponible</option>
+        <option value="Occupée">Occupée</option>
+        <option value="En maintenance">En maintenance</option>
+      </select>
+    </c-col>
+  
+    <c-col xs="12">
+      <button cButton type="submit" [disabled]="chambreForm.invalid">Modifier Chambre</button>
+    </c-col>
+  </form>
+  

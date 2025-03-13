@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Pharmacien> Pharmaciens { get; set; }
     public DbSet<RendezVous> Rdv { get; set; }
     public DbSet<Visiteur> Visiteurs { get; set; }
+    public DbSet<Admission>Admissions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

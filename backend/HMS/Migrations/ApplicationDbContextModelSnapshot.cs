@@ -51,6 +51,40 @@ namespace HMS.Migrations
                     b.ToTable("FactureMedicament");
                 });
 
+            modelBuilder.Entity("HMS.Models.Admission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ChambreId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdmission")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateSortie")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Motif")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Statut")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChambreId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Admissions");
+                });
+
             modelBuilder.Entity("HMS.Models.Chambre", b =>
                 {
                     b.Property<Guid>("Id")
@@ -58,6 +92,20 @@ namespace HMS.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Nb_lit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Niveau_dequipement")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumeroChambre")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Services")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("etage")
                         .HasColumnType("int");
 
                     b.Property<string>("statut")
@@ -158,8 +206,12 @@ namespace HMS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
+                    b.Property<DateOnly>("Date_Naiss")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Grp_Sang")
                         .IsRequired()
@@ -172,6 +224,9 @@ namespace HMS.Migrations
                     b.Property<string>("Prenom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Telephone")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -333,6 +388,25 @@ namespace HMS.Migrations
                         .HasForeignKey("MedicamentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HMS.Models.Admission", b =>
+                {
+                    b.HasOne("HMS.Models.Chambre", "Chambre")
+                        .WithMany()
+                        .HasForeignKey("ChambreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HMS.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chambre");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("HMS.Models.DossierM", b =>

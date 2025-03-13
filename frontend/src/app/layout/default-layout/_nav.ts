@@ -1,7 +1,7 @@
 import { INavData } from '@coreui/angular-pro';
 
 export const navItems: INavData[] = [
-  {
+  /*{
     name: 'Dashboard',
     url: '/dashboard',
     iconComponent: { name: 'cil-speedometer' },
@@ -413,5 +413,39 @@ export const navItems: INavData[] = [
     url: 'https://coreui.io/angular/docs/',
     iconComponent: { name: 'cil-description' },
     attributes: { target: '_blank' }
-  }
+  },*/
+  {
+    name: 'Chambre',
+    url: '/chambre',
+    iconComponent: { name: 'cil-home' },
+    children: [
+      {
+        name: 'Ajouter Une Chambre',
+        url: '/chambre/chambreAdd',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'La liste des chambres',
+        url: '/chambre/chambreList',
+        icon: 'nav-icon-bullet'
+      },
+      
+    ]},
+    {
+      name: 'Admission',
+      url: '/admission',
+      iconComponent: { name: 'cil-user' },
+      children: [
+        {
+          name: 'Ajouter Admission',
+          url: '/admission/admissionAdd',
+          icon: 'nav-icon-bullet'
+        },
+        {
+          name: 'Liste des admissions actuelles',
+          url: '/admission/admissionList',
+          icon: 'nav-icon-bullet'
+        },
+        
+      ]}
 ];

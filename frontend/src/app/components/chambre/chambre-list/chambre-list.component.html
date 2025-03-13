@@ -1,0 +1,32 @@
+
+<table cTable class="table table-bordered table-hover text-center">
+
+    <thead>
+      <tr class="">
+        <th scope="col">Numéro</th>
+        <th scope="col">Nombre de Lits</th>
+        <th scope="col">Étage</th>
+        <th scope="col">Niveau d'équipement</th>
+        <th scope="col">Services</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let chambre of chambres; let i = index">
+            <td>{{ chambre.numeroChambre }}</td>
+            <td>{{ chambre.nb_lit }}</td>
+            <td>{{ chambre.etage }}</td>
+            <td>{{ chambre.niveau_dequipement }}</td>
+            <td>{{ chambre.services }}</td>
+            <td>
+                <c-badge [class]="'custom-badge ' + getStatutClass(chambre.statut)" shape="rounded-pill"><i [class]="'bi ' + getStatutIcon(chambre.statut) + ' badge-icon'"></i>{{ chambre.statut }}</c-badge>
+              </td>
+              <button class="btn-icon"  [routerLink]="'/chambre/chambreEdit/'+ chambre.id" routerLinkActive="active"  >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              
+          </tr>
+    </tbody>
+  </table>
+  

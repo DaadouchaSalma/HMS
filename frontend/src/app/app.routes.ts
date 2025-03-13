@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent, EmailLayoutComponent } from './layout';
+import { ChambreAddComponent } from './components/chambre/chambre-add/chambre-add.component';
 
 export const routes: Routes = [
   {
@@ -7,6 +8,7 @@ export const routes: Routes = [
     redirectTo: 'dashboard',
     pathMatch: 'full'
   },
+  
   {
     path: 'apps/email',
     component: EmailLayoutComponent,
@@ -28,6 +30,14 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
+      },
+      {
+        path:'chambre',
+        loadChildren: () => import('./components/chambre/routes').then((m) => m.routes)
+      },
+      {
+        path:'admission',
+        loadChildren: () => import('./components/admission/routes').then((m) => m.routes)
       },
       {
         path: 'theme',
@@ -69,6 +79,7 @@ export const routes: Routes = [
         path: 'pages',
         loadChildren: () => import('./views/pages/routes').then((m) => m.routes)
       },
+      
       {
         path: 'apps',
         loadChildren: () => import('./views/apps/routes').then((m) => m.routes)
@@ -103,5 +114,6 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+  
   { path: '**', redirectTo: 'dashboard' }
 ];
