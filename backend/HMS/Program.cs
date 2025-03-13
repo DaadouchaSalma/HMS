@@ -3,6 +3,19 @@ using HMS.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
+
+// Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 
 builder.Services.AddScoped<IMedecinRepository, MedecinRepository>();
@@ -43,6 +56,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 app.UseCors("AllowAngularApp");
+
 //app.UseHttpsRedirection();
 
 app.UseAuthorization();

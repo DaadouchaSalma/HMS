@@ -4,6 +4,81 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 export const navItems: INavData[] = [
 
   {
+    name: 'Patient',
+    url: '/patient',
+    iconComponent: { name: 'cil-person' },
+    children: [
+      {
+        name: 'Ajouter un patient',
+        url: '/patient/new',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Mettre à jours un patient',
+        url: '/patient/update/:id',
+        icon: 'nav-icon-bullet'
+      }
+    ]
+  },
+  {
+    name: 'Prescription',
+    url: '/prescription',
+    iconComponent: { name: 'cil-read-the-docs' },
+    children: [
+      {
+        name: 'Ajouter une prescription',
+        url: '/prescription/new',
+        icon: 'nav-icon-bullet'
+      }
+    ]
+  },
+  {
+    name: 'Chambre',
+    url: '/chambre',
+    iconComponent: { name: 'cil-home' },
+    children: [
+      {
+        name: 'Ajouter Une Chambre',
+        url: '/chambre/chambreAdd',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'La liste des chambres',
+        url: '/chambre/chambreList',
+        icon: 'nav-icon-bullet'
+      },
+      
+    ]},
+    {
+      name: 'Admission',
+      url: '/admission',
+      iconComponent: { name: 'cil-user' },
+      children: [
+        {
+          name: 'Ajouter Admission',
+          url: '/admission/admissionAdd',
+          icon: 'nav-icon-bullet'
+        },
+        {
+          name: 'Liste des admissions actuelles',
+          url: '/admission/admissionList',
+          icon: 'nav-icon-bullet'
+        },
+        
+      ]},
+  {
+    name: 'Personnels',
+    url: '/personnel',
+    iconComponent: { name: 'cil-people' },
+    children: [
+      {
+        name: 'Liste Des Personnels',
+        url: '/personnel/list-personnel',
+        icon: 'nav-icon-bullet'
+      },
+    ]
+  }
+  /*{
     name: 'Stock Médical',
     url: '/',
     iconComponent: { name: 'cil-medical-cross' },
@@ -21,7 +96,6 @@ export const navItems: INavData[] = [
     ]
   },
  /*{
-
     name: 'Dashboard',
     url: '/dashboard',
     iconComponent: { name: 'cil-speedometer' },
@@ -30,18 +104,6 @@ export const navItems: INavData[] = [
       text: 'NEW'
     }
   },*/
-  {
-    name: 'Personnels',
-    url: '/personnel',
-    iconComponent: { name: 'cil-people' },
-    children: [
-      {
-        name: 'Liste Des Personnels',
-        url: '/personnel/list-personnel',
-        icon: 'nav-icon-bullet'
-      },
-    ]
-  },
  /* {
     title: true,
     name: 'Theme'
@@ -446,40 +508,5 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-description' },
     attributes: { target: '_blank' }
 
-  },*/
-  {
-    name: 'Chambre',
-    url: '/chambre',
-    iconComponent: { name: 'cil-home' },
-    children: [
-      {
-        name: 'Ajouter Une Chambre',
-        url: '/chambre/chambreAdd',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'La liste des chambres',
-        url: '/chambre/chambreList',
-        icon: 'nav-icon-bullet'
-      },
-      
-    ]},
-    {
-      name: 'Admission',
-      url: '/admission',
-      iconComponent: { name: 'cil-user' },
-      children: [
-        {
-          name: 'Ajouter Admission',
-          url: '/admission/admissionAdd',
-          icon: 'nav-icon-bullet'
-        },
-        {
-          name: 'Liste des admissions actuelles',
-          url: '/admission/admissionList',
-          icon: 'nav-icon-bullet'
-        },
-        
-      ]}
-
+  }*/
 ];

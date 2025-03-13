@@ -1,4 +1,4 @@
-﻿using HMS.Interfaces;
+using HMS.Interfaces;
 using HMS.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +18,7 @@ namespace HMS.Controllers
         
         /*[HttpGet]
         public async Task<ActionResult<IEnumerable<Medecin>>> GetMedecins()
+
         {
             return await _context.Medecins.ToListAsync();
         }

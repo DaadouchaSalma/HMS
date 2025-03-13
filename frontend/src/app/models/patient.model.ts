@@ -1,10 +1,11 @@
 export interface Patient {
-  id: string; 
-  nom: string;
-  prenom: string;
-  telephone: number;
-  email: string;
-  date_Naiss : string; 
-  grp_Sang: string;
-  }
+    id?: string;
+    nom: string;
+    prenom: string;
+    email: string;
+    grp_Sang: string;
+    password: string;
+    date_Naiss: string;
+    telephone: string;
+}
   
