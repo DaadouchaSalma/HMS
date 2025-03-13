@@ -1,0 +1,59 @@
+# Build outputs
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.appx
+*.appxsym
+**/bin/
+**/obj/
+bin/Debug/net9.0/
+bin/Release/net9.0/
+# User-specific files
+.vscode/
+.vs/
+*.user
+*.suo
+*.vssscc
+*.cache
+*.csproj.user
+*.sln.ide
+*.sln.docstates
+
+# Rider / JetBrains IDE
+.idea/
+*.sln.iml
+
+# ASP.NET Core files
+wwwroot/node_modules/
+wwwroot/lib/
+
+# NuGet packages
+*.nupkg
+packages/
+project.lock.json
+nuget.lock.json
+
+# Logs and databases
+*.log
+logs/
+database.db
+database.sqlite
+
+# Secrets and configuration files
+appsettings.json
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+Migrations/

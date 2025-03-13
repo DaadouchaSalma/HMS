@@ -158,8 +158,12 @@ namespace HMS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
+                    b.Property<DateOnly>("Date_Naiss")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Grp_Sang")
                         .IsRequired()
@@ -169,9 +173,16 @@ namespace HMS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Prenom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Telephone")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -214,6 +225,35 @@ namespace HMS.Migrations
                     b.ToTable("Personnels");
 
                     b.UseTptMappingStrategy();
+                });
+
+            modelBuilder.Entity("HMS.Models.Prescription", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ListeMed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("MedecinId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedecinId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Prescriptions");
                 });
 
             modelBuilder.Entity("HMS.Models.RendezVous", b =>
@@ -357,6 +397,25 @@ namespace HMS.Migrations
                     b.Navigation("Patient");
                 });
 
+            modelBuilder.Entity("HMS.Models.Prescription", b =>
+                {
+                    b.HasOne("HMS.Models.Medecin", "Medecin")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("MedecinId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HMS.Models.Patient", "Patient")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medecin");
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("HMS.Models.RendezVous", b =>
                 {
                     b.HasOne("HMS.Models.DossierM", null)
@@ -414,17 +473,19 @@ namespace HMS.Migrations
 
             modelBuilder.Entity("HMS.Models.Patient", b =>
                 {
-                    b.Navigation("DossierMedical")
-                        .IsRequired();
+                    b.Navigation("DossierMedical");
 
-                    b.Navigation("Facture")
-                        .IsRequired();
+                    b.Navigation("Facture");
+
+                    b.Navigation("Prescriptions");
 
                     b.Navigation("RendezVous");
                 });
 
             modelBuilder.Entity("HMS.Models.Medecin", b =>
                 {
+                    b.Navigation("Prescriptions");
+
                     b.Navigation("RendezVous");
                 });
 #pragma warning restore 612, 618

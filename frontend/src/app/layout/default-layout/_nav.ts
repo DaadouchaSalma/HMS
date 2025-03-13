@@ -2,6 +2,35 @@ import { INavData } from '@coreui/angular-pro';
 
 export const navItems: INavData[] = [
   {
+    name: 'Patient',
+    url: '/patient',
+    iconComponent: { name: 'cil-person' },
+    children: [
+      {
+        name: 'Ajouter un patient',
+        url: '/patient/new',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Mettre à jours un patient',
+        url: '/patient/update/:id',
+        icon: 'nav-icon-bullet'
+      }
+    ]
+  },
+  {
+    name: 'Prescription',
+    url: '/prescription',
+    iconComponent: { name: 'cil-read-the-docs' },
+    children: [
+      {
+        name: 'Ajouter une prescription',
+        url: '/prescription/new',
+        icon: 'nav-icon-bullet'
+      }
+    ]
+  }
+  /*{
     name: 'Dashboard',
     url: '/dashboard',
     iconComponent: { name: 'cil-speedometer' },
@@ -413,5 +442,5 @@ export const navItems: INavData[] = [
     url: 'https://coreui.io/angular/docs/',
     iconComponent: { name: 'cil-description' },
     attributes: { target: '_blank' }
-  }
+  }*/
 ];

@@ -72,9 +72,17 @@ export const routes: Routes = [
       {
         path: 'apps',
         loadChildren: () => import('./views/apps/routes').then((m) => m.routes)
+      },
+      {
+        path: 'patient',
+        loadChildren: () => import('./components/patients/routes').then((m) => m.routes)
+      },
+      {
+        path: 'prescription',
+        loadChildren: () => import('./components/prescription/routes').then((m) => m.routes)
       }
     ]
-  },
+  }, 
   {
     path: '404',
     loadComponent: () => import('./views/pages/page404/page404.component').then(m => m.Page404Component),

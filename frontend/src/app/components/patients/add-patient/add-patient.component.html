@@ -1,0 +1,59 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" cForm class="row g-5">
+  <c-col [md]="6">
+    <label cLabel for="Nom">Nom</label>
+    <input cFormControl id="Nom" type="text" [(ngModel)]="patient.nom" class="form-control" name="nom"/>
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="Prenom">Prénom</label>
+    <input cFormControl id="Prenom" type="text" [(ngModel)]="patient.prenom" class="form-control" name="prenom" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="Email">Email</label>
+    <input cFormControl id="Email" type="email" [(ngModel)]="patient.email" class="form-control" name="email" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="Password">Password</label>
+    <input cFormControl id="Password" type="password" [(ngModel)]="patient.password" class="form-control" name="password" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="tel">Téléphone</label>
+    <input cFormControl id="tel" type="tel" [(ngModel)]="patient.telephone" class="form-control" name="telephone" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel> Date De Naissance </label>
+    <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="patient.date_Naiss" placeholder="Sélectionnez la date de naissance"/>
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel>Groupe Sanguin</label>
+    <select aria-label="Choisissez le service" [(ngModel)]="patient.grp_Sang" name="grp_Sang" cSelect >
+        <option value="">Choose...</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+    </select>
+  </c-col>
+  <c-col [xs]="12" class="text-center mt-4">
+    <button cButton type="submit" class="btn btn-primary px-4 py-2">Ajouter</button>
+  </c-col>
+</form>
+
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
+           [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+           [style.color]="'white'">
+    <c-toast-header>
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>
+
