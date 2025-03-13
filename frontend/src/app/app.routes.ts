@@ -1,7 +1,14 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent, EmailLayoutComponent } from './layout';
+import { AddPharmacienComponent } from './components/Medecin_personnel/add-pharmacien/add-pharmacien.component';
+import { MedecinAjoutComponent } from './components/Medecin_personnel/medecin-ajout/medecin-ajout.component';
 
 export const routes: Routes = [
+  //
+  /*{ path: 'add-pharmacien', component: AddPharmacienComponent },
+  { path: 'add-personnel', component: AddPersonnelComponent },
+  { path: 'add-medecin', component: MedecinAjoutComponent },
+  { path: '', redirectTo: '/add-pharmacien', pathMatch: 'full' },*/
   {
     path: '',
     redirectTo: 'dashboard',
@@ -28,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
+      },
+      {
+        path: 'personnel',
+        loadChildren: () => import('./components/Medecin_personnel/routes').then((m) => m.routes)
       },
       {
         path: 'theme',
@@ -103,5 +114,12 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'dashboard' },
+
+
+
+
+
+  
+  
 ];

@@ -12,9 +12,11 @@ import {
 import { DropdownModule, SidebarModule } from '@coreui/angular-pro';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideRouter(routes,
       withRouterConfig({
         onSameUrlNavigation: 'reload'
@@ -29,6 +31,6 @@ export const appConfig: ApplicationConfig = {
     ),
     importProvidersFrom(SidebarModule, DropdownModule),
     IconSetService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(), provideAnimationsAsync()
   ]
 };

@@ -108,3 +108,6 @@ $info-gradient-dark-color: gradient($info-dark-color) !default;
 // We use those styles to show code examples, you should remove them in your application.
 @use "examples";
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

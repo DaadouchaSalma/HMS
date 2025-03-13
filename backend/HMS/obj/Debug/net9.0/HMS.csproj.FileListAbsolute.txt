@@ -153,3 +153,5 @@ C:\Users\Daadoucha Salma\OneDrive\Bureau\HMS\backend\HMS\obj\Debug\net9.0\refint
 C:\Users\Daadoucha Salma\OneDrive\Bureau\HMS\backend\HMS\obj\Debug\net9.0\HMS.pdb
 C:\Users\Daadoucha Salma\OneDrive\Bureau\HMS\backend\HMS\obj\Debug\net9.0\HMS.genruntimeconfig.cache
 C:\Users\Daadoucha Salma\OneDrive\Bureau\HMS\backend\HMS\obj\Debug\net9.0\ref\HMS.dll
+C:\Users\Daadoucha Salma\OneDrive\Bureau\HMS\backend\HMS\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\Daadoucha Salma\OneDrive\Bureau\HMS\backend\HMS\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

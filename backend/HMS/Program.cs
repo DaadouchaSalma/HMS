@@ -1,10 +1,25 @@
+using HMS.Interfaces;
+using HMS.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddScoped<IMedecinRepository, MedecinRepository>();
+builder.Services.AddScoped<IPharmacieRepository, PharmacieRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // Autorise uniquement ce domaine
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllersWithViews();
@@ -19,8 +34,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseHttpsRedirection();
+app.UseCors("AllowAngularApp");
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

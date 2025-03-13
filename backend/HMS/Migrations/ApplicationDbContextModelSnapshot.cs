@@ -184,6 +184,9 @@ namespace HMS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Adresse")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateOnly>("Date_Emb")
                         .HasColumnType("date");
 
@@ -208,6 +211,15 @@ namespace HMS.Migrations
 
                     b.Property<double>("Salaire")
                         .HasColumnType("float");
+
+                    b.Property<string>("Statut")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Telephone")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -281,14 +293,12 @@ namespace HMS.Migrations
                     b.HasBaseType("HMS.Models.Personnel");
 
                     b.Property<string>("Grad_med")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("service")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Medecins");
+                    b.ToTable("Medecins", (string)null);
                 });
 
             modelBuilder.Entity("HMS.Models.PersonnelAdministrative", b =>
@@ -302,7 +312,7 @@ namespace HMS.Migrations
                 {
                     b.HasBaseType("HMS.Models.Personnel");
 
-                    b.ToTable("Pharmaciens");
+                    b.ToTable("Pharmaciens", (string)null);
                 });
 
             modelBuilder.Entity("ChambrePatient", b =>
