@@ -133,8 +133,8 @@ namespace HMS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date_Exp")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("Date_Exp")
+                        .HasColumnType("date");
 
                     b.Property<string>("Description")
                         .IsRequired()

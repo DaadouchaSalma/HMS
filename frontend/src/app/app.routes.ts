@@ -72,7 +72,12 @@ export const routes: Routes = [
       {
         path: 'apps',
         loadChildren: () => import('./views/apps/routes').then((m) => m.routes)
-      }
+      },
+      {
+        path:'meds',
+        loadChildren:() => import('./components/routes').then((m)=> m.routes)
+      },
+      
     ]
   },
   {
@@ -103,5 +108,6 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'dashboard' },
+  
 ];
