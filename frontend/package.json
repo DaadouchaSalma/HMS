@@ -19,8 +19,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^19.1.7",
-    "@angular/cdk": "^19.1.5",
     "@angular/common": "^19.1.7",
     "@angular/compiler": "^19.1.7",
     "@angular/core": "^19.1.7",
@@ -46,6 +44,7 @@
     "@fullcalendar/timegrid": "^6.1.15",
     "@googlemaps/js-api-loader": "^1.16.8",
     "@googlemaps/markerclusterer": "^2.5.3",
+    "bootstrap": "^5.3.3",
     "chart.js": "^4.4.8",
     "date-fns": "^4.1.0",
     "lodash-es": "^4.17.21",

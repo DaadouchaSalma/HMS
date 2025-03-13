@@ -1,0 +1,79 @@
+<form  (ngSubmit)="onSubmit()" cForm class="row g-5">
+  <c-col [md]="6">
+    <label cLabel for="Nom">Nom</label>
+    <input cFormControl id="Nom" type="text" [(ngModel)]="medecin.nom" class="form-control" name="nom"/>
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="Prenom">Prénom</label>
+    <input cFormControl id="Prenom" type="text" [(ngModel)]="medecin.prenom" class="form-control" name="prenom" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="Email">Email</label>
+    <input cFormControl id="Email" type="email" [(ngModel)]="medecin.email" class="form-control" name="email" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="Password">Password</label>
+    <input cFormControl id="Password" type="password" [(ngModel)]="medecin.password" class="form-control" name="password" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="tel">Téléphone</label>
+    <input cFormControl id="tel" type="tel" [(ngModel)]="medecin.telephone" class="form-control" name="telephone" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel> Date De Naissance </label>
+    <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="medecin.date_Naiss" placeholder="Sélectionnez la date de naissance" />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel> Date D'Embauche </label>
+    <c-date-picker closeOnSelect [(ngModel)]="medecin.date_Emb" name="date_emb" placeholder="Sélectionnez la date d'embauche"  />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="salaire">Salaire</label>
+    <input cFormControl id="salaire" class="form-control" type="number" [(ngModel)]="medecin.salaire" name="salaire"  />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="Adresse">Adresse</label>
+    <input cFormControl id="Adresse" type="text" [(ngModel)]="medecin.adresse" class="form-control" name="adresse"  />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="Statut">Statut</label>
+    <input cFormControl id="Statut" type="text" [(ngModel)]="medecin.statut" class="form-control" name="statut"  />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="grade">Grade</label>
+    <input cFormControl id="grade" type="text" [(ngModel)]="medecin.grad_med" class="form-control" name="grade"  />
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel>Service</label>
+    <select aria-label="Choisissez le service" [(ngModel)]="medecin.service" name="service" cSelect >
+      <option>Choisissez</option>
+      <option value="Chirurgie">Chirurgie</option>
+      <option value="Cardiologie">Cardiologie</option>
+      <option value="Pédiatrie">Pédiatrie</option>
+      <option value="Gynécologie">Gynécologie</option>
+      <option value="Neurologie">Neurologie</option>
+      <option value="Psychiatrie">Psychiatrie</option>
+      <option value="Orthopédie">Orthopédie</option>
+    </select>
+  </c-col>
+  <c-col [xs]="12" class="text-center mt-4" style="margin-bottom: 40px;"
+  >
+    <button cButton type="submit" class="btn btn-primary px-4 py-2"
+    >Ajouter</button>
+  </c-col>
+</form>
+
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
+           [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+           [style.color]="'white'">
+    <c-toast-header>
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>
