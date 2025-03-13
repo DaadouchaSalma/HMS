@@ -26,10 +26,12 @@ import {
   cilArrowTop,
   cilBasket,
   cilBell,
+  cilBed,
   cilBold,
   cilBookmark,
   cilCalculator,
   cilCalendar,
+  
   cilCart,
   cilChart,
   cilChartPie,
@@ -66,6 +68,7 @@ import {
   cilMap,
   cilMediaPlay,
   cilMediaRecord,
+  cilMedicalCross,
   cilMenu,
   cilMoon,
   cilNotes,
@@ -104,6 +107,7 @@ import { signet } from './signet';
 import { logo } from './logo';
 
 export const iconSubset = {
+  cilMedicalCross,
   cibCcAmex,
   cibCcApplePay,
   cibCcMastercard,
@@ -115,6 +119,7 @@ export const iconSubset = {
   cibLinkedin,
   cibSkype,
   cibTwitter,
+  cilBed,
   cifBr,
   cifEs,
   cifFr,
@@ -208,6 +213,7 @@ export const iconSubset = {
 };
 
 export enum IconSubset {
+  cilMedicalCross = 'cilMedicalCross',
   cibCcAmex = 'cibCcAmex',
   cibCcApplePay = 'cibCcApplePay',
   cibCcMastercard = 'cibCcMastercard',
@@ -237,6 +243,7 @@ export enum IconSubset {
   cilBell = 'cilBell',
   cilBold = 'cilBold',
   cilBookmark = 'cilBookmark',
+  cilBed ='cilBed',
   cilCalculator = 'cilCalculator',
   cilCalendar = 'cilCalendar',
   cilCart = 'cilCart',

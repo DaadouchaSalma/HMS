@@ -1,0 +1,139 @@
+<div class="d-flex justify-content-between mb-3">
+  <button cButton color="primary" [routerLink]="['/personnel/add-personnel-admin']">
+    <i class="fa-solid fa-user-tie me-2"></i> Ajouter Administratif
+  </button>
+  
+  <button cButton color="success" [routerLink]="['/personnel/add-medecin']">
+    <i class="fas fa-user-md me-2"></i> Ajouter Médecin
+  </button>
+
+  <button cButton color="info" [routerLink]="['/personnel/add-pharmacien']">
+    <i class="fas fa-prescription-bottle-alt me-2"></i> Ajouter Pharmacien
+  </button>
+</div>
+
+<table class="custom-table">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Type</th>
+      <!--th>Date Naissance</th>
+      <th>Date Embauche</th-->
+      <th>Salaire</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let personnel of allPersonnel; let i = index">
+      <tr>
+        <td>{{ personnel.nom }}</td>
+        <td>{{ personnel.prenom }}</td>
+        <td>{{ personnel.email }}</td>
+        <td class="type-badge">
+          <i [ngClass]="getTypeIcon(personnel.type)"></i>
+          {{ getTypeLabel(personnel.type) }}
+        </td>
+        <!--td>{{ personnel.date_Naiss }}</td>
+        <td>{{ personnel.date_Emb }}</td-->
+        <td>{{ personnel.salaire }}</td>
+        <td>{{ personnel.telephone }}</td>
+        
+        <td>
+          <!-- New Button Using cButton -->
+          <button (click)="toggleCollapse(i)" cButton class="me-1" class="bouton-affich">
+            <i [ngClass]="visible(i) ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+          </button>
+        </td>
+      </tr>
+      <!-- Details Row Using cCollapse and c-card -->
+      <!--tr-->
+        
+          
+        <td colspan="7">
+          <div [visible]="visible(i)" cCollapse style="width: 700%; height: 100%;">
+            <div class="card-body" style="height: 100%;">
+                 <strong>Informations Complémentaires :</strong>
+              <div class="liste_bouton">
+              <div class="liste">
+                    <ul cListGroup flush *ngIf="personnel.type === 1">
+                      <li cListGroupItem *ngIf="'service' in personnel">
+                        <i class="fa-solid fa-square-plus me-2"></i>
+                    <b>Service : &nbsp;</b>  {{ personnel.service || 'Non disponible' }}
+                      </li>
+                      <li cListGroupItem *ngIf="'grad_med' in personnel">
+                      <i class="fas fa-stethoscope me-2"></i>
+                    <b> Grade : &nbsp;</b> {{ personnel.grad_Med || 'Non spécifié' }}
+                      </li> 
+                    </ul>
+                    <ul cListGroup flush>
+                      <li cListGroupItem >
+                        <i class="fas fa-calendar-day me-2"></i>
+                        <b> Date De Naissance : &nbsp;</b> {{ personnel.date_Naiss || 'Non spécifié' }}
+                      </li> 
+                      <li cListGroupItem >
+                        <i class="fa-solid fa-calendar-check me-2"></i>
+                        <b> Date D'Embauche :&nbsp; </b> {{ personnel.date_Emb || 'Non spécifié' }}
+                      </li> 
+                    </ul>
+                    <ul cListGroup flush>
+                        <li cListGroupItem >
+                            <i class="fa-solid fa-location-dot me-2"></i>
+                            <b>Adresse : &nbsp;</b>  {{ personnel.adresse || 'Non disponible' }}
+                        </li>
+                        <li cListGroupItem >
+                          <i class="fas fa-id-badge me-2"></i>
+                          <b> Statut :&nbsp; </b> {{ personnel.statut || 'Non spécifié' }}
+                        </li> 
+                    </ul>
+                  </div>
+
+                  <div class="mt-2" >
+                      <button cButton class="btn-action-1 me-1" style="background-color:  #c1cce6 ; border-color:  #c1cce6 ; color: black;">
+                        <i class="fas fa-edit"></i></button> <br>
+                      <button cButton class="btn-action-2 me-1" style="background-color: rgb(196, 57, 57); border-color: #dd789c;margin-top: 20px;" (click)="openDeleteModal(personnel.id, personnel.type)">
+                        <i class="fas fa-trash"></i></button>
+                  </div> 
+              </div>
+            
+            
+            </div>
+          </div>
+        </td>
+      <!--/tr-->
+    </ng-container>
+  </tbody>
+</table>
+<c-modal id="deleteModal" [visible]="visible_modal" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Confirmation de suppression</h5>
+    <button (click)="closeModal()" cButtonClose></button>
+  </c-modal-header>
+  
+  <c-modal-body>Êtes-vous sûr de vouloir supprimer cet employé ?</c-modal-body>
+
+  <c-modal-footer>
+    <button (click)="closeModal()" cButton color="secondary">
+      Annuler
+    </button>
+    <button (click)="confirmDelete()" cButton color="danger">
+      Supprimer
+    </button>
+  </c-modal-footer>
+</c-modal>
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible_toast()"
+           [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+           [style.color]="'white'">
+    <c-toast-header>
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>

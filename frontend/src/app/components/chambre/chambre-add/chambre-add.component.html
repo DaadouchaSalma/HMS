@@ -1,0 +1,66 @@
+<form cForm [formGroup]="chambreForm" (ngSubmit)="onSubmit()"  class="row g-5">
+  <c-col md="6">
+    <label cLabel for="numeroChambre">Numéro de Chambre</label>
+    <input cFormControl id="numeroChambre" type="number" formControlName="numeroChambre" required />
+  </c-col>
+
+  <c-col md="6">
+    <label cLabel for="nb_lit">Nombre de Lits</label>
+    <input cFormControl id="nb_lit" type="number" formControlName="nb_lit"  required />
+  </c-col>
+  <c-col md="6">
+    <label cLabel for="etage">Étage</label>
+    <input cFormControl id="etage" type="number" formControlName="etage"  required />
+  </c-col>
+  <c-col md="6">
+    <label cLabel for="niveau_dequipement">Niveau d'équipement </label>
+    <select cSelect id="niveau_dequipement" formControlName="niveau_dequipement" >
+      <option value="Basique">Basique</option>
+      <option value="Médicalisé">Médicalisé </option>
+      <option value="Soins intensifs">Soins intensifs</option>
+    </select>
+  </c-col>
+
+  <c-col md="6">
+    <label cLabel for="services">Services</label>
+    <select cSelect id="services" formControlName="services">
+      <option value="Réanimation">Réanimation (Réa)</option>
+      <option value="Maternité">Maternité</option>
+      <option value="post-opératoires">Soins post-opératoires</option>
+      <option value="Oncologie">Oncologie </option>
+      <option value="Psychiatrie">Psychiatrie </option>
+    </select>
+  </c-col>
+
+  <c-col md="6">
+    <label cLabel for="statut">Statut</label>
+    <select cSelect id="statut" formControlName="statut" >
+      <option value="Disponible">Disponible</option>
+      <option value="Occupée">Occupée</option>
+      <option value="En maintenance">En maintenance</option>
+    </select>
+  </c-col>
+
+  <c-col xs="12" class="text-center mt-4">
+    <button cButton type="submit" class="btn btn-primary px-4 py-2" [disabled]="chambreForm.invalid">Ajouter Chambre</button>
+  </c-col>
+</form>
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast
+    (timer)="onTimerChange($event)"
+    (visibleChange)="onVisibleChange($event)"
+    [visible]="visible()"
+    [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+    [style.color]="'white'"
+  >
+    <c-toast-header>
+     
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>

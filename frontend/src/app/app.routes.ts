@@ -1,12 +1,22 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent, EmailLayoutComponent } from './layout';
+import { ChambreAddComponent } from './components/chambre/chambre-add/chambre-add.component';
+import { AddPharmacienComponent } from './components/Medecin_personnel/add-pharmacien/add-pharmacien.component';
+import { MedecinAjoutComponent } from './components/Medecin_personnel/medecin-ajout/medecin-ajout.component';
+
 
 export const routes: Routes = [
+  //
+  /*{ path: 'add-pharmacien', component: AddPharmacienComponent },
+  { path: 'add-personnel', component: AddPersonnelComponent },
+  { path: 'add-medecin', component: MedecinAjoutComponent },
+  { path: '', redirectTo: '/add-pharmacien', pathMatch: 'full' },*/
   {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
   },
+  
   {
     path: 'apps/email',
     component: EmailLayoutComponent,
@@ -28,6 +38,19 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
+      },
+      {
+
+        path:'chambre',
+        loadChildren: () => import('./components/chambre/routes').then((m) => m.routes)
+      },
+      {
+        path:'admission',
+        loadChildren: () => import('./components/admission/routes').then((m) => m.routes)
+
+        path: 'personnel',
+        loadChildren: () => import('./components/Medecin_personnel/routes').then((m) => m.routes)
+
       },
       {
         path: 'theme',
@@ -69,6 +92,7 @@ export const routes: Routes = [
         path: 'pages',
         loadChildren: () => import('./views/pages/routes').then((m) => m.routes)
       },
+      
       {
         path: 'apps',
         loadChildren: () => import('./views/apps/routes').then((m) => m.routes)
@@ -81,6 +105,10 @@ export const routes: Routes = [
         path: 'prescription',
         loadChildren: () => import('./components/prescription/routes').then((m) => m.routes)
       }
+        path:'meds',
+        loadChildren:() => import('./components/routes').then((m)=> m.routes)
+      },
+      
     ]
   }, 
   {
@@ -111,5 +139,6 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-  { path: '**', redirectTo: 'dashboard' }
+
+  { path: '**', redirectTo: 'dashboard' },
 ];
