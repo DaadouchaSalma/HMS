@@ -7,7 +7,7 @@
         public string Description { get; set; }
         public int Nbr_stock { get; set; }
         public string Compagnie { get; set; }
-        public DateTime Date_Exp { get;set; }
+        public DateOnly Date_Exp { get;set; }
 
         public ICollection<Facture> Factures { get; set; } = new List<Facture>();
     }

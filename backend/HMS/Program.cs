@@ -1,16 +1,28 @@
+using HMS.Interfaces;
+using HMS.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddScoped<IMedecinRepository, MedecinRepository>();
+builder.Services.AddScoped<IPharmacieRepository, PharmacieRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") // Autorise uniquement ce domaine
+
+
+            policy.WithOrigins("http://localhost:4200") 
+
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
 });
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -23,6 +35,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
