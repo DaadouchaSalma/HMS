@@ -3,20 +3,26 @@ using HMS.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 builder.Services.AddScoped<IMedecinRepository, MedecinRepository>();
 builder.Services.AddScoped<IPharmacieRepository, PharmacieRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
         policy =>
         {
+
+
             policy.WithOrigins("http://localhost:4200") 
+
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
 });
->>>>>>> salma_branch
+
 // Add services to the container.
 
 builder.Services.AddControllers();

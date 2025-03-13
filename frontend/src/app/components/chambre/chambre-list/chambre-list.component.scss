@@ -1,0 +1,88 @@
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+  
+  /* Table Header */
+  th {
+    background-color: #f4f4f4;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  /* Table Rows */
+  td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* Alternating Row Colors */
+  tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+ 
+  
+  /* Badges Styling */
+  .custom-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px; 
+    padding: 5px 12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+  
+  .badge-libre {
+    background-color: #28a745; 
+    color: white;
+    
+  }
+  
+  .badge-occupee {
+    background-color: #dc3545; 
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  .badge-disponible {
+    background-color: #6c757d;
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  .badge-maintenance {
+    background-color: #ffc107; 
+    color: black;
+    text-transform: uppercase;
+  }
+  
+  .badge-icon {
+    font-size: 1rem;
+    margin-left: 5px; 
+    margin-right: 5px;
+  }
+  .btn-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem; 
+    color: #495057; 
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .btn-icon:hover {
+    color: #dd789c; 
+  }
+  

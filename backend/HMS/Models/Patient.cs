@@ -5,7 +5,9 @@
         public Guid Id { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-        public int Age { get; set; }
+        public long Telephone { get; set; }
+        public string Email { get; set; }
+        public DateOnly Date_Naiss { get; set; }
         public string Grp_Sang { get; set; }
 
 
