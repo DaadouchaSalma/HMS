@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\HMS.csproj": {}
+    "C:\\Users\\yosrm\\Desktop\\projetDev\\HMS\\backend\\HMS\\HMS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\HMS.csproj": {
+    "C:\\Users\\yosrm\\Desktop\\projetDev\\HMS\\backend\\HMS\\HMS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\HMS.csproj",
+        "projectUniqueName": "C:\\Users\\yosrm\\Desktop\\projetDev\\HMS\\backend\\HMS\\HMS.csproj",
         "projectName": "HMS",
-        "projectPath": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\HMS.csproj",
-        "packagesPath": "C:\\Users\\Daadoucha Salma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daadoucha Salma\\OneDrive\\Bureau\\HMS\\backend\\HMS\\obj\\",
+        "projectPath": "C:\\Users\\yosrm\\Desktop\\projetDev\\HMS\\backend\\HMS\\HMS.csproj",
+        "packagesPath": "C:\\Users\\yosrm\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\yosrm\\Desktop\\projetDev\\HMS\\backend\\HMS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Daadoucha Salma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yosrm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -74,6 +73,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.1, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [

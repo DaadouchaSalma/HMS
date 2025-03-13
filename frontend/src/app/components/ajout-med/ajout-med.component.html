@@ -1,0 +1,100 @@
+<!--<div *ngIf="visible_alert" class="alert" [ngClass]="'alert-' + alertType">
+  <svg *ngIf="alertType === 'success'" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+    <use xlink:href="#check-circle-fill" />
+  </svg>
+  <svg *ngIf="alertType === 'danger'" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Error:">
+    <use xlink:href="#exclamation-triangle-fill" />
+  </svg>
+  <div>{{ alertMessage }}</div>
+</div>-->
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast
+    (timer)="onTimerChange($event)"
+    (visibleChange)="onVisibleChange($event)"
+    [visible]="visible()"
+    [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+    [style.color]="'white'"
+  >
+    <c-toast-header>
+     
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>
+<form class="row g-5" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="medicamentName" class="form-label">Nom</label>
+    <input id="medicamentName" 
+           cFormControl 
+           [(ngModel)]="medicament.nom" 
+           name="nom" 
+           class="form-control" 
+           placeholder="Medicament Name" 
+           required 
+           type="text">
+  </div>
+
+  <div class="mb-3">
+    <label for="medicamentExpiration" class="form-label">Date d'Expiration</label>
+    <input id="medicamentExpiration"
+           cFormControl
+           [(ngModel)]="medicament.date_Exp"
+           name="date_Exp"
+           class="form-control"
+           placeholder="Expiration Date"
+           required
+           type="date">
+    <div *ngIf="isInvalidDate()" class="text-danger">
+    </div>
+  </div>
+  
+
+  <div class="mb-3">
+    <label for="medicamentStock" class="form-label">Stock</label>
+    <input id="medicamentStock" 
+           cFormControl
+           [(ngModel)]="medicament.nbr_stock"
+           name="nbr_stock"
+           class="form-control"
+           placeholder="Number of Stock"
+           required
+           type="number"
+           min="0"> <!-- Ensures no negative values -->
+    <div *ngIf="medicament.nbr_stock < 0" class="text-danger"></div>
+  </div>
+
+  <div class="mb-3">
+    <label for="medicamentDescription" class="form-label">Description</label>
+    <textarea id="medicamentDescription" 
+              cFormControl 
+              [(ngModel)]="medicament.description" 
+              name="description" 
+              class="form-control" 
+              placeholder="Description" 
+              required 
+              rows="3"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="medicamentCompany" class="form-label">Fournisseur</label>
+    <input id="medicamentCompany" 
+           cFormControl 
+           [(ngModel)]="medicament.compagnie" 
+           name="compagnie" 
+           class="form-control" 
+           placeholder="Company Name" 
+           required 
+           type="text">
+  </div>
+
+  <!-- Submit Button -->
+  
+<c-col [xs]="12" class="text-center mt-4">
+<button cButton type="submit" class="btn btn-primary px-4 py-2">Ajouter Médicament</button>
+</c-col>
+</form>

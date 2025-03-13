@@ -1,7 +1,26 @@
 import { INavData } from '@coreui/angular-pro';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export const navItems: INavData[] = [
+
   {
+    name: 'Stock Médical',
+    url: '/',
+    iconComponent: { name: 'cil-medical-cross' },
+    children: [
+      {
+        name: 'Consulter',
+        url: '/meds/meds',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Ajouter',
+        url: '/meds/ajoutMed',
+        icon: 'nav-icon-bullet'
+      },
+    ]
+  },
+  /*{
     name: 'Dashboard',
     url: '/dashboard',
     iconComponent: { name: 'cil-speedometer' },
@@ -413,5 +432,5 @@ export const navItems: INavData[] = [
     url: 'https://coreui.io/angular/docs/',
     iconComponent: { name: 'cil-description' },
     attributes: { target: '_blank' }
-  }
+  }*/
 ];

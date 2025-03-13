@@ -14,6 +14,7 @@ import usersData from '../_data';
     selector: 'app-smart-tables-basic-example',
     templateUrl: './smart-tables-basic-example.component.html',
     styleUrls: ['./smart-tables-basic-example.component.scss'],
+    standalone:true,
     imports: [BadgeComponent, ButtonDirective, CollapseDirective, SmartTableComponent, TemplateIdDirective, TextColorDirective]
 })
 export class SmartTablesBasicExampleComponent {
