@@ -109,7 +109,7 @@ namespace HMS.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePersonnelA(Guid id)
+        public async Task<IActionResult> DeletePharmacien(Guid id)
         {
             var pharmacien = await _pharmacienRepository.GetByIdAsync(id);
             if (pharmacien == null)
