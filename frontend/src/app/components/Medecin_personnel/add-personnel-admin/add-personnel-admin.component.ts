@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { PersonnelAdmin } from '../../../models/personnelAdmin.model';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import {ButtonDirective, DatePickerComponent, FormCheckComponent, FormCheckInputDirective, FormCheckLabelDirective, FormDirective, FormFloatingDirective, FormLabelDirective, FormSelectDirective, InputGroupComponent, InputGroupTextDirective, RowComponent, TextColorDirective,DatePickerComponent as DatePickerComponent_1,} from '@coreui/angular-pro';
 import { signal } from '@angular/core';
 import {
@@ -22,7 +22,7 @@ import { PersonnelAdminService } from '../../../services/personnel-admin.service
     ToasterComponent,
     ToastComponent,
     ToastHeaderComponent,
-    ToastBodyComponent],
+    ToastBodyComponent, FormsModule],
   templateUrl: './add-personnel-admin.component.html',
   styleUrl: './add-personnel-admin.component.scss'
 })
@@ -56,7 +56,7 @@ export class AddPersonnelAdminComponent {
     this.percentage.set($event * 25);
   }
   constructor(private personnelAdminService: PersonnelAdminService) {}
-  onSubmit() {
+  onSubmit(form: NgForm) {
     const personnelA = {
       ...this.personnel,
       date_Naiss: this.formatDate(new Date(this.personnel.date_Naiss)),
@@ -68,6 +68,7 @@ export class AddPersonnelAdminComponent {
       next: (response) => {
         console.log('Personnel Administrative  ajouté avec succès', response);
         this.toggleToast('Le Personnel Administrative a été ajouté avec succès.', 'success');
+        form.reset();
       },
       error: (err) => {
         console.log('Personnel Administrative  ajouté avec succès', personnelA);

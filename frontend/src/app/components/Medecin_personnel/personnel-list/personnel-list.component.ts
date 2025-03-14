@@ -79,7 +79,7 @@ export class PersonnelListComponent implements OnInit {
   ngOnInit(): void {
     this.collapseStates = this.allPersonnel.map(() => false);
     this.loadPersonnels();
-    this.loadMedecins();
+    //this.loadMedecins();
   }
  
   
@@ -197,7 +197,7 @@ confirmDelete() {
       next: () => {
         this.closeModal(); // Fermer la modale après suppression
         this.loadPersonnels(); // Rafraîchir la liste des personnels
-        this.loadMedecins();
+        //this.loadMedecins();
         this.toggleToast('Suppression réussie !', 'success'); // 🎉 Afficher un toast de succès
       },
       error: (err) => {

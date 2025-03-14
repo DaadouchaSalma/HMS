@@ -47,7 +47,8 @@ export const routes: Routes = [
       {
         path:'admission',
         loadChildren: () => import('./components/admission/routes').then((m) => m.routes)
-
+      },
+      {
         path: 'personnel',
         loadChildren: () => import('./components/Medecin_personnel/routes').then((m) => m.routes)
 
@@ -104,7 +105,8 @@ export const routes: Routes = [
       {
         path: 'prescription',
         loadChildren: () => import('./components/prescription/routes').then((m) => m.routes)
-      }
+      },
+      {
         path:'meds',
         loadChildren:() => import('./components/routes').then((m)=> m.routes)
       },
