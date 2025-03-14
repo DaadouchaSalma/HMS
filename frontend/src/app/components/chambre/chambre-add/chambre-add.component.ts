@@ -9,7 +9,7 @@ import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-chambre-add',
-  imports: [ColComponent,  FormControlDirective, ReactiveFormsModule, FormsModule, FormDirective, FormLabelDirective, FormSelectDirective, ButtonDirective,ProgressComponent,ToasterComponent,ToastComponent,ToastHeaderComponent,ToastBodyComponent,NgIf],
+  imports: [ColComponent,  FormControlDirective, ReactiveFormsModule, FormsModule, FormDirective, FormLabelDirective, FormSelectDirective, ButtonDirective, ProgressComponent,ToasterComponent,ToastComponent,ToastHeaderComponent,ToastBodyComponent,NgIf],
   templateUrl: './chambre-add.component.html',
   styleUrl: './chambre-add.component.scss',
   providers: [ChambreService] 

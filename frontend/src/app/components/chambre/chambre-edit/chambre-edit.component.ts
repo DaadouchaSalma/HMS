@@ -4,10 +4,11 @@ import{ColComponent,ProgressComponent, ToasterComponent, ToastComponent, ToastHe
 
 import { ActivatedRoute,Router } from '@angular/router';
 import { ChambreService } from '../../../services/services/chambre.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-chambre-edit',
-  imports: [ColComponent, ReactiveFormsModule, FormsModule, FormDirective, FormLabelDirective, FormSelectDirective, ButtonDirective,],
+  imports: [ColComponent, ReactiveFormsModule, FormsModule, FormDirective, FormLabelDirective, FormSelectDirective, ButtonDirective,ProgressComponent,ToasterComponent,ToastComponent,ToastHeaderComponent,ToastBodyComponent, NgIf],
   templateUrl: './chambre-edit.component.html',
   styleUrl: './chambre-edit.component.scss'
 })
@@ -67,7 +68,7 @@ export class ChambreEditComponent implements OnInit {
         this.chambreService.UpdateChambre(this.id, this.chambreForm.value).subscribe({
           next: () => {
             this.toggleToast('Chambre mise à jour avec succès !', 'success');
-            
+            this.router.navigate(['/chambre/chambreList']);
           },
           error: () => {
             this.toggleToast('Erreur lors de la mise à jour.', 'error');
