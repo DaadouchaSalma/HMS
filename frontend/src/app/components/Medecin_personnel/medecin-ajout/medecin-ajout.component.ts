@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import {  FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import {ButtonDirective, DatePickerComponent, FormCheckComponent, FormCheckInputDirective, FormCheckLabelDirective, FormDirective, FormFloatingDirective, FormLabelDirective, FormSelectDirective, InputGroupComponent, InputGroupTextDirective, RowComponent, TextColorDirective,DatePickerComponent as DatePickerComponent_1,} from '@coreui/angular-pro';
 import { signal } from '@angular/core';
 import {
@@ -22,7 +21,7 @@ import { MedecinService } from '../../../services/medecin.service';
     ToasterComponent,
     ToastComponent,
     ToastHeaderComponent,
-    ToastBodyComponent,FormSelectDirective],
+    ToastBodyComponent,FormSelectDirective, FormsModule],
   templateUrl: './medecin-ajout.component.html',
   styleUrl: './medecin-ajout.component.scss'
 })
@@ -59,7 +58,7 @@ export class MedecinAjoutComponent {
   
     constructor(private medecinService: MedecinService) {}
 
-    onSubmit() {
+    onSubmit(form: NgForm) {
       const medecin = {
         ...this.medecin,
         date_Naiss: this.formatDate(new Date(this.medecin.date_Naiss)),
@@ -72,6 +71,7 @@ export class MedecinAjoutComponent {
         next: (response) => {
           console.log('Medecin ajouté avec succès', response);
           this.toggleToast('Le medecin a été ajouté avec succès.', 'success');
+          form.reset();
         },
         error: (err) => {
           console.error('Erreur lors de l’ajout du medecin', err);

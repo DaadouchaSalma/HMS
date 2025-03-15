@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PharmacienService } from '../../../services/pharmacien.service';
 import { Pharmacien } from '../../../models/pharmacien.model';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import {ButtonDirective, DatePickerComponent, FormCheckComponent, FormCheckInputDirective, FormCheckLabelDirective, FormDirective, FormFloatingDirective, FormLabelDirective, FormSelectDirective, InputGroupComponent, InputGroupTextDirective, RowComponent, TextColorDirective,DatePickerComponent as DatePickerComponent_1,} from '@coreui/angular-pro';
 import { signal } from '@angular/core';
 import {
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
     ToasterComponent,
     ToastComponent,
     ToastHeaderComponent,
-    ToastBodyComponent],
+    ToastBodyComponent,FormsModule],
   templateUrl: './add-pharmacien.component.html',
   styleUrl: './add-pharmacien.component.scss'
 })
@@ -60,7 +60,7 @@ export class AddPharmacienComponent {
 
   constructor(private pharmacienService: PharmacienService) {}
   
-  onSubmit() {
+  onSubmit(form: NgForm) {
     const pharmacien = {
       ...this.pharmacien,
       date_Naiss: this.formatDate(new Date(this.pharmacien.date_Naiss)),
@@ -72,6 +72,7 @@ export class AddPharmacienComponent {
       next: (response) => {
         console.log('Pharmacien ajouté avec succès', response);
         this.toggleToast('Le pharmacien a été ajouté avec succès.', 'success');
+        form.reset();
       },
       error: (err) => {
         console.error('Erreur lors de l’ajout du pharmacien', err);
