@@ -4,7 +4,7 @@ import { Medicament } from '../../models/medicaments.model';
 import { CommonModule } from '@angular/common';  // Import CommonModule
 
 import {
-  BadgeComponent,
+  
   ButtonDirective,
   CollapseDirective,
   IColumn,
@@ -13,14 +13,6 @@ import {
   ModalModule
 } from '@coreui/angular-pro';
 import {
-  ButtonCloseDirective,
-  ModalBodyComponent,
-  ColComponent,
-  ModalComponent,
-  ModalFooterComponent,
-  ModalHeaderComponent,
-  ModalTitleDirective,
-  ThemeDirective,
   ProgressComponent,
   ToastComponent,
   ToastBodyComponent,
@@ -33,16 +25,9 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-medicaments',
   standalone: true,
   imports: [
-    BadgeComponent, ButtonDirective, CollapseDirective, SmartTableComponent, TemplateIdDirective, ModalModule,
-    ButtonCloseDirective,
-    ModalBodyComponent,
-    ModalComponent,
-    ModalFooterComponent,
-    ModalHeaderComponent,
-    ModalTitleDirective,
-    ThemeDirective,
+ButtonDirective, CollapseDirective, SmartTableComponent, TemplateIdDirective, ModalModule,
     FormsModule,
-    CommonModule,ColComponent,
+    CommonModule,
     ProgressComponent,
     ToastComponent,
     ToastBodyComponent,
@@ -143,6 +128,7 @@ export class MedicamentsComponent implements OnInit {
       error: (err) => console.error('Error updating stock:', err)
     });
   }
+  
   position = 'top-end';
     visible = signal(false);
     percentage = signal(0);

@@ -77,8 +77,8 @@ export const navItems: INavData[] = [
         icon: 'nav-icon-bullet'
       },
     ]
-  }
-  /*{
+  },
+  {
     name: 'Stock Médical',
     url: '/',
     iconComponent: { name: 'cil-medical-cross' },
