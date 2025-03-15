@@ -18,7 +18,7 @@ export class AddPrescriptionComponent {
   prescription = {
     note: '',
     listeMed: '',
-    medecinId: this.route.snapshot.paramMap.get('id') || '',
+    medecinId: '',
     patientId: '',
   };
   patients: any[] = [];
@@ -34,6 +34,7 @@ export class AddPrescriptionComponent {
   constructor(private prescriptionService: PrescriptionService, private patientService: PatientService, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.prescription.medecinId = this.route.snapshot.paramMap.get('id') || '';
     this.loadPatients();
   }
 
@@ -52,15 +53,16 @@ export class AddPrescriptionComponent {
     this.medications.splice(index, 1);
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
     this.prescription.listeMed = JSON.stringify(this.medications);
 
     this.prescriptionService.addPrescription(this.prescription).subscribe(
       response => {
-        console.log('Prescription added successfully:', response);
+        this.toggleToast('La prescription a été ajoutée avec succès.', 'success');
+        form.reset();
       },
       error => {
-        console.error('Error adding prescription:', error, this.prescription);
+        this.toggleToast("Échec de l'ajout de la prescription. Veuillez réessayer.", 'error');
       }
     );
   }

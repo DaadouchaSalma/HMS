@@ -1,4 +1,4 @@
-<form  (ngSubmit)="onSubmit()" cForm class="row g-5">
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" cForm class="row g-5">
   <c-col [md]="6">
     <label cLabel for="Nom">Nom</label>
     <input cFormControl id="Nom" type="text" [(ngModel)]="medecin.nom" class="form-control" name="nom"/>

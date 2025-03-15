@@ -6,7 +6,7 @@ export const navItems: INavData[] = [
   {
     name: 'Patient',
     url: '/patient',
-    iconComponent: { name: 'cil-person' },
+    iconComponent: { name: 'cil-user-plus' },
     children: [
       {
         name: 'Ajouter un patient',
@@ -15,7 +15,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Mettre à jours un patient',
-        url: '/patient/update/:id',
+        url: '/patient/update/id',
         icon: 'nav-icon-bullet'
       }
     ]
@@ -23,11 +23,11 @@ export const navItems: INavData[] = [
   {
     name: 'Prescription',
     url: '/prescription',
-    iconComponent: { name: 'cil-read-the-docs' },
+    iconComponent: { name: 'cil-notes' },
     children: [
       {
         name: 'Ajouter une prescription',
-        url: '/prescription/new',
+        url: '/prescription/new/id',
         icon: 'nav-icon-bullet'
       }
     ]
@@ -77,8 +77,8 @@ export const navItems: INavData[] = [
         icon: 'nav-icon-bullet'
       },
     ]
-  }
-  /*{
+  },
+  {
     name: 'Stock Médical',
     url: '/',
     iconComponent: { name: 'cil-medical-cross' },

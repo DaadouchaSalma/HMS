@@ -1,4 +1,4 @@
-<form cForm [formGroup]="chambreForm" (ngSubmit)="onSubmit()" class="row g-3">
+<form cForm [formGroup]="chambreForm" (ngSubmit)="onSubmit()" class="row g-5">
     <c-col md="6">
       <label cLabel for="numeroChambre">Numéro de Chambre</label>
       <input cFormControl class="form-control" id="numeroChambre" type="number" formControlName="numeroChambre" required />
@@ -43,8 +43,27 @@
       </select>
     </c-col>
   
-    <c-col xs="12">
-      <button cButton type="submit" [disabled]="chambreForm.invalid">Modifier Chambre</button>
+    <c-col xs="12" class="text-center mt-4">
+      <button cButton class="btn btn-primary px-4 py-2" type="submit" [disabled]="chambreForm.invalid">Modifier Chambre</button>
     </c-col>
   </form>
   
+  <c-toaster [placement]="position" class="p-3" position="fixed">
+    <c-toast
+      (timer)="onTimerChange($event)"
+      (visibleChange)="onVisibleChange($event)"
+      [visible]="visible()"
+      [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+      [style.color]="'white'"
+    >
+      <c-toast-header>
+       
+        <span *ngIf="toastType() === 'success'">Succès</span>
+        <span *ngIf="toastType() === 'error'">Erreur</span>
+      </c-toast-header>
+      <c-toast-body>
+        <p>{{ toastMessage() }}</p>
+        <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+      </c-toast-body>
+    </c-toast>
+  </c-toaster>
