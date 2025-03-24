@@ -1,69 +1,96 @@
-<form [formGroup]="admissionForm" (ngSubmit)="submitForm()" class="row g-4  ">
-  
-    <c-col md="6">
-      <label class="form-label">Patient</label>
-      <c-multi-select formControlName="patientId" [searchable]="true" selectionType="text" >
-        <c-multi-select-option *ngFor="let patient of patients" [value]="patient.value">
-          {{ patient.label }}
-        </c-multi-select-option>
-      </c-multi-select>
+<form [formGroup]="admissionForm" (ngSubmit)="submitForm()" class="row g-3">
 
-    </c-col>
-  
-    <c-col md="6">
-      <label class="form-label">Motif</label>
-      <input type="text" class="form-control" formControlName="motif" placeholder="Motif d'admission">
-    </c-col>
-  
-    <c-col md="4">
-      <label class="form-label">Service</label>
-      <select class="form-control" formControlName="services" (change)="loadChambres()">
-        <option value="Réanimation">Réanimation</option>
-        <option value="Maternité">Maternité</option>
-        <option value="post-opératoires">Post-opératoires</option>
-        <option value="Oncologie">Oncologie</option>
-        <option value="Psychiatrie">Psychiatrie</option>
-      </select>
-    </c-col>
-  
-    <c-col md="4">
-      <label class="form-label">Niveau d'Équipement</label>
-      <select class="form-control" formControlName="niveau_dequipement" (change)="loadChambres()">
-        <option value="Basique">Basique</option>
-        <option value="Médicalisé">Médicalisé</option>
-      </select>
-    </c-col>
-  
-    <c-col md="4">
-      <label class="form-label">Chambre Disponible</label>
-      <select class="form-control" formControlName="chambreId">
-        <option *ngFor="let chambre of chambres" [value]="chambre.id">{{ chambre.numeroChambre }}</option>
-      </select>
-    </c-col>
-  
-    <c-col md="6">
-      <label class="form-label">Date d'Admission</label>
-      <input type="date" class="form-control" formControlName="dateAdmission">
-    </c-col>
-  
-    <c-col xs="12" class="text-center mt-4">
-      <button type="submit" class="btn btn-primary px-4 py-2">Ajouter Admission</button>
-    </c-col>
-  
-  </form>
-  <c-toaster [placement]="position" class="p-3" position="fixed">
-    <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
-             [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
-             [style.color]="'white'">
-      <c-toast-header>
-        <span *ngIf="toastType() === 'success'">Succès</span>
-        <span *ngIf="toastType() === 'error'">Erreur</span>
-      </c-toast-header>
-      <c-toast-body>
-        <p>{{ toastMessage() }}</p>
-        <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
-      </c-toast-body>
-    </c-toast>
-  </c-toaster>
-  
-  
+  <!-- Patient -->
+  <c-col md="6">
+    <label class="form-label">Patient<span style="color: red;"> *</span></label>
+    <c-multi-select formControlName="patientId" [searchable]="true" selectionType="text">
+      <c-multi-select-option *ngFor="let patient of patients" [value]="patient.value">
+        {{ patient.label }}
+      </c-multi-select-option>
+    </c-multi-select>
+    <div *ngIf="admissionForm.get('patientId')?.invalid && admissionForm.get('patientId')?.touched" style="color: red; padding-left: 2%;">
+      <small>* Veuillez sélectionner un patient.</small>
+    </div>
+  </c-col>
+
+  <!-- Motif -->
+  <c-col md="6">
+    <label class="form-label">Motif<span style="color: red;"> *</span></label>
+    <input type="text" class="form-control" formControlName="motif" placeholder="Motif d'admission"/>
+    <div *ngIf="admissionForm.get('motif')?.invalid && admissionForm.get('motif')?.touched" style="color: red;  padding-left: 2%;">
+      <small>* Le motif est requis.</small>
+    </div>
+  </c-col>
+
+  <!-- Service -->
+  <c-col md="4">
+    <label class="form-label">Service<span style="color: red;"> *</span></label>
+    <select class="form-control" formControlName="services" (change)="loadChambres()">
+      <option value="">Sélectionnez un service</option>
+      <option value="Réanimation">Réanimation</option>
+      <option value="Maternité">Maternité</option>
+      <option value="post-opératoires">Post-opératoires</option>
+      <option value="Oncologie">Oncologie</option>
+      <option value="Psychiatrie">Psychiatrie</option>
+    </select>
+    <div *ngIf="admissionForm.get('services')?.invalid && admissionForm.get('services')?.touched" style="color: red; padding-left: 2%;">
+      <small>* Sélectionnez un service.</small>
+    </div>
+  </c-col>
+
+  <!-- Niveau d'Équipement -->
+  <c-col md="4">
+    <label class="form-label">Niveau d'Équipement<span style="color: red;"> *</span></label>
+    <select class="form-control" formControlName="niveau_dequipement" (change)="loadChambres()">
+      <option value="">Sélectionnez un niveau</option>
+      <option value="Basique">Basique</option>
+      <option value="Médicalisé">Médicalisé</option>
+    </select>
+    <div *ngIf="admissionForm.get('niveau_dequipement')?.invalid && admissionForm.get('niveau_dequipement')?.touched" style="color: red;  padding-left: 2%;">
+      <small>* Sélectionnez un niveau d’équipement.</small>
+    </div>
+  </c-col>
+
+  <!-- Chambre Disponible -->
+  <c-col md="4">
+    <label class="form-label">Chambre Disponible<span style="color: red;"> *</span></label>
+    <select class="form-control" formControlName="chambreId">
+      <option value="">Sélectionnez une chambre</option>
+      <option *ngFor="let chambre of chambres" [value]="chambre.id">{{ chambre.numeroChambre }}</option>
+    </select>
+    <div *ngIf="admissionForm.get('chambreId')?.invalid && admissionForm.get('chambreId')?.touched" style="color: red;  padding-left: 2%;">
+      <small>* Sélectionnez une chambre.</small>
+    </div>
+  </c-col>
+
+  <!-- Date d'Admission -->
+  <c-col md="6">
+    <label class="form-label">Date d'Admission<span style="color: red;"> *</span></label>
+    <c-date-picker closeOnSelect formControlName="dateAdmission" placeholder="Sélectionnez la date d'admission" [minDate]="today"
+    />
+    <div *ngIf="admissionForm.get('dateAdmission')?.invalid && admissionForm.get('dateAdmission')?.touched && admissionForm.errors?.['required']" style="color: red;  padding-left: 2%;">
+      <small>* La date d'admission est requise.</small>
+    </div>
+  </c-col>
+
+  <!-- Bouton de soumission -->
+  <c-col xs="12" class="text-center mt-4">
+    <button type="submit" class="btn btn-primary px-4 py-2">Ajouter Admission</button>
+  </c-col>
+
+</form>
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
+           [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+           [style.color]="'white'">
+    <c-toast-header>
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster> 
+

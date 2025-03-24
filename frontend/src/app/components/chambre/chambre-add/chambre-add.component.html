@@ -1,19 +1,28 @@
-<form cForm [formGroup]="chambreForm" (ngSubmit)="onSubmit()"  class="row g-5">
+<form cForm [formGroup]="chambreForm" (ngSubmit)="onSubmit()"  class="row g-3">
   <c-col md="6">
-    <label cLabel for="numeroChambre">Numéro de Chambre</label>
+    <label cLabel for="numeroChambre">Numéro de Chambre<span style="color: red;"> *</span></label>
     <input cFormControl id="numeroChambre" type="number" formControlName="numeroChambre" required />
+    <div *ngIf="chambreForm.get('numeroChambre')?.invalid && chambreForm.get('numeroChambre')?.touched" style="color: red; padding-left: 2%;">
+      <small>* Le numero est requis.</small>
+    </div>
   </c-col>
 
   <c-col md="6">
-    <label cLabel for="nb_lit">Nombre de Lits</label>
+    <label cLabel for="nb_lit">Nombre de Lits<span style="color: red;"> *</span></label>
     <input cFormControl id="nb_lit" type="number" formControlName="nb_lit"  required />
+    <div *ngIf="chambreForm.get('nb_lit')?.invalid && chambreForm.get('nb_lit')?.touched" style="color: red; padding-left: 2%;">
+      <small>* Le nombre de lits est requis.</small>
+    </div>
   </c-col>
   <c-col md="6">
-    <label cLabel for="etage">Étage</label>
+    <label cLabel for="etage">Étage<span style="color: red;"> *</span></label>
     <input cFormControl id="etage" type="number" formControlName="etage"  required />
+    <div *ngIf="chambreForm.get('etage')?.invalid && chambreForm.get('etage')?.touched" style="color: red; padding-left: 2%;">
+      <small>* Le numero de l'étage est requis.</small>
+    </div>
   </c-col>
   <c-col md="6">
-    <label cLabel for="niveau_dequipement">Niveau d'équipement </label>
+    <label cLabel for="niveau_dequipement">Niveau d'équipement <span style="color: red;"> *</span></label>
     <select cSelect id="niveau_dequipement" formControlName="niveau_dequipement" >
       <option value="Basique">Basique</option>
       <option value="Médicalisé">Médicalisé </option>
@@ -22,7 +31,7 @@
   </c-col>
 
   <c-col md="6">
-    <label cLabel for="services">Services</label>
+    <label cLabel for="services">Services<span style="color: red;"> *</span></label>
     <select cSelect id="services" formControlName="services">
       <option value="Réanimation">Réanimation (Réa)</option>
       <option value="Maternité">Maternité</option>
@@ -33,7 +42,7 @@
   </c-col>
 
   <c-col md="6">
-    <label cLabel for="statut">Statut</label>
+    <label cLabel for="statut">Statut<span style="color: red;"> *</span></label>
     <select cSelect id="statut" formControlName="statut" >
       <option value="Disponible">Disponible</option>
       <option value="Occupée">Occupée</option>
@@ -42,7 +51,7 @@
   </c-col>
 
   <c-col xs="12" class="text-center mt-4">
-    <button cButton type="submit" class="btn btn-primary px-4 py-2" [disabled]="chambreForm.invalid">Ajouter Chambre</button>
+    <button cButton type="submit" class="btn btn-primary px-4 py-2" >Ajouter Chambre</button>
   </c-col>
 </form>
 <c-toaster [placement]="position" class="p-3" position="fixed">

@@ -1,21 +1,24 @@
-<form cForm [formGroup]="chambreForm" (ngSubmit)="onSubmit()" class="row g-5">
+<form cForm [formGroup]="chambreForm" (ngSubmit)="onSubmit()" class="row g-3">
     <c-col md="6">
-      <label cLabel for="numeroChambre">Numéro de Chambre</label>
-      <input cFormControl class="form-control" id="numeroChambre" type="number" formControlName="numeroChambre" required />
+      <label cLabel for="numeroChambre">Numéro de Chambre </label>
+      <input cFormControl class="form-control" id="numeroChambre" type="number" formControlName="numeroChambre" [readonly]="true"  />
     </c-col>
   
     <c-col md="6">
-      <label cLabel for="nb_lit">Nombre de Lits</label>
+      <label cLabel for="nb_lit">Nombre de Lits <span style="color: red;"> *</span> </label>
       <input cFormControl class="form-control" id="nb_lit" type="number" formControlName="nb_lit" required />
+      <div *ngIf="chambreForm.get('nb_lit')?.invalid && chambreForm.get('nb_lit')?.touched" style="color: red; padding-left: 2%;">
+        <small>* Le nombre de lits est requis.</small>
+      </div>
     </c-col>
   
     <c-col md="6">
-      <label cLabel for="etage">Étage</label>
-      <input cFormControl class="form-control" id="etage" type="number" formControlName="etage" required />
+      <label cLabel for="etage">Étage </label>
+      <input cFormControl class="form-control" id="etage" type="number" formControlName="etage" [readonly]="true" />
     </c-col>
   
     <c-col md="6">
-      <label cLabel for="niveau_dequipement">Niveau d'équipement</label>
+      <label cLabel for="niveau_dequipement">Niveau d'équipement <span style="color: red;"> *</span></label>
       <select cSelect id="niveau_dequipement" formControlName="niveau_dequipement">
         <option value="Basique">Basique</option>
         <option value="Médicalisé">Médicalisé</option>
@@ -24,7 +27,7 @@
     </c-col>
   
     <c-col md="6">
-      <label cLabel for="services">Services</label>
+      <label cLabel for="services">Services <span style="color: red;"> *</span> </label>
       <select cSelect id="services" formControlName="services">
         <option value="Réanimation">Réanimation (Réa)</option>
         <option value="Maternité">Maternité</option>
@@ -35,16 +38,16 @@
     </c-col>
   
     <c-col md="6">
-      <label cLabel for="statut">Statut</label>
+      <label cLabel for="statut">Statut <span style="color: red;"> *</span></label>
       <select cSelect id="statut" formControlName="statut">
-        <option value="disponible">Disponible</option>
+        <option value="Disponible">Disponible</option>
         <option value="Occupée">Occupée</option>
         <option value="En maintenance">En maintenance</option>
       </select>
     </c-col>
   
     <c-col xs="12" class="text-center mt-4">
-      <button cButton class="btn btn-primary px-4 py-2" type="submit" [disabled]="chambreForm.invalid">Modifier Chambre</button>
+      <button cButton class="btn btn-primary px-4 py-2" type="submit" >Modifier Chambre</button>
     </c-col>
   </form>
   
