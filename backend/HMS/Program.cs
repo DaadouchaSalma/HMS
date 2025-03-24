@@ -22,6 +22,8 @@ builder.Services.AddScoped<IMedecinRepository, MedecinRepository>();
 builder.Services.AddScoped<IPharmacieRepository, PharmacieRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
+builder.Services.AddScoped<IFournisseur, FournisseurRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",

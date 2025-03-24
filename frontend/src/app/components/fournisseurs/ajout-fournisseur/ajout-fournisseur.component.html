@@ -1,0 +1,78 @@
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast
+    (timer)="onTimerChange($event)"
+    (visibleChange)="onVisibleChange($event)"
+    [visible]="visible()"
+    [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+    [style.color]="'white'"
+  >
+    <c-toast-header>
+     
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>
+<form #form = "ngForm" class="row g-3" (ngSubmit)="onSubmit(form)">
+  <c-col [md]="6">
+    <label for="fournisseurNom" class="form-label">Nom</label>
+    <input id="fournisseurNom" 
+           cFormControl 
+           [(ngModel)]="fournisseur.nomF" 
+           name="nom" 
+           class="form-control" 
+           placeholder="Nom" 
+           required 
+           type="text"
+           #nom="ngModel"
+           >
+           <div *ngIf="nom.invalid && nom.touched" style="color: red; padding-left: 2%;">
+            <small>* Le nom est requis.</small>
+          </div>
+  </c-col>
+    
+
+  <c-col [md]="6">
+      <label for="fournisseurTel" class="form-label">Numéro de téléphone</label>
+      <input id="fournisseurTel" 
+             cFormControl 
+             [(ngModel)]="fournisseur.numTel" 
+             name="tel" 
+             class="form-control" 
+             placeholder="Numéro de téléphone" 
+             required 
+             type="text"
+             #tel ="ngModel">
+             <div *ngIf="tel.invalid && tel.touched" style="color: red; padding-left: 2%;">
+              <small>* Le numéro de téléphone est requis.</small>
+            </div>
+  </c-col>
+
+  <c-col [md]="6">
+    <label for="fournisseurAdresse" class="form-label">Adresse</label>
+    <input id="fournisseurAdresse" 
+           cFormControl 
+           [(ngModel)]="fournisseur.adresse" 
+           name="compagnie" 
+           class="form-control" 
+           placeholder="Adresse" 
+           required 
+           type="text"
+           #adresse ="ngModel">
+           <div *ngIf="adresse.invalid && adresse.touched" style="color: red; padding-left: 2%;">
+            <small>* L'adresse est requis.</small>
+          </div>
+  </c-col>
+  
+    
+
+  <!-- Submit Button -->
+  
+<c-col [xs]="12" class="text-center mt-4">
+<button cButton type="submit" class="btn btn-primary px-4 py-2">Ajouter Fournisseur</button>
+</c-col>
+</form>

@@ -1,0 +1,26 @@
+<table cTable class="table table-bordered table-hover text-center">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Téléphone</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fournisseur of fournisseurs">
+      <td>{{ fournisseur.nomF }}</td>
+      <td>{{ fournisseur.adresse }}</td>
+      <td>{{ fournisseur.numTel }}</td>
+      <td>
+        <!--<button class="btn btn-danger" (click)="deleteFournisseur(fournisseur)" cButton>
+          <i class="bi bi-trash"></i> Supprimer
+        </button>-->
+        <button [routerLink]="['/meds/ModifF/', fournisseur.id]" cButton class="btn btn-info" size="sm" variant="outline">
+          Modifier
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

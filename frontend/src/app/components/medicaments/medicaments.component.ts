@@ -1,10 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { MedicamentService } from '../../services/medicament.service';
 import { Medicament } from '../../models/medicaments.model';
+import { Fournisseur } from '../../models/founisseur.model';
+
 import { CommonModule } from '@angular/common';  // Import CommonModule
 
 import {
-  BadgeComponent,
+  
   ButtonDirective,
   CollapseDirective,
   IColumn,
@@ -13,14 +15,6 @@ import {
   ModalModule
 } from '@coreui/angular-pro';
 import {
-  ButtonCloseDirective,
-  ModalBodyComponent,
-  ColComponent,
-  ModalComponent,
-  ModalFooterComponent,
-  ModalHeaderComponent,
-  ModalTitleDirective,
-  ThemeDirective,
   ProgressComponent,
   ToastComponent,
   ToastBodyComponent,
@@ -33,16 +27,9 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-medicaments',
   standalone: true,
   imports: [
-    BadgeComponent, ButtonDirective, CollapseDirective, SmartTableComponent, TemplateIdDirective, ModalModule,
-    ButtonCloseDirective,
-    ModalBodyComponent,
-    ModalComponent,
-    ModalFooterComponent,
-    ModalHeaderComponent,
-    ModalTitleDirective,
-    ThemeDirective,
+ButtonDirective, CollapseDirective, SmartTableComponent, TemplateIdDirective, ModalModule,
     FormsModule,
-    CommonModule,ColComponent,
+    CommonModule,
     ProgressComponent,
     ToastComponent,
     ToastBodyComponent,
@@ -58,7 +45,8 @@ export class MedicamentsComponent implements OnInit {
     nom: '',
     description: '',
     nbr_stock: 0,
-    compagnie: '',
+    fournisseurId: '' ,
+    CategorieId:'',
     date_Exp: new Date() // Initial date
   };
 
@@ -71,7 +59,8 @@ export class MedicamentsComponent implements OnInit {
   columns: IColumn[] = [
     { key: 'nom', label: 'Nom' },
     { key: 'nbr_stock', label: 'Quantité de Stock' },
-    { key: 'compagnie', label: 'Fournisseur' },
+    { key: 'fournisseur', label: 'Fournisseur' },
+    { key: 'categorie', label: 'Categorie' },
     { key: 'date_Exp', label: 'Date d\'Expiration ' },
     { key: 'show', label: '', _style: { width: '5%' }, filter: false, sorter: false },
     { key: 'delete', label: '', _style: { width: '5%' }, filter: false, sorter: false }
@@ -91,25 +80,43 @@ export class MedicamentsComponent implements OnInit {
     this.details_visible[id] = !this.details_visible[id];
   }
 
-  deleteMedicament(id: string): void {
-    if (confirm('Are you sure you want to delete this medicament?')) {
-      this.medicamentService.deleteMedicament(id).subscribe({
-        next: () => {
-          console.log(`Medicament with id ${id} deleted.`);
-          this.toggleToast('Médicament supprimé avec succés!', 'success');
+// Properties for modal control
+visible_modal: boolean = false;
+selectedId: string | null = null;
 
+// Open modal with the selected medicament ID
+openDeleteModal(id: string) {
+  this.selectedId = id;
+  this.visible_modal = true;
+}
 
-          this.medicamentsData = this.medicamentsData.filter(m => m.id !== id);
-        },
-        error: (err) => {
-          console.error('Error deleting medicament:', err);
-          this.toggleToast('Erreur lors de la suppression du médicament!', 'error');
+// Close modal and reset selected ID
+closeModal() {
+  this.visible_modal = false;
+  this.selectedId = null;
+}
 
-          
-        }
-      });
-    }
+// Confirm deletion
+confirmDelete() {
+  if (this.selectedId) {
+    this.medicamentService.deleteMedicament(this.selectedId).subscribe({
+      next: () => {
+        console.log(`Medicament with id ${this.selectedId} deleted.`);
+        this.toggleToast('Médicament supprimé avec succès!', 'success');
+
+        // Remove deleted medicament from the list
+        this.medicamentsData = this.medicamentsData.filter(m => m.id !== this.selectedId);
+
+        this.closeModal(); // Close modal after deletion
+      },
+      error: (err) => {
+        console.error('Error deleting medicament:', err);
+        this.toggleToast('Erreur lors de la suppression du médicament!', 'error');
+      }
+    });
   }
+}
+
   
 
   updateStock(medicament: Medicament, newStock: any): void {
@@ -143,6 +150,7 @@ export class MedicamentsComponent implements OnInit {
       error: (err) => console.error('Error updating stock:', err)
     });
   }
+  
   position = 'top-end';
     visible = signal(false);
     percentage = signal(0);
@@ -163,5 +171,13 @@ export class MedicamentsComponent implements OnInit {
     onTimerChange($event: number) {
       this.percentage.set($event * 25);
     }
+    toggleLiveDemo() {
+      this.visible_modal = !this.visible_modal;
+    }
+  
+    handleLiveDemoChange(event: any) {
+      this.visible_modal = event;
+    }
+  
   
 }
