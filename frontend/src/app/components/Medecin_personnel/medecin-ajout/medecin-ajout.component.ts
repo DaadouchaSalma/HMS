@@ -59,6 +59,18 @@ export class MedecinAjoutComponent {
     constructor(private medecinService: MedecinService) {}
 
     onSubmit(form: NgForm) {
+
+      if (this.validateDateEmb() === false) {
+        this.toggleToast('La date d\'embauche ne peut pas être dans le futur.', 'error');
+        return; 
+      }
+      if (form.invalid) {
+        Object.keys(form.controls).forEach((field) => {
+          const control = form.controls[field];
+          control.markAsTouched({ onlySelf: true });
+        });
+        return;
+      }
       const medecin = {
         ...this.medecin,
         date_Naiss: this.formatDate(new Date(this.medecin.date_Naiss)),
@@ -79,4 +91,18 @@ export class MedecinAjoutComponent {
         }
       });
     }
+
+    validateDateEmb() {
+      // Si la date d'embauche est définie
+      if (this.medecin.date_Emb) {
+        const today = new Date().toISOString().split('T')[0]; // Date du jour (YYYY-MM-DD)
+        const embDate = new Date(this.medecin.date_Emb).toISOString().split('T')[0]; // Date d'embauche
+    
+        // Si la date d'embauche est dans le futur, retourner false
+        if (embDate > today) {
+          return false;
+        }
+        else {return true; }
+      }else {return true; }
+    }    
 }

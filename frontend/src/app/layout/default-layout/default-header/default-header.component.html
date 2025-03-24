@@ -1,6 +1,6 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
-<ng-container>
-  <c-container [fluid]="true" class="px-4">
+<ng-container >
+  <c-container [fluid]="true" class="px-4" >
     <button
       [cSidebarToggle]="sidebarId()"
       cHeaderToggler
@@ -8,33 +8,35 @@
       toggle="visible"
       style="margin-inline-start: -14px;"
       aria-label="Toggle sidebar navigation"
+      
     >
-      <svg cIcon name="cilMenu" size="lg"></svg>
+      <svg cIcon name="cilMenu" size="lg" style="color: #6387c0;"></svg>
     </button>
-    <form cForm class="d-none d-sm-flex">
-      <c-input-group class="border border-light border-opacity-25 rounded">
-        <span cInputGroupText id="search-addon" class="bg-transparent border-0 px-1">
-          <svg cIcon name="cilSearch" size="lg" class="my-1 mx-2 text-white text-opacity-25"></svg>
+    <!--form cForm class="d-none d-sm-flex">
+      <c-input-group class="border border-light border-opacity-25 rounded" style="border-color: #6387c0 !important;">
+        <span cInputGroupText id="search-addon" class="bg-transparent border-0 px-1" >
+          <svg cIcon name="cilSearch" size="lg" class="my-1 mx-2 text-opacity-25" style="color: #6387c0;" ></svg>
         </span>
         <input cFormControl
                placeholder="Search..."
                aria-label="Search"
                aria-describedby="search-addon"
-               class="bg-transparent border-0"
+               class="bg-transparent border-0 border-input-search"
+               style="color: #6387c0;"
         />
       </c-input-group>
-    </form>
-    <c-header-nav class="d-none d-md-flex ms-auto ">
+    </form-->
+    <c-header-nav class="d-none d-md-flex ms-auto custom-header-nav">
       <ng-container *ngTemplateOutlet="notifyDropdown" />
-      <ng-container *ngTemplateOutlet="taskDropdown" />
-      <ng-container *ngTemplateOutlet="messagesDropdown" />
+      <!--ng-container *ngTemplateOutlet="taskDropdown" /-->
+      <ng-container *ngTemplateOutlet="messagesDropdown"/>
     </c-header-nav>
 
     <c-header-nav class="ms-auto ms-md-0">
       <div class="nav-item py-1">
         <div class="vr h-100 mx-2 text-white text-opacity-50"></div>
       </div>
-      <ng-container *ngTemplateOutlet="languageDropdown" />
+      <!--ng-container *ngTemplateOutlet="languageDropdown" /-->
       <ng-container *ngTemplateOutlet="themeDropdown" />
       <div class="nav-item py-1">
         <div class="vr h-100 mx-2 text-white text-opacity-50"></div>
@@ -46,14 +48,14 @@
     </c-header-nav>
 
     <!--aside toggler-->
-    <button
+    <!--button
       cHeaderToggler
       cSidebarToggle="aside1"
       style="margin-inline-end: -12px"
       toggle="visible"
     >
-      <svg cIcon name="cilApplicationsSettings" size="lg"></svg>
-    </button>
+      <svg cIcon name="cilApplicationsSettings" size="lg" style="color: #6387c0;"></svg>
+    </button-->
   </c-container>
 </ng-container>
 <!--</c-header>-->
@@ -164,7 +166,7 @@
   <c-dropdown alignment="end" variant="nav-item">
     <button [caret]="false" cDropdownToggle>
       <span class="d-inline-block my-1 mx-2 position-relative">
-        <svg cIcon name="cilEnvelopeOpen" size="lg"></svg>
+        <svg cIcon name="cilEnvelopeOpen" size="lg" class="hover-icon" style="color: #6387c0;"></svg>
         @if (newMessages?.length) {
           <c-badge
             class="p-1"
@@ -220,7 +222,7 @@
   <c-dropdown alignment="end" variant="nav-item">
     <button [caret]="false" cDropdownToggle>
       <span class="d-inline-block my-1 mx-2 position-relative">
-        <svg cIcon name="cilBell" size="lg"></svg>
+        <svg cIcon name="cilBell" size="lg" style="color: #6387c0;" class="hover-icon"></svg>
         @if (newNotifications?.length) {
           <c-badge
             class="p-1"
@@ -263,7 +265,7 @@
   <c-dropdown alignment="end" variant="nav-item">
     <button [caret]="false" cDropdownToggle href>
       <span class="d-inline-block my-1 mx-2 position-relative">
-      <svg cIcon name="cilListRich" size="lg"></svg>
+      <svg cIcon name="cilListRich" size="lg" style="color: #6387c0;" class="hover-icon"></svg>
         @if (newTasks?.length) {
           <c-badge
             class="p-1"
@@ -309,8 +311,8 @@
 
 <ng-template #themeDropdown>
   <c-dropdown alignment="end" variant="nav-item">
-    <button [caret]="false" cDropdownToggle aria-label="Open theme picker">
-      <svg cIcon [name]="icons()" size="lg"></svg>
+    <button [caret]="false" cDropdownToggle aria-label="Open theme picker" >
+      <svg cIcon [name]="icons()" size="lg" style="color: #6387c0;" class="hover-icon"></svg>
     </button>
     <div cDropdownMenu>
       @for (mode of colorModes; track mode.name) {

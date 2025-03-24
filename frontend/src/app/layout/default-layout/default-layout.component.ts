@@ -6,6 +6,7 @@ import { IconDirective } from '@coreui/icons-angular';
 import {
   ButtonCloseDirective,
   ContainerComponent,
+  ImgModule,
   ShadowOnScrollDirective,
   SidebarBrandComponent,
   SidebarComponent,
@@ -46,6 +47,7 @@ function isOverflown(element: HTMLElement) {
     RouterOutlet,
     ShadowOnScrollDirective,
     ButtonCloseDirective,
+    ImgModule
   ]
 })
 export class DefaultLayoutComponent {

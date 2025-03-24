@@ -1,4 +1,4 @@
-<form  (ngSubmit)="onSubmit()" cForm class="row g-5">
+<form #form="ngForm" (ngSubmit)="onSubmit()" cForm class="row g-3">
     <c-col [md]="6">
       <label cLabel for="Nom">Nom</label>
       <input cFormControl id="Nom" type="text" [(ngModel)]="pharmacien.nom" class="form-control" name="nom" disabled/>
@@ -8,16 +8,28 @@
       <input cFormControl id="Prenom" type="text" [(ngModel)]="pharmacien.prenom" class="form-control" name="prenom" disabled />
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="Email">Email</label>
-      <input cFormControl id="Email" type="email" [(ngModel)]="pharmacien.email" class="form-control" name="email" />
+      <label cLabel for="Email">Email<span style="color: red;"> *</span></label>
+      <input cFormControl id="Email" type="email" [(ngModel)]="pharmacien.email" class="form-control" name="email" #email="ngModel" email required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
+      <div *ngIf="email.invalid && email.touched"  style="color: red; padding-left: 2%;">
+        <small *ngIf="email.errors?.['required']">* L'email est requis.</small>
+        <small *ngIf="email.errors?.email">Format de l'email invalide.</small>
+        <small *ngIf="email.errors?.pattern">L'email doit être valide (ex: exemple&#64;mail.com).</small>
+      </div>
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="Password">Password</label>
-      <input cFormControl id="Password" type="password" [(ngModel)]="pharmacien.password" class="form-control" name="password" />
+      <label cLabel for="Password">Mot de Passe<span style="color: red;"> *</span></label>
+      <input cFormControl id="Password" type="password" [(ngModel)]="pharmacien.password" class="form-control" name="password" required #password="ngModel"/>
+      <div *ngIf="password.invalid && password.touched" style="color: red; padding-left: 2%;">
+        <small>* Le mot de passe est requis.</small>
+      </div>
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="tel">Téléphone</label>
-      <input cFormControl id="tel" type="tel" [(ngModel)]="pharmacien.telephone" class="form-control" name="telephone" />
+      <label cLabel for="tel">Téléphone<span style="color: red;"> *</span></label>
+      <input cFormControl id="tel" type="tel" [(ngModel)]="pharmacien.telephone" class="form-control" name="telephone" required #telephone="ngModel" pattern="^[1-9][0-9]{7}$"/>
+      <div *ngIf="telephone.invalid && telephone.touched" style="color: red; padding-left: 2%;">
+        <small *ngIf="telephone.errors?.['required']">* Le numéro de téléphone est requis.</small>
+        <small *ngIf="telephone.errors?.pattern">Le numéro doit contenir exactement 8 chiffres et ne pas commencer par 0.</small>
+      </div>
     </c-col>
     <c-col [md]="6">
       <label cLabel> Date De Naissance </label>
@@ -32,15 +44,18 @@
       <input cFormControl id="salaire" class="form-control" type="number" [(ngModel)]="pharmacien.salaire" name="salaire"  disabled/>
     </c-col>
     <c-col [md]="6">
-        <label cLabel for="Adresse">Adresse</label>
-        <input cFormControl id="Adresse" type="text" [(ngModel)]="pharmacien.adresse" class="form-control" name="adresse"  />
+        <label cLabel for="Adresse">Adresse<span style="color: red;"> *</span></label>
+        <input cFormControl id="Adresse" type="text" [(ngModel)]="pharmacien.adresse" class="form-control" name="adresse"  required  #adresse="ngModel"/>
+        <div *ngIf="adresse.invalid && adresse.touched" style="color: red; padding-left: 2%;">
+          <small>* L'adresse est requise.</small>
+        </div>
       </c-col>
       <c-col [md]="6">
         <label cLabel for="Statut">Statut</label>
         <input cFormControl id="Statut" type="text" [(ngModel)]="pharmacien.statut" class="form-control" name="statut" disabled />
       </c-col>
     <c-col [xs]="12" class="text-center mt-4" style="margin-bottom: 40px;">
-      <button cButton type="submit" class="btn btn-primary px-4 py-2">Mettre à jour</button>
+      <button cButton type="submit" class="btn btn-primary px-4 py-2" [ngClass]="{'btn-secondary': form.invalid}" [disabled]="form.invalid">Mettre à jour</button>
     </c-col>
   </form>
   

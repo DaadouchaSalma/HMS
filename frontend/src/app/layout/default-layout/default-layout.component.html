@@ -6,24 +6,28 @@
   id="sidebar1"
   visible
 >
-  <c-sidebar-header class="bg-primary border-bottom">
+  <c-sidebar-header class=" border-bottom" style="background-color: #c7d5ea; padding-top: 0.5rem; padding-bottom: 0.5rem;">
     <c-sidebar-brand cSidebarToggle="sidebar1" toggle="unfoldable" style="cursor: pointer;">
-      <svg [class]="{icon: false}" cIcon class="sidebar-brand-full" height="32" name="logo" title="CoreUI Logo"></svg>
-      <svg cIcon class="sidebar-brand-narrow" height="32" name="signet" title="CoreUI Logo"></svg>
+      <!--svg [class]="{icon: false}" cIcon class="sidebar-brand-full" height="32" name="logo" title="CoreUI Logo"></svg>
+      <svg cIcon class="sidebar-brand-narrow" height="32" name="signet" title="CoreUI Logo"></svg-->
+        <!--img src="../../../assets/images/logo_smartCare_sansbg_mini.png" alt="" style="height:32px"-->
+        <img cImg  src="../../../assets/images/logo_smartCare_sansbg (3).png" alt="" height="48" >
     </c-sidebar-brand>
+    
     <button cSidebarToggle="sidebar1"
             cButtonClose
             class="d-lg-none"
             dark
             toggle="visible"
             aria-label="Toggle sidebar"
+            style="color: #6387c0 !important;"
     >
     </button>
-    <button cSidebarToggler="sidebar1" toggle="unfoldable" aria-label="Toggle sidebar fold"></button>
+    <button cSidebarToggler="sidebar1" toggle="unfoldable" aria-label="Toggle sidebar fold" class="toggler-button" style="color: #6387c0 !important;"></button>
   </c-sidebar-header>
 
-  <ng-scrollbar pointerEventsMethod="scrollbar" visibility="hover">
-    <c-sidebar-nav [navItems]="navItems" dropdownMode="close" compact />
+  <ng-scrollbar pointerEventsMethod="scrollbar" visibility="hover" >
+    <c-sidebar-nav [navItems]="navItems" dropdownMode="close" compact/>
   </ng-scrollbar>
 </c-sidebar>
 
@@ -32,9 +36,10 @@
   <!--app-header-->
   <app-default-header
     [cShadowOnScroll]="'sm'"
-    class="mb-4 d-print-none header header-sticky p-0 shadow-sm bg-primary"
+    class="mb-4 d-print-none header header-sticky p-0 shadow-sm"
     position="sticky"
     sidebarId="sidebar1"
+    style="background-color: #c7d5ea;"
   />
   <!--app-body-->
   <div class="body flex-grow-1">

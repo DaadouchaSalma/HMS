@@ -1,13 +1,17 @@
 <div class="d-flex justify-content-between mb-3">
-  <button cButton color="primary" [routerLink]="['/personnel/add-personnel-admin']">
+  <button cButton  [routerLink]="['/personnel/add-personnel-admin']" style="color: white; background-color: #dd789c; border-color: #dd789c;"
+  onmouseover="this.style.backgroundColor='#b85f7c'; this.style.borderColor='#b85f7c';"
+  onmouseout="this.style.backgroundColor='#dd789c'; this.style.borderColor='#dd789c';">
     <i class="fa-solid fa-user-tie me-2"></i> Ajouter Administratif
   </button>
   
-  <button cButton color="success" [routerLink]="['/personnel/add-medecin']">
+  <button cButton [routerLink]="['/personnel/add-medecin']" style="color: white; background-color: #3E608C; border-color: #3E608C;"  onmouseover="this.style.backgroundColor='#345073'; this.style.borderColor='#345073';"
+  onmouseout="this.style.backgroundColor='#3E608C'; this.style.borderColor='#3E608C';">
     <i class="fas fa-user-md me-2"></i> Ajouter Médecin
   </button>
 
-  <button cButton color="info" [routerLink]="['/personnel/add-pharmacien']">
+  <button cButton  [routerLink]="['/personnel/add-pharmacien']" style="color: white; background-color: #854d82d6; border-color: #854d82d6;"  onmouseover="this.style.backgroundColor='#6b3d69d6'; this.style.borderColor='#6b3d69d6';"
+  onmouseout="this.style.backgroundColor='#854d82d6'; this.style.borderColor='#854d82d6';" >
     <i class="fas fa-prescription-bottle-alt me-2"></i> Ajouter Pharmacien
   </button>
 </div>
@@ -93,7 +97,7 @@
                   <div class="mt-2" >
                       <button cButton class="btn-action-1 me-1" style="background-color:  #c1cce6 ; border-color:  #c1cce6 ; color: black;">
                         <i class="fas fa-edit"></i></button> <br>
-                      <button cButton class="btn-action-2 me-1" style="background-color: rgb(196, 57, 57); border-color: #dd789c;margin-top: 20px;" (click)="openDeleteModal(personnel.id, personnel.type)">
+                      <button cButton class="btn-action-2 me-1" style="background-color: rgb(196, 57, 57); border-color: rgb(196, 57, 57);margin-top: 20px;" (click)="openDeleteModal(personnel.id, personnel.type)">
                         <i class="fas fa-trash"></i></button>
                   </div> 
               </div>
@@ -112,13 +116,13 @@
     <button (click)="closeModal()" cButtonClose></button>
   </c-modal-header>
   
-  <c-modal-body>Êtes-vous sûr de vouloir supprimer cet employé ?</c-modal-body>
+  <c-modal-body>Êtes-vous sûr de vouloir supprimer ce personnel ?</c-modal-body>
 
   <c-modal-footer>
     <button (click)="closeModal()" cButton color="secondary">
       Annuler
     </button>
-    <button (click)="confirmDelete()" cButton color="danger">
+    <button (click)="confirmDelete()" cButton color="danger" style="background-color: rgb(196, 57, 57); color: white;">
       Supprimer
     </button>
   </c-modal-footer>

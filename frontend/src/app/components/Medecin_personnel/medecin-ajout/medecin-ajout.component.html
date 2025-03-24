@@ -1,52 +1,96 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form)" cForm class="row g-5">
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" cForm class="row g-3">
   <c-col [md]="6">
-    <label cLabel for="Nom">Nom</label>
-    <input cFormControl id="Nom" type="text" [(ngModel)]="medecin.nom" class="form-control" name="nom"/>
+    <label cLabel for="Nom">Nom<span style="color: red;"> *</span></label>
+    <input cFormControl id="Nom" type="text" [(ngModel)]="medecin.nom" class="form-control" name="nom" required #nom="ngModel"/>
+    <div *ngIf="nom.invalid && nom.touched" style="color: red; padding-left: 2%;">
+      <small>* Le nom est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="Prenom">Prénom</label>
-    <input cFormControl id="Prenom" type="text" [(ngModel)]="medecin.prenom" class="form-control" name="prenom" />
+    <label cLabel for="Prenom">Prénom<span style="color: red;"> *</span></label>
+    <input cFormControl id="Prenom" type="text" [(ngModel)]="medecin.prenom" class="form-control" name="prenom"required  #prenom="ngModel"/>
+    <div *ngIf="prenom.invalid && prenom.touched" style="color: red; padding-left: 2%;">
+      <small>* Le prénom est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="Email">Email</label>
-    <input cFormControl id="Email" type="email" [(ngModel)]="medecin.email" class="form-control" name="email" />
+    <label cLabel for="Email">Email<span style="color: red;"> *</span></label>
+    <input cFormControl id="Email" type="email" [(ngModel)]="medecin.email" class="form-control" name="email" #email="ngModel" email required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
+    <div *ngIf="email.invalid && email.touched"  style="color: red; padding-left: 2%;">
+      <small *ngIf="email.errors?.['required']">* L'email est requis.</small>
+      <small *ngIf="email.errors?.email">Format de l'email invalide.</small>
+      <small *ngIf="email.errors?.pattern">L'email doit être valide (ex: exemple&#64;mail.com).</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="Password">Password</label>
-    <input cFormControl id="Password" type="password" [(ngModel)]="medecin.password" class="form-control" name="password" />
+    <label cLabel for="Password">Mot de Passe<span style="color: red;"> *</span></label>
+    <input cFormControl id="Password" type="password" [(ngModel)]="medecin.password" class="form-control" name="password"required #password="ngModel"/>
+    <div *ngIf="password.invalid && password.touched" style="color: red; padding-left: 2%;">
+      <small>* Le mot de passe est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="tel">Téléphone</label>
-    <input cFormControl id="tel" type="tel" [(ngModel)]="medecin.telephone" class="form-control" name="telephone" />
+    <label cLabel for="tel">Téléphone<span style="color: red;"> *</span></label>
+    <input cFormControl id="tel" type="tel" [(ngModel)]="medecin.telephone" class="form-control" name="telephone" required #telephone="ngModel" pattern="^[1-9][0-9]{7}$"/>
+    <div *ngIf="telephone.invalid && telephone.touched" style="color: red; padding-left: 2%;">
+      <small *ngIf="telephone.errors?.['required']">* Le numéro de téléphone est requis.</small>
+      <small *ngIf="telephone.errors?.pattern">Le numéro doit contenir exactement 8 chiffres et ne pas commencer par 0.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel> Date De Naissance </label>
-    <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="medecin.date_Naiss" placeholder="Sélectionnez la date de naissance" />
+    <label cLabel> Date De Naissance<span style="color: red;"> *</span></label>
+    <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="medecin.date_Naiss" placeholder="Sélectionnez la date de naissance" required  #dateNaiss="ngModel"/>
+    <div *ngIf="dateNaiss.invalid && dateNaiss.touched" style="color: red; padding-left: 2%;">
+      <small>* La date de naissance est requise.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel> Date D'Embauche </label>
-    <c-date-picker closeOnSelect [(ngModel)]="medecin.date_Emb" name="date_emb" placeholder="Sélectionnez la date d'embauche"  />
+    <label cLabel> Date D'Embauche<span style="color: red;"> *</span></label>
+    <c-date-picker closeOnSelect [(ngModel)]="medecin.date_Emb" name="date_emb" placeholder="Sélectionnez la date d'embauche"  required #dateEmb="ngModel" (ngModelChange)="validateDateEmb()"/>
+    <div *ngIf="dateEmb.invalid && dateEmb.touched" style="color: red; padding-left: 2%;">
+      <small  *ngIf="dateEmb.errors?.['required']">* La date d'embauche est requise.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="salaire">Salaire</label>
-    <input cFormControl id="salaire" class="form-control" type="number" [(ngModel)]="medecin.salaire" name="salaire"  />
+    <label cLabel for="salaire">Salaire<span style="color: red;"> *</span></label>
+    <input cFormControl id="salaire" class="form-control" type="number" [(ngModel)]="medecin.salaire" name="salaire" required  #salaire="ngModel"/>
+    <div *ngIf="salaire.invalid && salaire.touched" style="color: red; padding-left: 2%;">
+      <small>* Le salaire est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="Adresse">Adresse</label>
-    <input cFormControl id="Adresse" type="text" [(ngModel)]="medecin.adresse" class="form-control" name="adresse"  />
+    <label cLabel for="Adresse">Adresse<span style="color: red;"> *</span></label>
+    <input cFormControl id="Adresse" type="text" [(ngModel)]="medecin.adresse" class="form-control" name="adresse"  required  #adresse="ngModel"/>
+    <div *ngIf="adresse.invalid && adresse.touched" style="color: red; padding-left: 2%;">
+      <small>* L'adresse est requise.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="Statut">Statut</label>
-    <input cFormControl id="Statut" type="text" [(ngModel)]="medecin.statut" class="form-control" name="statut"  />
+    <label cLabel for="Statut">Statut<span style="color: red;"> *</span></label>
+    <select aria-label="Choisissez le statut" id="Statut" [(ngModel)]="medecin.statut" name="statut" cSelect required #statut="ngModel">
+      <option value="Contractuel">Contractuel</option>
+      <option value="Titulaire">Titulaire</option>
+      <option value="Vacataire">Vacataire</option>
+      <option value="Stagiaire">Stagiaire</option>
+    </select>
+    <div *ngIf="statut.invalid && statut.touched" style="color: red; padding-left: 2%;">
+      <small>* Le statut est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="grade">Grade</label>
-    <input cFormControl id="grade" type="text" [(ngModel)]="medecin.grad_med" class="form-control" name="grade"  />
+    <label cLabel for="grade">Grade<span style="color: red;"> *</span></label>
+    <select aria-label="Choisissez le grade" id="grade" [(ngModel)]="medecin.grad_med" name="grade" cSelect required #grade="ngModel">
+      <option value="Interne">Interne</option>
+      <option value="Résident">Résident</option>
+      <option value="Médecin Spécialiste">Médecin Spécialiste</option>
+    </select>
+    <div *ngIf="grade.invalid && grade.touched"  style="color: red; padding-left: 2%;">
+      <small *ngIf="grade.errors?.['required']">* Le grade est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel>Service</label>
-    <select aria-label="Choisissez le service" [(ngModel)]="medecin.service" name="service" cSelect >
-      <option>Choisissez</option>
+    <label cLabel>Spécialité<span style="color: red;"> *</span></label>
+    <select aria-label="Choisissez le service" [(ngModel)]="medecin.service" name="service" cSelect required #service="ngModel">
       <option value="Chirurgie">Chirurgie</option>
       <option value="Cardiologie">Cardiologie</option>
       <option value="Pédiatrie">Pédiatrie</option>
@@ -55,11 +99,13 @@
       <option value="Psychiatrie">Psychiatrie</option>
       <option value="Orthopédie">Orthopédie</option>
     </select>
+    <div *ngIf="service.invalid && service.touched"  style="color: red; padding-left: 2%;">
+      <small *ngIf="service.errors?.['required']">* La spécialité est requise.</small>
+    </div>
   </c-col>
   <c-col [xs]="12" class="text-center mt-4" style="margin-bottom: 40px;"
   >
-    <button cButton type="submit" class="btn btn-primary px-4 py-2"
-    >Ajouter</button>
+    <button cButton type="submit" class="btn px-4 py-2" >Ajouter</button>
   </c-col>
 </form>
 

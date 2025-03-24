@@ -1,0 +1,12 @@
+.border-input-search::placeholder {
+    color: #6387c0; /* Change la couleur ici */
+    opacity: 1;
+}
+.hover-icon {
+    color: #6387c0 !important;
+    transition: color 0.3s ease-in-out !important;
+  }
+  
+.hover-icon:hover {
+    color: #3E608C !important; /* Changer la couleur au survol */
+  }
