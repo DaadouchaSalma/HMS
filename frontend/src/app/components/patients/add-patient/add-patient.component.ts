@@ -39,7 +39,34 @@ export class AddPatientComponent {
       return `${year}-${month}-${day}`;
     }
 
+    validateDateNaiss() {
+   
+      if (this.patient.date_Naiss) {
+        const today = new Date().toISOString().split('T')[0];
+        const DateNaiss = new Date(this.patient.date_Naiss).toISOString().split('T')[0]; 
+    
+        if (DateNaiss > today) {
+          return false;
+        }
+        else {return true; }
+      }else {return true; }
+    }
+
   onSubmit(form: NgForm) {
+    
+    if (this.validateDateNaiss() === false) {
+      this.toggleToast('La date de naissance ne peut pas être dans le futur.', 'error');
+      return; 
+    }
+
+    if (form.invalid) {
+      Object.keys(form.controls).forEach((field) => {
+        const control = form.controls[field];
+        control.markAsTouched({ onlySelf: true });
+      });
+      return;
+    }
+    
     const patient = {
       ...this.patient,
       date_Naiss: this.formatDate(new Date(this.patient.date_Naiss)),
