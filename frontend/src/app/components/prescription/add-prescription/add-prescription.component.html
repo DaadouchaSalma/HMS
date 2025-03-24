@@ -1,38 +1,55 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form)" cForm class="row g-4">
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" cForm class="row g-3">
   <!-- Patient Selection -->
   <h4>Patient</h4>
   <hr>
-  <c-col [md]="6">
-    <label cLabel for="patientEmail">Email du Patient</label>
-    <select cFormControl id="patientEmail" [(ngModel)]="prescription.patientId" name="patientId" cSelect required>
-      <option value="">Choisissez...</option>
-      <option *ngFor="let patient of patients" [value]="patient.id">{{ patient.email }}</option>
-    </select>
+  <c-col md="6">
+    <label class="form-label">Patient<span style="color: red;"> *</span></label>
+    <c-multi-select cFormControl id="patientId" [searchable]="true" selectionType="text" [(ngModel)]="prescription.patientId" name="patientId" required #patientId="ngModel">
+      <c-multi-select-option *ngFor="let patient of patients" [value]="patient.value">
+        {{ patient.label }}
+      </c-multi-select-option>
+    </c-multi-select>
+    <div *ngIf="patientId.invalid && patientId.touched" style="color: red; padding-left: 2%;">
+      <small>* Le patient est requis.</small>
+    </div>
   </c-col>
+
   <h4>Médicament</h4>
   <hr>
   <!-- Medications List -->
   <ng-container *ngFor="let med of medications; let i = index">
     <div class="row g-4">
       <c-col [md]="6">
-        <label cLabel for="medication-{{i}}">Nom du Médicament</label>
-        <input cFormControl id="medication-{{i}}" type="text" [(ngModel)]="med.nom" name="nom-{{i}}" class="form-control"/>
+        <label cLabel for="medication-{{i}}">Nom du Médicament<span style="color: red;"> *</span></label>
+        <input cFormControl id="medication-{{i}}" type="text" [(ngModel)]="med.nom" name="nom-{{i}}" class="form-control" required #medication="ngModel"/>
+        <div *ngIf="medication.invalid && medication.touched" style="color: red; padding-left: 2%;">
+          <small>* Le nom du médicament est requis.</small>
+        </div>
       </c-col>
       <c-col [md]="6">
-        <label cLabel for="dosage-{{i}}">Dosage</label>
-        <input cFormControl id="dosage-{{i}}" type="text" [(ngModel)]="med.dosage" name="dosage-{{i}}" class="form-control"/>
+        <label cLabel for="dosage-{{i}}">Dosage<span style="color: red;"> *</span></label>
+        <input cFormControl id="dosage-{{i}}" type="text" [(ngModel)]="med.dosage" name="dosage-{{i}}" class="form-control" required #dosage="ngModel"/>
+        <div *ngIf="dosage.invalid && dosage.touched" style="color: red; padding-left: 2%;">
+          <small>* Le dosage est requis.</small>
+        </div>
       </c-col>
       <c-col [md]="6">
-        <label cLabel for="frequency-{{i}}">Fréquence</label>
-        <input cFormControl id="frequency-{{i}}" type="text" [(ngModel)]="med.frequence" name="frequence-{{i}}" class="form-control"/>
+        <label cLabel for="frequency-{{i}}">Fréquence<span style="color: red;"> *</span></label>
+        <input cFormControl id="frequency-{{i}}" type="text" [(ngModel)]="med.frequence" name="frequence-{{i}}" class="form-control" required #frequency="ngModel"/>
+        <div *ngIf="frequency.invalid && frequency.touched" style="color: red; padding-left: 2%;">
+          <small>* La fréquence est requise.</small>
+        </div>
       </c-col>
       <c-col [md]="6">
-        <label cLabel for="duree-{{i}}">Durée</label>
-        <input cFormControl id="duree-{{i}}" type="text" [(ngModel)]="med.duree" name="duree-{{i}}" class="form-control"/>
+        <label cLabel for="duree-{{i}}">Durée<span style="color: red;"> *</span></label>
+        <input cFormControl id="duree-{{i}}" type="text" [(ngModel)]="med.duree" name="duree-{{i}}" class="form-control" required #duree="ngModel"/>
+        <div *ngIf="duree.invalid && duree.touched" style="color: red; padding-left: 2%;">
+          <small>* La durée est requise.</small>
+        </div>
       </c-col>
       <c-col [md]="6">
-        <label cLabel for="voie-{{i}}">Voie d'Administration</label>
-        <select cFormControl id="voie-{{i}}" [(ngModel)]="med.voieAdministration" name="voie-{{i}}" cSelect>
+        <label cLabel for="voie-{{i}}">Voie d'Administration<span style="color: red;"> *</span></label>
+        <select cFormControl id="voie-{{i}}" [(ngModel)]="med.voieAdministration" name="voie-{{i}}" cSelect required #voie="ngModel">
           <option value="">Choisissez...</option>
           <option value="Orale">Orale</option>
           <option value="Intraveineuse">Intraveineuse</option>
@@ -43,14 +60,20 @@
           <option value="Topique">Topique</option>
           <option value="Sublinguale">Sublinguale</option>
         </select>
+        <div *ngIf="voie.invalid && voie.touched" style="color: red; padding-left: 2%;">
+          <small>* La voie d'administration est requise.</small>
+        </div>
       </c-col>
       <c-col [md]="6">
-        <label cLabel for="instructions-{{i}}">Instructions Spéciales</label>
-        <input cFormControl id="instructions-{{i}}" type="text" [(ngModel)]="med.InstructionsSpeciales" name="instructions-{{i}}" class="form-control"/>
+        <label cLabel for="instructions-{{i}}">Instructions Spéciales<span style="color: red;"> *</span></label>
+        <input cFormControl id="instructions-{{i}}" type="text" [(ngModel)]="med.InstructionsSpeciales" name="instructions-{{i}}" class="form-control" required #instructions="ngModel"/>
+        <div *ngIf="instructions.invalid && instructions.touched" style="color: red; padding-left: 2%;">
+          <small>* Les instructions spéciales sont requises.</small>
+        </div>
       </c-col>
       <c-col [md]="12">
-        <button cButton type="button" (click)="removeMedication(i)" class="btn btn-secondary px-4 py-2 gap-2">
-          <i class="bi bi-trash"></i> Supprimer Médicament
+        <button cButton type="button" (click)="removeMedication(i)" class="btn btn-secondary px-4 py-2 gap-2" style="background-color: rgb(196, 57, 57); border-color: rgb(196, 57, 57);margin-top: 20px;">
+          <i class="fas fa-trash"></i>
         </button>
       </c-col>
     </div>
@@ -63,7 +86,6 @@
     </button>
   </c-col>
 
-
   <h4>Autre</h4>
   <hr>
   <!-- Note Section -->
@@ -73,25 +95,21 @@
   </c-col>
 
   <c-col [xs]="12" class="text-center mt-4">
-    <button cButton type="submit" class="btn btn-primary px-4 py-2">Enregistrer la Prescription</button>
+    <button cButton type="submit" class="btn px-4 py-2" [ngClass]="{'btn-secondary': form.invalid}">Enregistrer la prescription</button>  
   </c-col>
 </form>
 
 <c-toaster [placement]="position" class="p-3" position="fixed">
-    <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
-             [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
-             [style.color]="'white'">
-      <c-toast-header>
-        <span *ngIf="toastType() === 'success'">Succès</span>
-        <span *ngIf="toastType() === 'error'">Erreur</span>
-      </c-toast-header>
-      <c-toast-body>
-        <p>{{ toastMessage() }}</p>
-        <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
-      </c-toast-body>
-    </c-toast>
-  </c-toaster>
-  
-
-  
-  
+  <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
+           [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+           [style.color]="'white'">
+    <c-toast-header>
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>

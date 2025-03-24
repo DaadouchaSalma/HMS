@@ -1,31 +1,49 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form)" cForm class="row g-5">
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" cForm class="row g-3">
   <c-col [md]="6">
-    <label cLabel for="Nom">Nom</label>
-    <input cFormControl id="Nom" type="text" [(ngModel)]="patient.nom" class="form-control" name="nom"/>
+    <label cLabel for="Nom">Nom<span style="color: red;"> *</span></label>
+    <input cFormControl id="Nom" type="text" [(ngModel)]="patient.nom" class="form-control" name="nom"  required #nom="ngModel"/>
+    <div *ngIf="nom.invalid && nom.touched" style="color: red; padding-left: 2%;">
+      <small>* Le nom est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="Prenom">Prénom</label>
-    <input cFormControl id="Prenom" type="text" [(ngModel)]="patient.prenom" class="form-control" name="prenom" />
+    <label cLabel for="Prenom">Prénom<span style="color: red;"> *</span></label>
+    <input cFormControl id="Prenom" type="text" [(ngModel)]="patient.prenom" class="form-control" name="prenom" required #prenom="ngModel"/>
+    <div *ngIf="prenom.invalid && prenom.touched" style="color: red; padding-left: 2%;">
+      <small>* Le prenom est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="Email">Email</label>
-    <input cFormControl id="Email" type="email" [(ngModel)]="patient.email" class="form-control" name="email" />
+    <label cLabel for="Email">Email<span style="color: red;"> *</span></label>
+    <input cFormControl id="Email" type="email" [(ngModel)]="patient.email" class="form-control" name="email" required #email="ngModel"/>
+    <div *ngIf="email.invalid && email.touched" style="color: red; padding-left: 2%;">
+      <small>* L'email est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="Password">Password</label>
-    <input cFormControl id="Password" type="password" [(ngModel)]="patient.password" class="form-control" name="password" />
+    <label cLabel for="Password">Password<span style="color: red;"> *</span></label>
+    <input cFormControl id="Password" type="password" [(ngModel)]="patient.password" class="form-control" name="password" required #password="ngModel"/>
+    <div *ngIf="password.invalid && password.touched" style="color: red; padding-left: 2%;">
+      <small>* Le mot de passe est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="tel">Téléphone</label>
-    <input cFormControl id="tel" type="tel" [(ngModel)]="patient.telephone" class="form-control" name="telephone" />
+    <label cLabel for="tel">Téléphone<span style="color: red;"> *</span></label>
+    <input cFormControl id="tel" type="tel" [(ngModel)]="patient.telephone" class="form-control" name="telephone" required #telephone="ngModel"/>
+    <div *ngIf="telephone.invalid && telephone.touched" style="color: red; padding-left: 2%;">
+      <small>* Le telephone est requis.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel> Date De Naissance </label>
-    <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="patient.date_Naiss" placeholder="Sélectionnez la date de naissance"/>
+    <label cLabel>Date De Naissance<span style="color: red;"> *</span></label>
+    <c-date-picker closeOnSelect [(ngModel)]="patient.date_Naiss" placeholder="Sélectionnez la date de naissance" name="date_Naiss" required #date_Naiss="ngModel" (ngModelChange)="validateDateNaiss()"/>
+    <div *ngIf="date_Naiss.invalid && date_Naiss.touched" style="color: red; padding-left: 2%;">
+      <small  ngIf="date_Naiss.errors?.['required']"> La date de naissance est requise.</small>
+    </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel>Groupe Sanguin</label>
-    <select aria-label="Choisissez le service" [(ngModel)]="patient.grp_Sang" name="grp_Sang" cSelect >
+    <label cLabel>Groupe Sanguin<span style="color: red;"> *</span></label>
+    <select aria-label="Choisissez le service" [(ngModel)]="patient.grp_Sang" name="grp_Sang" cSelect required #grp_Sang="ngModel">
         <option value="">Choose...</option>
         <option value="A+">A+</option>
         <option value="A-">A-</option>
@@ -36,9 +54,12 @@
         <option value="O+">O+</option>
         <option value="O-">O-</option>
     </select>
+    <div *ngIf="grp_Sang.invalid && grp_Sang.touched" style="color: red; padding-left: 2%;">
+      <small>* Le groupe sanguin est requis.</small>
+    </div>
   </c-col>
   <c-col [xs]="12" class="text-center mt-4">
-    <button cButton type="submit" class="btn btn-primary px-4 py-2">Ajouter</button>
+    <button cButton type="submit" class="btn px-4 py-2" [ngClass]="{'btn-secondary': form.invalid}">Ajouter</button>  
   </c-col>
 </form>
 

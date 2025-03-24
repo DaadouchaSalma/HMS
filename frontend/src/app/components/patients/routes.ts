@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Patients List'
+      title: 'Patients'
     },
     children: [
       {
