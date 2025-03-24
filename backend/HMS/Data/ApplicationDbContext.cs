@@ -21,6 +21,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Visiteur> Visiteurs { get; set; }
     public DbSet<Prescription> Prescriptions { get; set; }
     public DbSet<Admission>Admissions { get; set; }
+    public DbSet<Fournisseur> fournisseurs { get; set; }
+    public DbSet<CategorieMedicament> categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

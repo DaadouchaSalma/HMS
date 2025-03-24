@@ -1,0 +1,67 @@
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast
+    (timer)="onTimerChange($event)"
+    (visibleChange)="onVisibleChange($event)"
+    [visible]="visible()"
+    [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+    [style.color]="'white'"
+  >
+    <c-toast-header>
+     
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>
+
+
+<form #form = "ngForm" class="row g-3 align-items-center" (ngSubmit)="onSubmit(form)">
+  <div class="col-md-8">
+    <label for="categorieNom" class="form-label">Nom</label>
+    <input id="categorieNom" 
+           cFormControl 
+           [(ngModel)]="categ.name" 
+           name="nom" 
+           class="form-control" 
+           placeholder="Catégorie Nom" 
+           required 
+           type="text"
+           #nom="ngModel">
+
+           <div *ngIf="nom.invalid && nom.touched" style="color: red; padding-left: 2%;">
+            <small>* Le nom est requis.</small>
+          </div>
+  </div>
+
+  <div class="col-md-4 d-flex align-items-end">
+    <button cButton type="submit" class="btn btn-primary w-100">Ajouter Categorie</button>
+  </div>
+</form>
+
+
+
+<table cTable class="table table-bordered table-hover text-center">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+
+      <!--<th scope="col">Action</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let categorie of categories">
+      <td>{{ categorie.name }}</td>
+
+      <!--<td>
+        <button class="btn btn-danger" (click)="deleteCategorie(categorie)" cButton>
+          <i class="bi bi-trash"></i> Supprimer
+        </button>
+      </td>-->
+    </tr>
+  </tbody>
+</table>
+

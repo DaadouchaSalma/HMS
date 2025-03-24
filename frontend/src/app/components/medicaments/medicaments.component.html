@@ -4,18 +4,7 @@
   color: white !important;
   border-color: #6387c0 !important;
 }
-/*
-.modal-content {
-  max-width: 600px; /* Set a maximum width for the form 
-  margin: 0 auto; /* Center the content horizontally 
-}
 
-.modal-body {
-  display: flex;
-  justify-content: center; /* Center the form horizontally 
-  align-items: center; /* Center the form vertically 
-  min-height: 50vh; /* Ensure there's enough space for vertical centering 
-}*/
 
 </style>
 <c-toaster [placement]="position" class="p-3" position="fixed">
@@ -37,19 +26,39 @@
     </c-toast-body>
   </c-toast>
 </c-toaster>
+<!-- Delete Confirmation Modal -->
+<c-modal id="deleteModal" [visible]="visible_modal" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Confirmation de suppression</h5>
+    <button (click)="closeModal()" cButtonClose></button>
+  </c-modal-header>
+  
+  <c-modal-body>Êtes-vous sûr de vouloir supprimer ce médicament ?</c-modal-body>
+
+  <c-modal-footer>
+    <button (click)="closeModal()" cButton color="secondary">
+      Annuler
+    </button>
+    <button (click)="confirmDelete()" cButton color="danger" style="background-color: rgb(196, 57, 57); color: white;">
+      Supprimer
+    </button>
+  </c-modal-footer>
+</c-modal>
+
 
 <c-smart-table
   [activePage]="1"
   [columnSorter]="true"
   [columns]="columns"
   [columnFilter]="true"
-  [itemsPerPageSelect]="true"
-  [itemsPerPage]="5"
   [items]="medicamentsData"
   [sorterValue]="{ column: 'nom', state: 'asc' }"
   [tableFilter]="true"
   [tableProps]="{ hover: true, striped: true, responsive: true }"
   [tableBodyProps]="{ align: 'middle' }"
+  noItemsLabel=" Aucun médicament trouvé"
+  tableFilterLabel = "filtrer"
+  tableFilterPlaceholder="Entrer Lettre"
   cleaner
   clickableRows
   footer
@@ -63,6 +72,7 @@
         <div class="card-body">
           <h5>{{ item.nom }}</h5>
           <p class="text-muted">Description: {{ item.description }}</p>
+          
 
         </div>
       </div>
@@ -95,7 +105,7 @@
           </button>
         }
         @case ('delete'){
-          <button cButton class="ms-1" color="danger" size="sm" (click)="deleteMedicament(item.id)">
+          <button style="background-color: rgb(196, 57, 57); border-color: rgb(196, 57, 57);" cButton class="ms-1"  size="sm" (click)="openDeleteModal(item.id)">
             Supprimer
           </button>
         }
@@ -109,103 +119,5 @@
   
   
 </c-smart-table>
-
-
-
-<!--<button [cModalToggle]="fullScreen.id" cButton class="custom-btn">Ajouter médicament</button>
-
-
- Full Screen Modal 
-<c-modal #fullScreen [fullscreen]="true" id="fullScreen">
-  <c-modal-header>
-    <h5 cModalTitle>Ajouter Médicament</h5>
-    <button [cModalToggle]="fullScreen.id" cButtonClose></button>
-  </c-modal-header>
-  <c-modal-body>
-     Add Medicament Form 
-    <div class="modal-content">
-      <div *ngIf="visible_alert" class="alert" [ngClass]="'alert-' + alertType">
-        <svg *ngIf="alertType === 'success'" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-          <use xlink:href="#check-circle-fill" />
-        </svg>
-        <svg *ngIf="alertType === 'danger'" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Error:">
-          <use xlink:href="#exclamation-triangle-fill" />
-        </svg>
-        <div>{{ alertMessage }}</div>
-      </div>
-    <form class="row g-5" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="medicamentName" class="form-label">Nom</label>
-        <input id="medicamentName" 
-               cFormControl 
-               [(ngModel)]="medicament.nom" 
-               name="nom" 
-               class="form-control" 
-               placeholder="Medicament Name" 
-               required 
-               type="text">
-      </div>
-
-      <div class="mb-3">
-        <label for="medicamentExpiration" class="form-label">Date d'Expiration</label>
-        <input id="medicamentExpiration" 
-               cFormControl 
-               [(ngModel)]="medicament.date_Exp" 
-               name="date_Exp" 
-               class="form-control" 
-               placeholder="Expiration Date" 
-               required 
-               type="date">
-      </div>
-
-      <div class="mb-3">
-        <label for="medicamentStock" class="form-label">Stock</label>
-        <input id="medicamentStock" 
-               cFormControl 
-               [(ngModel)]="medicament.nbr_stock" 
-               name="nbr_stock" 
-               class="form-control" 
-               placeholder="Number of Stock" 
-               required 
-               type="number">
-      </div>
-
-      <div class="mb-3">
-        <label for="medicamentDescription" class="form-label">Description</label>
-        <textarea id="medicamentDescription" 
-                  cFormControl 
-                  [(ngModel)]="medicament.description" 
-                  name="description" 
-                  class="form-control" 
-                  placeholder="Description" 
-                  required 
-                  rows="3"></textarea>
-      </div>
-
-      <div class="mb-3">
-        <label for="medicamentCompany" class="form-label">Fournisseur</label>
-        <input id="medicamentCompany" 
-               cFormControl 
-               [(ngModel)]="medicament.compagnie" 
-               name="compagnie" 
-               class="form-control" 
-               placeholder="Company Name" 
-               required 
-               type="text">
-      </div>
-
-       Submit Button 
-      
-<c-col [xs]="12" class="text-center mt-4">
-  <button cButton type="submit" class="btn btn-primary px-4 py-2">Ajouter Médicament</button>
-</c-col>
-    </form>
-  </div>
-  </c-modal-body>
-  <c-modal-footer>
-    <button cButton class="custom-btn" [cModalToggle]="fullScreen.id">Fermer</button>
-  </c-modal-footer>
-</c-modal>-->
-
 
 

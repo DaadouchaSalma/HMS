@@ -15,5 +15,33 @@ export const routes: Routes = [
     data: {
       title: 'Ajouter Des Médicaments'
     }
+  },
+  {
+    path: 'ajoutF',
+    loadComponent: () => import('./fournisseurs/ajout-fournisseur/ajout-fournisseur.component').then(m => m.AjoutFournisseurComponent),
+    data: {
+      title: 'Ajouter Des Fournisseurs'
+    }
+  },
+  {
+    path: 'fournisseurs',
+    loadComponent: () => import('./fournisseurs/fournisseurs/fournisseurs.component').then(m => m.FournisseursComponent),
+    data: {
+      title: 'Consulter Les Fournisseurs'
+    }
+  },
+  {
+    path: 'ModifF/:id',
+    loadComponent: () => import('./fournisseurs/update-fournisseur/update-fournisseur.component').then(m => m.UpdateFournisseurComponent),
+    data: {
+      title: 'Modifier Le Fournisseur'
+    }
+  },
+  {
+    path: 'categorie',
+    loadComponent: () => import('./categorie/categorie.component').then(m => m.CategorieComponent),
+    data: {
+      title: 'Consulter Les Catégories'
+    }
   }
 ]

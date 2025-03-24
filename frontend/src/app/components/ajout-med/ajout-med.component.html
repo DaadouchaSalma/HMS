@@ -26,21 +26,37 @@
     </c-toast-body>
   </c-toast>
 </c-toaster>
-<form class="row g-5" (ngSubmit)="onSubmit()">
-  <div class="mb-3">
-    <label for="medicamentName" class="form-label">Nom</label>
+<form class="row g-3" (ngSubmit)="onSubmit()">
+  
+    <c-col [md]="6">
+      <label for="medicamentName" class="form-label">Nom</label>
     <input id="medicamentName" 
            cFormControl 
            [(ngModel)]="medicament.nom" 
            name="nom" 
            class="form-control" 
-           placeholder="Medicament Name" 
+           placeholder="Nom Du Médicament" 
            required 
            type="text">
-  </div>
-
-  <div class="mb-3">
-    <label for="medicamentExpiration" class="form-label">Date d'Expiration</label>
+    </c-col>
+    
+    <c-col [md]="6">
+      <label for="medicamentcategorie" class="form-label">Catégorie</label>
+    <select id="medicamentcategorie"
+            cFormControl
+            [(ngModel)]="medicament.CategorieId"
+            name="categorie"
+            class="form-control"
+            required>
+      <option *ngFor="let categorie of categories" [value]="categorie.id">
+        {{ categorie.name }}
+      </option>
+      
+    </select>
+    </c-col>
+    
+    <c-col [md]="6">
+      <label for="medicamentExpiration" class="form-label">Date d'Expiration</label>
     <input id="medicamentExpiration"
            cFormControl
            [(ngModel)]="medicament.date_Exp"
@@ -49,13 +65,13 @@
            placeholder="Expiration Date"
            required
            type="date">
-    <div *ngIf="isInvalidDate()" class="text-danger">
-    </div>
-  </div>
+    <div *ngIf="isInvalidDate()" class="text-danger"></div>
+    </c-col>
+    
   
 
-  <div class="mb-3">
-    <label for="medicamentStock" class="form-label">Stock</label>
+    <c-col [md]="6">
+      <label for="medicamentStock" class="form-label">Stock</label>
     <input id="medicamentStock" 
            cFormControl
            [(ngModel)]="medicament.nbr_stock"
@@ -65,11 +81,12 @@
            required
            type="number"
            min="0"> <!-- Ensures no negative values -->
-    <div *ngIf="medicament.nbr_stock < 0" class="text-danger"></div>
-  </div>
+    <div *ngIf="medicament.nbr_stock <= 0" class="text-danger"></div>
+    </c-col>
+    
 
-  <div class="mb-3">
-    <label for="medicamentDescription" class="form-label">Description</label>
+    <c-col [md]="6">
+      <label for="medicamentDescription" class="form-label">Description</label>
     <textarea id="medicamentDescription" 
               cFormControl 
               [(ngModel)]="medicament.description" 
@@ -78,19 +95,25 @@
               placeholder="Description" 
               required 
               rows="3"></textarea>
-  </div>
+    </c-col>
+    
+    <c-col [md]="6">
+      <label for="medicamentCompany" class="form-label">Fournisseur</label>
+    <select id="medicamentCompany"
+            cFormControl
+            [(ngModel)]="medicament.fournisseurId"
+            name="compagnie"
+            class="form-control"
+            required>
+      <option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur.id">
+        {{ fournisseur.nomF }}
+      </option>
+      
+    </select>
+    </c-col>
+    
 
-  <div class="mb-3">
-    <label for="medicamentCompany" class="form-label">Fournisseur</label>
-    <input id="medicamentCompany" 
-           cFormControl 
-           [(ngModel)]="medicament.compagnie" 
-           name="compagnie" 
-           class="form-control" 
-           placeholder="Company Name" 
-           required 
-           type="text">
-  </div>
+  
 
   <!-- Submit Button -->
   
