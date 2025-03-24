@@ -18,7 +18,7 @@ import { PersonnelAdminService } from '../../../services/personnel-admin.service
 
 @Component({
   selector: 'app-add-personnel-admin',
-  imports: [FormsModule,CommonModule, FormLabelDirective, ReactiveFormsModule, FormsModule, FormDirective, FormLabelDirective, ButtonDirective,ColComponent,DatePickerComponent_1,ProgressComponent,
+  imports: [FormsModule,CommonModule, FormLabelDirective, ReactiveFormsModule, FormsModule, FormDirective, FormLabelDirective, ButtonDirective,ColComponent,DatePickerComponent_1,ProgressComponent,FormSelectDirective,
     ToasterComponent,
     ToastComponent,
     ToastHeaderComponent,
@@ -33,6 +33,8 @@ export class AddPersonnelAdminComponent {
   percentage = signal(0);
   toastMessage = signal(''); 
   toastType = signal('success');
+ 
+
 
   formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -57,6 +59,19 @@ export class AddPersonnelAdminComponent {
   }
   constructor(private personnelAdminService: PersonnelAdminService) {}
   onSubmit(form: NgForm) {
+    
+  if (this.validateDateEmb() === false) {
+    this.toggleToast('La date d\'embauche ne peut pas être dans le futur.', 'error');
+    return; // Bloque l'envoi des données si la date est incorrecte
+  }
+  if (form.invalid) {
+    Object.keys(form.controls).forEach((field) => {
+      const control = form.controls[field];
+      control.markAsTouched({ onlySelf: true });
+    });
+    return;
+  }
+
     const personnelA = {
       ...this.personnel,
       date_Naiss: this.formatDate(new Date(this.personnel.date_Naiss)),
@@ -77,4 +92,18 @@ export class AddPersonnelAdminComponent {
       }
     });
   }
+  
+  validateDateEmb() {
+   
+    if (this.personnel.date_Emb) {
+      const today = new Date().toISOString().split('T')[0];
+      const embDate = new Date(this.personnel.date_Emb).toISOString().split('T')[0]; 
+  
+      if (embDate > today) {
+        return false;
+      }
+      else {return true; }
+    }else {return true; }
+  }
+
 }

@@ -12,6 +12,15 @@ import { BreadcrumbRouterComponent, RowComponent } from '@coreui/angular-pro';
     RowComponent
   ],
   templateUrl: './default-breadcrumb.component.html',
+  styles: [`
+    ::ng-deep c-breadcrumb-router a {
+  color: #6387c0 !important;
+}
+
+::ng-deep c-breadcrumb-router a:hover {
+  color: #3E608C !important;
+}
+  `]
 })
 export class DefaultBreadcrumbComponent {
 

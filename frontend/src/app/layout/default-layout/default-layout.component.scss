@@ -15,7 +15,12 @@
   //.sidebar-nav {
   //  scrollbar-color: var(--cui-gray-500, #444) transparent;
   //}
+  .sidebar-toggler {
+    --cui-sidebar-toggler-color: #6387c0;
+    --cui-sidebar-toggler-hover-color:#3E608C ;
+  }
 }
+
 
 // ng-scrollbar css variables
 //.cui-scrollbar {

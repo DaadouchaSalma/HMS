@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
     imports: [RouterOutlet, FormsModule]
 })
 export class AppComponent implements OnInit {
-  title = 'CoreUI Pro Angular Admin Template';
+  title = 'SmartCare';
 
   readonly #destroyRef: DestroyRef = inject(DestroyRef);
   readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);

@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
     ToasterComponent,
     ToastComponent,
     ToastHeaderComponent,
-    ToastBodyComponent,FormsModule],
+    ToastBodyComponent,FormsModule,FormSelectDirective],
   templateUrl: './add-pharmacien.component.html',
   styleUrl: './add-pharmacien.component.scss'
 })
@@ -61,6 +61,19 @@ export class AddPharmacienComponent {
   constructor(private pharmacienService: PharmacienService) {}
   
   onSubmit(form: NgForm) {
+
+    if (this.validateDateEmb() === false) {
+      this.toggleToast('La date d\'embauche ne peut pas être dans le futur.', 'error');
+      return; // Bloque l'envoi des données si la date est incorrecte
+    }
+    if (form.invalid) {
+      Object.keys(form.controls).forEach((field) => {
+        const control = form.controls[field];
+        control.markAsTouched({ onlySelf: true });
+      });
+      return;
+    }
+  
     const pharmacien = {
       ...this.pharmacien,
       date_Naiss: this.formatDate(new Date(this.pharmacien.date_Naiss)),
@@ -79,6 +92,20 @@ export class AddPharmacienComponent {
         this.toggleToast("Échec de l'ajout du pharmacien. Veuillez réessayer.", 'error');
       }
     });
+  }
+
+  validateDateEmb() {
+    // Si la date d'embauche est définie
+    if (this.pharmacien.date_Emb) {
+      const today = new Date().toISOString().split('T')[0]; // Date du jour (YYYY-MM-DD)
+      const embDate = new Date(this.pharmacien.date_Emb).toISOString().split('T')[0]; // Date d'embauche
+  
+      // Si la date d'embauche est dans le futur, retourner false
+      if (embDate > today) {
+        return false;
+      }
+      else {return true; }
+    }else {return true; }
   }
 
 }
