@@ -23,11 +23,11 @@ export class ChambreEditComponent implements OnInit {
   constructor(private fb: FormBuilder, private chambreService: ChambreService, private route: ActivatedRoute,private router: Router
   ) {
     this.chambreForm = this.fb.group({
-      numeroChambre: ['', Validators.required],
+      numeroChambre: [ { value: 'N/A', disabled: true }], 
       services: ['', Validators.required],
       niveau_dequipement: ['', Validators.required],
       nb_lit: ['', [Validators.required, Validators.min(1)]],
-      etage: ['', [Validators.required, Validators.min(1)]],
+      etage: [{ value: 'N/A', disabled: true }], 
       statut: ['', Validators.required]
     });
   }
@@ -64,8 +64,13 @@ export class ChambreEditComponent implements OnInit {
       this.percentage.set($event * 25);
     }
     onSubmit() {
+      if (this.chambreForm.invalid) {
+        this.chambreForm.markAllAsTouched(); 
+        return;
+      }
       if (this.chambreForm.valid) {
-        this.chambreService.UpdateChambre(this.id, this.chambreForm.value).subscribe({
+        const formData = { ...this.chambreForm.getRawValue(),etage: this.chambreForm.get('etage')?.value, numeroChambre: this.chambreForm.get('numeroChambre')?.value };
+        this.chambreService.UpdateChambre(this.id, formData).subscribe({
           next: () => {
             this.toggleToast('Chambre mise à jour avec succès !', 'success');
             this.router.navigate(['/chambre/chambreList']);

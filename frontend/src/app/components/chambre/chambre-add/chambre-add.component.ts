@@ -48,7 +48,10 @@ export class ChambreAddComponent {
     this.percentage.set($event * 25);
   }
   onSubmit() {
-    if (this.chambreForm.valid) {
+    if (this.chambreForm.invalid) {
+      this.chambreForm.markAllAsTouched(); 
+      return;
+    }
       this.chambreService.AddChambre(this.chambreForm.value).subscribe({
         next: () => {
           this.toggleToast('Chambre ajoutée avec succès !', 'success');
@@ -63,4 +66,4 @@ export class ChambreAddComponent {
   }
   
 
-}
+

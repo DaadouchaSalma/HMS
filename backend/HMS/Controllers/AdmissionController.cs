@@ -35,7 +35,7 @@ namespace HMS.Controllers
             admission.Statut = "en cours";
 
             // Mettre à jour l'état de la chambre
-            chambre.statut = "Occupé";
+            chambre.statut = "Occupée";
 
             _context.Admissions.Add(admission);
             _context.SaveChanges();

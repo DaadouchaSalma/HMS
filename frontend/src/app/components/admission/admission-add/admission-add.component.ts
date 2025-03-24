@@ -8,9 +8,10 @@ import {
   MultiSelectOptgroupComponent,
   MultiSelectOptionComponent,
   RowComponent,
+  DatePickerComponent as DatePickerComponent_1,
   TextColorDirective,
   FormCheckComponent, FormCheckInputDirective,
-  ProgressComponent,ToastBodyComponent, ToastComponent, ToasterComponent, ToastHeaderComponent,DatePickerComponent as DatePickerComponent_1
+  ProgressComponent,ToastBodyComponent, ToastComponent, ToasterComponent, ToastHeaderComponent,
 } from '@coreui/angular-pro';
 import { FormBuilder, FormGroup, Validators ,ReactiveFormsModule } from '@angular/forms';
 import { Patient } from '../../../models/patient.model';
@@ -21,7 +22,7 @@ import { CommonModule, NgForOf, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-admission-add',
-  imports: [RowComponent,ColComponent,CommonModule,TextColorDirective, CardComponent, CardHeaderComponent,MultiSelectComponent_1, MultiSelectOptionComponent, MultiSelectOptgroupComponent,FormCheckComponent, FormCheckInputDirective,ReactiveFormsModule,NgForOf,ProgressComponent,ToasterComponent,ToastComponent,ToastHeaderComponent,ToastBodyComponent,NgIf],
+  imports: [RowComponent,ColComponent,CommonModule,TextColorDirective, CardComponent, CardHeaderComponent,MultiSelectComponent_1, MultiSelectOptionComponent, MultiSelectOptgroupComponent,FormCheckComponent, FormCheckInputDirective,ReactiveFormsModule,NgForOf,ProgressComponent,ToasterComponent,ToastComponent,ToastHeaderComponent,ToastBodyComponent,NgIf,DatePickerComponent_1],
   templateUrl: './admission-add.component.html',
   styleUrl: './admission-add.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -30,6 +31,7 @@ export class AdmissionAddComponent  implements OnInit{
   admissionForm: FormGroup;
   patients: any[] = [];
   chambres: Chambre[] = [];
+  today: Date = new Date();
   position = 'top-end';
   visible = signal(false);
   percentage = signal(0);
@@ -42,9 +44,10 @@ export class AdmissionAddComponent  implements OnInit{
       services: ['', Validators.required],
       niveau_dequipement: ['', Validators.required],
       chambreId: ['', Validators.required],
-      dateAdmission: ['', Validators.required]
+      dateAdmission: ['', Validators.required] 
     });
   } 
+  
   ngOnInit() {
     this.loadPatients();
     setTimeout(() => console.log("liste après 1s", this.patients), 1000);
@@ -94,14 +97,8 @@ export class AdmissionAddComponent  implements OnInit{
   }
     submitForm() {
       if (this.admissionForm.invalid) {
-        this.admissionForm.markAllAsTouched(); 
-        const invalidFields = Object.keys(this.admissionForm.controls)
-          .filter(key => this.admissionForm.get(key)?.invalid);
-    
-        if (invalidFields.length > 0) {
-          this.toggleToast(`Veuillez remplir tous les champs obligatoires.`, 'error');
-        }
-        return; 
+        this.admissionForm.markAllAsTouched(); // Marque tous les champs comme "touchés" pour afficher les erreurs
+        return;
       }
       this.admissionService.addAdmission(this.admissionForm.value).subscribe({
         next: () => {
@@ -113,6 +110,13 @@ export class AdmissionAddComponent  implements OnInit{
         }
       });
     }
+      /*submitForm(): void {
+        if (this.admissionForm.invalid) {
+          this.admissionForm.markAllAsTouched(); // Marque tous les champs comme "touchés" pour afficher les erreurs
+          return;
+        }
+        console.log('Formulaire soumis avec succès', this.admissionForm.value);
+      }*/
     
     
   
