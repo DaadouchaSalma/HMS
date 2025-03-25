@@ -17,7 +17,7 @@
         <td>{{ admission.numeroChambre }}</td>
         <td>{{ admission.dateAdmission | date: 'dd/MM/yyyy' }}</td>
         <td>
-          <button class="btn btn-danger" (click)="confirmerSortie(admission)" cButton>
+          <button class="btn" (click)="confirmerSortie(admission)" style="color: white; background-color: #dd789c; border-color: #dd789c;" cButton>
             <i class="bi bi-person-x"></i> Sortie
           </button>
         </td>
@@ -36,6 +36,6 @@
   </c-modal-body>
   <c-modal-footer>
     <button cButton color="secondary" (click)="toggleLiveDemo()">Annuler</button>
-    <button cButton color="primary" (click)="sortirPatient()">Confirmer</button>
+    <button cButton style="background-color:#3E608C; border-color: #3E608C; color: white;" (click)="sortirPatient()">Confirmer</button>
   </c-modal-footer>
 </c-modal>

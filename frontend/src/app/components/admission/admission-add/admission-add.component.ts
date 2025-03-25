@@ -38,6 +38,7 @@ export class AdmissionAddComponent  implements OnInit{
   toastMessage = signal(''); 
   toastType = signal('success');
   constructor(private fb: FormBuilder, private admissionService: AdmissionService) {
+    this.today.setHours(0, 0, 0, 0);
     this.admissionForm = this.fb.group({
       patientId: ['', Validators.required],
       motif: ['', Validators.required],

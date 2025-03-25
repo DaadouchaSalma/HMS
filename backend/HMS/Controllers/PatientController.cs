@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using HMS.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,13 +11,18 @@ namespace HMS.Controllers
     public class PatientController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public PatientController(ApplicationDbContext context)
+        public PatientController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
+                              RoleManager<IdentityRole> roleManager )
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
             _context = context;
         }
 
-        [HttpPost("new")]
+        /*[HttpPost("new")]
         public async Task<IActionResult> CreatePatient([FromBody] Patient patient)
         {
             if (patient == null)
@@ -28,7 +34,46 @@ namespace HMS.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Patient ajouté avec succès" });
+        }*/
+
+        [HttpPost("ajouterPatient")]
+        public async Task<IActionResult> AjouterPatient([FromBody] RegisterModel model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                Nom = model.Nom,
+                Prenom = model.Prenom,
+               // Role = "Patient"
+            };
+
+            
+
+            var patient = new Patient
+            {
+                Id = Guid.NewGuid(),
+                Nom = model.Nom,
+                Prenom = model.Prenom,
+                Email = model.Email,
+                Date_Naiss = model.Date_Naiss,
+                Telephone = model.Telephone,
+                Grp_Sang = model.Grp_Sang,
+                IdentityUserId = user.Id
+            };
+            user.PatientId = patient.Id;
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded) return BadRequest(result.Errors);
+
+            await _userManager.AddToRoleAsync(user, "Patient");
+            _context.Patients.Add(patient);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Patient ajouté avec succès" });
         }
+
 
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdatePatient(Guid id, [FromBody] Patient updatedPatient)
@@ -48,7 +93,7 @@ namespace HMS.Controllers
             existingPatient.Prenom = updatedPatient.Prenom;
             existingPatient.Grp_Sang = updatedPatient.Grp_Sang;
             existingPatient.Email = updatedPatient.Email;
-            existingPatient.Password = updatedPatient.Password;
+            //existingPatient.Password = updatedPatient.Password;
             existingPatient.Date_Naiss = updatedPatient.Date_Naiss;
             existingPatient.Telephone = updatedPatient.Telephone;
 
