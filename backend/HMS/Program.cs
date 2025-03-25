@@ -1,6 +1,8 @@
 using HMS.Interfaces;
 using HMS.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using HMS.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
@@ -38,6 +40,8 @@ builder.Services.AddCors(options =>
         });
 });
 
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -48,8 +52,27 @@ builder.Services.AddControllersWithViews();
 // Register the DbContext with dependency injection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configuration d'Identity avec gestion des rôles
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
+// Création des rôles au démarrage
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    string[] roles = { "PersonnelAdministratif", "Medecin", "Pharmacien", "Patient", "Admin" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -60,6 +83,8 @@ app.UseCors("AllowAngularApp");
 
 //app.UseHttpsRedirection();
 
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

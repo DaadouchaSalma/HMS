@@ -5,5 +5,6 @@
         PersonnelAdministrative,
         Medecin ,
         Pharmacien,
+        Admin,
     }
 }

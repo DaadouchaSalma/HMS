@@ -45,6 +45,7 @@
       <option value="">Sélectionnez un niveau</option>
       <option value="Basique">Basique</option>
       <option value="Médicalisé">Médicalisé</option>
+      <option value="Soins intensifs">Soins intensifs</option>
     </select>
     <div *ngIf="admissionForm.get('niveau_dequipement')?.invalid && admissionForm.get('niveau_dequipement')?.touched" style="color: red;  padding-left: 2%;">
       <small>* Sélectionnez un niveau d’équipement.</small>
