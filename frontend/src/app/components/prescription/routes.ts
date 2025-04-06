@@ -8,7 +8,7 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'new/:id',
+        path: 'new',
         loadComponent: () => import('./add-prescription/add-prescription.component').then(m => m.AddPrescriptionComponent),
         data: {
           title: 'Ajout d\'une prescription'

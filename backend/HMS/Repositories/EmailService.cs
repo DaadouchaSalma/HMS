@@ -16,10 +16,10 @@ namespace HMS.Services
         }
         public async Task SendEmailAsync(string to, string nom)
         {
-            var smtpClient = new SmtpClient("smtp.gmail.com")
+            var smtpClient = new SmtpClient("smtp.gmail.com") 
             {
                 Port = 587,
-                Credentials = new NetworkCredential("smartcare314@gmail.com", "fjni rtid zvgp gdta"),
+                Credentials = new NetworkCredential("smartcare314@gmail.com", "fjni rtid zvgp gdta"), 
                 EnableSsl = true,
             };
 
@@ -41,7 +41,7 @@ namespace HMS.Services
 
             var mailMessage = new MailMessage
             {
-                From = new MailAddress("smartcare314@gmail.com"),
+                From = new MailAddress("smartcare314@gmail.com"), 
                 Subject = "Votre avis sur votre rendez-vous",
                 Body = emailBody,
                 IsBodyHtml = true,
@@ -50,6 +50,7 @@ namespace HMS.Services
 
             await smtpClient.SendMailAsync(mailMessage);
         }
+
 
         public async Task SendEmailAsync_crenaux(string to, string subject, string body)
         {
@@ -65,3 +66,4 @@ namespace HMS.Services
 
     }
 }
+

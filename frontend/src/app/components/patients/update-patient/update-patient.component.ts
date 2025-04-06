@@ -24,7 +24,7 @@ export class UpdatePatientComponent {
     grp_Sang: '',
     password: '',
     date_Naiss: '',
-    telephone: ''
+    telephone: '',
   };
   position = 'top-end';
   visible = signal(false);
@@ -35,16 +35,14 @@ export class UpdatePatientComponent {
   constructor(private patientService: PatientService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const patientId = this.route.snapshot.paramMap.get('id');
-    if (patientId) {
-      this.loadPatient(patientId);
-    }
+      this.loadPatient();
   }
 
-  loadPatient(id: string) {
-    this.patientService.getPatientById(id).subscribe({
+  loadPatient() {
+    this.patientService.getPatientById().subscribe({
       next: (data: Patient) => {
         this.patient = data;
+        console.log("matricule: ", this.patient.dossierMedical?.matricule)
       },
       error: () => {
         this.toggleToast('Erreur.', 'error');
@@ -59,16 +57,22 @@ export class UpdatePatientComponent {
       return `${year}-${month}-${day}`;
     }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
     const patient = {
       ...this.patient,
       date_Naiss: this.formatDate(new Date(this.patient.date_Naiss)),
     };
 
-    console.log('hello world!', patient);
+    if (form.invalid) {
+      Object.keys(form.controls).forEach((field) => {
+        const control = form.controls[field];
+        control.markAsTouched({ onlySelf: true });
+      });
+      return;
+    }
 
     if (this.patient.id) {
-      this.patientService.updatePatient(this.patient.id, patient).subscribe({
+      this.patientService.updatePatient(patient).subscribe({
         next: () => this.toggleToast('Le patient a été mis à jour avec succès.', 'success'),
         error: (error) => { console.log(error); this.toggleToast('Échec de l\'ajout du patient. Veuillez réessayer.', 'error')},
       });

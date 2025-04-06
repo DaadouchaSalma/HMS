@@ -115,7 +115,10 @@ export const routes: Routes = [
         path:'meds',
         loadChildren:() => import('./components/routes').then((m)=> m.routes)
       },
-      
+      {
+        path:'dme',
+        loadChildren:() => import('./components/DME/routes').then((m)=> m.routes)
+      }
     ]
   }, 
   {

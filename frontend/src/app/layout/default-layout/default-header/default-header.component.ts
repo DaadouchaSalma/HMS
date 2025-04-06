@@ -1,6 +1,6 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import {
   AvatarComponent,
@@ -25,12 +25,25 @@ import {
   SidebarToggleDirective
 } from '@coreui/angular-pro';
 
-import { IconDirective } from '@coreui/icons-angular';
+import { IconDirective, IconSetService } from '@coreui/icons-angular';
+import { AuthService } from 'src/app/services/auth.service';
+import { cilPowerStandby,
+  cilMenu,
+  cilUser,
+  cilEnvelopeOpen,
+  cilBell,
+  cilListRich,
+  cilLanguage,
+  cilSun,
+  cilMoon,
+  cilContrast,
+  cilAccountLogout } from '@coreui/icons';
 
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective]
+  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective],
+  providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
 
@@ -47,10 +60,50 @@ export class DefaultHeaderComponent extends HeaderComponent {
     const currentMode = this.colorMode();
     return this.colorModes.find(mode => mode.name === currentMode)?.icon ?? 'cilSun';
   });
+  userRole: string = '';
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router, iconSet: IconSetService) {
     super();
+    iconSet.icons = { 
+      cilPowerStandby,
+      cilMenu,
+      cilUser,
+      cilEnvelopeOpen,
+      cilBell,
+      cilListRich,
+      cilLanguage,
+      cilSun,
+      cilMoon,
+      cilContrast,
+      cilAccountLogout
+    };
   }
+
+  ngOnInit(): void {
+    const roles  = this.authService.getUserRoles();
+    if (roles.includes('Patient')) {
+      this.userRole = 'Patient';
+    } else if (roles.includes('Medecin')) {
+      this.userRole = 'Medecin';
+    }  
+  }
+
+  getProfileRoute(): string {
+    if (this.userRole === 'Patient') {
+      return '/patient/update';
+    } else if (this.userRole === 'Medecin') {
+      return '/dashboard';
+    }
+    return '/patient/list'; 
+  }
+
+  logout(): void {
+    localStorage.removeItem('userRoles');
+    this.authService.logout().subscribe();
+    console.log(localStorage.getItem('userRoles'));
+    this.router.navigate(['/login']);
+  }
+
 
   sidebarId = input('sidebar1');
 

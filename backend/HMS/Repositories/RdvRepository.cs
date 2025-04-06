@@ -34,6 +34,39 @@ namespace HMS.Repositories
                  .ToListAsync();
          }*/
 
+
+        public async Task CheckAndSendFeedbackEmailsAsync()
+        {
+            //var oneHourAgo = DateTime.UtcNow.AddHours(-1);
+            var halfHourAgo = TimeOnly.FromDateTime(DateTime.UtcNow.AddMinutes(-30));
+
+            var pastAppointments = await _context.Rdv
+                .Where(r => r.Time_RDV <= halfHourAgo && r.etat == "En attente")
+                .Include(r => r.Patient)
+                .ToListAsync();
+
+            foreach (var rdv in pastAppointments)
+            {
+                rdv.etat = "Terminée"; 
+
+                if (rdv.Patient != null)
+                {
+                    await _emailService.SendEmailAsync(
+                        rdv.Patient.Email,rdv.Patient.Nom
+                    );
+                }
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+
+        /*public async Task<IEnumerable<RendezVous>> GetDisponibilitesAsync(Guid medecinId, DateTime date)
+        {
+            return await _context.Rdv
+                .Where(r => r.MedecinId == medecinId && r.Date_RDV.Date == date.Date)
+                .ToListAsync();
+        }*/
         public async Task<List<TimeOnly>> GetHeuresDisponiblesAsync(Guid medecinId, DateOnly dateRDV)
         {
             // Récupérer tous les créneaux horaires possibles pour ce médecin
@@ -86,31 +119,6 @@ namespace HMS.Repositories
                 .Where(r => r.PatientId == patientId)
                 .Include(r => r.Medecin) // Inclure les détails du médecin
                 .ToListAsync();
-        }
-
-        public async Task CheckAndSendFeedbackEmailsAsync()
-        {
-            //var oneHourAgo = DateTime.UtcNow.AddHours(-1);
-            var halfHourAgo = TimeOnly.FromDateTime(DateTime.UtcNow.AddMinutes(-30));
-
-            var pastAppointments = await _context.Rdv
-                .Where(r => r.Time_RDV <= halfHourAgo && r.etat == "En attente")
-                .Include(r => r.Patient)
-                .ToListAsync();
-
-            foreach (var rdv in pastAppointments)
-            {
-                rdv.etat = "Terminée";
-
-                if (rdv.Patient != null)
-                {
-                    await _emailService.SendEmailAsync(
-                        rdv.Patient.Email, rdv.Patient.Nom
-                    );
-                }
-            }
-
-            await _context.SaveChangesAsync();
         }
     }
 }

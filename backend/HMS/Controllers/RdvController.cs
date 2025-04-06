@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace HMS.Controllers
 {
     [Route("api/rendezvous")]
@@ -98,35 +99,52 @@ namespace HMS.Controllers
         */
         /*[HttpPost("add")]
         public async Task<IActionResult> AddRendezVous([FromBody] RendezVous rdv)
+
+        private readonly IRdvRepository _rendezVousRepository;
+
+        public RdvController(IRdvRepository rendezVousRepository)
+        {
+            _rendezVousRepository = rendezVousRepository;
+        }
+
+        [HttpPost("add")]
+        public async Task<IActionResult> AddRendezVous([FromBody] RendezVous rdv)
         {
             try
             {
-                if (!User.Identity.IsAuthenticated)
+                /* if (!User.Identity.IsAuthenticated)
+                 {
+                     return Unauthorized(new { message = "Utilisateur non authentifié" });
+                 }*/
+
+                /* var identityUserId = _userManager.GetUserId(User);
+                 if (string.IsNullOrEmpty(identityUserId))
+                 {
+                     return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
+                 }
+
+                 // Vérifier que le patient existe
+                 var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
+                 if (patient == null)
+                 {
+                     return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
+                 }*/
+
+                // Vérifier si le créneau est disponible
+               /* var disponibilites = await _rendezVousRepository.GetHeuresDisponiblesAsync(rdv.MedecinId, rdv.Date_RDV);
+                TimeOnly selectedTime = rdv.Time_RDV; // Pas besoin de conversion en string
+
+                if (!disponibilites.Contains(selectedTime))
                 {
-                    return Unauthorized(new { message = "Utilisateur non authentifié" });
+                    return BadRequest(new { message = "Le médecin n'est pas disponible à cette heure." });
                 }
 
-                var identityUserId = _userManager.GetUserId(User);
 
-                if (string.IsNullOrEmpty(identityUserId))
-                {
-                    return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
-                }
-                // Find the patient associated with the authenticated user
-                var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
-                if (patient == null)
-                {
-                    return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-                }
+                // Ajouter le rendez-vous
+                //rdv.PatientId = patient.Id;
+                await _rendezVousRepository.AddAsync(rdv);
 
-                var disponibilites = await _rendezVousRepository.GetDisponibilitesAsync(rdv.MedecinId, rdv.Date_RDV, rdv.Time_RDV);
-                if (disponibilites.Any())
-                {
-                    return BadRequest(new { message = "Le médecin n'est pas disponible à cette date." });
-                }
-                _rendezVousRepository.AddAsync(rdv);
-
-                // Exclure la propriété RendezVous avant de renvoyer la réponse
+                // Réponse sans boucle infinie
                 var response = new
                 {
                     rdv.Id,
@@ -134,29 +152,27 @@ namespace HMS.Controllers
                     rdv.Time_RDV,
                     rdv.etat,
                     rdv.PatientId,
-                    Patient = new
+                    /*Patient = new
                     {
-                        rdv.Patient?.Id,
-                        rdv.Patient?.Nom,
-                        rdv.Patient?.Prenom,
-                        rdv.Patient?.Grp_Sang,
-                        rdv.Patient?.Email,
-                        rdv.Patient?.Date_Naiss,
-                        rdv.Patient?.Telephone,
-                        rdv.Patient?.IdentityUserId
-                    },
+                        patient.Id,
+                        patient.Nom,
+                        patient.Prenom,
+                        patient.Grp_Sang,
+                        patient.Email,
+                        patient.Date_Naiss,
+                        patient.Telephone,
+                        patient.IdentityUserId
+                    },*/
                     rdv.MedecinId
                 };
 
-                
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erreur interne : {ex.Message}");
+                return StatusCode(500, new { message = $"Erreur interne : {ex.Message}" });
             }
         }*/
-
         
         [HttpPost("add")]
         //[Authorize(Roles = "Patient")]

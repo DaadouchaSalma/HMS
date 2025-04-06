@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HMS.Repositories
 {
-    public class PatientRepository :IPatientRepository
+    public class PatientRepository : IPatientRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -16,11 +16,14 @@ namespace HMS.Repositories
         {
             return await _context.Patients.FindAsync(id);
         }
-        public async Task<Patient> GetByIdentityUserIdAsync(string identityUserId)
+       /* public async Task<Patient> GetByIdentityUserIdAsync(string identityUserId)
         {
             return await _context.Patients.FirstOrDefaultAsync(p => p.IdentityUserId == identityUserId);
+        }*/
+
+        public async Task<Patient> GetByIdentityUserIdAsync(string identityUserId)
+        {
+            return await _context.Patients.Include(p => p.DossierMedical).FirstOrDefaultAsync(p => p.IdentityUserId == identityUserId);
         }
-
-
     }
 }

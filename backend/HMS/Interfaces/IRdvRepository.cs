@@ -1,4 +1,6 @@
+
 ﻿using HMS.Models;
+
 
 namespace HMS.Interfaces
 {
@@ -14,7 +16,7 @@ namespace HMS.Interfaces
         Task<RendezVous> AddAsync(RendezVous rendezVous);
         Task UpdateAsync(RendezVous rendezVous);
         Task DeleteAsync(Guid id);
-
         Task CheckAndSendFeedbackEmailsAsync();
     }
 }
+

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PersonnelAdminController : Controller

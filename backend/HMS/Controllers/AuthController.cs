@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using HMS.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication;
 
 namespace HMS.Controllers
 {
@@ -23,22 +24,7 @@ namespace HMS.Controllers
         }
 
 
-        /* [HttpPost("login")]
-         public async Task<IActionResult> Login([FromBody] LoginModel model)
-         {
-             var user = await _userManager.FindByEmailAsync(model.Email);
-             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
-                 return Unauthorized(new { message = "Identifiants incorrects" });
 
-             // Get user roles
-             var roles = await _userManager.GetRolesAsync(user);
-
-             return Ok(new
-             {
-                 message = "Connexion réussie",
-                 roles // Returns the list of roles assigned to the user
-             });
-         }*/
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
@@ -53,12 +39,28 @@ namespace HMS.Controllers
             // Get user roles
             var roles = await _userManager.GetRolesAsync(user);
 
+            /*Response.Cookies.Append("AuthCookie", "true", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false, // Use `false` only in local development
+                SameSite = SameSiteMode.None
+            });*/
+
             return Ok(new
             {
                 message = "Connexion réussie",
                 roles
             });
         }
+
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme); 
+            return Ok(new { message = "Logout successful" });
+        }
+
 
     }
 }

@@ -15,10 +15,17 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'update/:id',
+        path: 'update',
         loadComponent: () => import('./update-patient/update-patient.component').then(m => m.UpdatePatientComponent),
         data: {
           title: 'Mise à jour d\'un Patient'
+        }
+      },
+      {
+        path: 'list',
+        loadComponent: () => import('./list-patient/list-patient.component').then(m => m.ListPatientComponent),
+        data: {
+          title: 'Liste des Patients'
         }
       }
     ]
