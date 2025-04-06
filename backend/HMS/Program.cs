@@ -3,6 +3,8 @@ using HMS.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using HMS.Models;
+using HMS.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
@@ -14,6 +16,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy.WithOrigins("http://localhost:4200")
+                  .AllowCredentials()
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -23,32 +26,47 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IMedecinRepository, MedecinRepository>();
 builder.Services.AddScoped<IPharmacieRepository, PharmacieRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
-
 builder.Services.AddScoped<IFournisseur, FournisseurRepository>();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngularApp",
-        policy =>
-        {
-
-
-            policy.WithOrigins("http://localhost:4200") 
-
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
-});
-
-
+builder.Services.AddScoped<IRdvRepository, RdvRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddHostedService<RdvBackgroundService>();
+builder.Services.AddScoped<IDossierMRepository, DossierMRepository>();
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllersWithViews();
+/*builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.None; // Set to Always in production (change to None for local dev)
+        options.Cookie.SameSite = SameSiteMode.None; // Required for frontend-backend communication
+        options.Cookie.Name = "AuthCookie";
+        options.LoginPath = "/api/auth/login";
+        // Define login path for redirection when authentication is required
+        //options.LoginPath = "/api/auth/login";
+        //options.AccessDeniedPath = "/api/auth/access-denied"; // Customize the path for access denied
+    });*/
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = "AuthCookie";
+    //options.Cookie.HttpOnly = true;
+    //options.Cookie.SecurePolicy = CookieSecurePolicy.None; // Use CookieSecurePolicy.Always in production
+    //options.Cookie.SameSite = SameSiteMode.None;
+    options.LoginPath = "/api/auth/login";
+    options.LogoutPath = "/api/auth/logout";
+});
+
+// Add Authorization (to protect routes)
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Authenticated", policy => policy.RequireAuthenticatedUser());
+});
 // Register the DbContext with dependency injection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -56,6 +74,9 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 // Création des rôles au démarrage
@@ -73,13 +94,21 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 app.UseCors("AllowAngularApp");
+
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.None,
+    HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always,
+    //Secure = CookieSecurePolicy.Always
+    Secure = CookieSecurePolicy.None
+});
+
 
 //app.UseHttpsRedirection();
 

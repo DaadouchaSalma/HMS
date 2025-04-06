@@ -27,6 +27,13 @@ public class ApplicationDbContext :  IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<DossierM>()
+         .HasIndex(d => d.matricule)
+         .IsUnique(); 
+
+        modelBuilder.Entity<DossierM>()
+            .Property(d => d.matricule)
+            .IsRequired();
         /* modelBuilder.Entity<RendezVous>()
              .HasOne(rv => rv.Patient) 
              .WithMany(p => p.RendezVous)

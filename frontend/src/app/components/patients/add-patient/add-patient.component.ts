@@ -6,6 +6,7 @@ import { ButtonModule, ColComponent, ColDirective, FormFeedbackComponent, FormLa
 import { CommonModule } from '@angular/common';
 import { signal } from '@angular/core';
 import { DatePickerComponent as DatePickerComponent_1 } from '@coreui/angular-pro';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-patient',
@@ -30,7 +31,7 @@ export class AddPatientComponent {
   toastMessage = signal(''); 
   toastType = signal('success');
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService, private router: Router) {}
 
   formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -76,6 +77,8 @@ export class AddPatientComponent {
       next: (response) => {
         console.log('patient ajouté avec succès', response);
         this.toggleToast('Le patient a été ajouté avec succès.', 'success');
+        console.log(response.id);
+        this.router.navigate(['../dme/new'], { state: { patientId: response.id } });
       },
       error: (err) => {
         console.error('Erreur lors de l’ajout du patient', err);
