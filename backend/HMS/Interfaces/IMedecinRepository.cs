@@ -9,14 +9,11 @@ namespace HMS.Interfaces
         Medecin GetById(Guid id);
         void Update(Medecin medecin);
         void Save();
-
         Task<IEnumerable<Medecin>> GetAll();
         Task Add(Medecin medecin);
         Task SaveAsync();
-
+        Task<Medecin> GetByIdentityUserIdAsync(string identityUserId);
         Task<Medecin?> GetByIdAsync(Guid id);
-
         void Delete(Medecin medecin);
-
     }
 }

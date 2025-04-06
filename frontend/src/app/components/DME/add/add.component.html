@@ -1,0 +1,66 @@
+<form cForm  #form="ngForm" (ngSubmit)="onSubmit(form)" class="row g-3">
+    <c-col [md]="6">
+      <label cLabel for="sexe">Sexe<span style="color: red;"> *</span></label>
+      <input cFormControl id="sexe" type="text" [(ngModel)]="dme.sexe" class="form-control" name="sexe"  required #sexe="ngModel"/>
+      <div *ngIf="sexe.invalid && sexe.touched" style="color: red; padding-left: 2%;">
+        <small>* Le sexe est requis.</small>
+      </div>
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel for="anterieures">Maladies antérieures</label>
+      <input cFormControl id="maladies_anterieures" type="text" [(ngModel)]="dme.maladies_anterieures" class="form-control" name="maladies_anterieures"/>
+    </c-col>
+    <c-col [md]="6">
+        <label cLabel for="maladies_familiaux">Maladies familiales</label>
+        <input cFormControl id="maladies_familiaux" type="text" [(ngModel)]="dme.maladies_familiaux" class="form-control" name="maladies_familiaux"/>
+      </c-col>
+    
+      <c-col [md]="6">
+        <label cLabel for="chirurgies">Chirurgies</label>
+        <input cFormControl id="chirurgies" type="text" [(ngModel)]="dme.chirurgies" class="form-control" name="chirurgies"/>
+      </c-col>
+    
+      <c-col [md]="6">
+        <label cLabel for="allergies">Allergies</label>
+        <input cFormControl id="allergies" type="text" [(ngModel)]="dme.allergies" class="form-control" name="allergies"/>
+      </c-col>
+    
+      <c-col [md]="6">
+        <label cLabel for="vaccinations">Vaccinations</label>
+        <input cFormControl id="vaccinations" type="text" [(ngModel)]="dme.vaccinations" class="form-control" name="vaccinations"/>
+      </c-col>
+    
+      <c-col [md]="6">
+        <label cLabel for="contact_urg">Contacts d'urgence</label>
+        <input cFormControl id="contact_urg" type="text" [(ngModel)]="dme.contact_urg" class="form-control" name="contact_urg"/>
+      </c-col>
+    
+      <c-col [md]="6">
+        <label cLabel for="note">Notes</label>
+        <input cFormControl id="note" type="text" [(ngModel)]="dme.note" class="form-control" name="note"/>
+      </c-col>
+    
+      <c-col [md]="6">
+        <label cLabel for="liste_analyse">Liste des analyses</label>
+        <input cFormControl id="liste_analyse" type="text" [(ngModel)]="dme.liste_analyse" class="form-control" name="liste_analyse"/>
+      </c-col>
+       
+    <c-col [xs]="12" class="text-center mt-4">
+      <button cButton type="submit" class="btn px-4 py-2" [ngClass]="{'btn-secondary': form.invalid}">Créer</button>  
+    </c-col>
+  </form>
+
+  <c-toaster [placement]="position" class="p-3" position="fixed">
+    <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
+             [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+             [style.color]="'white'">
+      <c-toast-header>
+        <span *ngIf="toastType() === 'success'">Succès</span>
+        <span *ngIf="toastType() === 'error'">Erreur</span>
+      </c-toast-header>
+      <c-toast-body>
+        <p>{{ toastMessage() }}</p>
+        <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+      </c-toast-body>
+    </c-toast>
+  </c-toaster>
