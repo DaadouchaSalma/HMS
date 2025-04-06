@@ -18,8 +18,14 @@ export class MedecinService {
   getMedecinById(id: string): Observable<Medecin> {
     return this.http.get<Medecin>(`${this.apiUrl}/get/${id}`);
   }
+  getMedecinByIdAdmin(id: string): Observable<Medecin> {
+    return this.http.get<Medecin>(`${this.apiUrl}/getA/${id}`);
+  }
   updateMedecin(id: string, updatedMedecin: Medecin): Observable<any> {
     return this.http.put(`${this.apiUrl}/editInfo/${id}`, updatedMedecin);
+  }
+  updateMedecinAdmin(id: string, updatedMedecin: Medecin): Observable<any> {
+    return this.http.put(`${this.apiUrl}/eedit/${id}`, updatedMedecin);
   }
   deleteMedecin(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);

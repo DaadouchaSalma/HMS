@@ -22,7 +22,23 @@ namespace HMS.Controllers
             _context = context;  
         }
 
-        
+
+        /* [HttpPost("login")]
+         public async Task<IActionResult> Login([FromBody] LoginModel model)
+         {
+             var user = await _userManager.FindByEmailAsync(model.Email);
+             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
+                 return Unauthorized(new { message = "Identifiants incorrects" });
+
+             // Get user roles
+             var roles = await _userManager.GetRolesAsync(user);
+
+             return Ok(new
+             {
+                 message = "Connexion réussie",
+                 roles // Returns the list of roles assigned to the user
+             });
+         }*/
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
@@ -30,14 +46,19 @@ namespace HMS.Controllers
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
                 return Unauthorized(new { message = "Identifiants incorrects" });
 
+            // Sign in the user
+            var signInManager = HttpContext.RequestServices.GetRequiredService<SignInManager<ApplicationUser>>();
+            await signInManager.SignInAsync(user, isPersistent: true);  // Keeps user logged in
+
             // Get user roles
             var roles = await _userManager.GetRolesAsync(user);
 
             return Ok(new
             {
                 message = "Connexion réussie",
-                roles // Returns the list of roles assigned to the user
+                roles
             });
         }
+
     }
 }

@@ -78,8 +78,9 @@ export class AddPharmacienComponent {
       ...this.pharmacien,
       date_Naiss: this.formatDate(new Date(this.pharmacien.date_Naiss)),
       date_Emb: this.formatDate(new Date(this.pharmacien.date_Emb)),
-      Type:2
+      type:2
     };
+    console.log(pharmacien)
 
     this.pharmacienService.addPharmacien(pharmacien).subscribe({
       next: (response) => {

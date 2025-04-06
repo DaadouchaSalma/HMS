@@ -54,125 +54,7 @@
       }
     }
   }
-  /*
-  .no-data {
-    text-align: center;
-    padding: 20px;
-    font-size: 18px;
-    color: #555;
-  }
-  
-  .details-row {
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .show-row {
-    background-color: #f8f9fa !important;
-  }
-  
-  .card-body {
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-  }
-  
-  .btn-sm {
-    font-size: 0.8rem;
-    padding: 5px 10px;
-  }
-  
-  .bi-chevron-up, .bi-chevron-down {
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .collapse {
-    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  }
-  
-  .advanced-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    margin: 10px;
-    overflow: hidden;
-    position: relative;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background: linear-gradient(45deg, #6366f1, #8b5cf6, #3b82f6);
-      z-index: -1;
-      border-radius: 22px;
-      animation: border-animation 3s linear infinite;
-    }
-  }
-  
-  .card-header {
-    padding: 1.5rem;
-    background: rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    
-    h3 {
-      margin: 0;
-      color: #1f2937;
-      font-weight: 600;
-    }
-    
-    i {
-      font-size: 1.5rem;
-      background: linear-gradient(45deg, #3b82f6, #6366f1);
-      
-      -webkit-text-fill-color: transparent;
-    }
-  }
-  
-  .card-content {
-    padding: 1.5rem;
-  }
-  
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1rem;
-    margin: 1rem 0;
-    background: rgba(255,255,255,0.05);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: translateX(10px);
-      background: rgba(255,255,255,0.1);
-    }
-  }
-  
-  .icon-wrapper {
-    width: 45px;
-    height: 45px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    i {
-      font-size: 1.2rem;
-      color: white;
-    }
-    
-    &.gradient-purple {
-      background: linear-gradient(45deg, #8b5cf6, #c084fc);
-    }
-    
-    &.gradient-blue {
-      background: linear-gradient(45deg, #3b82f6, #60a5fa);
-    }
-  }*/
+ 
   
   .info-text {
     display: flex;
@@ -273,3 +155,82 @@
       color: white !important;;
     }
   }
+
+
+ // Style du dropdown de filtrage
+/* Style du label Filtrer */
+#filtre label {
+  font-weight: bold;
+  font-size: 20px;
+  color: #333;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* Style du conteneur du filtre */
+#filtre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Style du bouton de filtre */
+.drop_filtre button[cButton] {
+  border-color: #551721!important;
+ // background-color: white;
+  color: #551721;
+  border-width: 0px;
+  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.drop_filtre button[cButton]:hover {
+  background-color: #551721;
+  color: white;
+}
+.filtre_spec button[cButton]{
+  border-color: #573355!important;
+ // background-color: white;
+  color: #573355;
+  border: none;
+  border-width: 0px;
+  padding: 8px 15px;
+  font-size: 14px;
+  
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+.filtre_spec button[cButton]:hover{
+  background-color: #573355;
+  color: white;
+}
+
+/* Style du menu déroulant */
+ul[cDropdownMenu] {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 0;
+}
+
+ul[cDropdownMenu] li button[cDropdownItem] {
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+ul[cDropdownMenu] li button[cDropdownItem]:hover {
+  background-color: #f1f1f1;
+}

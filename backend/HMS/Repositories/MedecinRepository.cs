@@ -55,5 +55,10 @@ namespace HMS.Repositories
         {
             _context.Medecins.Remove(medecin);
         }
+
+        public async Task<Medecin> GetByIdentityUserIdAsync(string identityUserId)
+        {
+            return await _context.Medecins.FirstOrDefaultAsync(m => m.IdentityUserId == identityUserId);
+        }
     }
 }

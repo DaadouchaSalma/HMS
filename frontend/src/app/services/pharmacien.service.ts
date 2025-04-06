@@ -18,10 +18,16 @@ export class PharmacienService {
   getPharmacienById(id: string): Observable<Pharmacien> {
       return this.http.get<Pharmacien>(`${this.apiUrl}/get/${id}`);
   }
+  getPharmacienByIdAdmin(id: string): Observable<Pharmacien> {
+    return this.http.get<Pharmacien>(`${this.apiUrl}/getA/${id}`);
+}
   updatePharmacien(id: string, updatedPharmacien: Pharmacien): Observable<any> {
       return this.http.put(`${this.apiUrl}/editInfo/${id}`, updatedPharmacien);
   }
   deletePharmacien(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  updatePharmacienAdmin(id: string, updatedPharmacien: Pharmacien): Observable<any> {
+    return this.http.put(`${this.apiUrl}/edit/${id}`, updatedPharmacien);
+}
 }

@@ -1,10 +1,10 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()" cForm class="row g-3">
     <c-col [md]="6">
-      <label cLabel for="Nom">Nom</label>
+      <label cLabel for="Nom">Nom<span style="color: red;"> *</span></label>
       <input cFormControl id="Nom" type="text" [(ngModel)]="personnelA.nom" class="form-control" name="nom" disabled/>
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="Prenom">Prénom</label>
+      <label cLabel for="Prenom">Prénom<span style="color: red;"> *</span></label>
       <input cFormControl id="Prenom" type="text" [(ngModel)]="personnelA.prenom" class="form-control" name="prenom" disabled/>
     </c-col>
     <c-col [md]="6">
@@ -18,7 +18,7 @@
     </c-col>
     <c-col [md]="6">
       <label cLabel for="Password">Mot de Passe<span style="color: red;"> *</span></label>
-      <input cFormControl id="Password" type="password" [(ngModel)]="personnelA.password" class="form-control" name="password" required #password="ngModel"/>
+      <input cFormControl id="Password" type="password" [(ngModel)]="personnelA.password" class="form-control" name="password" required #password="ngModel" disabled/>
       <div *ngIf="password.invalid && password.touched" style="color: red; padding-left: 2%;">
         <small>* Le mot de passe est requis.</small>
       </div>
@@ -55,7 +55,7 @@
         <input cFormControl id="Statut" type="text" [(ngModel)]="personnelA.statut" class="form-control" name="statut" disabled />
       </c-col>
     <c-col [xs]="12" class="text-center mt-4" style="margin-bottom: 40px;">
-      <button cButton type="submit" class="btn btn-primary px-4 py-2" [ngClass]="{'btn-secondary': form.invalid}" [disabled]="form.invalid">Mettre à jour </button>
+      <button cButton type="submit" class="btn btn-primary px-4 py-2" >Mettre à jour </button>
     </c-col>
   </form>
   <c-toaster [placement]="position" class="p-3" position="fixed">

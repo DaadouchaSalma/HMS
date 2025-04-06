@@ -4,7 +4,7 @@ import { IconModule } from '@coreui/icons-angular';
 import { Personnel } from '../../../models/personnel.model';
 import {PersonnelService} from '../../../services/personnel.service';
 import { Medecin } from '../../../models/medecin.model';
-import { ButtonModule, CardModule, CollapseModule, FormSelectDirective, ListGroupModule, NavComponent, NavItemComponent, NavLinkDirective, TemplateIdDirective } from '@coreui/angular-pro';
+import { ButtonModule, CardModule, ColComponent, CollapseModule, DropdownComponent, DropdownItemDirective, DropdownMenuDirective, DropdownModule, DropdownToggleDirective, FormSelectDirective, ListGroupModule, NavComponent, NavItemComponent, NavLinkDirective, TemplateIdDirective } from '@coreui/angular-pro';
 import { ButtonDirective, CardBodyComponent, CardComponent, CollapseDirective } from '@coreui/angular-pro';
 import { cilCalendarCheck } from '@coreui/icons';
 import { RouterModule } from '@angular/router';
@@ -27,6 +27,7 @@ import {
   ModalTitleDirective,
   ThemeDirective
 } from '@coreui/angular-pro';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-personnel-list',
@@ -34,7 +35,7 @@ import {
       ToasterComponent,
       ToastComponent,
       ToastHeaderComponent,
-      ToastBodyComponent,FormSelectDirective],
+      ToastBodyComponent,FormSelectDirective,FormsModule,DropdownMenuDirective,DropdownItemDirective,DropdownToggleDirective,DropdownComponent,ColComponent],
   templateUrl: './personnel-list.component.html',
   styleUrl: './personnel-list.component.scss'
 })
@@ -49,6 +50,18 @@ export class PersonnelListComponent implements OnInit {
   visible_modal = false;
   selectedId: string | null = null;
   selectedType: number | null = null;
+  selectedType__2: string = ''; // Filtre par type (vide = tous)
+  selectedService: string = ''; // Filtre par service (pour les médecins)
+  services = ['Chirurgie', 'Cardiologie', 'Pédiatrie', 'Gynécologie','Neurologie','Psychiatrie','Orthopédie'];
+  filteredPersonnel: Personnel[] = [];
+
+types = [
+ // { label: 'Tous', value: '' },
+  { label: 'Administratif', value: '0' },
+  { label: 'Médecin', value: '1' },
+  { label: 'Pharmacien', value: '2' }
+];
+
   position = 'top-end';
   visible_toast = signal(false);
   percentage = signal(0);
@@ -61,6 +74,7 @@ export class PersonnelListComponent implements OnInit {
       case 0: return 'Administratif';
       case 1: return 'Médecin';
       case 2: return 'Pharmacien';
+      case 3:return  'Administrateur';
       default: return 'Inconnu';
     }
   }
@@ -70,6 +84,7 @@ export class PersonnelListComponent implements OnInit {
       case 0: return 'fas fa-briefcase'; // Icône utilisateur
       case 1: return 'fas fa-user-md'; // Icône médecin
       case 2: return 'fas fa-pills'; // Icône pharmacien
+      case 3: return 'fas fa-user-cog';
       default: return 'fas fa-question-circle';
     }
   }  
@@ -79,27 +94,33 @@ export class PersonnelListComponent implements OnInit {
   ngOnInit(): void {
     this.collapseStates = this.allPersonnel.map(() => false);
     this.loadPersonnels();
-    //this.loadMedecins();
+    //this.filteredPersonnel = [...this.allPersonnel];
+
+    
   }
  
   
-
   loadPersonnels() {
     this.personnelService.getPersonnels().subscribe(
       (data: Personnel[]) => {
-        this.personnels = data;
-        this.mergeData(); // Fusionner les données après le chargement
+        this.personnels = data.filter(personnel => personnel.type === 0 || personnel.type === 2 );
+        this.loadMedecins();
+        console.log(this.personnels)
+        this.mergeData(); // Fusionner les données après le filtrage
       },
       (error) => {
         this.error = 'Erreur lors de la récupération des personnels';
       }
     );
   }
+
+    
   loadMedecins() {
     this.personnelService.getMedecins().subscribe(
       (data: Medecin[]) => {
         this.medecins = data;
         this.mergeData(); // Fusionner les données après le chargement
+        console.log(this.medecins)
       },
       (error) => {
         this.error = 'Erreur lors de la récupération des médecins';
@@ -110,6 +131,7 @@ export class PersonnelListComponent implements OnInit {
   mergeData() {
     // Fusionner les deux tableaux
     this.allPersonnel = [...this.personnels, ...this.medecins];
+    this.filteredPersonnel = [...this.allPersonnel];
   }
 
   hasMedecin(): boolean {
@@ -206,6 +228,59 @@ confirmDelete() {
       }
     });
   }
+}
+getUpdateRoute(id: string, type: number): string {
+  switch (type) {
+    case 0:
+      return `/personnel/update-personnelA/${id}`;
+    case 1:
+      return `/personnel/update-medecin/${id}`;
+    case 2:
+      return `/personnel/update-pharmacien/${id}`;
+    default:
+      return `/personnel/update-personnelA/${id}`; // Valeur par défaut
+  }
+}
+filterPersonnel() {
+  this.filteredPersonnel = this.allPersonnel.filter(personnel => {
+   
+    // Si aucun type n'est sélectionné, afficher tout
+    if (!this.selectedType__2) {
+      return true;
+    }
+
+    // Filtre par type
+    if (this.selectedType__2 && personnel.type.toString() !== this.selectedType__2) {
+      return false;
+    }
+
+    // Filtre par service (uniquement si Médecin est sélectionné et un service est choisi)
+    if (this.selectedType__2 === '1' && this.selectedService) {
+      
+      if ('service' in personnel) { // 🔥 Vérifie la présence de 'service' au lieu d'instanceof
+        return personnel.service === this.selectedService;
+      }
+      return false;
+    }
+
+    return true;
+  });
+}
+
+
+selectType(type: string) {
+  this.selectedType__2 = type;
+  this.filterPersonnel();
+}
+
+selectService(service: string) {
+  this.selectedService = service;
+  this.filterPersonnel();
+}
+
+getTypeLabel_2(type: string): string {
+  const foundType = this.types.find(t => t.value === type);
+  return foundType ? foundType.label : '';
 }
 
   

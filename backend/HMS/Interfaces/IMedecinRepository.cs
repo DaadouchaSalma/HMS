@@ -1,4 +1,5 @@
 ﻿using HMS.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,5 +19,6 @@ namespace HMS.Interfaces
 
         void Delete(Medecin medecin);
 
+        Task<Medecin> GetByIdentityUserIdAsync(string identityUserId);
     }
 }
