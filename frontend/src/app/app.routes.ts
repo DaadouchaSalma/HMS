@@ -54,6 +54,11 @@ export const routes: Routes = [
 
       },
       {
+        path: 'rendezvous',
+        loadChildren: () => import('./components/RDV/routes').then((m) => m.routes)
+
+      },
+      {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
       },

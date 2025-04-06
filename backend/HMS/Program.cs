@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using HMS.Models;
 using HMS.Services;
+using System.Net.Mail;
+using System.Net;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,16 +24,26 @@ builder.Services.AddCors(options =>
         });
 });
 
-
+builder.Services.AddScoped<SmtpClient>(sp =>
+{
+    var smtpClient = new SmtpClient("smtp.gmail.com")
+    {
+        Port = 587, // ou 465, selon votre serveur SMTP
+        Credentials = new System.Net.NetworkCredential("smartcare314@gmail.com", "fjni rtid zvgp gdta"),
+        EnableSsl = true,
+    };
+    return smtpClient;
+});
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddHostedService<RdvBackgroundService>();
 builder.Services.AddScoped<IMedecinRepository, MedecinRepository>();
 builder.Services.AddScoped<IPharmacieRepository, PharmacieRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
-builder.Services.AddScoped<IFournisseur, FournisseurRepository>();
 builder.Services.AddScoped<IRdvRepository, RdvRepository>();
-builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddHostedService<RdvBackgroundService>();
-builder.Services.AddScoped<IDossierMRepository, DossierMRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IFournisseur, FournisseurRepository>();
+builder.Services.AddScoped<ListeAttenteRepository>();
+builder.Services.AddScoped<IDossierMRepository, DossierMRepository>();
 
 // Add services to the container.
 
@@ -69,8 +81,9 @@ builder.Services.AddAuthorization(options =>
 });
 // Register the DbContext with dependency injection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-// Configuration d'Identity avec gestion des rôles
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
+    ServiceLifetime.Scoped);
+// Configuration d'Identity avec gestion des rÃ´les
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
@@ -79,7 +92,7 @@ builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
-// Création des rôles au démarrage
+// CrÃ©ation des rÃ´les au dÃ©marrage
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();

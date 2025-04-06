@@ -1,4 +1,5 @@
 <div class="d-flex justify-content-between mb-3">
+  
   <button cButton  [routerLink]="['/personnel/add-personnel-admin']" style="color: white; background-color: #dd789c; border-color: #dd789c;"
   onmouseover="this.style.backgroundColor='#b85f7c'; this.style.borderColor='#b85f7c';"
   onmouseout="this.style.backgroundColor='#dd789c'; this.style.borderColor='#dd789c';">
@@ -14,15 +15,75 @@
   onmouseout="this.style.backgroundColor='#854d82d6'; this.style.borderColor='#854d82d6';" >
     <i class="fas fa-prescription-bottle-alt me-2"></i> Ajouter Pharmacien
   </button>
+  
 </div>
 
+<div>
+  <!--div class="d-flex justify-content-start mb-3">
+    <!-- Filtre par type -->
+    <!--select cSelect [(ngModel)]="selectedType__2" (change)="filterPersonnel()" class="me-3">
+      <option value="">Tous</option>
+      <option *ngFor="let type of types" [value]="type.value">{{ type.label }}</option>
+      
+    </select-->
+
+  
+    <!-- Filtre par service (visible seulement si Médecin est sélectionné) -->
+    <!--select cSelect *ngIf="selectedType__2 === '1'" [(ngModel)]="selectedService" (change)="filterPersonnel()">
+      <option value="">Tous les spécialités</option>
+      <option *ngFor="let service of services" [value]="service">{{ service }}</option>
+    </select>
+  </div-->
+ 
+</div>
+<div id="filtre" class="d-flex justify-content-start mb-3" >
+    <!-- Filtre par type -->
+  <label style="font-size: 17px;">Filtrer par Poste :</label>
+    
+  
+    <c-dropdown direction="center" class="me-3 drop_filtre">
+      <button cButton cDropdownToggle  variant="outline" style="border-color: #3E608C; border-width: 1px;" >
+        {{ getTypeLabel_2(selectedType__2) || 'Tous' }}
+      </button>
+      <ul cDropdownMenu>
+        <li>
+          <button cButton cDropdownItem (click)="selectType('')" variant="outline" style="border-color: #3E608C; border-width: 1px;">Tous</button>
+        </li>
+        <li *ngFor="let type of types">
+          <button cButton cDropdownItem (click)="selectType(type.value)" variant="outline" style="border-color: #3E608C; border-width: 1px;">
+            {{ type.label }}
+          </button>
+        </li>
+      </ul>
+    </c-dropdown>
+
+    <!-- Filtre par service (visible seulement si Médecin est sélectionné) -->
+    <c-dropdown *ngIf="selectedType__2 === '1'" direction="center" class="filtre_spec">
+      <button cButton cDropdownToggle variant="outline" style="border-color: #3E608C; border-width: 1px;">
+        {{ selectedService || 'Toutes les spécialités' }}
+      </button>
+      <ul cDropdownMenu>
+        <li>
+          <button cButton cDropdownItem (click)="selectService('')" variant="outline" style="border-color: #3E608C; border-width: 1px;">
+            Toutes les spécialités
+          </button>
+        </li>
+        <li *ngFor="let service of services">
+          <button  cButton cDropdownItem (click)="selectService(service)" variant="outline" style="border-color: #3E608C; border-width: 1px;">
+            {{ service }}
+          </button>
+        </li>
+      </ul>
+    </c-dropdown>
+  </div>
 <table class="custom-table">
+  
   <thead>
     <tr>
       <th>Nom</th>
       <th>Prénom</th>
       <th>Email</th>
-      <th>Type</th>
+      <th>Poste</th>
       <!--th>Date Naissance</th>
       <th>Date Embauche</th-->
       <th>Salaire</th>
@@ -31,7 +92,7 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let personnel of allPersonnel; let i = index">
+    <ng-container *ngFor="let personnel of filteredPersonnel; let i = index">
       <tr>
         <td>{{ personnel.nom }}</td>
         <td>{{ personnel.prenom }}</td>
@@ -65,11 +126,11 @@
                     <ul cListGroup flush *ngIf="personnel.type === 1">
                       <li cListGroupItem *ngIf="'service' in personnel">
                         <i class="fa-solid fa-square-plus me-2"></i>
-                    <b>Service : &nbsp;</b>  {{ personnel.service || 'Non disponible' }}
+                    <b>Spécialité : &nbsp;</b>  {{ personnel.service || 'Non disponible' }}
                       </li>
                       <li cListGroupItem *ngIf="'grad_med' in personnel">
                       <i class="fas fa-stethoscope me-2"></i>
-                    <b> Grade : &nbsp;</b> {{ personnel.grad_Med || 'Non spécifié' }}
+                    <b> Grade : &nbsp;</b> {{ personnel.grad_med || 'Non spécifié' }}
                       </li> 
                     </ul>
                     <ul cListGroup flush>
@@ -95,7 +156,7 @@
                   </div>
 
                   <div class="mt-2" >
-                      <button cButton class="btn-action-1 me-1" style="background-color:  #c1cce6 ; border-color:  #c1cce6 ; color: black;">
+                      <button cButton class="btn-action-1 me-1" style="background-color:  #c1cce6 ; border-color:  #c1cce6 ; color: black;" [routerLink]="getUpdateRoute(personnel.id, personnel.type)">
                         <i class="fas fa-edit"></i></button> <br>
                       <button cButton class="btn-action-2 me-1" style="background-color: rgb(196, 57, 57); border-color: rgb(196, 57, 57);margin-top: 20px;" (click)="openDeleteModal(personnel.id, personnel.type)">
                         <i class="fas fa-trash"></i></button>
@@ -109,7 +170,9 @@
       <!--/tr-->
     </ng-container>
   </tbody>
+  
 </table>
+
 <c-modal id="deleteModal" [visible]="visible_modal" (visibleChange)="handleLiveDemoChange($event)">
   <c-modal-header>
     <h5 cModalTitle>Confirmation de suppression</h5>

@@ -40,6 +40,7 @@ namespace HMS.Controllers
 
             return Ok(new { message = "Patient ajouté avec succès" });
         }*/
+
         [Authorize(Roles = "Medecin, PersonnelAdministratif")]
         [HttpPost("new")]
         public async Task<IActionResult> AjouterPatient([FromBody] RegisterModel model)

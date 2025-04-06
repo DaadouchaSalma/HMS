@@ -1,0 +1,125 @@
+<form #form="ngForm" (ngSubmit)="onSubmit()" cForm class="row g-3">
+    <c-col [md]="6">
+      <label cLabel for="Nom">Nom<span style="color: red;"> *</span></label>
+      <input cFormControl id="Nom" type="text" [(ngModel)]="medecin.nom" class="form-control" name="nom" disabled/>
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel for="Prenom">Prénom<span style="color: red;"> *</span></label>
+      <input cFormControl id="Prenom" type="text" [(ngModel)]="medecin.prenom" class="form-control" name="prenom" disabled />
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel for="Email">Email<span style="color: red;"> *</span></label>
+      <input cFormControl id="Email" type="email" [(ngModel)]="medecin.email" class="form-control" name="email" #email="ngModel" email required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" disabled/>
+      <div *ngIf="email.invalid && email.touched"  style="color: red; padding-left: 2%;">
+        <small *ngIf="email.errors?.['required']">* L'email est requis.</small>
+        <small *ngIf="email.errors?.email">Format de l'email invalide.</small>
+        <small *ngIf="email.errors?.pattern">L'email doit être valide (ex: exemple&#64;mail.com).</small>
+      </div>
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel for="Password">Mot De Passe<span style="color: red;"> *</span></label>
+      <input cFormControl id="Password" type="password" [(ngModel)]="medecin.password" class="form-control" name="password" required #password="ngModel" (ngModelChange)="validatePassword(medecin.password)" 
+      />
+      <div *ngIf="(password.invalid && password.touched) || passwordErrors.length > 0" style="color: red; padding-left: 2%;">
+        <!--small>* Le mot de passe est requis.</small-->
+        <small *ngFor="let error of passwordErrors">{{ error }}</small>
+      </div>
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel for="tel">Téléphone<span style="color: red;"> *</span></label>
+      <input cFormControl id="tel" type="tel" [(ngModel)]="medecin.telephone" class="form-control" name="telephone" required #telephone="ngModel" pattern="^[1-9][0-9]{7}$" disabled/>
+      <div *ngIf="telephone.invalid && telephone.touched" style="color: red; padding-left: 2%;">
+        <small *ngIf="telephone.errors?.['required']">* Le numéro de téléphone est requis.</small>
+        <small *ngIf="telephone.errors?.pattern">Le numéro doit contenir exactement 8 chiffres et ne pas commencer par 0.</small>
+      </div>
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel> Date De Naissance<span style="color: red;"> *</span> </label>
+      <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="medecin.date_Naiss" placeholder="Sélectionnez la date de naissance" disabled/>
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel> Date D'Embauche<span style="color: red;"> *</span> </label>
+      <c-date-picker closeOnSelect [(ngModel)]="medecin.date_Emb" name="date_emb" placeholder="Sélectionnez la date d'embauche" disabled />
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel for="salaire">Salaire<span style="color: red;"> *</span></label>
+      <input cFormControl id="salaire" class="form-control" type="number" [(ngModel)]="medecin.salaire" name="salaire" #salaire="ngModel" required/>
+      <div *ngIf="salaire.invalid && salaire.touched" style="color: red; padding-left: 2%;">
+        <small>* Le salaire est requis.</small>
+      </div>
+    </c-col>
+    <c-col [md]="6">
+      <label cLabel for="Adresse">Adresse<span style="color: red;"> *</span></label>
+      <input cFormControl id="Adresse" type="text" [(ngModel)]="medecin.adresse" class="form-control" name="adresse" required  #adresse="ngModel" disabled/>
+      <div *ngIf="adresse.invalid && adresse.touched" style="color: red; padding-left: 2%;">
+        <small>* L'adresse est requise.</small>
+      </div>
+    </c-col>
+    <c-col [md]="6">
+        <label cLabel for="Statut">Statut<span style="color: red;"> *</span></label>
+        <select aria-label="Choisissez le statut" id="Statut" [(ngModel)]="medecin.statut" name="statut" cSelect required #statut="ngModel">
+          <option value="Contractuel">Contractuel</option>
+          <option value="Titulaire">Titulaire</option>
+          <option value="Vacataire">Vacataire</option>
+          <option value="Stagiaire">Stagiaire</option>
+        </select>
+        <div *ngIf="statut.invalid && statut.touched" style="color: red; padding-left: 2%;">
+          <small>* Le statut est requis.</small>
+        </div>
+      </c-col>
+      <c-col [md]="6">
+        <label cLabel for="grade">Grade<span style="color: red;"> *</span></label>
+        <select aria-label="Choisissez le grade" id="grade" [(ngModel)]="medecin.grad_med" name="grade" cSelect required #grade="ngModel">
+          <option value="Interne">Interne</option>
+          <option value="Résident">Résident</option>
+          <option value="Médecin Spécialiste">Médecin Spécialiste</option>
+        </select>
+        <div *ngIf="grade.invalid && grade.touched"  style="color: red; padding-left: 2%;">
+          <small *ngIf="grade.errors?.['required']">* Le grade est requis.</small>
+        </div>
+      </c-col>
+      <c-col [md]="6">
+        <label cLabel>Spécialité<span style="color: red;"> *</span></label>
+        <select aria-label="Choisissez le service" [(ngModel)]="medecin.service" name="service" cSelect required #service="ngModel">
+          <option value="Chirurgie">Chirurgie</option>
+          <option value="Cardiologie">Cardiologie</option>
+          <option value="Pédiatrie">Pédiatrie</option>
+          <option value="Gynécologie">Gynécologie</option>
+          <option value="Neurologie">Neurologie</option>
+          <option value="Psychiatrie">Psychiatrie</option>
+          <option value="Orthopédie">Orthopédie</option>
+        </select>
+        <div *ngIf="service.invalid && service.touched"  style="color: red; padding-left: 2%;">
+          <small *ngIf="service.errors?.['required']">* La spécialité est requise.</small>
+        </div>
+      </c-col>
+    <c-col [xs]="12" class="text-center mt-4" style="margin-bottom: 40px;">
+      <button cButton type="submit" class="btn btn-primary px-4 py-2" >Mettre à jour</button>
+    </c-col>
+  </form>
+  
+  <c-toaster [placement]="position" class="p-3" position="fixed">
+    <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
+             [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+             [style.color]="'white'">
+      <c-toast-header>
+        <span *ngIf="toastType() === 'success'">Succès</span>
+        <span *ngIf="toastType() === 'error'">Erreur</span>
+      </c-toast-header>
+      <c-toast-body>
+        <p>{{ toastMessage() }}</p>
+        <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+      </c-toast-body>
+    </c-toast>
+  </c-toaster>
+  
+
+
+
+
+
+
+
+
+
+

@@ -12,6 +12,14 @@ namespace HMS.Repositories
         {
             _context = context;
         }
+        public async Task<Patient> GetByIdAsync(Guid id)
+        {
+            return await _context.Patients.FindAsync(id);
+        }
+       /* public async Task<Patient> GetByIdentityUserIdAsync(string identityUserId)
+        {
+            return await _context.Patients.FirstOrDefaultAsync(p => p.IdentityUserId == identityUserId);
+        }*/
 
         public async Task<Patient> GetByIdentityUserIdAsync(string identityUserId)
         {

@@ -12,6 +12,7 @@ export class Personnel {
     showDetails?: boolean;
     adresse: string='';
     statut : string =''
+    passwordHash:string=''
     constructor() {
         // Initialisation des valeurs par défaut
       }

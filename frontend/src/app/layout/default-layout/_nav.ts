@@ -95,6 +95,23 @@ export const navItems: INavData[] = [
       },
     ]
   },
+  {
+    name: 'Rendez-Vous',
+    url: '/rendezvous',
+    iconComponent: { name: 'cil-user-plus' },
+    children: [
+      {
+        name: 'Prendre Un Rendez-Vous',
+        url: '/rendezvous/add-rdv',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Ma liste Des Rendez-Vous',
+        url: '/rendezvous/list-rdv',
+        icon: 'nav-icon-bullet'
+      },
+    ]
+  },
  /*{
     name: 'Dashboard',
     url: '/dashboard',

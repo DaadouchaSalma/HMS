@@ -51,6 +51,10 @@ namespace HMS.Repositories
         {
             _context.Admins.Remove(personnelAdministrative);
         }
+        public async Task<PersonnelAdministrative> GetByIdentityUserIdAsync(string identityUserId)
+        {
+            return await _context.Admins.FirstOrDefaultAsync(m => m.IdentityUserId == identityUserId);
+        }
     }
 }
 

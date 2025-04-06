@@ -1,4 +1,5 @@
-﻿using HMS.Interfaces;
+﻿
+using HMS.Interfaces;
 using HMS.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,6 +43,7 @@ namespace HMS.Repositories
         {
             _context.Pharmaciens.Update(pharmacien);
         }
+        
 
         public void Save()
         {
@@ -51,6 +53,11 @@ namespace HMS.Repositories
         public void Delete(Pharmacien pharmacien)
         {
             _context.Pharmaciens.Remove(pharmacien);
+        }
+
+        public async Task<Pharmacien> GetByIdentityUserIdAsync(string identityUserId)
+        {
+            return await _context.Pharmaciens.FirstOrDefaultAsync(m => m.IdentityUserId == identityUserId);
         }
     }
 }

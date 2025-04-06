@@ -24,6 +24,7 @@ public class ApplicationDbContext :  IdentityDbContext<ApplicationUser>
     public DbSet<Admission>Admissions { get; set; }
     public DbSet<Fournisseur> fournisseurs { get; set; }
     public DbSet<CategorieMedicament> categories { get; set; }
+    public DbSet<ListeAttente> ListeAttentes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

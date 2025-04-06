@@ -23,8 +23,8 @@ public class RdvBackgroundService : BackgroundService
                 var rdvRepo = scope.ServiceProvider.GetRequiredService<IRdvRepository>();
                 await rdvRepo.CheckAndSendFeedbackEmailsAsync();
             }
-
             await Task.Delay(TimeSpan.FromMinutes(15), stoppingToken); 
         }
     }
 }
+

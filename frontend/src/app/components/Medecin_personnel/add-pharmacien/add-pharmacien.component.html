@@ -30,7 +30,7 @@
     </div>
   </c-col>
   <c-col [md]="6">
-    <label cLabel for="tel">Téléphone</label>
+    <label cLabel for="tel">Téléphone<span style="color: red;"> *</span></label>
     <input cFormControl id="tel" type="tel" [(ngModel)]="pharmacien.telephone" class="form-control" name="telephone"required #telephone="ngModel" pattern="^[1-9][0-9]{7}$" default=""/>
     <div *ngIf="telephone.invalid && telephone.touched" style="color: red; padding-left: 2%;">
       <small *ngIf="telephone.errors?.['required']">* Le numéro de téléphone est requis.</small>
@@ -39,7 +39,10 @@
   </c-col>
   <c-col [md]="6">
     <label cLabel >Date De Naissance<span style="color: red;"> *</span></label>
-      <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="pharmacien.date_Naiss" placeholder="Sélectionnez la date de naissance"/>
+      <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="pharmacien.date_Naiss" placeholder="Sélectionnez la date de naissance" required #date_Naiss="ngModel"/>
+      <div *ngIf="date_Naiss.invalid && date_Naiss.touched" style="color: red; padding-left: 2%;">
+        <small  *ngIf="date_Naiss.errors?.['required']">* La date de naissance est requise.</small>
+      </div>
   </c-col>
   <c-col [md]="6">
     <label cLabel >Date D'Embauche<span style="color: red;"> *</span></label>

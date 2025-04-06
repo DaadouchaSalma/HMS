@@ -24,6 +24,7 @@ namespace HMS.Controllers
         }
 
 
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
@@ -52,12 +53,14 @@ namespace HMS.Controllers
             });
         }
 
+
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme); 
             return Ok(new { message = "Logout successful" });
         }
+
 
     }
 }

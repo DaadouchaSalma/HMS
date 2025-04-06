@@ -8,6 +8,12 @@ namespace HMS.Services
 {
     public class EmailService : IEmailService
     {
+        private readonly SmtpClient _smtpClient; // Configurez votre client SMTP ici
+        
+        public EmailService(SmtpClient smtpClient)
+        {
+            _smtpClient = smtpClient;
+        }
         public async Task SendEmailAsync(string to, string nom)
         {
             var smtpClient = new SmtpClient("smtp.gmail.com") 
@@ -44,5 +50,20 @@ namespace HMS.Services
 
             await smtpClient.SendMailAsync(mailMessage);
         }
+
+
+        public async Task SendEmailAsync_crenaux(string to, string subject, string body)
+        {
+            var mailMessage = new MailMessage {
+                From= new MailAddress("smartcare314@gmail.com"),
+                Subject= subject,
+                Body=body,
+                IsBodyHtml = true };
+            mailMessage.To.Add(to);
+            
+            await _smtpClient.SendMailAsync(mailMessage);
+        }
+
     }
 }
+
