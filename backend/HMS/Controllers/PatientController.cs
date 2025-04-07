@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using HMS.Interfaces;
 using HMS.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -40,6 +40,8 @@ namespace HMS.Controllers
 
             return Ok(new { message = "Patient ajouté avec succès" });
         }*/
+
+
 
         [Authorize(Roles = "Medecin, PersonnelAdministratif")]
         [HttpPost("new")]

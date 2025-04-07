@@ -42,9 +42,9 @@ builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IRdvRepository, RdvRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IFournisseur, FournisseurRepository>();
+builder.Services.AddScoped<IReclamationRepository, ReclamationRepository>();
 builder.Services.AddScoped<ListeAttenteRepository>();
 builder.Services.AddScoped<IDossierMRepository, DossierMRepository>();
-
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -92,7 +92,10 @@ builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+app.UseStaticFiles();
+
 // Création des rôles au démarrage
+
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();

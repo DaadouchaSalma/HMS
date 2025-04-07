@@ -1,4 +1,6 @@
-﻿namespace HMS.Models
+using System.Text.Json.Serialization;
+
+namespace HMS.Models
 {
     public class Patient
     {
@@ -19,5 +21,8 @@
         public DossierM? DossierMedical { get; set; }
         public ICollection<Prescription>? Prescriptions { get; set; } = new List<Prescription>();
         public ICollection<Chambre>? Chambres { get; set; } = new List<Chambre>();
+        [JsonIgnore]
+        public ICollection<Reclamation> Reclamations { get; set; } = new List<Reclamation>();
+
     }
 }

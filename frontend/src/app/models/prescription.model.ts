@@ -4,5 +4,6 @@ export interface Prescription {
     note: string;
     medecinId?: string;
     patientId: string;
+    datePrescription?: string;
 }
   

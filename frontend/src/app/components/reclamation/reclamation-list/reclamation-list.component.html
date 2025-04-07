@@ -1,0 +1,47 @@
+<table cTable cAlign="middle" [cBorder]="1" bordered class="text-center custom-table" >
+  <thead cTableColor="light" cAlign="middle" style="border-radius: 5px; " >
+    <tr>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Type de problème</th>
+      <th>Description</th>
+      <th>Date de soumission</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let reclamation of allReclamations; let i = index">
+      <tr>
+        <td>{{ reclamation.patient?.nom }}</td>
+        <td>{{ reclamation.patient?.prenom }}</td>
+        <td>{{ reclamation.patient?.email }}</td>
+        <td>{{ reclamation.typeProbleme }}</td>
+        <td>{{ reclamation.description }}</td>
+        <td>{{ reclamation.dateSoumission | date: 'dd/MM/yyyy' }}</td> <!-- Format de la date -->
+        <td>
+          <button cButton color="danger" (click)="confirmSupprimer(reclamation)">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+<!-- Modal de confirmation de suppression -->
+<c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Confirmation de suppression</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    Êtes-vous sûr de vouloir supprimer cette réclamation ?
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="secondary" (click)="toggleLiveDemo()">Annuler</button>
+    <button cButton style="background-color:#3E608C; border-color: #3E608C; color: white;" (click)="supprimerReclamation()">
+      Confirmer
+    </button>
+  </c-modal-footer>
+</c-modal>

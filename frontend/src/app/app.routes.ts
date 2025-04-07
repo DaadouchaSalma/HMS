@@ -41,8 +41,17 @@ export const routes: Routes = [
       },
       {
 
+        path:'dossierM',
+        loadChildren: () => import('./components/dossierM/routes').then((m) => m.routes)
+      },
+      {
+
         path:'chambre',
         loadChildren: () => import('./components/chambre/routes').then((m) => m.routes)
+      },
+      {
+        path:'reclamation',
+        loadChildren: () => import('./components/reclamation/routes').then((m) => m.routes)
       },
       {
         path:'admission',

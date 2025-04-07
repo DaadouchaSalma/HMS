@@ -10,3 +10,47 @@
 .hover-icon:hover {
     color: #3E608C !important; /* Changer la couleur au survol */
   }
+  .notification-dropdown {
+    min-width: 24rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  .notification-header {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .notification-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .notification-item:hover {
+    background-color: #f1f3f5;
+  }
+  
+  .notification-badge {
+    background-color: rgb(221, 120, 156); /* Couleur demandée */
+    font-size: 12px;
+    padding: 5px 8px;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+  
+  .notification-title {
+    font-weight: bold;
+    color: #343a40;
+  }
+  
+  .notification-message {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  

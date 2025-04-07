@@ -1,6 +1,9 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import {RdvService} from '../../../services/rdv.service';
+import { Router} from '@angular/router';
+
 
 import {
   AvatarComponent,
@@ -24,7 +27,7 @@ import {
   ProgressComponent,
   SidebarToggleDirective
 } from '@coreui/angular-pro';
-
+import { NgModel } from '@angular/forms';
 import { IconDirective, IconSetService } from '@coreui/icons-angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { cilPowerStandby,
@@ -38,7 +41,6 @@ import { cilPowerStandby,
   cilMoon,
   cilContrast,
   cilAccountLogout } from '@coreui/icons';
-
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
@@ -46,7 +48,7 @@ import { cilPowerStandby,
   providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
-
+  notifications: { title: string, message: string }[] = [];
   readonly #colorModeService = inject(ColorModeService);
   readonly colorMode = this.#colorModeService.colorMode;
 
@@ -62,7 +64,9 @@ export class DefaultHeaderComponent extends HeaderComponent {
   });
   userRole: string = '';
 
-  constructor(private authService: AuthService, private router: Router, iconSet: IconSetService) {
+
+  constructor(private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute) {
+
     super();
     iconSet.icons = { 
       cilPowerStandby,
@@ -80,6 +84,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   }
 
   ngOnInit(): void {
+    this.loadNotifications();
     const roles  = this.authService.getUserRoles();
     if (roles.includes('Patient')) {
       this.userRole = 'Patient';
@@ -87,6 +92,19 @@ export class DefaultHeaderComponent extends HeaderComponent {
       this.userRole = 'Medecin';
     }  
   }
+   loadNotifications() {
+    const patientId = "123e4567-e89b-12d3-a456-426614174000"
+    if (patientId) {
+    this.rdvService.getNotifications(patientId).subscribe(response => {
+      this.notifications = response.map((notif, index) => ({
+        title: `Rappel`,
+        message: notif
+      }));
+    }, error => {
+      console.error('Erreur lors du chargement des notifications', error);
+    });
+  }
+}
 
   getProfileRoute(): string {
     if (this.userRole === 'Patient') {
