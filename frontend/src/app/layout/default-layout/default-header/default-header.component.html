@@ -223,28 +223,29 @@
     <button [caret]="false" cDropdownToggle>
       <span class="d-inline-block my-1 mx-2 position-relative">
         <svg cIcon name="cilBell" size="lg" style="color: #6387c0;" class="hover-icon"></svg>
-        @if (newNotifications?.length) {
+        @if (notifications?.length) {
           <c-badge
             class="p-1"
             color="danger"
             position="top-end"
             shape="rounded-circle"
           >
-            <span class="visually-hidden">{{ newNotifications?.length ?? 0 }} new alerts</span>
+            <span class="visually-hidden">{{ notifications?.length ?? 0 }} new alerts</span>
         </c-badge>
         }
       </span>
     </button>
     <div cDropdownMenu class="p-0">
       <h6 cDropdownHeader class="bg-body-secondary text-body-secondary fw-semibold rounded-top">
-        <span>You have {{ newNotifications?.length ?? 0 }} notifications</span>
+        <span>Vous avez {{ notifications?.length ?? 0 }} notifications</span>
       </h6>
-      @for (notification of newNotifications; track notification.id) {
+      @for (notification of notifications; track notification.id) {
         <a cDropdownItem routerLink="">
-          <svg cIcon class="me-2 text-{{notification.color}}" name="{{notification.icon}}"></svg>
-          {{ notification.title }}
+          <svg cIcon class="me-2 text-info" name="cilBell"></svg>
+          {{ notification.message }}
         </a>
       }
+      <!--
       <h6 cDropdownHeader class="bg-body-secondary text-body-secondary fw-semibold">
         <span>Server</span>
       </h6>
@@ -256,7 +257,7 @@
           <c-progress thin [value]="status.value" color="{{status.color}}-gradient" />
           <span class="text-body-secondary small">{{ status.details }}</span>
         </a>
-      }
+      }-->
     </div>
   </c-dropdown>
 </ng-template>

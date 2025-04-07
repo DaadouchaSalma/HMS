@@ -36,7 +36,7 @@ namespace HMS.Controllers
             return Ok(new { message = "Patient ajouté avec succès" });
         }*/
 
-        [HttpPost("ajouterPatient")]
+        [HttpPost("add")]
         public async Task<IActionResult> AjouterPatient([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);

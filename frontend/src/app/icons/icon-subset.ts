@@ -31,7 +31,7 @@ import {
   cilBookmark,
   cilCalculator,
   cilCalendar,
-  
+  cilTruck,
   cilCart,
   cilChart,
   cilChartPie,
@@ -107,6 +107,7 @@ import { signet } from './signet';
 import { logo } from './logo';
 
 export const iconSubset = {
+  cilTruck,
   cilMedicalCross,
   cibCcAmex,
   cibCcApplePay,
@@ -213,6 +214,7 @@ export const iconSubset = {
 };
 
 export enum IconSubset {
+  cilTruck='cilTruck',
   cilMedicalCross = 'cilMedicalCross',
   cibCcAmex = 'cibCcAmex',
   cibCcApplePay = 'cibCcApplePay',

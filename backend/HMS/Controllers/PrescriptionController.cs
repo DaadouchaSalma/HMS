@@ -37,5 +37,23 @@ namespace HMS.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        
+        [HttpGet("generate-pdf/{id}")]
+        public async Task<IActionResult> GeneratePrescriptionPdf(Guid id)
+        {
+            // Fetch prescription from DB
+            Prescription prescription = await _prescriptionRepository.GetPrescriptionByIdAsync(id);
+            if (prescription == null)
+            {
+                return NotFound("Prescription not found");
+            }
+
+            // Generate PDF
+            byte[] pdfBytes = PdfGenerator.FillPrescriptionTemplate(prescription);
+            return File(pdfBytes, "application/pdf", "Prescription.pdf");
+        }
     }
+
+
 }

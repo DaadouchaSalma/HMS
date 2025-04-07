@@ -1,12 +1,3 @@
-<!--<div *ngIf="visible_alert" class="alert" [ngClass]="'alert-' + alertType">
-  <svg *ngIf="alertType === 'success'" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-    <use xlink:href="#check-circle-fill" />
-  </svg>
-  <svg *ngIf="alertType === 'danger'" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Error:">
-    <use xlink:href="#exclamation-triangle-fill" />
-  </svg>
-  <div>{{ alertMessage }}</div>
-</div>-->
 <c-toaster [placement]="position" class="p-3" position="fixed">
   <c-toast
     (timer)="onTimerChange($event)"
@@ -26,7 +17,7 @@
     </c-toast-body>
   </c-toast>
 </c-toaster>
-<form class="row g-3" (ngSubmit)="onSubmit()">
+<form #form = "ngForm" class="row g-3" (ngSubmit)="onSubmit(form)">
   
     <c-col [md]="6">
       <label for="medicamentName" class="form-label">Nom</label>
@@ -37,22 +28,29 @@
            class="form-control" 
            placeholder="Nom Du Médicament" 
            required 
-           type="text">
+           type="text"
+           #nom="ngModel">
+           <div *ngIf="nom.invalid && nom.touched" style="color: red; padding-left: 2%;">
+            <small>* Le nom est requis.</small>
+          </div>
     </c-col>
     
     <c-col [md]="6">
       <label for="medicamentcategorie" class="form-label">Catégorie</label>
     <select id="medicamentcategorie"
             cFormControl
-            [(ngModel)]="medicament.CategorieId"
+            [(ngModel)]="medicament.categorieId"
             name="categorie"
-            class="form-control"
-            required>
-      <option *ngFor="let categorie of categories" [value]="categorie.id">
+            class="form-control" 
+            required #categorie="ngModel">
+      <option value="" disabled selected>Choisissez une catégorie</option>
+      <option *ngFor="let categorie of categories" [value]="categorie.id" >
         {{ categorie.name }}
       </option>
-      
     </select>
+    <div *ngIf="categorie.invalid && categorie.touched" style="color: red; padding-left: 2%;">
+      <small>* La catégorie est requise.</small>
+    </div>
     </c-col>
     
     <c-col [md]="6">
@@ -64,8 +62,11 @@
            class="form-control"
            placeholder="Expiration Date"
            required
-           type="date">
+           type="date" #dateExp="ngModel">
     <div *ngIf="isInvalidDate()" class="text-danger"></div>
+    <div *ngIf="dateExp.invalid && dateExp.touched" style="color: red; padding-left: 2%;">
+      <small>* La date d'expiration est requise.</small>
+    </div>
     </c-col>
     
   
@@ -80,8 +81,11 @@
            placeholder="Number of Stock"
            required
            type="number"
-           min="0"> <!-- Ensures no negative values -->
-    <div *ngIf="medicament.nbr_stock <= 0" class="text-danger"></div>
+           min="1"  #stock="ngModel"> <!-- Ensures no negative values -->
+    <div *ngIf="medicament.nbr_stock < 0" class="text-danger"></div>
+    <div *ngIf="stock.invalid && stock.touched" style="color: red; padding-left: 2%;">
+      <small>* Le nombre de stock est requis.</small>
+    </div>
     </c-col>
     
 
@@ -93,7 +97,7 @@
               name="description" 
               class="form-control" 
               placeholder="Description" 
-              required 
+               
               rows="3"></textarea>
     </c-col>
     
@@ -104,12 +108,15 @@
             [(ngModel)]="medicament.fournisseurId"
             name="compagnie"
             class="form-control"
-            required>
+            required #fournisseur="ngModel">
+      <option value="" disabled selected>Choisissez un fournisseur</option>
       <option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur.id">
         {{ fournisseur.nomF }}
       </option>
-      
     </select>
+    <div *ngIf="fournisseur.invalid && fournisseur.touched" style="color: red; padding-left: 2%;">
+      <small>* Le nom du fournisseur est requis.</small>
+    </div>
     </c-col>
     
 

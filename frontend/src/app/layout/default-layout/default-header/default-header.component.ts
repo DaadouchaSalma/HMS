@@ -1,6 +1,8 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MedNotifsService } from '../../../services/med-notifs.service';
+import { MedNotifs } from '../../../models/medNotifs.model';
 
 import {
   AvatarComponent,
@@ -48,9 +50,21 @@ export class DefaultHeaderComponent extends HeaderComponent {
     return this.colorModes.find(mode => mode.name === currentMode)?.icon ?? 'cilSun';
   });
 
-  constructor() {
+  constructor(private medNotifsService: MedNotifsService) {
     super();
   }
+
+  public notifications: MedNotifs[] = [];
+
+ngOnInit(): void {
+  this.medNotifsService.getMedNotifs().subscribe({
+    next: (data) => {
+      this.notifications = data;
+      console.log('Fetched notifications:', this.notifications);
+    },
+    error: (err) => console.error('Error fetching notifications:', err)
+  });
+}
 
   sidebarId = input('sidebar1');
 

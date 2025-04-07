@@ -3,6 +3,7 @@ using HMS.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using HMS.Models;
+using HMS.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
@@ -25,6 +26,11 @@ builder.Services.AddScoped<IPharmacieRepository, PharmacieRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 builder.Services.AddScoped<IFournisseur, FournisseurRepository>();
+builder.Services.AddHostedService<ExpirationCheckService>();
+builder.Services.AddScoped<IPanierRepository, PanierRepository>();
+
+builder.Services.AddSignalR();
+
 
 builder.Services.AddCors(options =>
 {
@@ -36,8 +42,9 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://localhost:4200") 
 
                   .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+});
 });
 
 
@@ -72,6 +79,7 @@ using (var scope = app.Services.CreateScope())
         }
     }
 }
+app.MapHub<NotificationHub>("/notificationHub");
 
 
 // Configure the HTTP request pipeline.
