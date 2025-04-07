@@ -63,6 +63,11 @@ export const routes: Routes = [
 
       },
       {
+        path: 'rendezvous',
+        loadChildren: () => import('./components/RDV/routes').then((m) => m.routes)
+
+      },
+      {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
       },
@@ -119,7 +124,10 @@ export const routes: Routes = [
         path:'meds',
         loadChildren:() => import('./components/routes').then((m)=> m.routes)
       },
-      
+      {
+        path:'dme',
+        loadChildren:() => import('./components/DME/routes').then((m)=> m.routes)
+      }
     ]
   }, 
   {

@@ -1,0 +1,119 @@
+.btn-rdv {
+    background-color:#3E608C; 
+    border-color: #3E608C;
+    color: white;
+    font-weight: bold;
+    margin-top: 2rem;
+  }
+  
+  .btn-rdv:hover {
+    background-color: #345073;
+  }
+  .form-label {
+    font-size: 0.8rem; 
+    font-weight: bold;
+    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+  }
+  input.ng-invalid.ng-touched, 
+select.ng-invalid.ng-touched,
+c-multi-select.ng-invalid.ng-touched {
+  border: 0.5px solid red;
+}
+.btn-heure-rdv{
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-bottom: 0.5%;
+  //background-color: #3E608C;
+  border-color: #854d82d6;
+  color: #854d82d6;
+}
+.btn-heure-rdv:hover {
+  background-color: #854d82d6;
+  color: white;
+}
+.btn-heure-rdv.selected {
+  border-color: #854d82d6;
+  background-color: #854d82d6;
+  color: white;
+}
+/*
+.btn-attente {
+  background: linear-gradient(135deg, #854d82d6, #dd789c);
+  color: white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(199, 213, 234, 0.2);
+}
+
+.btn-attente:hover {
+  background: linear-gradient(135deg, #dd789c, #854d82d6);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(221, 120, 156, 0.3);
+}
+
+.btn-attente:focus {
+  outline: none;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(199, 213, 234, 0.3);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(221, 120, 156, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(199, 213, 234, 0.3);
+  }
+}
+.btn-attente {
+  animation: pulse 1.8s infinite;
+}*/
+.btn-attente {
+  background: linear-gradient(135deg, #bd7bb7d6, #dc88a6);
+  color: white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(199, 213, 234, 0.2);
+  margin-top: 40px;
+} 
+
+.btn-attente:hover {
+  background: linear-gradient(135deg, #dc88a6, #bd7bb7d6);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(221, 120, 156, 0.3);
+}
+
+.btn-attente:focus {
+  outline: none;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(199, 213, 234, 0.3);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(221, 120, 156, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(199, 213, 234, 0.3);
+  }
+}
+.btn-attente {
+  animation: pulse 1.8s infinite;
+}

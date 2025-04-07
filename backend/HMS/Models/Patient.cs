@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HMS.Models
 {
@@ -9,7 +9,7 @@ namespace HMS.Models
         public string Prenom { get; set; }
         public string Grp_Sang { get; set; }
         public string Email { get; set; }
-        //public string Password { get; set; }
+        public string Password { get; set; }
         public DateOnly Date_Naiss { get; set; }
         public long Telephone { get; set; }
 

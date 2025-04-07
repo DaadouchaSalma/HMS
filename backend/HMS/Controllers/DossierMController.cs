@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using HMS.Models;
+using HMS.Interfaces;
 using System;
 using Microsoft.EntityFrameworkCore;
 using NewtonsoftJson = Newtonsoft.Json;
@@ -20,12 +22,45 @@ namespace HMS.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly IDossierMRepository _dossierRepository;
         private static List<DossierM> dossiers = new List<DossierM>();
 
-        public DossierMController(ApplicationDbContext context, IWebHostEnvironment env)
+        public DossierMController(ApplicationDbContext context, IWebHostEnvironment env,IDossierMRepository dossierRepository)
         {
             _context = context;
             _env = env;
+             _dossierRepository = dossierRepository;
+        }
+         [Authorize(Roles = "Medecin")]
+        [HttpPost("new")]
+        public async Task<IActionResult> CreateDossierM([FromBody] DossierM dossier)
+        {
+            if (dossier == null)
+            {
+                return BadRequest("Invalid dossier data.");
+            }
+
+            var createdDossier = await _dossierRepository.CreateDossierM(dossier);
+            return Ok(new { message = "DossierM ajouté avec succès" });
+        }
+
+        [Authorize(Roles = "Medecin")]
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateDossierM(Guid id, [FromBody] DossierM dossierUpdates)
+        {
+            if (dossierUpdates == null)
+            {
+                return BadRequest("Invalid dossier updates.");
+            }
+
+            var updatedDossier = await _dossierRepository.UpdateDossierM(id, dossierUpdates);
+            if (updatedDossier == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { message = "DossierM mis à jour avec succès" });
+
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDossier(Guid id)
@@ -169,8 +204,8 @@ namespace HMS.Controllers
             string fileName = Path.GetFileName(filePath);
             return File(fileBytes, contentType, fileName);*/
             return PhysicalFile(filePath, contentType, Path.GetFileName(filePath));
+            }
 
-        }
 
 
     }

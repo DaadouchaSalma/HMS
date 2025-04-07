@@ -23,6 +23,7 @@ namespace HMS.Models
         public double? Salaire { get; set; }
         public string? Adresse { get; set; }
         public string? Statut { get; set; }
+        public TypePersonnel Type { get; set; }
 
         // Fields Specific to Medecins
         public string? Grad_med { get; set; } 

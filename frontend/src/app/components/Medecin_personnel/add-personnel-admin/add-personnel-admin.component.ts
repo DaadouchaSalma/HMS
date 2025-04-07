@@ -71,12 +71,12 @@ export class AddPersonnelAdminComponent {
     });
     return;
   }
-
+    console.log('date',this.personnel.date_Naiss)
     const personnelA = {
       ...this.personnel,
       date_Naiss: this.formatDate(new Date(this.personnel.date_Naiss)),
       date_Emb: this.formatDate(new Date(this.personnel.date_Emb)),
-      Type:0
+      type:0
     };
 
     this.personnelAdminService.addPersonnelAdministrative(personnelA).subscribe({

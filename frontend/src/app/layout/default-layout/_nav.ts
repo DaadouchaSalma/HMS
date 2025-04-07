@@ -14,8 +14,8 @@ export const navItems: INavData[] = [
         icon: 'nav-icon-bullet'
       },
       {
-        name: 'Mettre à jours un patient',
-        url: '/patient/update/id',
+        name: 'Liste des patients',
+        url: '/patient/list',
         icon: 'nav-icon-bullet'
       }
     ]
@@ -27,7 +27,7 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'Ajouter une prescription',
-        url: '/prescription/new/id',
+        url: '/prescription/new',
         icon: 'nav-icon-bullet'
       },
       {
@@ -124,6 +124,23 @@ export const navItems: INavData[] = [
       {
         name: 'Ajouter',
         url: '/meds/ajoutMed',
+        icon: 'nav-icon-bullet'
+      },
+    ]
+  },
+  {
+    name: 'Rendez-Vous',
+    url: '/rendezvous',
+    iconComponent: { name: 'cil-user-plus' },
+    children: [
+      {
+        name: 'Prendre Un Rendez-Vous',
+        url: '/rendezvous/add-rdv',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Ma liste Des Rendez-Vous',
+        url: '/rendezvous/list-rdv',
         icon: 'nav-icon-bullet'
       },
     ]

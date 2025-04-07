@@ -39,21 +39,42 @@ export const routes: Routes = [
         path: 'edit-medecin/:id',
         loadComponent: () => import('./edit-medecin/edit-medecin.component').then(m => m.EditMedecinComponent),
         data: {
-          title: 'Modifier Mon Profil'
+          title: 'Mon Profil'
         }
       },
       {
         path: 'edit-pharmacien/:id',
         loadComponent: () => import('./edit-pharmacien/edit-pharmacien.component').then(m => m.EditPharmacienComponent),
         data: {
-          title: 'Modifier Mon Profil'
+          title: 'Mon Profil'
         }
       },
       {
         path: 'edit-personnelA/:id',
         loadComponent: () => import('./edit-personnel-admin/edit-personnel-admin.component').then(m => m.EditPersonnelAdminComponent),
         data: {
-          title: 'Modifier Mon Profil'
+          title: 'Mon Profil'
+        }
+      },
+      {
+        path: 'update-personnelA/:id',
+        loadComponent: () => import('./update-personnel-a/update-personnel-a.component').then(m => m.UpdatePersonnelAComponent),
+        data: {
+          title: 'Modifier Les Informations Du Personnel Administrative'
+        }
+      },
+      {
+        path: 'update-medecin/:id',
+        loadComponent: () => import('./update-medecin/update-medecin.component').then(m => m.UpdateMedecinComponent),
+        data: {
+          title: 'Modifier Les Informations Du Medecin'
+        }
+      },
+      {
+        path: 'update-pharmacien/:id',
+        loadComponent: () => import('./update-pharmacien/update-pharmacien.component').then(m => m.UpdatePharmacienComponent),
+        data: {
+          title: 'Modifier Les Informations Du Pharmacien'
         }
       },
     ]

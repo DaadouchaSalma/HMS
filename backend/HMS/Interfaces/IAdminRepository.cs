@@ -1,4 +1,5 @@
 ﻿using HMS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HMS.Interfaces
 {
@@ -15,5 +16,8 @@ namespace HMS.Interfaces
         Task<PersonnelAdministrative?> GetByIdAsync(Guid id);
 
         void Delete(PersonnelAdministrative personnelAdministrative);
+
+        Task<PersonnelAdministrative> GetByIdentityUserIdAsync(string identityUserId);
+        
     }
 }

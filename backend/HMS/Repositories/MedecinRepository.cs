@@ -36,6 +36,11 @@ namespace HMS.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Medecin> GetByIdentityUserIdAsync(string identityUserId)
+        {
+            return await _context.Medecins.FirstOrDefaultAsync(m => m.IdentityUserId == identityUserId);
+        }
+
         public Medecin GetById(Guid id)
         {
             return _context.Medecins.FirstOrDefault(m => m.Id == id);
@@ -54,6 +59,11 @@ namespace HMS.Repositories
         public void Delete(Medecin medecin)
         {
             _context.Medecins.Remove(medecin);
+        }
+
+        public async Task<Medecin> GetByIdentityUserIdAsync(string identityUserId)
+        {
+            return await _context.Medecins.FirstOrDefaultAsync(m => m.IdentityUserId == identityUserId);
         }
     }
 }

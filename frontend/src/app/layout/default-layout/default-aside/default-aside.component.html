@@ -11,15 +11,19 @@
     <c-sidebar-header class="bg-transparent p-0 position-relative">
       <!--nav for tabs-->
       <c-tabs-list class="w-100" variant="underline-border">
-        <button aria-label="Open schedule tab" cTab itemKey="0">
+        <!--button aria-label="Open schedule tab" cTab itemKey="0">
           <svg aria-label="CoreUI Icon List" cIcon name="cilList"></svg>
-        </button>
-        <button aria-label="Open messages tab" cTab itemKey="1">
+        </button-->
+        <!--button aria-label="Open messages tab" cTab itemKey="1">
           <svg aria-label="CoreUI Icon Speech" cIcon name="cilSpeech"></svg>
-        </button>
-        <button aria-label="Open settings tab" cTab itemKey="2">
           <svg aria-label="CoreUI Icon Settings" cIcon name="cilSettings"></svg>
+        </button-->
+        <button aria-label="Open messages tab" cTab itemKey="0">
+          <svg aria-label="CoreUI Icon Speech" cIcon name="cilList"></svg>
         </button>
+        <!--button aria-label="Open settings tab" cTab itemKey="2">
+          <svg aria-label="CoreUI Icon Power" cIcon name="cilPowerStandby"></svg>
+        </button-->    
         <button
           aria-label="Close aside"
           cButtonClose
@@ -32,21 +36,24 @@
 
     <!--tab content-->
     <c-tabs-content>
-      <c-tab-panel itemKey="0">
+      <!--c-tab-panel itemKey="0">
+        <ng-container *ngTemplateOutlet="tabPane0" />
+      </c-tab-panel-->
+      <c-tab-panel class="p-2" itemKey="0">
         <ng-container *ngTemplateOutlet="tabPane0" />
       </c-tab-panel>
-      <c-tab-panel class="p-2" itemKey="1">
-        <ng-container *ngTemplateOutlet="tabPane1" />
-      </c-tab-panel>
-      <c-tab-panel class="p-3" itemKey="2">
+      <!--c-tab-panel class="p-3" itemKey="2">
         <ng-container *ngTemplateOutlet="tabPane2" />
-      </c-tab-panel>
+      </c-tab-panel-->
+      <c-header-nav class="p-3" itemKey="2">
+        <ng-container *ngTemplateOutlet="tabPane2" />
+      </c-header-nav>
     </c-tabs-content>
   </c-tabs>
 </c-sidebar>
 
 <!--tab pane templates-->
-<ng-template #tabPane0>
+<!--ng-template #tabPane0>
   <div [flush]="true" cListGroup>
     <a
       [cBorder]="{ start: { color: 'secondary', width: 4 } }"
@@ -166,11 +173,11 @@
       </div>
     </a>
   </div>
-</ng-template>
+</ng-template-->
 
-<ng-template #tabPane1>
+<ng-template #tabPane0>
   <div [flush]="true" cListGroup>
-    @for (message of messages; track message; let i = $index, last = $last) {
+    <!--@for (message of messages; track message; let i = $index, last = $last) {
       <a
         [cBorder]="{ bottom: last ? 0 : 1 }"
         [routerLink]="'/apps/email/message'"
@@ -196,12 +203,127 @@
           eiusmod tempor incididunt...
         </small>
       </a>
-    }
+    }-->
+    <!--div>
+      <small class="text-body-secondary">Lukasz Holeczek</small>
+      <small class="text-body-secondary float-end mt-1">1:52 PM</small>
+    </div-->
+    <!--div class="text-truncate fw-semibold">
+      Name
+    </div>
+    <small class="text-body-secondary">
+      Sana
+    </small-->
+    <br>
+    <h3 class="text-center" style="color: #6387c0;">Mon Profile</h3>
+    <div class="d-flex justify-content-center">
+      <h5 style="color: #854d82d6;">Matricule DME: {{ patient.dossierMedical?.matricule }}</h5>
+    </div>
+<br>
+<br>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" class="row g-4">
+  <c-col [md]="6">
+    <label cLabel for="nom" class="text-truncate fw-semibold" style="margin-bottom: -1px;">Nom</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-light fa-user" style="color: #6387c0"></i>
+      </span>
+      <input cFormControl id="nom" type="text" 
+           [value]="patient.nom"
+           class="form-control" 
+           readonly/>
+    </div>     
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="prenom" class="text-truncate fw-semibold" style="margin-bottom: -1px;">Prénom</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-light fa-user" style="color: #6387c0;"></i>
+      </span>
+      <input cFormControl id="prenom" type="text" 
+           [value]="patient.prenom"
+           class="form-control" 
+           readonly/>
+    </div>     
+  </c-col>
+  <c-col [md]="12">
+    <label cLabel for="email" class="text-truncate fw-semibold" style="margin-bottom: -1px;">Email</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fa-solid fa-at" style="color: #6387c0;"></i>
+      </span>
+      <input cFormControl type="email" 
+           [(ngModel)]="patient.email" 
+           name="email" 
+           class="form-control" 
+           required 
+           #email="ngModel"/>
+    </div> 
+    <div *ngIf="email.invalid && email.touched" style="color: red; padding-left: 2%;">
+      <small>* Email is required</small>
+    </div>
+  </c-col>
+  <c-col [md]="12">
+    <label cLabel for="telephone" class="text-truncate fw-semibold" style="margin-bottom: -1px;">Téléphone</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fa-solid fa-phone" style="color: #6387c0;"></i>
+      </span>
+      <input cFormControl type="telephone" 
+           [(ngModel)]="patient.telephone" 
+           name="telephone" 
+           class="form-control" 
+           required 
+           #telephone="ngModel"/>
+      </div>  
+    <div *ngIf="telephone.invalid && telephone.touched" style="color: red; padding-left: 2%;">
+      <small>* telephone is required</small>
+    </div>
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="date_Naiss" class="text-truncate fw-semibold" style="margin-bottom: -1px;">Date De Naissance</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fa-solid fa-calendar-days" style="color: #6387c0;"></i>
+            </span>
+            <input cFormControl 
+           [value]="patient.date_Naiss" 
+           class="form-control" 
+           readonly/>
+    </div>  
+  </c-col>
+  <c-col [md]="6">
+    <label cLabel for="grp_Sang" class="text-truncate fw-semibold" style="margin-bottom: -1px;">Groupe Sanguin</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fa-solid fa-droplet" style="color: #6387c0;"></i>
+      </span>
+      <input cFormControl 
+           [value]="patient.grp_Sang" 
+           class="form-control" 
+           readonly/>
+    </div>
+  </c-col>
+  <c-col [xs]="12" class="text-center mt-4">
+    <button cButton type="submit" class="btn px-4 py-2" id="btn1" [ngClass]="{'btn-secondary': form.invalid}">Mettre à jour</button>
+  </c-col>
+</form>
+
+<c-alert *ngIf="visible()" 
+  [color]="toastType() === 'error' ? 'danger' : 'success'" 
+  class="d-flex align-items-center position-fixed bottom-0 end-0 me-3"
+  style="z-index: 9999; transform: translateX(-24px) !important;" 
+>
+  <div>
+    {{ toastMessage() }}
   </div>
+</c-alert>
+  </div>
+  
 </ng-template>
 
 <ng-template #tabPane2>
-  <h6>Settings</h6>
+  <!--h6>Settings</h6>
   <div>
     <div class="clearfix mt-4">
       <c-form-check [switch]="true" sizing="lg">
@@ -267,5 +389,5 @@
     SSD 2 Usage
   </div>
   <c-progress [value]="10" color="success-gradient" thin />
-  <small class="small text-body-secondary">25GB/256GB</small>
+  <small class="small text-body-secondary">25GB/256GB</small-->
 </ng-template>

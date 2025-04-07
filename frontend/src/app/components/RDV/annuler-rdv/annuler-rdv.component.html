@@ -1,0 +1,23 @@
+<c-card>
+    
+    <c-card-body>
+      <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    </c-card-body>
+  </c-card>
+  <c-modal id="deleteModal" [visible]="visible_modal" (visibleChange)="handleLiveDemoChange($event)">
+    <c-modal-header>
+      <h5 cModalTitle>Confirmation d'annulation</h5>
+      <button (click)="closeModal()" cButtonClose></button>
+    </c-modal-header>
+    
+    <c-modal-body>Êtes-vous sûr de vouloir annuler ce rendez-vous ?</c-modal-body>
+  
+    <c-modal-footer>
+      <button (click)="closeModal()" cButton color="secondary">
+        Annuler
+      </button>
+      <button (click)="confirmDelete()" cButton color="danger" style="background-color: rgb(196, 57, 57); color: white;">
+        Confirmer
+      </button>
+    </c-modal-footer>
+  </c-modal>

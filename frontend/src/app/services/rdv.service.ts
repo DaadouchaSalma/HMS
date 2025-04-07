@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {RendezVous} from '../models/rdv.model'
+import {RendezVous} from '../../app/models/rdv.model'
 import { Medecin } from '../models/medecin.model';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,9 +15,6 @@ export class RdvService {
       return this.http.get<Medecin[]>('http://localhost:5160/api/medecin');
     }
 
-  /*prendreRendezVous(rdv: RendezVous): Observable<RendezVous> {
-    return this.http.post<RendezVous>(${this.apiUrl}/add, rdv);
-  }*/
     addRendezVous(rendezVous: any): Observable<any> {
       return this.http.post(`${this.apiUrl}/add`, {
         ...rendezVous,
@@ -36,14 +32,23 @@ export class RdvService {
       });
     }
     
-  annulerRendezVous(id: string): Observable<void> {
+
+    deleteRendezVous(id: string): Observable<void> {
+
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
   getRendezVousByPatientId(patientId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/patient/${patientId}`);
   }
+
   getNotifications(patientId: string): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/notifications/${patientId}`);
   }
   
+
+
+  ajouterALaListeAttente(rdv: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/addAttente`, rdv);
+  }
+
 }
