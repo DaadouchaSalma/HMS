@@ -17,7 +17,7 @@ namespace HMS.Models
         public List<string>? vaccinations { get; set; }
         public List<string>? contact_urg { get; set; }
         public List<string>? note { get; set; }
-        public List<string>? liste_analyse { get; set; }
+        public string? liste_analyse { get; set; }
         public Guid PatientId { get; set; }
         [JsonIgnore]
         public Patient? Patient { get; set; }

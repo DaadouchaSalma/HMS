@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { DossierM } from '../../../models/DossierM.model';
+import { DossierMedical } from '../../../models/dossierM.model';
 import { DMEService } from '../../../services/dme.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule, ColComponent, ColDirective, FormFeedbackComponent, FormLabelDirective, FormSelectDirective, ProgressComponent, RowDirective, ToastBodyComponent, ToastComponent, ToasterComponent, ToastHeaderComponent } from '@coreui/angular-pro';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './add.component.scss'
 })
 export class AddComponent {
-      dme: DossierM = {
+      dme: DossierMedical = {
         matricule: 0,
         sexe: '',
         maladies_anterieures: [],
@@ -23,7 +23,7 @@ export class AddComponent {
         vaccinations: [],
         contact_urg: [],
         note: [],
-        liste_analyse: [],
+        liste_analyse: '',
         patientId: ''
     };
     position = 'top-end';
@@ -56,12 +56,11 @@ export class AddComponent {
       'allergies',
       'vaccinations',
       'contact_urg',
-      'note',
-      'liste_analyse'
+      'note'
     ];
   
     listFields.forEach((field) => {
-      const key = field as keyof DossierM; 
+      const key = field as keyof DossierMedical; 
     
       if (typeof this.dme[key] === 'string') {
         (this.dme[key] as any) = (this.dme[key] as unknown as string).split(',').map(item => item.trim());

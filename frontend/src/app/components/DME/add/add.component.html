@@ -40,10 +40,6 @@
         <input cFormControl id="note" type="text" [(ngModel)]="dme.note" class="form-control" name="note"/>
       </c-col>
     
-      <c-col [md]="6">
-        <label cLabel for="liste_analyse">Liste des analyses</label>
-        <input cFormControl id="liste_analyse" type="text" [(ngModel)]="dme.liste_analyse" class="form-control" name="liste_analyse"/>
-      </c-col>
        
     <c-col [xs]="12" class="text-center mt-4">
       <button cButton type="submit" class="btn px-4 py-2" [ngClass]="{'btn-secondary': form.invalid}">Créer</button>  

@@ -41,7 +41,10 @@ namespace HMS.Repositories
             existingDossier.vaccinations.AddRange(dossierUpdates.vaccinations ?? new List<string>());
             existingDossier.contact_urg.AddRange(dossierUpdates.contact_urg ?? new List<string>());
             existingDossier.note.AddRange(dossierUpdates.note ?? new List<string>());
-            existingDossier.liste_analyse.AddRange(dossierUpdates.liste_analyse ?? new List<string>());
+            //existingDossier.liste_analyse.AddRange(dossierUpdates.liste_analyse ?? new List<string>());
+     
+
+
 
             _context.Dossiers.Update(existingDossier);
             await _context.SaveChangesAsync();

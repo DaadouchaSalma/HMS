@@ -32,7 +32,7 @@ import {
 } from '@coreui/angular-pro';
 import { NgModel } from '@angular/forms';
 import { IconDirective, IconSetService } from '@coreui/icons-angular';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { cilPowerStandby,
   cilMenu,
   cilUser,
@@ -87,7 +87,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
 
    loadNotifications() {
-    const patientId = "123e4567-e89b-12d3-a456-426614174000"
+    const patientId = "e30a30f7-37ec-4812-9b4d-020109796f67"
     if (patientId) {
     this.rdvService.getNotifications(patientId).subscribe(response => {
       this.notifications = response.map((notif, index) => ({
@@ -117,12 +117,12 @@ export class DefaultHeaderComponent extends HeaderComponent {
   }
 
 
-  public notifications: MedNotifs[] = [];
+  public Mednotifications: MedNotifs[] = [];
 
 ngOnInit(): void {
   this.medNotifsService.getMedNotifs().subscribe({
     next: (data) => {
-      this.notifications = data;
+      this.Mednotifications = data;
       console.log('Fetched notifications:', this.notifications);
     },
     error: (err) => console.error('Error fetching notifications:', err)
