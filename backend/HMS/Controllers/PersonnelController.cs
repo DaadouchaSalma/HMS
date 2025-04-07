@@ -70,7 +70,8 @@ namespace HMS.Controllers
                 Telephone = model.Telephone,
                 Adresse = model.Adresse,
                 Statut = model.Statut,
-                IdentityUserId = user.Id
+                IdentityUserId = user.Id,
+                Password = model.Password
             };
             user.PersonnelId = personnel.Id;
 

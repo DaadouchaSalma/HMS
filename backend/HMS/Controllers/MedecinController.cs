@@ -45,7 +45,7 @@ namespace HMS.Controllers
 
         // Récupérer tous les médecins
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<object>>> GetMedecins()
         {
             var medecins = await _medecinRepository.GetAll();
@@ -85,7 +85,7 @@ namespace HMS.Controllers
          }*/
 
         [HttpPost("add")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> AjouterMedecin([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);

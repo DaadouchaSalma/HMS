@@ -178,7 +178,7 @@ export class AnnulerRdvComponent implements OnInit, AfterViewInit{
         calendarApi.updateSize();
       }, 1000);
     
-      const patientId = '586756a6-c272-4585-93ee-7cd0abf5704a'; // À remplacer dynamiquement
+      const patientId = 'e30a30f7-37ec-4812-9b4d-020109796f67'; // À remplacer dynamiquement
       this.rendezVousService.getRendezVousByPatientId(patientId).subscribe((rdvs) => {
         console.log('liste rdv de l api', rdvs);
         

@@ -3,8 +3,8 @@ import { Component, signal } from '@angular/core';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonModule, ColComponent, ColDirective, FormFeedbackComponent, FormLabelDirective, FormSelectDirective, ProgressComponent, RowDirective, ToastBodyComponent, ToastComponent, ToasterComponent, ToastHeaderComponent } from '@coreui/angular-pro';
-import { DossierM } from 'src/app/models/DossierM.model';
-import { DMEService } from 'src/app/services/dme.service';
+import { DossierMedical } from '../../../models/dossierM.model';
+import { DMEService } from '../../../services/dme.service';
 
 @Component({
   selector: 'app-edit',
@@ -14,7 +14,7 @@ import { DMEService } from 'src/app/services/dme.service';
 })
 export class EditComponent {
 
-  dme: DossierM = {
+  dme: DossierMedical = {
           id: '',
           matricule: 0,
           sexe: '',
@@ -25,7 +25,7 @@ export class EditComponent {
           vaccinations: [],
           contact_urg: [],
           note: [],
-          liste_analyse: []
+          liste_analyse: ''
       };
       position = 'top-end';
       visible = signal(false);
@@ -57,12 +57,10 @@ export class EditComponent {
         'allergies',
         'vaccinations',
         'contact_urg',
-        'note',
-        'liste_analyse'
-      ];
+        'note'      ];
     
       listFields.forEach((field) => {
-        const key = field as keyof DossierM; 
+        const key = field as keyof DossierMedical; 
       
         if (typeof this.dme[key] === 'string') {
           (this.dme[key] as any) = (this.dme[key] as unknown as string).split(',').map(item => item.trim());

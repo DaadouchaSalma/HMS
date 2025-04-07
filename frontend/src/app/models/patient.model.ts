@@ -1,4 +1,4 @@
-import { DossierM } from './DossierM.model';
+import { DossierMedical } from './dossierM.model';
 export interface Patient {
     id?: string;
     nom: string;
@@ -8,6 +8,6 @@ export interface Patient {
     password: string;
     date_Naiss: string;
     telephone: string;
-    dossierMedical?: DossierM;
+    dossierMedical?: DossierMedical;
 }
   

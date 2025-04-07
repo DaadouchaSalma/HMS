@@ -25,7 +25,7 @@ namespace HMS.Models
         [JsonIgnore]
 
         public ICollection<Panier> Paniers { get; set; } = new List<Panier>();
-
+        [JsonIgnore]
         public ICollection<Reclamation> Reclamations { get; set; } = new List<Reclamation>();
 
 

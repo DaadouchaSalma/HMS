@@ -162,7 +162,7 @@ export class AddRdvComponent implements OnInit{
   ajouterALaListeAttente() {
     // Créer un objet avec les informations nécessaires
     const rdv = {
-      patientId: "1c91fbf6-49de-4bbf-abff-8dace500b157",  // Vérifie que patientId est un GUID valide
+      patientId: "1e52f1bf-f923-4952-8fcf-31fb58fe3583",  // Vérifie que patientId est un GUID valide
       medecinId: this.selectedMedecin,
       date_RDV:this.formatDate(new Date( this.rendezVous.date_RDV )), // S'assurer que date_RDV est bien formatée
       
