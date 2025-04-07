@@ -11,5 +11,6 @@
         public string statut {  get; set; }
 
         public ICollection<Patient> Patients { get; set; } = new List<Patient>();
+        public ICollection<Reclamation> Reclamations { get; set; } = new List<Reclamation>();
     }
 }

@@ -1,10 +1,10 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()" cForm class="row g-3">
     <c-col [md]="6">
-      <label cLabel for="Nom">Nom</label>
+      <label cLabel for="Nom">Nom<span style="color: red;"> *</span></label>
       <input cFormControl id="Nom" type="text" [(ngModel)]="medecin.nom" class="form-control" name="nom" disabled/>
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="Prenom">Prénom</label>
+      <label cLabel for="Prenom">Prénom<span style="color: red;"> *</span></label>
       <input cFormControl id="Prenom" type="text" [(ngModel)]="medecin.prenom" class="form-control" name="prenom" disabled />
     </c-col>
     <c-col [md]="6">
@@ -18,7 +18,7 @@
     </c-col>
     <c-col [md]="6">
       <label cLabel for="Password">Mot De Passe<span style="color: red;"> *</span></label>
-      <input cFormControl id="Password" type="password" [(ngModel)]="medecin.password" class="form-control" name="password" required #password="ngModel"/>
+      <input cFormControl id="Password" type="password" [(ngModel)]="medecin.password" class="form-control" name="password" required #password="ngModel" disabled/>
       <div *ngIf="password.invalid && password.touched" style="color: red; padding-left: 2%;">
         <small>* Le mot de passe est requis.</small>
       </div>
@@ -32,15 +32,15 @@
       </div>
     </c-col>
     <c-col [md]="6">
-      <label cLabel> Date De Naissance </label>
+      <label cLabel> Date De Naissance <span style="color: red;"> *</span></label>
       <c-date-picker closeOnSelect name="date_naiss" [(ngModel)]="medecin.date_Naiss" placeholder="Sélectionnez la date de naissance" disabled/>
     </c-col>
     <c-col [md]="6">
-      <label cLabel> Date D'Embauche </label>
+      <label cLabel> Date D'Embauche <span style="color: red;"> *</span></label>
       <c-date-picker closeOnSelect [(ngModel)]="medecin.date_Emb" name="date_emb" placeholder="Sélectionnez la date d'embauche" disabled />
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="salaire">Salaire</label>
+      <label cLabel for="salaire">Salaire<span style="color: red;"> *</span></label>
       <input cFormControl id="salaire" class="form-control" type="number" [(ngModel)]="medecin.salaire" name="salaire"  disabled/>
     </c-col>
     <c-col [md]="6">
@@ -51,15 +51,15 @@
       </div>
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="Statut">Statut</label>
+      <label cLabel for="Statut">Statut<span style="color: red;"> *</span></label>
       <input cFormControl id="Statut" type="text" [(ngModel)]="medecin.statut" class="form-control" name="statut" disabled />
     </c-col>
     <c-col [md]="6" >
-      <label cLabel for="grade">Grade</label>
+      <label cLabel for="grade">Grade<span style="color: red;"> *</span></label>
       <input cFormControl id="grade" type="text" [(ngModel)]="medecin.grad_med" class="form-control" name="grade" disabled  />
     </c-col>
     <c-col [md]="6" >
-      <label cLabel>Service</label>
+      <label cLabel>Spécialité<span style="color: red;"> *</span></label>
       <select aria-label="Choisissez le service" [(ngModel)]="medecin.service" name="service" cSelect disabled >
         <option>Choisissez</option>
         <option value="Chirurgie">Chirurgie</option>

@@ -36,6 +36,9 @@
       <div class="nav-item py-1">
         <div class="vr h-100 mx-2 text-white text-opacity-50"></div>
       </div>
+
+    
+
       <!--ng-container *ngTemplateOutlet="languageDropdown" /-->
       <ng-container *ngTemplateOutlet="themeDropdown" />
       <div class="nav-item py-1">
@@ -43,19 +46,19 @@
       </div>
     </c-header-nav>
 
-    <c-header-nav class="ms-0">
-      <ng-container *ngTemplateOutlet="userDropdown" />
-    </c-header-nav>
-
-    <!--aside toggler-->
-    <!--button
+      <!--aside toggler-->
+      <button
       cHeaderToggler
       cSidebarToggle="aside1"
       style="margin-inline-end: -12px"
       toggle="visible"
     >
-      <svg cIcon name="cilApplicationsSettings" size="lg" style="color: #6387c0;"></svg>
-    </button-->
+      <svg cIcon name="cilUser" size="lg" style="color: #6387c0;"></svg>
+    </button>
+
+    <c-header-nav class="ms-4">
+      <ng-container *ngTemplateOutlet="userDropdown" />
+    </c-header-nav>
   </c-container>
 </ng-container>
 <!--</c-header>-->
@@ -63,16 +66,18 @@
 <ng-template #userDropdown>
   <c-dropdown [popperOptions]="{ placement: 'bottom-start' }" variant="nav-item">
     <button [caret]="false" cDropdownToggle class="py-0" aria-label="Open user menu">
-      <c-avatar
+      <!--c-avatar
         size="md"
         src="./assets/images/avatars/8.jpg"
         status="success"
         textColor="primary"
         alt="User avatar"
-      />
+      /-->
+      <svg aria-label="CoreUI Icon Power" cIcon name="cilPowerStandby" size="lg" style="color: #6387c0;"></svg>
+   
     </button>
     <ul cDropdownMenu class="pt-0 w-auto">
-      <li>
+      <!--li>
         <h6 cDropdownHeader class="bg-body-secondary text-body-secondary fw-semibold py-2 rounded-top">
           Account
         </h6>
@@ -142,20 +147,31 @@
             42
           </c-badge>
         </a>
-      </li>
+      </li-->
       <li>
+        <h6 cDropdownHeader class="text-body-secondary fw-semibold py-2" style="background-color: #d6b4d4d6; height: 35px;">
+          
+        </h6>
+      </li>
+      <!--li>
+        <a cDropdownItem  [routerLink]="getProfileRoute()">
+          <svg cIcon class="me-1" name="cilUser"></svg>
+          Profile
+        </a>
+      </li-->
+      <!--li>
         <hr cDropdownDivider />
-      </li>
-      <li>
+      </li-->
+      <!--li>
         <a cDropdownItem routerLink="">
           <svg cIcon class="me-1" name="cilLockLocked"></svg>
           Lock Account
         </a>
-      </li>
-      <li>
-        <a cDropdownItem routerLink="">
+      </li-->
+      <li style="margin-top: 5px;">
+        <a cDropdownItem (click)="logout()">
           <svg cIcon class="me-1" name="cilAccountLogout"></svg>
-          Logout
+          Se Déconnecter
         </a>
       </li>
     </ul>
@@ -167,56 +183,44 @@
     <button [caret]="false" cDropdownToggle>
       <span class="d-inline-block my-1 mx-2 position-relative">
         <svg cIcon name="cilEnvelopeOpen" size="lg" class="hover-icon" style="color: #6387c0;"></svg>
-        @if (newMessages?.length) {
+        @if (notifications?.length) {
           <c-badge
             class="p-1"
             color="danger"
             shape="rounded-circle"
             position="top-end"
           >
-          <span class="visually-hidden">{{ newMessages?.length ?? 0 }} new alerts</span>
-        </c-badge>
+            <span class="visually-hidden">{{ notifications?.length ?? 0 }} new alerts</span>
+          </c-badge>
         }
       </span>
     </button>
     <div cDropdownMenu class="p-0" [ngStyle]="{minWidth: '24rem'}">
       <h6 cDropdownHeader class="bg-body-secondary text-body-secondary fw-semibold rounded-top mb-2">
-        <span>You have {{ newMessages?.length ?? 0 }} messages</span>
+        <span>📩 Vous avez {{ notifications?.length ?? 0 }} notifications</span>
       </h6>
-      @for (message of newMessages; track message.id) {
-        <a cDropdownItem routerLink="{{message.link}}">
+      @for (notif of notifications; track notif) {
+        <a cDropdownItem>
           <div class="d-flex">
-            <c-avatar
-              size=""
-              src="./assets/images/avatars/{{message.avatar}}"
-              status="{{message.status}}"
-              class="flex-shrink-0 my-3 me-3" />
             <div class="message text-wrap">
-              <div class="d-flex justify-content-between small text-body-secondary mt-1">
-                <div>{{ message.from }}</div>
-                <div>{{ message.time }}</div>
-              </div>
               <div class="fw-semibold">
-                @if (message.id < 2) {
-                  <span class="text-danger me-1">!</span>
-                }
-                <span>{{ message.title }}</span>
+             
+                <span>{{ notif.title }}</span>
               </div>
-              <div class="small text-body-secondary">
-                {{ message.message }}
+              <div class=" text-body-secondary">
+                {{ notif.message }}
               </div>
+              <hr/>
             </div>
           </div>
         </a>
       }
       <div class="p-2">
-        <button cButton color="primary" variant="outline" class="w-100" routerLink="apps/email/inbox">
-          View all messages
-        </button>
       </div>
     </div>
   </c-dropdown>
 </ng-template>
+
 
 <ng-template #notifyDropdown>
   <c-dropdown alignment="end" variant="nav-item">

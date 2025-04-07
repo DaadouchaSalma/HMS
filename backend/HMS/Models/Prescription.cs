@@ -13,6 +13,7 @@ namespace HMS.Models
         public Guid PatientId { get; set; }
         [JsonIgnore]
         public Patient? Patient { get; set; }
+        public DateTime Dateprescription { get; set; } = DateTime.Now;
 
     }
 }

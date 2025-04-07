@@ -14,8 +14,8 @@ export const navItems: INavData[] = [
         icon: 'nav-icon-bullet'
       },
       {
-        name: 'Mettre à jours un patient',
-        url: '/patient/update/id',
+        name: 'Liste des patients',
+        url: '/patient/list',
         icon: 'nav-icon-bullet'
       }
     ]
@@ -27,11 +27,27 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'Ajouter une prescription',
-        url: '/prescription/new/id',
+        url: '/prescription/new',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Liste des prescriptions',
+        url: '/prescription/listPrescription/:id',
         icon: 'nav-icon-bullet'
       }
     ]
   },
+  {
+    name: 'Dossier Medical',
+    url: '/dossierM/dossierMListe/:id',
+    iconComponent: { name: 'cil-notes' },
+  },
+  {
+    name: 'Dossier Medical M',
+    url: '/dossierM/dossierMListeMedecin/:id',
+    iconComponent: { name: 'cil-notes' },
+  },
+  
   {
     name: 'Chambre',
     url: '/chambre',
@@ -49,6 +65,23 @@ export const navItems: INavData[] = [
       },
       
     ]},
+    {
+      name: 'Reclamation',
+      url: '/reclamation',
+      iconComponent: { name: 'cil-home' },
+      children: [
+        {
+          name: 'Ajouter Une Reclamation',
+          url: '/reclamation/reclamationAdd/:id',
+          icon: 'nav-icon-bullet'
+        },
+        {
+          name: 'La liste des reclamation',
+          url: '/reclamation/reclamationList',
+          icon: 'nav-icon-bullet'
+        },
+        
+      ]},
     {
       name: 'Admission',
       url: '/admission',
@@ -121,6 +154,23 @@ export const navItems: INavData[] = [
         iconComponent: { name: 'cilCart' },
       },
 
+    ]
+  },
+  {
+    name: 'Rendez-Vous',
+    url: '/rendezvous',
+    iconComponent: { name: 'cil-user-plus' },
+    children: [
+      {
+        name: 'Prendre Un Rendez-Vous',
+        url: '/rendezvous/add-rdv',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Ma liste Des Rendez-Vous',
+        url: '/rendezvous/list-rdv',
+        icon: 'nav-icon-bullet'
+      },
     ]
   },
  /*{

@@ -12,19 +12,19 @@ export class PatientService {
   
   constructor(private http: HttpClient) { }
   createPatient(patient: Patient): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/new`, patient);
+    return this.http.post<any>(`${this.apiUrl}/new`, patient, { withCredentials: true });
   }
 
-  updatePatient(id: string, patient: Partial<Patient>): Observable<void> {
-    return this.http.put<any>(`${this.apiUrl}/update/${id}`, patient);
+  updatePatient(patient: Partial<Patient>): Observable<void> {
+    return this.http.put<any>(`${this.apiUrl}/update`, patient, { withCredentials: true });
   }
 
-  getPatientById(id: string): Observable<Patient> {
-    return this.http.get<Patient>(`${this.apiUrl}/${id}`);
+  getPatientById(): Observable<Patient> {
+    return this.http.get<Patient>(`${this.apiUrl}/me`, { withCredentials: true });
   }
   
   getAllPatients(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/all`);
+    return this.http.get<any[]>(`${this.apiUrl}/all`, { withCredentials: true });
   }
 
 }

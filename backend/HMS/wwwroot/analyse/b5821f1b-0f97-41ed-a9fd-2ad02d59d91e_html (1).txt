@@ -1,0 +1,76 @@
+<form cForm #form="ngForm" class="row g-3" (ngSubmit)="onSubmit(form)">
+    
+    <c-col [md]="6" [xs]="12">
+      <label cLabel for="medecin">Médecin<span style="color: red;"> *</span></label>
+      <c-multi-select id="medecin" name="selectedMedecin" [(ngModel)]="selectedMedecin" 
+                      [searchable]="true" required (ngModelChange)="onMedecinChange()">
+        <c-multi-select-option *ngFor="let medecin of medecins" [value]="medecin.id">
+          {{ medecin.nom }}
+        </c-multi-select-option>
+      </c-multi-select>
+    </c-col>
+
+    
+    <!-- Sélection de la date -->
+    <c-col [md]="6" [xs]="12">
+      <label cLabel for="inputDate">Date du Rendez-Vous<span style="color: red;"> *</span></label>
+      <c-date-picker id="inputDate" name="date_RDV" [(ngModel)]="rendezVous.date_RDV" 
+                     closeOnSelect required (dateChange)="onDateChange($event)">
+      </c-date-picker>
+    </c-col>
+
+    
+    <c-col [md]="12" [xs]="12">
+      
+    
+      <ng-container *ngIf="heuresDisponibles !== null">
+        <ng-container *ngIf="heuresDisponibles.length > 0; else listeAttente">
+          <label cLabel>Heure du rendez-vous<span style="color: red;"> *</span></label><br><br>
+          <div class="btn-container">
+            <button *ngFor="let heure of heuresDisponibles" type="button" 
+                    class="btn btn-heure-rdv" 
+                    [ngClass]="{ 'selected': selectedTime === heure }"
+                    [class.btn-outline-primary]="selectedTime !== heure"
+                    (click)="selectTime(heure)">
+              {{ heure }}
+            </button>
+          </div>
+        </ng-container>
+    
+        <ng-template #listeAttente>
+          <p style="color: red;">Aucun créneau disponible.</p>
+          <button type="button" class="btn btn-warning" (click)="ajouterALaListeAttente()">
+            Liste d’attente
+          </button>
+        </ng-template>
+      </ng-container>
+    </c-col>
+    
+
+    
+    
+    <!-- Colonne pour le bouton de soumission -->
+    <c-col [xs]="12" class="text-center mt-4" >
+      <button cButton type="submit" class="btn btn-primary px-4 py-2 btn-rdv" >Prendre Rendez-Vous</button>
+    </c-col>
+  </form>
+  <c-toaster [placement]="position" class="p-3" position="fixed">
+    <c-toast
+      (timer)="onTimerChange($event)"
+      (visibleChange)="onVisibleChange($event)"
+      [visible]="visible()"
+      [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+      [style.color]="'white'"
+    >
+      <c-toast-header>
+       
+        <span *ngIf="toastType() === 'success'">Succès</span>
+        <span *ngIf="toastType() === 'error'">Erreur</span>
+      </c-toast-header>
+      <c-toast-body>
+        <p>{{ toastMessage() }}</p>
+        <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+      </c-toast-body>
+    </c-toast>
+  </c-toaster>
+  

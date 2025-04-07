@@ -21,7 +21,6 @@ export class AddPrescriptionComponent implements OnInit {
   prescription = {
     note: '',
     listeMed: '',
-    medecinId: '',
     patientId: '',
   };
   patients: any[] = [];
@@ -39,7 +38,6 @@ export class AddPrescriptionComponent implements OnInit {
   ) {}
   
   ngOnInit() {
-    this.prescription.medecinId = this.route.snapshot.paramMap.get('id') || '';
     this.loadPatients();
   }
 

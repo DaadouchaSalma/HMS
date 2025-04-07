@@ -1,0 +1,35 @@
+<div class="d-flex flex-column mb-3">
+  <input type="text" class="form-control w-25" style="height: 5%; margin-bottom: 1.5%;" [(ngModel)]="searchText" placeholder="Rechercher un patient...">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Matricule DME</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Date Naissance</th>
+        <th>Groupe Sanguin</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let patient of filteredPatients(); let i = index">
+        <tr>
+          <td>{{ patient.dossierMedical?.matricule }}</td>
+          <td>{{ patient.nom }}</td>
+          <td>{{ patient.prenom }}</td>
+          <td>{{ patient.email }}</td>
+          <td>{{ patient.telephone }}</td>
+          <td>{{ patient.date_Naiss }}</td>
+          <td>{{ patient.grp_Sang }}</td>
+          <td>
+            <i class="fas fa-edit cursor-pointer" style="color: #dd789c;" (click)="editItem(patient.dossierMedical.id)"></i>
+            &nbsp;&nbsp;&nbsp;
+            <i class="fas fa-eye" style="color: #753f73d6;"></i>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

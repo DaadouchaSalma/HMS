@@ -70,7 +70,7 @@ personnelA: PersonnelAdmin = new PersonnelAdmin();
       ...this.personnelA,
       date_Naiss: this.formatDate(new Date(this.personnelA.date_Naiss)),
     date_Emb: this.formatDate(new Date(this.personnelA.date_Emb)),
-      type: 2
+      type: 0
     }
     console.log("Objet envoyé : ", updatedpharmacien);
   

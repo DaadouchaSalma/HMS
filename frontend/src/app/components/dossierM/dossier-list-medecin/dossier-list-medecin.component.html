@@ -1,0 +1,26 @@
+<div class="dossier-container">
+    <h2 class="section-title"><i class="fa-solid fa-stethoscope"></i> Historique Médical</h2>
+    <div class="historique-medical">
+      <p><i class="fas fa-virus"></i> <strong>Maladies antérieures:</strong> {{ dossier?.maladies_anterieures?.join(', ') || 'N/A' }}</p>
+      <p><i class="fas fa-dna"></i> <strong>Maladies familiales:</strong> {{ dossier?.maladies_familiaux?.join(', ') || 'N/A' }}</p>
+      <p><i class="fas fa-user-md"></i> <strong>Chirurgies:</strong> {{ dossier?.chirurgies?.join(', ') || 'N/A' }}</p>
+      <p><i class="fas fa-allergies"></i> <strong>Allergies:</strong> {{ dossier?.allergies?.join(', ') || 'N/A' }}</p>
+      <p><i class="fas fa-syringe"></i> <strong>Vaccinations:</strong> {{ dossier?.vaccinations?.join(', ') || 'N/A' }}</p>
+    </div>
+  <br/>
+    <h2 class="section-title"><i class="fa-solid fa-flask"></i> Analyses Médicales</h2>
+    <div class="analyses-medicales">
+      <p *ngIf="!dossier?.liste_analyse || dossier.liste_analyse.length === 0">Aucune analyse disponible.</p>
+      
+      <ul *ngIf="dossier?.liste_analyse && dossier.liste_analyse.length > 0" class="analyses-list">
+        <li *ngFor="let analyse of dossier.liste_analyse"><i class="fa-solid fa-droplet icon"></i>
+          {{ analyse.nom }} 
+          <button cButton *ngIf="analyse.fichierUrl" (click)="telechargerFichier(analyse.fichierUrl)"  target="_blank" class="telecharger-link">
+            <i class="fa-solid fa-download"></i> Télécharger
+          </button>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+  

@@ -1,0 +1,83 @@
+<c-col xs="12">
+  <c-card class="mb-3">
+    <c-card-header ngPreserveWhitespaces style="background-color: rgba(225, 200, 225, 0.9);">
+      <strong >Dossier Médical</strong>
+    </c-card-header>
+    <c-card-body >
+      <c-tabs [activeItemKey]="0">
+        <c-tabs-list variant="tabs">
+          <ng-container *ngFor="let tab of panes; let i = index">
+            <button  cTab [itemKey]="i">
+              <i [class]="tab.icon" style="margin-right: 10px;"></i>
+              {{ tab.name }}
+            </button>
+          </ng-container> 
+        </c-tabs-list>
+        
+        
+
+        <c-tabs-content>
+          <ng-container *ngFor="let pane of panes; let i = index">
+            <c-tab-panel class="p-3 preview" [itemKey]="i" cRounded="bottom">
+              <div *ngIf="pane.name === 'Analyses Médicales'; else defaultContent">
+                <div class="text-end mt-3">
+                  <c-button class="btn" 
+                    style="background-color: #dd789c; border-color: #dd789c; margin-top: -25px; color: white; font-weight: 600;" 
+                    (click)="ouvrirModalAjouterAnalyse(dossier.id)">
+                    Ajouter Analyse
+                  </c-button>
+                </div>
+                
+                <!-- Updated Analyses section with working download buttons -->
+                <div *ngIf="dossier?.liste_analyse?.length; else noAnalyses">
+                  <ul class="analyses-list">
+                    <li *ngFor="let analyse of dossier.liste_analyse">
+                      {{ analyse.nom }}
+                      <button cButton 
+                        (click)="telechargerFichier(analyse.fichierUrl)" 
+                        class="telecharger-link buttonF "
+                       >
+                        <i class="fa-solid fa-download"></i> Télécharger
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <ng-template #noAnalyses>
+                  <p>Aucune analyse disponible.</p>
+                </ng-template>
+              </div>
+              
+              <ng-template #defaultContent>
+                <div [innerHTML]="pane.content"></div>
+              </ng-template>
+            </c-tab-panel>
+          </ng-container>
+        </c-tabs-content>
+
+      </c-tabs> 
+    </c-card-body>
+  </c-card>
+</c-col>
+<c-modal  id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Ajouter une Analyse</h5>
+    <button  (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+
+  <c-modal-body>
+    <div class="mb-3">
+      <label cLabel for="nomAnalyse" >Nom de l'Analyse</label>
+      <input cFormControl id="nomAnalyse" class="form-control" type="text" [(ngModel)]="nomAnalyse" placeholder="Nom de l'analyse" />
+    </div>
+
+    <div class="mb-3">
+      <label cLabel for="formFile" >Sélectionner un fichier</label>
+      <input cFormControl id="formFile" type="file" class="form-control" (change)="onFileSelected($event)" #fileInput />
+    </div>
+  </c-modal-body>
+
+  <c-modal-footer>
+    <button cButton color="secondary" (click)="toggleLiveDemo()">Annuler</button>
+    <button cButton style="background-color:#3E608C; border-color: #3E608C; color: white;" (click)="ajouterAnalyse()">Ajouter</button>
+  </c-modal-footer>
+</c-modal>

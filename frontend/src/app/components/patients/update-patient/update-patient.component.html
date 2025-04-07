@@ -1,4 +1,6 @@
-<form (ngSubmit)="onSubmit()" class="row g-3">
+<h3>Matricule DME: {{ patient.dossierMedical?.matricule }}</h3>
+<br>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" class="row g-3">
     <c-col [md]="6">
       <label cLabel for="Nom">Nom</label>
       <input cFormControl id="Nom" type="text" [(ngModel)]="patient.nom" class="form-control" name="nom" readonly/>
@@ -8,16 +10,22 @@
       <input cFormControl id="Prenom" type="text" [(ngModel)]="patient.prenom" class="form-control" name="prenom" readonly/>
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="Email">Email</label>
-      <input cFormControl id="Email" type="email" [(ngModel)]="patient.email" class="form-control" name="email" />
+      <label cLabel for="Email">Email<span style="color: red;"> *</span></label>
+      <input cFormControl id="Email" type="email" [(ngModel)]="patient.email" class="form-control" name="email" required #email="ngModel"/>
+      <div *ngIf="email.invalid && email.touched" style="color: red; padding-left: 2%;">
+        <small>* L'email est requis.</small>
+      </div>
     </c-col>
     <c-col [md]="6">
       <label cLabel for="Password">Password</label>
       <input cFormControl id="Password" type="password" [(ngModel)]="patient.password" class="form-control" name="password" readonly/>
     </c-col>
     <c-col [md]="6">
-      <label cLabel for="tel">Téléphone</label>
-      <input cFormControl id="tel" type="tel" [(ngModel)]="patient.telephone" class="form-control" name="telephone" />
+      <label cLabel for="tel">Téléphone<span style="color: red;"> *</span></label>
+      <input cFormControl id="tel" type="tel" [(ngModel)]="patient.telephone" class="form-control" name="telephone" required #telephone="ngModel"/>
+      <div *ngIf="telephone.invalid && telephone.touched" style="color: red; padding-left: 2%;">
+        <small>* Le telephone est requis.</small>
+      </div>
     </c-col>
     <c-col [md]="6">
       <label cLabel>Date De Naissance</label>
@@ -37,8 +45,8 @@
         <option value="O-">O-</option>
       </select>
     </c-col>
-    <c-col [xs]="12">
-      <button cButton type="submit" class="btn btn-primary">Mettre à jour</button>
+    <c-col [xs]="12" class="text-center mt-4">
+      <button cButton type="submit" class="btn px-4 py-2" [ngClass]="{'btn-secondary': form.invalid}">Mettre à jour</button>
     </c-col>
   </form>
   

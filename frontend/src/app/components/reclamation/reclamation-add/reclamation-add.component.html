@@ -1,0 +1,53 @@
+<form [formGroup]="reclamationForm" (ngSubmit)="onSubmit()" class="row g-3">
+  <c-col md="6">
+    <label cLabel for="numeroChambre">Numéro de Chambre<span style="color: red;"> *</span></label>
+    
+    <c-multi-select formControlName="chambreId" [searchable]="true" selectionType="text">
+      <c-multi-select-option *ngFor="let chambre of chambres" [value]="chambre.value">
+        {{ chambre.label }}
+      </c-multi-select-option>
+    </c-multi-select>
+  
+    <div *ngIf="reclamationForm.get('chambreId')?.invalid && reclamationForm.get('chambreId')?.touched" style="color: red; padding-left: 2%;">
+      <small>* Le numéro de chambre est requis.</small>
+    </div>
+  </c-col>
+  
+    <c-col md="6">
+      <label cLabel for="typeProbleme">Type de Problème<span style="color: red;"> *</span></label>
+      <select cFormControl id="typeProbleme" formControlName="typeProbleme" class="form-control" required>
+        <option value="" disabled selected>Sélectionner un type de problème</option>
+        <option *ngFor="let type of typesProblemes" [value]="type.value">{{ type.label }}</option>
+      </select>
+      <div *ngIf="reclamationForm.get('typeProbleme')?.invalid && reclamationForm.get('typeProbleme')?.touched" style="color: red; padding-left: 2%;">
+        <small>* Le type de problème est requis.</small>
+      </div>
+    </c-col>
+  
+    <c-col md="6">
+      <label cLabel for="description">Description<span style="color: red;"> *</span></label>
+      <textarea  id="description" formControlName="description" class="form-control" required></textarea>
+      <div *ngIf="reclamationForm.get('description')?.invalid && reclamationForm.get('description')?.touched" style="color: red; padding-left: 2%;">
+        <small>* La description est requise.</small>
+      </div>
+    </c-col>
+  
+    <c-col xs="12" class="text-center mt-4">
+      <button cButton type="submit" class="btn btn-primary px-4 py-2">Ajouter Réclamation</button>
+    </c-col>
+  </form>
+  
+  <c-toaster [placement]="position" class="p-3" position="fixed">
+    <c-toast (timer)="onTimerChange($event)" (visibleChange)="onVisibleChange($event)" [visible]="visible()"
+             [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+             [style.color]="'white'">
+      <c-toast-header>
+        <span *ngIf="toastType() === 'success'">Succès</span>
+        <span *ngIf="toastType() === 'error'">Erreur</span>
+      </c-toast-header>
+      <c-toast-body>
+        <p>{{ toastMessage() }}</p>
+        <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+      </c-toast-body>
+    </c-toast>
+  </c-toaster> 

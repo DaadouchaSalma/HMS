@@ -1,8 +1,12 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { MedNotifsService } from '../../../services/med-notifs.service';
 import { MedNotifs } from '../../../models/medNotifs.model';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import {RdvService} from '../../../services/rdv.service';
+import { Router} from '@angular/router';
+
+
 
 import {
   AvatarComponent,
@@ -26,16 +30,28 @@ import {
   ProgressComponent,
   SidebarToggleDirective
 } from '@coreui/angular-pro';
-
-import { IconDirective } from '@coreui/icons-angular';
-
+import { NgModel } from '@angular/forms';
+import { IconDirective, IconSetService } from '@coreui/icons-angular';
+import { AuthService } from 'src/app/services/auth.service';
+import { cilPowerStandby,
+  cilMenu,
+  cilUser,
+  cilEnvelopeOpen,
+  cilBell,
+  cilListRich,
+  cilLanguage,
+  cilSun,
+  cilMoon,
+  cilContrast,
+  cilAccountLogout } from '@coreui/icons';
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective]
+  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective],
+  providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
-
+  notifications: { title: string, message: string }[] = [];
   readonly #colorModeService = inject(ColorModeService);
   readonly colorMode = this.#colorModeService.colorMode;
 
@@ -49,10 +65,57 @@ export class DefaultHeaderComponent extends HeaderComponent {
     const currentMode = this.colorMode();
     return this.colorModes.find(mode => mode.name === currentMode)?.icon ?? 'cilSun';
   });
+  userRole: string = '';
 
-  constructor(private medNotifsService: MedNotifsService) {
+
+  constructor(private medNotifsService: MedNotifsService ,private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute) {
     super();
+    iconSet.icons = { 
+      cilPowerStandby,
+      cilMenu,
+      cilUser,
+      cilEnvelopeOpen,
+      cilBell,
+      cilListRich,
+      cilLanguage,
+      cilSun,
+      cilMoon,
+      cilContrast,
+      cilAccountLogout
+    };
   }
+
+
+   loadNotifications() {
+    const patientId = "123e4567-e89b-12d3-a456-426614174000"
+    if (patientId) {
+    this.rdvService.getNotifications(patientId).subscribe(response => {
+      this.notifications = response.map((notif, index) => ({
+        title: `Rappel`,
+        message: notif
+      }));
+    }, error => {
+      console.error('Erreur lors du chargement des notifications', error);
+    });
+  }
+}
+
+  getProfileRoute(): string {
+    if (this.userRole === 'Patient') {
+      return '/patient/update';
+    } else if (this.userRole === 'Medecin') {
+      return '/dashboard';
+    }
+    return '/patient/list'; 
+  }
+
+  logout(): void {
+    localStorage.removeItem('userRoles');
+    this.authService.logout().subscribe();
+    console.log(localStorage.getItem('userRoles'));
+    this.router.navigate(['/login']);
+  }
+
 
   public notifications: MedNotifs[] = [];
 
@@ -64,6 +127,13 @@ ngOnInit(): void {
     },
     error: (err) => console.error('Error fetching notifications:', err)
   });
+  this.loadNotifications();
+      const roles  = this.authService.getUserRoles();
+      if (roles.includes('Patient')) {
+        this.userRole = 'Patient';
+      } else if (roles.includes('Medecin')) {
+        this.userRole = 'Medecin';
+      }  
 }
 
   sidebarId = input('sidebar1');

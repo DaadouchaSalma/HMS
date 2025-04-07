@@ -41,8 +41,17 @@ export const routes: Routes = [
       },
       {
 
+        path:'dossierM',
+        loadChildren: () => import('./components/dossierM/routes').then((m) => m.routes)
+      },
+      {
+
         path:'chambre',
         loadChildren: () => import('./components/chambre/routes').then((m) => m.routes)
+      },
+      {
+        path:'reclamation',
+        loadChildren: () => import('./components/reclamation/routes').then((m) => m.routes)
       },
       {
         path:'admission',
@@ -51,6 +60,11 @@ export const routes: Routes = [
       {
         path: 'personnel',
         loadChildren: () => import('./components/Medecin_personnel/routes').then((m) => m.routes)
+
+      },
+      {
+        path: 'rendezvous',
+        loadChildren: () => import('./components/RDV/routes').then((m) => m.routes)
 
       },
       {
@@ -110,7 +124,10 @@ export const routes: Routes = [
         path:'meds',
         loadChildren:() => import('./components/routes').then((m)=> m.routes)
       },
-      
+      {
+        path:'dme',
+        loadChildren:() => import('./components/DME/routes').then((m)=> m.routes)
+      }
     ]
   }, 
   {

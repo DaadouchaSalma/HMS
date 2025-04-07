@@ -1,0 +1,168 @@
+/* Amélioration de l'affichage général */
+c-card {
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+ 
+  overflow: hidden;
+}
+
+/* Style du titre du dossier médical */
+c-card-header {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: rgba(75, 40, 85, 0.9);
+  background-color: rgba(225, 200, 225, 0.9);
+  padding: 12px 16px;
+  border-bottom: 2px solid rgba(133, 77, 130, 0.6);
+}
+
+/* Style des onglets */
+c-tabs-list {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(215, 180, 215, 0.6);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+button[cTab] {
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: rgba(133, 77, 130, 0.9);
+  background: transparent;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  text-align: center; 
+}
+
+button[cTab]:hover {
+  background-color: rgba(133, 77, 130, 0.9);
+  color: white;
+}
+
+button[cTab] svg[cIcon] {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+/* Contenu des onglets */
+c-tab-panel {
+ 
+  padding: 16px;
+  border-radius: 8px;
+}
+
+/* Liste des analyses médicales */
+.analyses-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Élément de liste avec style */
+.analyses-list li {
+  padding: 16px;
+  background: rgba(248, 240, 248, 0.95);
+  margin: 10px 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(75, 40, 85, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.analyses-list li:hover {
+  transform: translateY(-4px); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+}
+
+/* Icône à gauche (plus moderne avec une taille et espacement ajustés) */
+.analyses-list li::before {
+  content: "🧪"; 
+  font-size: 1.4rem;
+  margin-right: 15px;
+  color: rgba(133, 77, 130, 0.9); 
+  transition: color 0.3s ease;
+}
+
+.analyse-date {
+  font-size: 0.9rem;
+  color: rgba(100, 50, 110, 0.8);
+  margin-right: 12px;
+}
+
+
+.telecharger-link {
+  color: rgba(133, 77, 130, 0.9);
+  font-weight: 600;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-left: auto; 
+}
+a.telecharger-link:focus,
+a.telecharger-link:active {
+  background: rgba(100, 50, 110, 0.8); 
+}
+
+
+.telecharger-link:hover {
+color: rgba(133, 77, 130, 0.9);
+background: none;
+border: none;
+}
+
+
+.hist {
+  line-height: 1.8;
+  padding: 10px;
+}
+
+.hist_ma i {
+  color: #3E608C;
+  margin-right: 8px;
+}
+.hist_ma strong {
+  color: #3E608C;
+}
+
+.hist_mf i {
+  color: #4D79FF;
+  margin-right: 8px;
+}
+.hist_mf strong {
+  color: #4D79FF;
+}
+
+.hist_ch i {
+  color: #854d82d6;
+  margin-right: 8px;
+}
+.hist_ch strong {
+  color: #854d82d6;
+}
+
+.hist_all i {
+  color: #dd789c;
+  margin-right: 8px;
+}
+.hist_all strong {
+  color: #dd789c;
+}
+
+.hist_vacc i {
+  color: #A855F7;
+  margin-right: 8px;
+}
+.hist_vacc strong {
+  color: #A855F7;
+}

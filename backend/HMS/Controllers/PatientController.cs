@@ -1,11 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
+using HMS.Interfaces;
 using HMS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PatientController : Controller
@@ -13,13 +16,15 @@ namespace HMS.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IPatientRepository _patientRepository;
 
         public PatientController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
-                              RoleManager<IdentityRole> roleManager )
+                              RoleManager<IdentityRole> roleManager, IPatientRepository patientRepository )
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _context = context;
+            _patientRepository = patientRepository;
         }
 
         /*[HttpPost("new")]
@@ -36,7 +41,12 @@ namespace HMS.Controllers
             return Ok(new { message = "Patient ajouté avec succès" });
         }*/
 
-        [HttpPost("add")]
+
+
+
+        [Authorize(Roles = "Medecin, PersonnelAdministratif")]
+        [HttpPost("new")]
+
         public async Task<IActionResult> AjouterPatient([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -58,6 +68,7 @@ namespace HMS.Controllers
                 Nom = model.Nom,
                 Prenom = model.Prenom,
                 Email = model.Email,
+                Password = model.Password,
                 Date_Naiss = model.Date_Naiss,
                 Telephone = model.Telephone,
                 Grp_Sang = model.Grp_Sang,
@@ -71,29 +82,41 @@ namespace HMS.Controllers
             _context.Patients.Add(patient);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Patient ajouté avec succès" });
+            return Ok(patient);
         }
 
-
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdatePatient(Guid id, [FromBody] Patient updatedPatient)
+        [Authorize(Roles = "Patient")]
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdatePatient([FromBody] Patient updatedPatient)
         {
-            if (updatedPatient == null || id != updatedPatient.Id)
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Unauthorized(new { message = "Utilisateur non authentifié" });
+            }
+            
+
+             var identityUserId = _userManager.GetUserId(User);
+             if (string.IsNullOrEmpty(identityUserId))
+             {
+                 return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
+             }
+
+             var existingPatient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
+             if (existingPatient == null)
+             {
+                 return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
+             }
+
+            if (updatedPatient == null)
             {
                 return BadRequest("Invalid patient data.");
-            }
-
-            var existingPatient = await _context.Patients.FindAsync(id);
-            if (existingPatient == null)
-            {
-                return NotFound("Patient not found.");
             }
 
             existingPatient.Nom = updatedPatient.Nom;
             existingPatient.Prenom = updatedPatient.Prenom;
             existingPatient.Grp_Sang = updatedPatient.Grp_Sang;
             existingPatient.Email = updatedPatient.Email;
-            //existingPatient.Password = updatedPatient.Password;
+            existingPatient.Password = updatedPatient.Password;
             existingPatient.Date_Naiss = updatedPatient.Date_Naiss;
             existingPatient.Telephone = updatedPatient.Telephone;
 
@@ -102,22 +125,36 @@ namespace HMS.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPatientById(Guid id)
+        [Authorize(Roles = "Patient")]
+        [HttpGet("me")]
+        public async Task<IActionResult> GetPatientById()
         {
-            var patient = await _context.Patients.FindAsync(id);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Unauthorized(new { message = "Utilisateur non authentifié" });
+            }
+
+            var identityUserId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(identityUserId))
+            {
+                return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
+            }
+
+            var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
+
             if (patient == null)
             {
-                return NotFound("Patient not found.");
+                return NotFound(new { message = "Aucun patient trouvé pour cet utilisateur." });
             }
 
             return Ok(patient);
         }
 
+        [Authorize(Roles = "Medecin, PersonnelAdministratif, Pharmacien, Admin")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllPatients()
         {
-            var patients = await _context.Patients.ToListAsync();
+            var patients = await _context.Patients.Include(p => p.DossierMedical).ToListAsync();
 
             if (!patients.Any())
             {

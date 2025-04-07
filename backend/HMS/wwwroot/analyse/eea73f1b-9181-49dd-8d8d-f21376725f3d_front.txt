@@ -1,0 +1,321 @@
+import React,{ useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {
+  CButton,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CForm,
+  CContainer,
+  CDatePicker,
+  CFormInput,
+  CFormLabel,
+  CFormSelect,
+  CFormTextarea,
+  CFormCheck,
+  CInputGroup,
+  CInputGroupText,
+  CRow,
+} from '@coreui/react-pro'
+import axios from 'axios';
+import dayjs from 'dayjs';
+
+import CIcon from '@coreui/icons-react'
+import { cilMagnifyingGlass } from '@coreui/icons'
+import { DocsExample } from 'src/components'
+
+const Page500 = () => {
+  const [departement, setDepartement] = useState('');
+  const postes = {
+    "Ressources Humaines": [
+      { value: "Assistant RH", label: "Assistant RH" },
+      { value: "Chargé de Recrutement", label: "Chargé de Recrutement" },
+      { value: "Responsable Formation", label: "Responsable Formation" }
+    ],
+    "Développement Informatique": [
+      { value: "Ingénieur DevOps", label: "Ingénieur DevOps" },
+      { value: "Chef de Projet IT", label: "Chef de Projet IT" },
+      { value: "Développeur Full Stack", label: "Développeur Full Stack" },
+      { value: "Architecte Logiciel", label: "Architecte Logiciel" }
+    ],
+    "Finance et Comptabilité": [
+      { value: "Directeur Financier", label: "Directeur Financier" },
+      { value: "Comptable", label: "Comptable" }
+    ],
+    "Marketing": [
+      { value: "Community Manager", label: "Community Manager" },
+      { value: "Responsable Marketing", label: "Responsable Marketing" }
+    ],
+    "Juridique": [
+      { value: "Avocat d'Entreprise", label: "Avocat d'Entreprise" }
+    ]
+  };
+  
+  const [employe, setEmploye] = useState({
+    nom: '',
+    prenom: '',
+    mail: '',
+    numTelephone: '',
+    password: '',
+    poste: '',
+    departement: '',
+    dateofjoining: '',
+    maladie: '',
+    numUrgence: '',
+  });
+  const [cvFile, setCvFile] = useState(null);
+  const [contratFile, setContratFile] = useState(null);
+
+  const handleDateChange = (date) => {
+    const formattedDate = dayjs(date).format('YYYY-MM-DD'); // Format YYYY-MM-DD
+    setEmploye({
+      ...employe,
+      dateofjoining: formattedDate, // Assurez-vous d'utiliser le même nom de clé que dans votre base
+    });
+  };
+
+  const handleDepartementChange = (e) => {
+    const departementNom = e.target.options[e.target.selectedIndex].text; // Récupère le nom du département
+    setDepartement(departementNom);
+    setEmploye({
+      ...employe,
+      departement: departementNom
+    });
+  };
+  const handleChange = (e) => {
+    setEmploye({
+      ...employe,
+      [e.target.name]:e.target.files ? e.target.files[0] : e.target.value,
+    });
+  };
+  const handlePosteChange = (e) => {
+    setEmploye({
+      ...employe,
+      poste: e.target.value
+    });
+  };
+  /*const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8082/api/employes', employe); 
+        
+      console.log(response.data);
+      alert('Employé ajouté avec succès');
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de l\'employé', error);
+      alert('Erreur lors de l\'ajout de l\'employé');
+    }
+  };*/
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const requiredFields = [
+      employe.nom,
+      employe.prenom,
+      employe.mail,
+      employe.password,
+      employe.numTelephone,
+      employe.departement,
+      employe.poste,
+      employe.dateofjoining,
+      employe.numUrgence,
+      //employe.cvPath,
+      //employe.contratDeTravailPath
+  ];
+  
+
+  // Vérifiez si tous les champs obligatoires sont remplis
+  const allFieldsFilled = requiredFields.every(field => field);
+
+  if (!allFieldsFilled) {
+      toast.error('❌ Veuillez remplir tous les champs obligatoires.', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+      });
+      return; 
+  }
+    /*try {
+      const response = await axios.post('http://localhost:8082/api/employes', employe);
+      toast.success('🎉 Employé ajouté avec succès!', {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de l\'employé', error);
+      toast.error('❌ Une erreur est survenue lors de l\'ajout de l\'employé', {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
+  };*/
+  const formData = new FormData();
+  formData.append("departement", employe.departement);
+  formData.append("poste", employe.poste);
+  formData.append("nom", employe.nom);
+  formData.append("prenom", employe.prenom);
+  formData.append("mail", employe.mail);
+  formData.append("password", employe.password);
+  formData.append("numTelephone", employe.numTelephone);
+  formData.append("numUrgence", employe.numUrgence);
+  formData.append("dateofjoining", employe.dateofjoining);
+
+
+  if (cvFile) formData.append('cvPath', cvFile);
+  if (contratFile) formData.append('contratDeTravailPath', contratFile);
+    try {
+      const response = await axios.post('http://localhost:8082/api/employes', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      
+      toast.success('🎉 Employé ajouté avec succès!', { position: "top-right", autoClose: 3000 });
+      console.log(response.data);
+  } catch (error) {
+      console.error('Erreur lors de l\'ajout de l\'employé', error);
+      toast.error('❌ Une erreur est survenue lors de l\'ajout de l\'employé', { position: "top-right", autoClose: 3000 });
+  }
+};
+
+// Mise à jour de la gestion des fichiers dans le `onChange`
+const handleFileChange = (e) => {
+  const { name, files } = e.target;
+  if (name === 'cvFile') {
+    setCvFile(files[0]);
+  } else if (name === 'contratFile') {
+    setContratFile(files[0]);
+  }
+};
+  
+
+  return (
+    <CRow>
+      <CContainer>
+      <ToastContainer />
+        <CRow >
+          <CCol md={6}>
+          <p className="h3">Ajouter un Nouvel Employé</p>            
+          </CCol>
+          <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Informations Personnelles</strong> 
+          </CCardHeader>
+          <CCardBody>
+          
+             
+              <CForm className="row g-3">
+              <CFormLabel >Nom & Prénom</CFormLabel>
+              <CCol xs={6} >
+                  <CFormInput name="nom"  placeholder="Nom" aria-label="First name"  onChange={handleChange} required />
+                </CCol>
+                <CCol xs={6}>
+                  <CFormInput name="prenom" placeholder="Prénom"  onChange={handleChange} aria-label="Last name" required />
+                </CCol>
+                <CFormLabel >Email & Mot de passe</CFormLabel>
+                <CCol xs={6}>
+                  <CFormInput name="mail" type="email"     onChange={handleChange} placeholder="name@example.com" required />
+                </CCol>                
+                <CCol xs={6}>                 
+                  <CFormInput name="password" type="password"   onChange={handleChange} placeholder='Mot de passe ' required />
+                </CCol>
+                <CFormLabel >Adresse</CFormLabel>
+                <CCol xs={8} >                  
+                  <CFormInput  name="" placeholder="1234 Main St" />
+                </CCol>
+                <CFormLabel >Numéro de Téléphone</CFormLabel>
+                <CCol xs={8}>                 
+                  <CFormInput   name='numTelephone'  onChange={handleChange} type='number' required />
+                </CCol>
+                
+                <CCol xs={8}>
+                <CFormLabel >Numéro de téléphone d'urgence</CFormLabel>
+                  <CFormInput name='numUrgence' type="number"   onChange={handleChange} required/>
+                </CCol>
+                <CCol xs={12}>
+                <CFormLabel >Date de naissance</CFormLabel>
+                   <CCol lg={4}>
+                      <CDatePicker locale="en-US"  />
+                   </CCol>
+                 </CCol>
+                 <CFormLabel >Antécédents médicaux (facultatif)</CFormLabel>
+                  <CCol xs={6}>
+                  <CFormTextarea  name='maladie'  onChange={handleChange} rows="3" placeholder="Saisissez des informations médicales importantes" required/>
+                  </CCol>
+              </CForm>
+          </CCardBody>
+        </CCard>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Informations Professionnelles</strong> 
+          </CCardHeader>
+          <CCardBody>
+          
+             
+              <CForm className="row g-3">
+              <CFormLabel >Département</CFormLabel>
+                    <CCol xs={6}>
+                    <CFormSelect name='departement'aria-label="Default select example"  onChange={handleDepartementChange} required >
+                      <option>Selectionner un département</option>
+                      <option value="Ressources Humaines">Ressources Humaines </option>
+                      <option value="Développement Informatique">Développement Informatique</option>
+                      <option value="Finance et Comptabilité">Finance et Comptabilité</option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Juridique">Juridique</option>                    
+                    </CFormSelect>                 
+            </CCol>
+            <CFormLabel >Postes</CFormLabel>
+                    <CCol xs={6}>
+                    <CFormSelect aria-label="Default select example" name='poste'  onChange={handlePosteChange} required >
+                    {postes[departement]?.map((poste) => (
+                        <option key={poste.value} value={poste.value}>{poste.label}</option>
+                    ))}
+                    </CFormSelect>                 
+            </CCol>
+                <CCol xs={8} >
+                  <CFormLabel >Date de début de contrat </CFormLabel>
+                  <CCol lg={4}>
+                      <CDatePicker name='dateofjoining' locale="en-US" onDateChange={handleDateChange } required/>
+                   </CCol>
+                </CCol>
+                
+              </CForm>
+          </CCardBody>
+        </CCard>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Documents à Joindre</strong> 
+          </CCardHeader>
+          <CCardBody>            
+              <CForm className="row g-3">
+                <CCol xs={8} >
+                  <CFormLabel >Contrat de travail</CFormLabel>
+                  <div className="mb-3">               
+                    <CFormInput name="contratFile"  type="file"   onChange={handleFileChange} required/>
+                  </div>
+                </CCol>
+                <CCol xs={8}>
+                  <CFormLabel >CV</CFormLabel>
+                  <div className="mb-3">
+                    <CFormInput  name="cvFile"  type="file"   onChange={handleFileChange} required />
+                  </div>
+                </CCol>
+              </CForm>
+          </CCardBody>
+        </CCard>
+        <div className="d-grid gap-2 col-6 mx-auto">
+                <CButton color="secondary" onClick={handleSubmit}>Ajouter</CButton>               
+              </div>
+        </CRow>
+        </CContainer>
+        
+    </CRow>
+  )
+  
+}
+
+export default Page500

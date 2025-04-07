@@ -1,0 +1,122 @@
+.prescriptions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    
+  }
+  
+  .fixed-height-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .fixed-height-card:hover {
+    transform: scale(1.03);
+  }
+  
+  c-card-header {
+    
+    color: #fff;
+    background-color: #6387c0;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+  }
+  
+  c-card-body {
+    padding: 15px;
+    color: #333;
+    
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  
+  ul[cListGroup] {
+    overflow: hidden;
+    border: 1px solid #ddd;
+  }
+  
+  li[cListGroupItem] {   
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    
+  }
+  
+  li[cListGroupItem]:last-child {
+    border-bottom: none;
+  }
+  
+  button {
+    border-radius: 8px;
+    font-weight: bold;
+   
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+  }
+  
+  button[cButton] {
+    background: #8c9cc2;
+    color: white;
+
+  }
+  
+  button[cButton]:hover {
+    background:#8c9cc2;
+  }
+  
+  .btn-primary {
+    background: #81a4d3;
+    border-color:#81a4d3 ;
+  }
+  
+  .btn-primary:hover {
+    background:#81a4d3;
+  }
+  
+  /* Popover style */
+  .popover-header {
+    background: rgb(236, 174, 191);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .popover-body {
+    background: #fff0f5;
+    padding: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+  }
+  /* Container pour aligner le bouton et l'icône */
+.actions-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacement entre l'œil et le bouton */
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style de l'icône de l'œil */
+  .icon-eye {
+    cursor: pointer;
+    color: #81a4d3;
+    font-size: 1.5rem;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .icon-eye:hover {
+    transform: scale(1.1);
+  }
+  

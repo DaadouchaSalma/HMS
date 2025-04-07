@@ -8,12 +8,20 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'new/:id',
+        path: 'new',
         loadComponent: () => import('./add-prescription/add-prescription.component').then(m => m.AddPrescriptionComponent),
         data: {
           title: 'Ajout d\'une prescription'
         }
+      },
+      {
+        path: 'listPrescription/:id',
+        loadComponent: () => import('./list-prescription/list-prescription.component').then(m => m.ListPrescriptionComponent),
+        data: {
+          title: 'Liste des prescriptions'
+        }
       }
+
     ]
   }
 ];

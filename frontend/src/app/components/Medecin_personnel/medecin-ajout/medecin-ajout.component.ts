@@ -75,7 +75,7 @@ export class MedecinAjoutComponent {
         ...this.medecin,
         date_Naiss: this.formatDate(new Date(this.medecin.date_Naiss)),
         date_Emb: this.formatDate(new Date(this.medecin.date_Emb)),
-        Type:1
+        type:1
       };
       console.log("Objet envoyé : ", medecin);
   
