@@ -29,9 +29,25 @@ export const navItems: INavData[] = [
         name: 'Ajouter une prescription',
         url: '/prescription/new/id',
         icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Liste des prescriptions',
+        url: '/prescription/listPrescription/:id',
+        icon: 'nav-icon-bullet'
       }
     ]
   },
+  {
+    name: 'Dossier Medical',
+    url: '/dossierM/dossierMListe/:id',
+    iconComponent: { name: 'cil-notes' },
+  },
+  {
+    name: 'Dossier Medical M',
+    url: '/dossierM/dossierMListeMedecin/:id',
+    iconComponent: { name: 'cil-notes' },
+  },
+  
   {
     name: 'Chambre',
     url: '/chambre',
@@ -49,6 +65,23 @@ export const navItems: INavData[] = [
       },
       
     ]},
+    {
+      name: 'Reclamation',
+      url: '/reclamation',
+      iconComponent: { name: 'cil-home' },
+      children: [
+        {
+          name: 'Ajouter Une Reclamation',
+          url: '/reclamation/reclamationAdd/:id',
+          icon: 'nav-icon-bullet'
+        },
+        {
+          name: 'La liste des reclamation',
+          url: '/reclamation/reclamationList',
+          icon: 'nav-icon-bullet'
+        },
+        
+      ]},
     {
       name: 'Admission',
       url: '/admission',

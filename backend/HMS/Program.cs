@@ -40,6 +40,7 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddScoped<IReclamationRepository, ReclamationRepository>();
 
 
 // Add services to the container.
@@ -58,6 +59,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 var app = builder.Build();
+app.UseStaticFiles();
 // Création des rôles au démarrage
 using (var scope = app.Services.CreateScope())
 {

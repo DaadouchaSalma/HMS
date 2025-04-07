@@ -167,56 +167,44 @@
     <button [caret]="false" cDropdownToggle>
       <span class="d-inline-block my-1 mx-2 position-relative">
         <svg cIcon name="cilEnvelopeOpen" size="lg" class="hover-icon" style="color: #6387c0;"></svg>
-        @if (newMessages?.length) {
+        @if (notifications?.length) {
           <c-badge
             class="p-1"
             color="danger"
             shape="rounded-circle"
             position="top-end"
           >
-          <span class="visually-hidden">{{ newMessages?.length ?? 0 }} new alerts</span>
-        </c-badge>
+            <span class="visually-hidden">{{ notifications?.length ?? 0 }} new alerts</span>
+          </c-badge>
         }
       </span>
     </button>
     <div cDropdownMenu class="p-0" [ngStyle]="{minWidth: '24rem'}">
       <h6 cDropdownHeader class="bg-body-secondary text-body-secondary fw-semibold rounded-top mb-2">
-        <span>You have {{ newMessages?.length ?? 0 }} messages</span>
+        <span>📩 Vous avez {{ notifications?.length ?? 0 }} notifications</span>
       </h6>
-      @for (message of newMessages; track message.id) {
-        <a cDropdownItem routerLink="{{message.link}}">
+      @for (notif of notifications; track notif) {
+        <a cDropdownItem>
           <div class="d-flex">
-            <c-avatar
-              size=""
-              src="./assets/images/avatars/{{message.avatar}}"
-              status="{{message.status}}"
-              class="flex-shrink-0 my-3 me-3" />
             <div class="message text-wrap">
-              <div class="d-flex justify-content-between small text-body-secondary mt-1">
-                <div>{{ message.from }}</div>
-                <div>{{ message.time }}</div>
-              </div>
               <div class="fw-semibold">
-                @if (message.id < 2) {
-                  <span class="text-danger me-1">!</span>
-                }
-                <span>{{ message.title }}</span>
+             
+                <span>{{ notif.title }}</span>
               </div>
-              <div class="small text-body-secondary">
-                {{ message.message }}
+              <div class=" text-body-secondary">
+                {{ notif.message }}
               </div>
+              <hr/>
             </div>
           </div>
         </a>
       }
       <div class="p-2">
-        <button cButton color="primary" variant="outline" class="w-100" routerLink="apps/email/inbox">
-          View all messages
-        </button>
       </div>
     </div>
   </c-dropdown>
 </ng-template>
+
 
 <ng-template #notifyDropdown>
   <c-dropdown alignment="end" variant="nav-item">

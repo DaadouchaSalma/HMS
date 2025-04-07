@@ -13,7 +13,15 @@ export const routes: Routes = [
         data: {
           title: 'Ajout d\'une prescription'
         }
+      },
+      {
+        path: 'listPrescription/:id',
+        loadComponent: () => import('./list-prescription/list-prescription.component').then(m => m.ListPrescriptionComponent),
+        data: {
+          title: 'Liste des prescriptions'
+        }
       }
+
     ]
   }
 ];

@@ -11,6 +11,7 @@ namespace HMS.Models
         public Medecin? Medecin { get; set; }
         public Guid PatientId { get; set; }
         public Patient? Patient { get; set; }
+        public DateTime Dateprescription { get; set; } = DateTime.Now;
 
     }
 }

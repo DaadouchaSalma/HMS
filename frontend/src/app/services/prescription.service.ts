@@ -13,6 +13,9 @@ export class PrescriptionService {
   constructor(private http: HttpClient) { }
 
   addPrescription(prescription: Prescription): Observable<any> {
-    return this.http.post(`${this.apiUrl}/new`, prescription);
+    return this.http.post(`${this.apiUrl}/new`, prescription);    
+  }
+  getPrescriptions(patientId: string): Observable<Prescription[]> {
+    return this.http.get<Prescription[]>(`${this.apiUrl}/${patientId}`);
   }
 }

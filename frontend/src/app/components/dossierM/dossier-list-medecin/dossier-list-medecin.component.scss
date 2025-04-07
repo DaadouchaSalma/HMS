@@ -1,0 +1,92 @@
+.dossier-container {
+  width: 80%;
+  margin: auto;
+  padding: 25px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #854d82d6; /* Nouvelle couleur */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Ajoute un espace entre l'icône et le texte */
+  padding-bottom: 10px;
+  border-bottom: 2px solid #854d82d6; /* Ligne fine sous le titre pour le démarquer */
+}
+
+.section-title i {
+  font-size: 26px; /* Taille un peu plus grande pour l'icône */
+}
+
+.historique-medical, .analyses-medicales {
+  background: #fff;
+  padding: 18px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
+
+.historique-medical p, .analyses-medicales ul {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333; /* Couleur du texte améliorée */
+}
+
+.historique-medical p i {
+  color: #854d82d6; /* Uniformise la couleur des icônes */
+  margin-right: 5px;
+}
+
+  .analyses-list {
+    list-style: none;
+    padding: 0;
+}
+
+.analyses-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    background: #f3f9fe;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.analyses-list li .analyse-name {
+    display: flex;
+    align-items: center;
+    gap: 3px; /* Évite un grand espace entre l'icône et le nom */
+}
+
+.analyses-list li .icon {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color:  rgb(196, 57, 57); 
+    margin-right: 10px; 
+}
+
+.telecharger-link {
+    text-decoration: none;
+    color: #3E608C;
+    font-weight: bold;
+    margin-left: auto; 
+}
+
+.telecharger-link:hover {
+    text-decoration: underline;
+}
+button {
+  background: none;
+  border: none;
+  outline: none; /* Supprime le focus par défaut */
+  cursor: pointer; /* Garde le curseur de type bouton */
+}
+button:hover {
+  background: none;
+  border: none;
+}
+

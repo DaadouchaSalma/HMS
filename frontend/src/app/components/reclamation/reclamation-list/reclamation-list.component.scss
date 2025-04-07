@@ -1,0 +1,64 @@
+/* Style du tableau */
+.custom-table, 
+.custom-table thead, 
+.custom-table tbody ::ng-deep {
+  background-color:  #ff0000  !important;
+}
+.table-light{
+    --cui-table-bg: #77A1D9;
+    --cui-table-color:#fff;
+     
+}
+/* Bouton Supprimer */
+button[color="danger"] {
+    background-color: rgb(196, 57, 57);
+    border-color: rgb(196, 57, 57);
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button[color="danger"]:hover {
+    background-color:rgb(142, 29, 29)!important;
+      color: white !important;;
+}
+
+/* Modal */
+c-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+c-modal-body {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Boutons du modal */
+c-modal-footer button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+
+
+
+c-modal-footer button[style*="background-color:#3E608C"] {
+    background-color: #3E608C;
+    color: white;
+}
+
+c-modal-footer button[style*="background-color:#3E608C"]:hover {
+    background-color: #6387c0;
+}

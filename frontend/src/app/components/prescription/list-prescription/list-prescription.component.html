@@ -1,0 +1,52 @@
+<div class="prescriptions-container">
+  <c-col  *ngFor="let prescription of prescriptions">
+    <c-card class="mb-4 fixed-height-card" style="width: 18rem;">
+      <c-card-header>
+        Date : {{ prescription.datePrescription }}
+      </c-card-header>
+      <c-card-body>
+        <p><strong>Médecin :</strong> {{ prescription.medecinNomComplet }}</p>
+        <p><strong>Médicaments :</strong></p>
+      </c-card-body>
+
+      <ul [flush]="true" cListGroup>
+        <li cListGroupItem *ngFor="let medicament of prescription.nomsMedicaments.slice(0, 2)">
+          {{ medicament }}
+        </li>
+      </ul>
+      <div class="actions-container">
+      <button (click)="downloadPrescription(prescription)" class="btn btn-primary btn-sm">Télécharger</button>
+      <ng-container *ngIf="prescription.nomsMedicaments.length > 2">
+       
+          <!-- Icône de l’œil -->
+          
+          <span 
+            [cPopover]="popoverHtml"
+            cPopoverPlacement="right"
+            [cPopoverTrigger]="'click'"
+            [cPopoverVisible]="visible"
+            class="icon-eye">
+            <i class="fa-solid fa-eye"></i>
+          </span>
+
+          <ng-template #popoverHtml>
+            <h3 class="popover-header">
+              Médicaments supplémentaires
+            </h3>
+            <div class="popover-body">
+              <ul>
+                <li *ngFor="let medicament of prescription.nomsMedicaments.slice(2)">
+                  {{ medicament }}
+                </li>
+              </ul>
+            </div>
+          </ng-template>
+
+          <!-- Bouton Télécharger -->
+          
+       
+      </ng-container>
+    </div>
+    </c-card>
+  </c-col>
+</div>

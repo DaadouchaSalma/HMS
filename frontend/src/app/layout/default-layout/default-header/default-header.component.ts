@@ -1,6 +1,7 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import {RdvService} from '../../../services/rdv.service';
 
 import {
   AvatarComponent,
@@ -26,6 +27,7 @@ import {
 } from '@coreui/angular-pro';
 
 import { IconDirective } from '@coreui/icons-angular';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-default-header',
@@ -33,7 +35,25 @@ import { IconDirective } from '@coreui/icons-angular';
   imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
+  notifications: { title: string, message: string }[] = [];
 
+  ngOnInit(): void {
+    this.loadNotifications();
+  }
+
+  loadNotifications() {
+    const patientId = "123e4567-e89b-12d3-a456-426614174000"
+    if (patientId) {
+    this.rdvService.getNotifications(patientId).subscribe(response => {
+      this.notifications = response.map((notif, index) => ({
+        title: `Rappel`,
+        message: notif
+      }));
+    }, error => {
+      console.error('Erreur lors du chargement des notifications', error);
+    });
+  }
+}
   readonly #colorModeService = inject(ColorModeService);
   readonly colorMode = this.#colorModeService.colorMode;
 
@@ -48,7 +68,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     return this.colorModes.find(mode => mode.name === currentMode)?.icon ?? 'cilSun';
   });
 
-  constructor() {
+  constructor(private rdvService: RdvService ,  private route: ActivatedRoute) {
     super();
   }
 
