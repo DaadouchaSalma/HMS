@@ -3,10 +3,12 @@ using HMS.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using HMS.Models;
+using HMS.Hubs;
 using HMS.Services;
 using System.Net.Mail;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
@@ -42,9 +44,20 @@ builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IRdvRepository, RdvRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IFournisseur, FournisseurRepository>();
+
+builder.Services.AddHostedService<ExpirationCheckService>();
+builder.Services.AddScoped<IPanierRepository, PanierRepository>();
+
+builder.Services.AddSignalR();
+
+
+
+
+
 builder.Services.AddScoped<IReclamationRepository, ReclamationRepository>();
 builder.Services.AddScoped<ListeAttenteRepository>();
 builder.Services.AddScoped<IDossierMRepository, DossierMRepository>();
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -109,6 +122,7 @@ using (var scope = app.Services.CreateScope())
         }
     }
 }
+app.MapHub<NotificationHub>("/notificationHub");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,8 +1,11 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
+import { MedNotifsService } from '../../../services/med-notifs.service';
+import { MedNotifs } from '../../../models/medNotifs.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {RdvService} from '../../../services/rdv.service';
 import { Router} from '@angular/router';
+
 
 
 import {
@@ -65,8 +68,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   userRole: string = '';
 
 
-  constructor(private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute) {
-
+  constructor(private medNotifsService: MedNotifsService ,private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute) {
     super();
     iconSet.icons = { 
       cilPowerStandby,
@@ -83,15 +85,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     };
   }
 
-  ngOnInit(): void {
-    this.loadNotifications();
-    const roles  = this.authService.getUserRoles();
-    if (roles.includes('Patient')) {
-      this.userRole = 'Patient';
-    } else if (roles.includes('Medecin')) {
-      this.userRole = 'Medecin';
-    }  
-  }
+
    loadNotifications() {
     const patientId = "123e4567-e89b-12d3-a456-426614174000"
     if (patientId) {
@@ -122,6 +116,25 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.router.navigate(['/login']);
   }
 
+
+  public notifications: MedNotifs[] = [];
+
+ngOnInit(): void {
+  this.medNotifsService.getMedNotifs().subscribe({
+    next: (data) => {
+      this.notifications = data;
+      console.log('Fetched notifications:', this.notifications);
+    },
+    error: (err) => console.error('Error fetching notifications:', err)
+  });
+  this.loadNotifications();
+      const roles  = this.authService.getUserRoles();
+      if (roles.includes('Patient')) {
+        this.userRole = 'Patient';
+      } else if (roles.includes('Medecin')) {
+        this.userRole = 'Medecin';
+      }  
+}
 
   sidebarId = input('sidebar1');
 

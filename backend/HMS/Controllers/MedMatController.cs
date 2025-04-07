@@ -1,4 +1,6 @@
 ﻿using HMS.Models;
+using HMS.Repositories;
+using HMS.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -10,10 +12,12 @@ namespace HMS.Controllers
     public class MedMatController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IPanierRepository _panierRepository;
 
-        public MedMatController(ApplicationDbContext context)
+        public MedMatController(ApplicationDbContext context, IPanierRepository panierRepository)
         {
             _context = context;
+            _panierRepository = panierRepository;
         }
 
         // ✅ Get all medical materials
@@ -100,6 +104,8 @@ namespace HMS.Controllers
             var material = await _context.Medicaments.FindAsync(id);
             if (material == null)
                 return NotFound();
+
+            await _panierRepository.MarkMedicamentAsMissingInPaniersAsync(id);
 
             _context.Medicaments.Remove(material);
             await _context.SaveChangesAsync();

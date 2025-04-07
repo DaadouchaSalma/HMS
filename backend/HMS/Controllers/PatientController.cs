@@ -43,8 +43,10 @@ namespace HMS.Controllers
 
 
 
+
         [Authorize(Roles = "Medecin, PersonnelAdministratif")]
         [HttpPost("new")]
+
         public async Task<IActionResult> AjouterPatient([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);

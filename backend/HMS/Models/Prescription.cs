@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace HMS.Models
 {
@@ -10,6 +11,7 @@ namespace HMS.Models
         public Guid MedecinId { get; set; }
         public Medecin? Medecin { get; set; }
         public Guid PatientId { get; set; }
+        [JsonIgnore]
         public Patient? Patient { get; set; }
         public DateTime Dateprescription { get; set; } = DateTime.Now;
 

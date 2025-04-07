@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 
+
 namespace HMS.Models
 {
     public class Patient
@@ -22,7 +23,11 @@ namespace HMS.Models
         public ICollection<Prescription>? Prescriptions { get; set; } = new List<Prescription>();
         public ICollection<Chambre>? Chambres { get; set; } = new List<Chambre>();
         [JsonIgnore]
+
+        public ICollection<Panier> Paniers { get; set; } = new List<Panier>();
+
         public ICollection<Reclamation> Reclamations { get; set; } = new List<Reclamation>();
+
 
     }
 }

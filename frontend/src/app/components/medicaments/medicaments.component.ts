@@ -2,6 +2,13 @@ import { Component, OnInit, signal } from '@angular/core';
 import { MedicamentService } from '../../services/medicament.service';
 import { Medicament } from '../../models/medicaments.model';
 import { Fournisseur } from '../../models/founisseur.model';
+import { CategorieMedicament } from '../../models/categorie.model';
+
+import { NotificationService } from '../../services/notification.service';
+import { FournisseursService } from '../../services/fournisseurs.service';
+import { CategorieService } from '../../services/categorie.service';
+import { PanierService } from '../../services/panier.service';
+
 
 import { CommonModule } from '@angular/common';  // Import CommonModule
 
@@ -19,9 +26,10 @@ import {
   ToastComponent,
   ToastBodyComponent,
   ToastHeaderComponent,
-  ToastModule
+  ToastModule,ButtonModule
 } from '@coreui/angular-pro';
 import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-medicaments',
@@ -34,7 +42,7 @@ ButtonDirective, CollapseDirective, SmartTableComponent, TemplateIdDirective, Mo
     ToastComponent,
     ToastBodyComponent,
     ToastHeaderComponent,
-    ToastModule
+    ToastModule,ButtonModule
   ],
   templateUrl: './medicaments.component.html',
 })
@@ -46,9 +54,16 @@ export class MedicamentsComponent implements OnInit {
     description: '',
     nbr_stock: 0,
     fournisseurId: '' ,
-    CategorieId:'',
+    categorieId:'',
     date_Exp: new Date() // Initial date
   };
+
+  fournisseur : Fournisseur = {
+    id: '',
+    nomF: '',
+    numTel:  '',
+    adresse: ''
+  }
 
 
   medicamentsData: Medicament[] = [];
@@ -59,63 +74,124 @@ export class MedicamentsComponent implements OnInit {
   columns: IColumn[] = [
     { key: 'nom', label: 'Nom' },
     { key: 'nbr_stock', label: 'Quantité de Stock' },
-    { key: 'fournisseur', label: 'Fournisseur' },
-    { key: 'categorie', label: 'Categorie' },
     { key: 'date_Exp', label: 'Date d\'Expiration ' },
+    //{ key: 'fournisseur', label: ' fff ' },
     { key: 'show', label: '', _style: { width: '5%' }, filter: false, sorter: false },
     { key: 'delete', label: '', _style: { width: '5%' }, filter: false, sorter: false }
 
   ];
 
-  constructor(private medicamentService: MedicamentService) {}
+  constructor(private medicamentService: MedicamentService,private notificationService: NotificationService,
+    private CategorieService : CategorieService, private fournisseurService : FournisseursService, private cdr :ChangeDetectorRef,
+    private panierService : PanierService 
 
-  ngOnInit(): void {
-    this.medicamentService.getMedicaments().subscribe({
-      next: (data) => (this.medicamentsData = data),
-      error: (err) => console.error('Error fetching medicaments:', err)
-    });
-  }
+  ) {}
 
-  toggleDetails(id: string) {
-    this.details_visible[id] = !this.details_visible[id];
-  }
+    ngOnInit(): void {
+      this.loadMedicaments();
+    }
+    loadMedicaments() {
+      this.medicamentService.getMedicaments().subscribe({
+        next: (data) => {
+          this.medicamentsData = data;
+          console.log('Medicaments loaded:', this.medicamentsData);
+        },
+        error: (err) => console.error('Error fetching medicaments:', err),
+      });
+    }
+    
 
-// Properties for modal control
-visible_modal: boolean = false;
-selectedId: string | null = null;
+    getFournisseurById(fournisseurId: string, medicament: Medicament) {
+      this.fournisseurService.getFournisseurById(fournisseurId).subscribe({
+        next: (fournisseur) => {
+          medicament.fournisseur = fournisseur; // Attach fournisseur data to medicament
+          this.cdr.markForCheck();
+        },
+        error: (err) => console.error('Error fetching fournisseur:', err)
+      });
+    }
+  
 
-// Open modal with the selected medicament ID
-openDeleteModal(id: string) {
-  this.selectedId = id;
-  this.visible_modal = true;
-}
-
-// Close modal and reset selected ID
-closeModal() {
-  this.visible_modal = false;
-  this.selectedId = null;
-}
-
-// Confirm deletion
-confirmDelete() {
-  if (this.selectedId) {
-    this.medicamentService.deleteMedicament(this.selectedId).subscribe({
-      next: () => {
-        console.log(`Medicament with id ${this.selectedId} deleted.`);
-        this.toggleToast('Médicament supprimé avec succès!', 'success');
-
-        // Remove deleted medicament from the list
-        this.medicamentsData = this.medicamentsData.filter(m => m.id !== this.selectedId);
-
-        this.closeModal(); // Close modal after deletion
+  
+  getCategorieById(categorieId: string, medicament: Medicament) {
+    this.CategorieService.getCategorieById(categorieId).subscribe({
+      next: (data) => {
+        // Attach categorie data to the medicament
+        medicament.categorie = data; // Ensure this updates the correct medicament
+        console.log(data);
       },
-      error: (err) => {
-        console.error('Error deleting medicament:', err);
-        this.toggleToast('Erreur lors de la suppression du médicament!', 'error');
-      }
+      error: (err) => console.error('Error fetching categorie:', err),
     });
   }
-}
+  
+  
+  
+  toggleDetails(medicament: Medicament) {
+    const id = medicament.id;
+  
+    if (!id) {
+      console.warn('Medicament ID is undefined, cannot toggle details.');
+      return;
+    }
+  
+    if (!this.details_visible[id]) {
+      this.details_visible[id] = true; // Show details
+  
+      // Fetch fournisseur ONLY if it's not already set
+      if (!medicament.fournisseur && medicament.fournisseurId) {
+        console.log(`Fetching fournisseur for medicament: ${medicament.nom} (ID: ${medicament.fournisseurId})`);
+        this.getFournisseurById(medicament.fournisseurId as string, medicament);
+      }
+  
+      // Fetch categorie ONLY if it's not already set
+      if (!medicament.categorie && medicament.categorieId) {
+        console.log(`Fetching categorie for medicament: ${medicament.nom} (ID: ${medicament.categorieId})`);
+        this.getCategorieById(medicament.categorieId, medicament);
+      }
+    } else {
+      this.details_visible[id] = false; // Hide details
+    }
+  }
+  
+  
+  
+
+  // Properties for modal control
+  visible_modal: boolean = false;
+  selectedId: string | null = null;
+
+  // Open modal with the selected medicament ID
+  openDeleteModal(id: string) {
+    this.selectedId = id;
+    this.visible_modal = true;
+  }
+
+  // Close modal and reset selected ID
+  closeModal() {
+    this.visible_modal = false;
+    this.selectedId = null;
+  }
+
+  // Confirm deletion
+  confirmDelete() {
+    if (this.selectedId) {
+      this.medicamentService.deleteMedicament(this.selectedId).subscribe({
+        next: () => {
+          console.log(`Medicament with id ${this.selectedId} deleted.`);
+          this.toggleToast('Médicament supprimé avec succès!', 'success');
+
+          // Remove deleted medicament from the list
+          this.medicamentsData = this.medicamentsData.filter(m => m.id !== this.selectedId);
+
+          this.closeModal(); // Close modal after deletion
+        },
+        error: (err) => {
+          console.error('Error deleting medicament:', err);
+          this.toggleToast('Erreur lors de la suppression du médicament!', 'error');
+        }
+      });
+    }
+  }
 
   
 
@@ -124,8 +200,7 @@ confirmDelete() {
   
     const stockValue = Number(newStock);
     if (isNaN(stockValue) || stockValue < 0) {
-      this.toggleToast('Stock ne peut pas être negatif!', 'error');
-
+      this.toggleToast('Stock ne peut pas être négatif!', 'error');
       return;
     }
   
@@ -134,20 +209,30 @@ confirmDelete() {
       return;
     }
   
-    // ✅ Ensure the property name matches the backend
+    // ✅ Ensure the updated stock is explicitly sent
     const updatedMedicament = { 
       ...medicament, 
+      nbr_stock: stockValue  // Ensure this value is sent in the API request
     };
   
     this.medicamentService.updateMedicament(medicament.id, updatedMedicament).subscribe({
       next: () => {
-        medicament.nbr_stock = stockValue; // Update UI
-        console.log(`Stock updated successfully: ${medicament.nbr_stock}`);
-        this.toggleToast('Stock modifié avec succés!', 'success');
-
-
+        console.log(`Stock updated successfully in DB: ${stockValue}`);
+        medicament.nbr_stock = stockValue; // Update UI after confirmation from the backend
+        this.panierService.refreshMissingMeds().subscribe({
+          next: (res) => {
+            console.log('Missing meds refreshed:', res);
+          },
+          error: (err) => {
+            console.error('Failed to refresh missing meds:', err);
+          }
+        });
+                this.toggleToast('Stock modifié avec succès!', 'success');
       },
-      error: (err) => console.error('Error updating stock:', err)
+      error: (err) => {
+        console.error('Error updating stock:', err);
+        this.toggleToast('Erreur lors de la modification du stock!', 'error');
+      }
     });
   }
   

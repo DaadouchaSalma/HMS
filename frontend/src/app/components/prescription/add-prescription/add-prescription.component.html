@@ -34,6 +34,13 @@
         </div>
       </c-col>
       <c-col [md]="6">
+        <label cLabel for="quantite-{{i}}">Quantité<span style="color: red;"> *</span></label>
+        <input cFormControl id="quantite-{{i}}" type="text" [(ngModel)]="med.quantite" name="quantite-{{i}}" class="form-control" required #quantite="ngModel"/>
+        <div *ngIf="quantite.invalid && quantite.touched" style="color: red; padding-left: 2%;">
+          <small>* La quantité est requise.</small>
+        </div>
+      </c-col>
+      <c-col [md]="6">
         <label cLabel for="frequency-{{i}}">Fréquence<span style="color: red;"> *</span></label>
         <input cFormControl id="frequency-{{i}}" type="text" [(ngModel)]="med.frequence" name="frequence-{{i}}" class="form-control" required #frequency="ngModel"/>
         <div *ngIf="frequency.invalid && frequency.touched" style="color: red; padding-left: 2%;">

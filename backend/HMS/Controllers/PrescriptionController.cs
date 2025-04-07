@@ -69,6 +69,23 @@ namespace HMS.Controllers
             }
         }
 
+
+        
+        [HttpGet("generate-pdf/{id}")]
+        public async Task<IActionResult> GeneratePrescriptionPdf(Guid id)
+        {
+            // Fetch prescription from DB
+            Prescription prescription = await _prescriptionRepository.GetPrescriptionByIdAsync(id);
+            if (prescription == null)
+            {
+                return NotFound("Prescription not found");
+            }
+
+            // Generate PDF
+            byte[] pdfBytes = PdfGenerator.FillPrescriptionTemplate(prescription);
+            return File(pdfBytes, "application/pdf", "Prescription.pdf");
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPrescriptions(Guid id)
         {
@@ -111,6 +128,9 @@ namespace HMS.Controllers
 
 
 
+
     }
+
+
 }
 

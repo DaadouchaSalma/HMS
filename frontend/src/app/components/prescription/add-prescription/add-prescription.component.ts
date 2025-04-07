@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule, ColComponent, ColDirective, FormFeedbackComponent, FormLabelDirective, FormSelectDirective, MultiSelectComponent, MultiSelectOptgroupComponent, MultiSelectOptionComponent, ProgressComponent, RowDirective, ToastBodyComponent, ToastComponent, ToasterComponent, ToastHeaderComponent,MultiSelectComponent as MultiSelectComponent_1, } from '@coreui/angular-pro';
 import { signal } from '@angular/core';
 import { DatePickerComponent as DatePickerComponent_1 } from '@coreui/angular-pro';
+import { PanierService } from '../../../services/panier.service';
+
 
 @Component({
   selector: 'app-add-prescription',
@@ -23,7 +25,7 @@ export class AddPrescriptionComponent implements OnInit {
   };
   patients: any[] = [];
   medications = [
-    { nom: '', dosage: '', frequence: '', duree: '', voieAdministration: '', InstructionsSpeciales: '' } 
+    { nom: '', dosage: '', quantite: '', frequence: '', duree: '', voieAdministration: '', InstructionsSpeciales: '' } 
   ];
   position = 'top-end';
   visible = signal(false);
@@ -31,7 +33,9 @@ export class AddPrescriptionComponent implements OnInit {
   toastMessage = signal(''); 
   toastType = signal('success');
 
-  constructor(private prescriptionService: PrescriptionService, private patientService: PatientService, private route: ActivatedRoute) {}
+  constructor(private prescriptionService: PrescriptionService, private patientService: PatientService, private route: ActivatedRoute,
+    private panierService : PanierService
+  ) {}
   
   ngOnInit() {
     this.loadPatients();
@@ -53,7 +57,7 @@ export class AddPrescriptionComponent implements OnInit {
   
   
   addMedication() {
-    this.medications.push({ nom: '', dosage: '', frequence: '', duree: '', voieAdministration: '', InstructionsSpeciales: '' });
+    this.medications.push({ nom: '', dosage: '', quantite: '', frequence: '', duree: '', voieAdministration: '', InstructionsSpeciales: '' });
   }
 
   removeMedication(index: number) {
@@ -61,7 +65,12 @@ export class AddPrescriptionComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.prescription.listeMed = JSON.stringify(this.medications);
+    this.prescription.listeMed = JSON.stringify(
+      this.medications.map(med => ({
+        ...med,
+        quantite: Number(med.quantite)  // Convert to number
+      }))
+    );
     if (this.medications.length === 0) {
       this.toggleToast('If faut ajouter au moins un médicaments.', 'error');
       return; 
@@ -75,14 +84,25 @@ export class AddPrescriptionComponent implements OnInit {
     }
     this.prescriptionService.addPrescription(this.prescription).subscribe(
       response => {
+        console.log(this.prescription);
+        
         this.toggleToast('La prescription a été ajoutée avec succès.', 'success');
         form.reset();
+        
       },
       error => {
         this.toggleToast("Échec de l'ajout de la prescription. Veuillez réessayer.", 'error');
       }
     );
-  }
+    this.panierService.addToPanier(this.prescription).subscribe(
+      response => {
+        console.log("Panier updated successfully", response); // Debugging
+      },
+      error => {
+        console.error("Error adding to panier:", error); // Debugging
+      }
+    );
+      }
 
   toggleToast(message: string, type: 'success' | 'error') {
     this.toastMessage.set(message);

@@ -19,4 +19,8 @@ export class PrescriptionService {
   getPrescriptions(patientId: string): Observable<Prescription[]> {
     return this.http.get<Prescription[]>(`${this.apiUrl}/${patientId}`);
   }
+
+  generatePdf(id: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/generate-pdf/${id}`, { responseType: 'blob' });
+  }
 }

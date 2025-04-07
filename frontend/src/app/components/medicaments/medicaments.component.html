@@ -72,6 +72,11 @@
         <div class="card-body">
           <h5>{{ item.nom }}</h5>
           <p class="text-muted">Description: {{ item.description }}</p>
+          <p class="text-muted">Fournisseur: {{ item.fournisseur?.nomF }}</p>
+          <p class="text-muted">Catégorie: {{ item.categorie?.name }}</p>
+
+
+
           
 
         </div>
@@ -95,12 +100,13 @@
                 placeholder="{{item.nbr_stock}}" 
                 required 
                 type="number"
-                (change)="updateStock(item, item.nbrStock)">
-            </div>
+                (blur)="updateStock(item, $event.target.value)">            </div>
           </form>
         }
+
+
         @case ('show') {
-          <button (click)="toggleDetails(item.id)" cButton class="custom-btn" size="sm" variant="outline">
+          <button (click)="toggleDetails(item)" cButton class="custom-btn" size="sm" variant="outline">
             Détails
           </button>
         }

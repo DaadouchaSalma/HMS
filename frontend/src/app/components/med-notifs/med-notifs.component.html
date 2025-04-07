@@ -1,0 +1,14 @@
+<c-row>
+  <c-col *ngFor="let notification of notifications" lg="6" xs="12">
+    <c-widget-stat-f
+      class="mb-3"
+      color="info-gradient"
+      padding
+      [value]="notification.message || 'N/A'"
+    >
+      <ng-template cTemplateId="widgetIconTemplate">
+        <svg size="xl" width="24"></svg>
+      </ng-template>
+    </c-widget-stat-f>
+  </c-col>
+</c-row>

@@ -43,5 +43,19 @@ export const routes: Routes = [
     data: {
       title: 'Consulter Les Catégories'
     }
+  },
+  {
+    path: 'medNotifs',
+    loadComponent: () => import('./med-notifs/med-notifs.component').then(m => m.MedNotifsComponent),
+    data: {
+      title: 'Consulter Les Notifications'
+    }
+  },
+  {
+    path: 'paniers',
+    loadComponent: () => import('./paniers-list/paniers-list.component').then(m => m.PaniersListComponent),
+    data: {
+      title: 'Consulter Les Paniers'
+    }
   }
 ]

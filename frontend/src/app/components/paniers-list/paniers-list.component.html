@@ -1,0 +1,182 @@
+<style>
+  .custom-btn {
+  background-color: #6387c0 !important;
+  color: white !important;
+  border-color: #6387c0 !important;
+}
+
+
+</style>
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast
+    (timer)="onTimerChange($event)"
+    (visibleChange)="onVisibleChange($event)"
+    [visible]="visible()"
+    [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+    [style.color]="'white'"
+  >
+    <c-toast-header>
+     
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>
+
+
+<!-- Validation Confirmation Modal -->
+<c-modal id="validationModal" [visible]="visible_modal" (visibleChange)="handleModalChange($event)">
+  <c-modal-header>
+    <h5>Confirmation de validation</h5>
+
+    <button (click)="closeModal()" cButtonClose></button>
+  </c-modal-header>
+
+  <c-modal-body>
+    <p>Êtes-vous sûr de vouloir valider ce panier ?</p>
+    
+  </c-modal-body>
+
+  <c-modal-footer>
+    <button (click)="closeModal()" cButton color="secondary">
+      Annuler
+    </button>
+    <button (click)="confirmValidation()" cButton color="success">
+      Valider
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+
+<c-smart-table
+  [activePage]="1"
+  [columnSorter]="true"
+  [columns]="columns"
+  [columnFilter]="true"
+  [items]="paniers"
+  [sorterValue]="{ column: 'nom', state: 'asc' }"
+  [tableFilter]="true"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  [tableBodyProps]="{ align: 'middle' }"
+  noItemsLabel=" Aucun panier trouvé"
+  tableFilterLabel = "filtrer"
+  tableFilterPlaceholder="Entrer Lettre"
+  cleaner
+  clickableRows
+  footer
+  header
+  pagination
+>
+
+
+<ng-template cTemplateId="tableDetails" let-item="item">
+  <div *ngIf="details_visible[item.panierId] && panierDetails[item.panierId]">
+    <h5>Médicaments du panier:</h5>
+
+    <div>
+      <strong>Médicaments existans et quantités requises:</strong>
+      <ul *ngIf="panierDetails[item.panierId]?.medPaniers?.length > 0; else noMeds">
+        <li *ngFor="let med of panierDetails[item.panierId].medPaniers">
+          {{ med.medicament.nom }} ({{ med.quantity}})
+        </li>
+      </ul>
+      <ng-template #noMeds>
+        <p>Aucun médicament trouvé</p>
+      </ng-template>
+    </div>
+
+    <div>
+      <strong>Médicaments Manquants:</strong>
+      <ul *ngIf="panierDetails[item.panierId]?.missingMeds?.length > 0; else noMissingMeds">
+        <li *ngFor="let med of panierDetails[item.panierId].missingMeds">
+          {{ med.nom }} ({{ med.quantite }})
+        </li>
+      </ul>
+      <ng-template #noMissingMeds>
+        <p>Aucun médicament manquant</p>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @case ('show') {
+          <button (click)="toggleDetails(item.panierId)" cButton class="custom-btn" size="sm" variant="outline">
+            Détails
+          </button>
+        }
+        @case ('valider') {
+          <button (click)="openValidationModal(item.panierId)" cButton class="custom-btn" size="sm" variant="outline">
+            valider
+          </button>
+        }
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+  
+  
+  
+</c-smart-table>
+
+
+<!-- Paniers Table 
+<div class="container">
+  <h2>Liste des Paniers</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Patient</th>
+          <th>Email</th>
+          <th>Médicaments</th>
+          <th>Médicaments Manquants</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let panier of paniers">
+          <td>{{ panier.patientName }}</td>
+          <td>{{ panier.patientEmail }}</td>
+          <td>
+            <ul *ngIf="panier.medications.length > 0; else noMeds">
+              <li *ngFor="let med of panier.medications">
+                {{ med.medName }} ({{ med.quantity }})
+              </li>
+            </ul>
+            <ng-template #noMeds>
+              <p>Aucun médicament trouvé</p>
+            </ng-template>
+          </td>
+          <td>
+            <ul *ngIf="panier.missingMedications.length > 0; else noMissingMeds">
+              <li *ngFor="let missingMed of panier.missingMedications">
+                {{ missingMed.medName }} {{ missingMed.quantity }}
+              </li>
+            </ul>
+            <ng-template #noMissingMeds>
+              <p>Aucun médicament manquant</p>
+            </ng-template>
+          </td>
+          <td>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  <ng-template #noData>
+    <p>Aucun panier trouvé.</p>
+  </ng-template>
+</div>
+-->
