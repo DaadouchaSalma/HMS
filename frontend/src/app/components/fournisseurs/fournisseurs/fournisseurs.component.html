@@ -3,6 +3,7 @@
     <tr>
       <th scope="col">Nom</th>
       <th scope="col">Adresse</th>
+      <th scope="col">Adresse Mail</th>
       <th scope="col">Téléphone</th>
       <th scope="col">Action</th>
     </tr>
@@ -11,6 +12,7 @@
     <tr *ngFor="let fournisseur of fournisseurs">
       <td>{{ fournisseur.nomF }}</td>
       <td>{{ fournisseur.adresse }}</td>
+      <td>{{ fournisseur.mail }}</td>
       <td>{{ fournisseur.numTel }}</td>
       <td>
         <!--<button class="btn btn-danger" (click)="deleteFournisseur(fournisseur)" cButton>

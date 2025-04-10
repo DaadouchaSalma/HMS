@@ -9,6 +9,7 @@ using HMS.Models;
 using System.Text.Json;
 using iText.Kernel.Colors;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PdfGenerator
 {
@@ -24,91 +25,78 @@ public class PdfGenerator
             Document document = new Document(pdfDoc);
             var font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-            // Directly add content to the PDF by specifying the coordinates for each element
-
-            
             // Patient & Doctor Information
-
-
             document.Add(new Paragraph($"Docteur: {prescription.Medecin?.Nom ?? "N/A"} {prescription.Medecin?.Prenom ?? "N/A"}")
                 .SetFont(font)
                 .SetFontSize(12)
                 .SetBold()
-                .SetFixedPosition(40, 730, 400)); // Position the Doctor's Name
+                .SetFixedPosition(40, 730, 400));
 
             document.Add(new Paragraph($"Patient : {prescription.Patient?.Nom ?? "N/A"} {prescription.Patient?.Prenom ?? "N/A"}")
                 .SetFont(font)
                 .SetFontSize(12)
                 .SetBold()
-                .SetFixedPosition(40, 710, 400)); // Position the Patient's Name
+                .SetFixedPosition(40, 710, 400));
 
             document.Add(new Paragraph($"Date: {DateTime.Now:yyyy-MM-dd}")
                 .SetFont(font)
                 .SetFontSize(12)
                 .SetBold()
-                .SetFixedPosition(40, 690, 400)); // Position the Date
+                .SetFixedPosition(40, 690, 400));
 
-            // Medications Section
+            // Deserialize and display medications with spacing
             var cleanedJson = JsonSerializer.Deserialize<string>(prescription.ListeMed);
             List<MedicamentDTO> medications = JsonSerializer.Deserialize<List<MedicamentDTO>>(cleanedJson);
 
-            string medsFormatted = string.Join("\n", medications.Select(m =>
-                $"- {m.Nom}: {m.Dosage}, {m.Frequence} pendant {m.Duree} / {m.InstructionsSpeciales}"));
+            float startY = 600; // Starting Y position
+            float lineHeight = 60; // Line spacing
 
-            // Medication List
-            document.Add(new Paragraph("Médicaments:")
-                .SetFont(font)
-                .SetFontSize(14)
-                .SetBold()
-                .SetFixedPosition(70, 650, 400)); // Position the "Medications" title
-
-            document.Add(new Paragraph(medsFormatted)
-                .SetFont(font)
-                .SetFontSize(14)
-                .SetFixedPosition(80, 600, 400)); // Position the medications list
+            foreach (var m in medications)
+            {
+                string line = $"- {m.Nom}: {m.Dosage}, {m.Frequence} pendant {m.Duree} / {m.InstructionsSpeciales}";
+                document.Add(new Paragraph(line)
+                    .SetFont(font)
+                    .SetFontSize(18)
+                    .SetFixedPosition(40, startY, 500));
+                startY -= lineHeight;
+            }
 
             // Notes Section
             document.Add(new Paragraph("Notes:")
                 .SetFont(font)
                 .SetFontSize(14)
                 .SetBold()
-                .SetFixedPosition(40, 200, 400)); // Position the "Notes" title
+                .SetFixedPosition(40, 200, 400));
 
             document.Add(new Paragraph(prescription.Note ?? "")
                 .SetFont(font)
                 .SetFontSize(12)
-                .SetFixedPosition(40, 150, 400)); // Position the notes content
+                .SetFixedPosition(40, 150, 400));
 
-            // Doctor's Signature Line
-            document.Add(new Paragraph("\n\nSignature: __________________")
-                .SetFont(font)
-                .SetFontSize(12)
-                .SetFixedPosition(400, 150, 400)); // Position the signature line
-
-            //tel
+            // Contact Info (in white font)
             document.Add(new Paragraph("12345678")
                 .SetFont(font)
                 .SetFontSize(12)
-                .SetFontColor(ColorConstants.WHITE)  // Set font color to white
+                .SetFontColor(ColorConstants.WHITE)
                 .SetFixedPosition(100, 50, 400));
-            //mail
-            document.Add(new Paragraph("smartmed@gmail.com")
+
+            document.Add(new Paragraph("smartcare314@gmail.com")
                 .SetFont(font)
                 .SetFontSize(12)
                 .SetFontColor(ColorConstants.WHITE)
-                .SetFixedPosition(100, 20, 400)); 
-            //localisation
+                .SetFixedPosition(100, 20, 400));
+
             document.Add(new Paragraph("16 Tunis, Tunis, Tunisie")
                 .SetFont(font)
                 .SetFontSize(12)
                 .SetFontColor(ColorConstants.WHITE)
-                .SetFixedPosition(260, 50, 400)); 
-            //site web
-            document.Add(new Paragraph("smart-med.tn")
+                .SetFixedPosition(290, 50, 400));
+
+            document.Add(new Paragraph("smartCare.tn")
                 .SetFont(font)
                 .SetFontSize(12)
                 .SetFontColor(ColorConstants.WHITE)
-                .SetFixedPosition(260, 20, 400)); 
+                .SetFixedPosition(290, 20, 400));
 
             pdfDoc.Close();
             return ms.ToArray();

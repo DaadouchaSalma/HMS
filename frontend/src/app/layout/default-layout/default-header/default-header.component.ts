@@ -118,15 +118,25 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
 
   public Mednotifications: MedNotifs[] = [];
+  public ExpiryNotifications: MedNotifs[] = [];
+  public StockNotifications: MedNotifs[] = [];
+
 
 ngOnInit(): void {
   this.medNotifsService.getMedNotifs().subscribe({
     next: (data) => {
       this.Mednotifications = data;
-      console.log('Fetched notifications:', this.notifications);
+  
+      // Separate notifications
+      this.ExpiryNotifications = data.filter((notif) => notif.message.startsWith('Le'));
+      this.StockNotifications = data.filter((notif) => notif.message.startsWith('Il'));
+  
+      console.log('Le notifications:', this.ExpiryNotifications);
+      console.log('Il notifications:', this.StockNotifications);
     },
     error: (err) => console.error('Error fetching notifications:', err)
   });
+  
   this.loadNotifications();
       const roles  = this.authService.getUserRoles();
       if (roles.includes('Patient')) {

@@ -67,7 +67,6 @@
   tableFilterPlaceholder="Entrer Lettre"
   cleaner
   clickableRows
-  footer
   header
   pagination
 >
@@ -75,8 +74,45 @@
 
 <ng-template cTemplateId="tableDetails" let-item="item">
   <div *ngIf="details_visible[item.panierId] && panierDetails[item.panierId]">
-    <h5>Médicaments du panier:</h5>
+    <h5><strong>Les médicaments du panier</strong></h5>
+    <div class="card-body">
+      <div class="row">
+        <!-- Existing Medications List -->
+        <div class="col-md-6">
+          <strong>Médicaments existants et quantités requises :</strong>
 
+          <ul cListGroup flush *ngIf="panierDetails[item.panierId]?.medPaniers?.length > 0; else noMeds">
+            <li cListGroupItem *ngFor="let med of panierDetails[item.panierId].medPaniers">
+              <i class="fa-solid fa-pills me-2"></i> 
+              {{ med.medicament.nom }} ({{ med.quantity}})
+            </li>
+          </ul>
+          <ng-template #noMeds>
+            <p>Aucun médicament trouvé</p>
+          </ng-template>
+        </div>
+  
+        <!-- Missing Medications List -->
+        <div class="col-md-6">
+          <strong>Médicaments Manquants :</strong>
+          <ul cListGroup flush *ngIf="panierDetails[item.panierId]?.missingMeds?.length > 0; else noMissingMeds">
+            <li cListGroupItem *ngFor="let med of panierDetails[item.panierId].missingMeds">
+              <i class="fa-solid fa-ban me-2"></i>
+              {{ med.nom }} ({{ med.quantite }})
+            </li>
+          </ul>
+          <ng-template #noMissingMeds>
+            <p>Aucun médicament manquant</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<!--
+
+  <div *ngIf="details_visible[item.panierId] && panierDetails[item.panierId]">
     <div>
       <strong>Médicaments existans et quantités requises:</strong>
       <ul *ngIf="panierDetails[item.panierId]?.medPaniers?.length > 0; else noMeds">
@@ -100,7 +136,7 @@
         <p>Aucun médicament manquant</p>
       </ng-template>
     </div>
-  </div>
+  </div>-->
 </ng-template>
 
 

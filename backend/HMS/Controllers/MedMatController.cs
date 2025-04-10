@@ -4,9 +4,11 @@ using HMS.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MedMatController : ControllerBase
@@ -22,6 +24,7 @@ namespace HMS.Controllers
 
         // ✅ Get all medical materials
         [HttpGet]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> GetAll()
         {
             var materials = await _context.Medicaments
@@ -32,6 +35,7 @@ namespace HMS.Controllers
 
         // ✅ Get a specific medical material by ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> GetById(Guid id)
         {
             var material = await _context.Medicaments
@@ -46,6 +50,7 @@ namespace HMS.Controllers
 
         // ✅ Create a new medical material        
         [HttpPost]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> Create([FromBody] Medicament medMat)
         {
             if (medMat == null)
@@ -78,6 +83,7 @@ namespace HMS.Controllers
 
         // ✅ Update an existing medical material
         [HttpPut("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> Update(Guid id, [FromBody] Medicament medMat)
         {
             if (medMat == null || medMat.Id != id)
@@ -99,6 +105,7 @@ namespace HMS.Controllers
 
         // ✅ Delete a medical material
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var material = await _context.Medicaments.FindAsync(id);

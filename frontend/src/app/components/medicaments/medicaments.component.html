@@ -61,7 +61,6 @@
   tableFilterPlaceholder="Entrer Lettre"
   cleaner
   clickableRows
-  footer
   header
   pagination
 >
@@ -69,17 +68,23 @@
   <ng-template cTemplateId="tableDetails" let-item="item">
     <div>
       <div [visible]="details_visible[item.id] === true" cCollapse>
-        <div class="card-body">
-          <h5>{{ item.nom }}</h5>
-          <p class="text-muted">Description: {{ item.description }}</p>
-          <p class="text-muted">Fournisseur: {{ item.fournisseur?.nomF }}</p>
-          <p class="text-muted">Catégorie: {{ item.categorie?.name }}</p>
-
-
-
-          
-
+        <div>
+          <div style="display: flex; align-items: center;">
+            <h6 style="margin: 0 5px 0 0;">Description:</h6>
+            <p class="text-muted" style="margin: 0;">{{ item.description }}</p>
+          </div>
+        
+          <div style="display: flex; align-items: center;">
+            <h6 style="margin: 0 5px 0 0;">Fournisseur:</h6>
+            <p class="text-muted" style="margin: 0;">{{ item.fournisseur?.nomF }}</p>
+          </div>
+        
+          <div style="display: flex; align-items: center;">
+            <h6 style="margin: 0 5px 0 0;">Catégorie:</h6>
+            <p class="text-muted" style="margin: 0;">{{ item.categorie?.name }}</p>
+          </div>
         </div>
+        
       </div>
     </div>
   </ng-template>

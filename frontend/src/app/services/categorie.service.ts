@@ -13,22 +13,22 @@ export class CategorieService {
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<CategorieMedicament[]> {
-    return this.http.get<CategorieMedicament[]>(this.apiUrl);
+    return this.http.get<CategorieMedicament[]>(this.apiUrl , { withCredentials: true });
   }
 
   getCategorieById(id: string): Observable<CategorieMedicament> {
-    return this.http.get<CategorieMedicament>(`${this.apiUrl}/${id}`);
+    return this.http.get<CategorieMedicament>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 
   addCategorie(Categorie: CategorieMedicament): Observable<CategorieMedicament> {
-    return this.http.post<CategorieMedicament>(this.apiUrl, Categorie);
+    return this.http.post<CategorieMedicament>(this.apiUrl, Categorie, { withCredentials: true });
   }
   updateCategorie(id: string, Categorie: CategorieMedicament): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, Categorie);
+    return this.http.put<void>(`${this.apiUrl}/${id}`, Categorie, { withCredentials: true });
   }
 
   deleteCategorie(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 }
 
