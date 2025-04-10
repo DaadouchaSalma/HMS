@@ -1,4 +1,24 @@
-<!-- Form to edit fournisseur -->
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast
+    (timer)="onTimerChange($event)"
+    (visibleChange)="onVisibleChange($event)"
+    [visible]="visible()"
+    [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+    [style.color]="'white'"
+  >
+    <c-toast-header>
+     
+      <span *ngIf="toastType() === 'success'">Succès</span>
+      <span *ngIf="toastType() === 'error'">Erreur</span>
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ toastMessage() }}</p>
+      <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+    </c-toast-body>
+  </c-toast>
+</c-toaster>
+
+
 <form class="row g-3" (submit)="onSubmit()">
   <c-col [md]="6">
     <label for="nom">Nom</label>
@@ -8,6 +28,26 @@
   <c-col [md]="6">
     <label for="adresse">Adresse</label>
     <input type="text" id="adresse" class="form-control" [(ngModel)]="fournisseur.adresse" name="adresse" required>
+  </c-col>
+
+  <c-col [md]="6">
+    <label for="adresse">Adresse Mail</label>
+    <input
+    id="mail"
+    [(ngModel)]="fournisseur.mail"
+    name="mail"
+    class="form-control"
+    placeholder="E-mail"
+    required
+    type="email"
+    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+    #mail="ngModel"
+  />
+
+         
+  <div *ngIf="mail.invalid" style="color: red; padding-left: 2%;">
+    <small *ngIf="mail.errors?.['email'] || mail.errors?.['pattern']">* Le format de l'adresse mail est invalide.</small>
+  </div>
   </c-col>
 
   <c-col [md]="6">

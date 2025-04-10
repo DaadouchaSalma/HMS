@@ -13,10 +13,10 @@ export class MedNotifsService {
   constructor(private http: HttpClient) { }
 
   getMedNotifs() : Observable<MedNotifs[]>{
-    return this.http.get<MedNotifs[]>(`${this.apiUrl}` );
+    return this.http.get<MedNotifs[]>(`${this.apiUrl}`, { withCredentials: true } );
   }
 
   deleteMedNotif(id : string) : Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 }

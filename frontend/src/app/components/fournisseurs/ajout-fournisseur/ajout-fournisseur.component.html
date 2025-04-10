@@ -34,7 +34,29 @@
             <small>* Le nom est requis.</small>
           </div>
   </c-col>
+  <c-col [md]="6">
+    <label for="fournisseurAdresseMail" class="form-label">Adresse Mail</label>
+    <input
+      id="fournisseurAdresseMail"
+      cFormControl
+      [(ngModel)]="fournisseur.mail"
+      name="mail"
+      class="form-control"
+      placeholder="E-mail"
+      required
+      type="email"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      #mail="ngModel"
+    />
+
+           
+    <div *ngIf="mail.invalid && mail.touched" style="color: red; padding-left: 2%;">
+      <small *ngIf="mail.errors?.['required']">* L'adresse mail est requise.</small>
+      <small *ngIf="mail.errors?.['email'] || mail.errors?.['pattern']">* Le format de l'adresse mail est invalide.</small>
+    </div>
     
+  </c-col>
+  
 
   <c-col [md]="6">
       <label for="fournisseurTel" class="form-label">Numéro de téléphone</label>
@@ -57,14 +79,14 @@
     <input id="fournisseurAdresse" 
            cFormControl 
            [(ngModel)]="fournisseur.adresse" 
-           name="compagnie" 
+           name="adresse" 
            class="form-control" 
            placeholder="Adresse" 
            required 
            type="text"
            #adresse ="ngModel">
            <div *ngIf="adresse.invalid && adresse.touched" style="color: red; padding-left: 2%;">
-            <small>* L'adresse est requis.</small>
+            <small>* L'adresse est requise.</small>
           </div>
   </c-col>
   

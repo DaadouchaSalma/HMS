@@ -101,6 +101,7 @@ namespace HMS.Controllers
 
             var prescriptions = patient.Prescriptions.Select(pr => new
             {
+                id = pr.Id,
                 DatePrescription = pr.Dateprescription,
                 MedecinNomComplet = $"{pr.Medecin?.Prenom} {pr.Medecin?.Nom}",
                 NomsMedicaments = ExtraireNomsMedicaments(pr.ListeMed)

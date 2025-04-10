@@ -44,7 +44,19 @@ export class ListPrescriptionComponent {
 
 
   downloadPrescription(prescription: Prescription): void {
+    console.log(prescription);
+    if(prescription.id != null){
+      this.prescriptionService.generatePdf(prescription.id).subscribe(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Prescription.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+      }, error => {
+        console.error('Download failed', error);
+      });
+    }
     
-    console.log('Téléchargement de la prescription:', prescription);
-  }
-}
+  } 
+ }

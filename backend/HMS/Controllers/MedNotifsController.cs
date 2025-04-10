@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HMS.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MedNotifsController : ControllerBase
@@ -21,6 +23,7 @@ namespace HMS.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<ActionResult<IEnumerable<MedNotifs>>> GetMedNotifs()
         {
 
@@ -29,6 +32,7 @@ namespace HMS.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> DeleteMedNotif(Guid id)
         {
             var notif = await _context.medNotifs.FindAsync(id);
