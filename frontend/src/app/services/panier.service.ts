@@ -16,23 +16,23 @@ export class PanierService {
 
   addToPanier(prescription: Prescription): Observable<any> {
     console.log("Sending prescription to add to panier:", prescription);
-    return this.http.post<any>(`${this.apiUrl}/add`, prescription);
+    return this.http.post<any>(`${this.apiUrl}/add`, prescription,{ withCredentials: true });
   }
 
   getAllPaniers(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/all`);
+    return this.http.get<any>(`${this.apiUrl}/all`,{ withCredentials: true });
   }
 
   validatePanier(panierId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/validate/${panierId}`, {});
+    return this.http.post(`${this.apiUrl}/validate/${panierId}`, {},{ withCredentials: true });
   }
 
   getPanierById(id: string): Observable<Panier> {
-    return this.http.get<Panier>(`${this.apiUrl}/${id}`);
+    return this.http.get<Panier>(`${this.apiUrl}/${id}`,{ withCredentials: true });
   }
 
   refreshMissingMeds(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/refresh-missing-meds`, {});
+    return this.http.post(`${this.apiUrl}/refresh-missing-meds`, {},{ withCredentials: true });
   }
   
   

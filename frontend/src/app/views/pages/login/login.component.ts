@@ -46,6 +46,10 @@ export class LoginComponent {
       }else if (roles.includes('Pharmacien')) {
         this.router.navigate(['/meds/meds']);
     } else {
+            this.router.navigate(['/dashboard']);
+        } else if (roles.includes('Pharmacien')) {
+          this.router.navigate(['/meds/meds']);
+      } else {
           console.error('Unknown role, redirecting to default page');
           this.router.navigate(['/login']); 
         }

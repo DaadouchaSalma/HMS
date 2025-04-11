@@ -3,5 +3,6 @@ export interface Fournisseur {
     nomF: string;
     numTel: string;
     adresse: string;
+    mail: string;
 
 }
