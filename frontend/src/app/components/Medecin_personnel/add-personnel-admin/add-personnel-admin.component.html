@@ -24,9 +24,10 @@
     </c-col>
     <c-col [md]="6">
       <label cLabel for="Password">Mot de Passe<span style="color: red;"> *</span></label>
-      <input cFormControl id="Password" type="password" [(ngModel)]="personnel.password" class="form-control" name="password" required #password="ngModel"/>
-      <div *ngIf="password.invalid && password.touched" style="color: red; padding-left: 2%;">
-        <small>* Le mot de passe est requis.</small>
+      <input cFormControl id="Password" type="password" [(ngModel)]="personnel.password" class="form-control" name="password" required #password="ngModel" (ngModelChange)="validatePassword(personnel.password)"/>
+      <div *ngIf="(password.invalid && password.touched) || passwordErrors.length > 0" style="color: red; padding-left: 2%;">
+        <!--small>* Le mot de passe est requis.</small-->
+        <small *ngFor="let error of passwordErrors">{{ error }}</small>
       </div>
     </c-col>
     <c-col [md]="6">

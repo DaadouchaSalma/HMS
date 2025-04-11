@@ -1,10 +1,11 @@
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { CommonModule, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { Component, computed, inject, input, Output, ViewChild ,EventEmitter} from '@angular/core';
 import { MedNotifsService } from '../../../services/med-notifs.service';
 import { MedNotifs } from '../../../models/medNotifs.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {RdvService} from '../../../services/rdv.service';
 import { Router} from '@angular/router';
+import { SidebarComponent, SidebarService } from '@coreui/angular-pro'; // selon ta version
 
 
 
@@ -30,7 +31,7 @@ import {
   ProgressComponent,
   SidebarToggleDirective
 } from '@coreui/angular-pro';
-import { NgModel } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { IconDirective, IconSetService } from '@coreui/icons-angular';
 import { AuthService } from '../../../services/auth.service';
 import { cilPowerStandby,
@@ -44,10 +45,11 @@ import { cilPowerStandby,
   cilMoon,
   cilContrast,
   cilAccountLogout } from '@coreui/icons';
+
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective],
+  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective,FormsModule,CommonModule],
   providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
@@ -67,8 +69,10 @@ export class DefaultHeaderComponent extends HeaderComponent {
   });
   userRole: string = '';
 
+ 
 
-  constructor(private medNotifsService: MedNotifsService ,private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute) {
+  
+  constructor(private medNotifsService: MedNotifsService ,private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute,private sidebarService: SidebarService) {
     super();
     iconSet.icons = { 
       cilPowerStandby,
@@ -117,6 +121,9 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
 
   public Mednotifications: MedNotifs[] = [];
+  public ExpiryNotifications: MedNotifs[] = [];
+  public StockNotifications: MedNotifs[] = [];
+
 
 ngOnInit(): void {
   this.loadNotifications();
@@ -124,17 +131,45 @@ ngOnInit(): void {
   this.medNotifsService.getMedNotifs().subscribe({
     next: (data) => {
       this.Mednotifications = data;
-      console.log('Fetched notifications:', this.notifications);
+  
+      // Separate notifications
+      this.ExpiryNotifications = data.filter((notif) => notif.message.startsWith('Le'));
+      this.StockNotifications = data.filter((notif) => notif.message.startsWith('Il'));
+  
+      console.log('Le notifications:', this.ExpiryNotifications);
+      console.log('Il notifications:', this.StockNotifications);
     },
     error: (err) => console.error('Error fetching notifications:', err)
   });
+
       const roles  = this.authService.getUserRoles();
+      
       if (roles.includes('Patient')) {
         this.userRole = 'Patient';
       } else if (roles.includes('Medecin')) {
         this.userRole = 'Medecin';
+        this.router.navigate(['/personnel/edit-medecin']);
+      }  else if (roles.includes('Pharmacien')) {
+        this.userRole = 'Pharmacien';
+        this.router.navigate(['/personnel/edit-pharmacien']);
+      }  else if (roles.includes('PersonnelAdministrative')) {
+        this.userRole = 'PersonnelAdministrative';
+        this.router.navigate(['/personnel/edit-personnelA']);
       }  
+      console.log("roles",this.userRole)
 }
+navigateTo() {
+  if (this.userRole.includes('Medecin')) {
+    this.router.navigate(['/personnel/edit-medecin']);
+  }  else if (this.userRole.includes('Pharmacien')) {
+    this.userRole = 'Pharmacien';
+    this.router.navigate(['/personnel/edit-pharmacien']);
+  }  else if (this.userRole.includes('PersonnelAdministrative')) {
+    this.userRole = 'PersonnelAdministrative';
+    this.router.navigate(['/personnel/edit-personnelA']);
+  }  
+}
+
 
   sidebarId = input('sidebar1');
 

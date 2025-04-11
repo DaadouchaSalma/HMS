@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HMS.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategorieController : ControllerBase
@@ -22,6 +24,7 @@ namespace HMS.Controllers
 
         // GET: api/Categorie
         [HttpGet]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<ActionResult<IEnumerable<CategorieMedicament>>> GetCategories()
         {
             return await _context.categories.ToListAsync();
@@ -29,6 +32,7 @@ namespace HMS.Controllers
 
         // GET: api/Categorie/{id}
         [HttpGet("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<ActionResult<CategorieMedicament>> GetCategorie(Guid id)
         {
             var categorie = await _context.categories.FindAsync(id);
@@ -43,6 +47,7 @@ namespace HMS.Controllers
 
         // POST: api/Categorie
         [HttpPost]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<ActionResult<CategorieMedicament>> CreateCategorie(CategorieMedicament categorie)
         {
             if (categorie == null || string.IsNullOrWhiteSpace(categorie.Name))
@@ -59,6 +64,7 @@ namespace HMS.Controllers
 
         // PUT: api/Categorie/{id}
         [HttpPut("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> UpdateCategorie(Guid id, CategorieMedicament categorie)
         {
             if (id != categorie.Id)
@@ -82,6 +88,7 @@ namespace HMS.Controllers
 
         // DELETE: api/Categorie/{id}
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> DeleteCategorie(Guid id)
         {
             var categorie = await _context.categories.FindAsync(id);

@@ -159,7 +159,7 @@ export const navItems: INavData[] = [
   {
     name: 'Rendez-Vous',
     url: '/rendezvous',
-    iconComponent: { name: 'cil-user-plus' },
+    iconComponent: { name: 'cilCalendar' },
     children: [
       {
         name: 'Prendre Un Rendez-Vous',

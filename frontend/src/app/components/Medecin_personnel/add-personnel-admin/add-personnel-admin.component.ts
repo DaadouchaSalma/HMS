@@ -64,6 +64,10 @@ export class AddPersonnelAdminComponent {
     this.toggleToast('La date d\'embauche ne peut pas être dans le futur.', 'error');
     return; // Bloque l'envoi des données si la date est incorrecte
   }
+  if (this.validateDateNaiss() === false) {
+    this.toggleToast('La date de naissance ne peut pas être dans le futur.', 'error');
+    return; 
+  }
   if (form.invalid) {
     Object.keys(form.controls).forEach((field) => {
       const control = form.controls[field];
@@ -88,7 +92,15 @@ export class AddPersonnelAdminComponent {
       error: (err) => {
         console.log('Personnel Administrative  ajouté avec succès', personnelA);
         console.error('Erreur lors de l’ajout du Personnel Administrative ', err);
-        this.toggleToast("Échec de l'ajout du Personnel Administrative . Veuillez réessayer.", 'error');
+
+        const errorCode = err?.error[0]?.code;
+      const errorDescription = err?.error[0]?.description;
+
+      if (errorCode === 'DuplicateUserName') {
+        this.toggleToast("L\'email est déjà utilisé", 'error');
+      } else {
+        this.toggleToast('Une erreur est survenue lors de l\'ajout.', 'error');
+      }
       }
     });
   }
@@ -104,6 +116,42 @@ export class AddPersonnelAdminComponent {
       }
       else {return true; }
     }else {return true; }
+  }
+
+  validateDateNaiss() {
+   
+    if (this.personnel.date_Naiss) {
+      const today = new Date().toISOString().split('T')[0];
+      const DateNaiss = new Date(this.personnel.date_Naiss).toISOString().split('T')[0]; 
+  
+      if (DateNaiss > today) {
+        return false;
+      }
+      else {return true; }
+    }else {return true; }
+  }
+  passwordErrors: string[] = [];
+
+  validatePassword(password: string) {
+    this.passwordErrors = []; // Réinitialiser les erreurs
+  
+    if (!password) {
+      this.passwordErrors.push("* Le mot de passe est requis.");
+      return;
+    }
+    if (password.length < 6) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins 6 caractères.");
+    }
+    if (!/[A-Z]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins une lettre majuscule.");
+    }
+    if (!/[0-9]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins un chiffre.");
+    }
+    if (!/[^A-Za-z0-9]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins un caractère spécial.");
+    }
+    console.log(this.passwordErrors)
   }
 
 }

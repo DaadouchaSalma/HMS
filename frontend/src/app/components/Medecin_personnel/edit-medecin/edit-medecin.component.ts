@@ -29,14 +29,14 @@ export class EditMedecinComponent implements OnInit {
     constructor(private medecinService: MedecinService,private route: ActivatedRoute) {}
 
     ngOnInit() {
-      const id = this.route.snapshot.paramMap.get('id');
-      if (id) {
-        this.medecinService.getMedecinById(id).subscribe({
+      //const id = this.route.snapshot.paramMap.get('id');
+      //if (id) {
+        this.medecinService.getMedecinById().subscribe({
           next : (data) => (this.medecin = data),
           error :(error) => this.toggleToast('Erreur lors de la récupération des données', 'error')
       });
       }
-    }
+    //}
     formatDate(date: Date): string {
       const year = date.getFullYear();
       const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Les mois commencent à 0
@@ -44,8 +44,8 @@ export class EditMedecinComponent implements OnInit {
       return `${year}-${month}-${day}`;
     }
 
-    getMedecin(id: string): void {
-      this.medecinService.getMedecinById(id).subscribe(
+    getMedecin(): void {
+      this.medecinService.getMedecinById().subscribe(
         (medecin: Medecin) => {
           this.medecin = medecin;
           console.log('Données récupérées : ', medecin);
@@ -79,7 +79,7 @@ export class EditMedecinComponent implements OnInit {
       }
       console.log("Objet envoyé : ", updatedMedecin);
     
-      this.medecinService.updateMedecin(this.medecin.id,updatedMedecin).subscribe({
+      this.medecinService.updateMedecin(updatedMedecin).subscribe({
         next : (response) =>{ this.toggleToast('Médecin mis à jour avec succès', 'success') ;
                console.log(response);
         },

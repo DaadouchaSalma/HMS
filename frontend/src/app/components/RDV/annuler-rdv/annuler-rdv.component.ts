@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild ,signal} from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
@@ -10,15 +10,31 @@ import { ButtonCloseDirective, ButtonModule, CardBodyComponent, CardComponent, C
 import { RdvService } from '../../../services/rdv.service';
 import { Renderer2 } from '@angular/core';
 import { cilX } from '@coreui/icons';
+import {
+  ProgressComponent,
+  ToastBodyComponent,
+  ToastComponent,
+  ToasterComponent,
+  ToastHeaderComponent
+} from '@coreui/angular-pro';
 
 @Component({
   selector: 'app-annuler-rdv',
-  imports: [TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, FullCalendarModule, ModalComponent, ModalHeaderComponent, ModalTitleDirective, ThemeDirective, ButtonCloseDirective, ModalBodyComponent, ModalFooterComponent,ButtonModule],
+  imports: [TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, FullCalendarModule, ModalComponent, ModalHeaderComponent, ModalTitleDirective, ThemeDirective, ButtonCloseDirective, ModalBodyComponent, ModalFooterComponent,ButtonModule,ProgressComponent,
+    ToastBodyComponent,
+    ToastComponent,
+    ToasterComponent,
+    ToastHeaderComponent],
   templateUrl: './annuler-rdv.component.html',
   styleUrl: './annuler-rdv.component.scss'
 })
 export class AnnulerRdvComponent implements OnInit, AfterViewInit{
- 
+ position = 'top-end';
+     visible = signal(false);
+     percentage = signal(0);
+     toastMessage = signal(''); 
+     toastType = signal('success');
+
   visible_modal: boolean = false;
   eventIdToCancel: string | null = null;
   events: any[] = [];
@@ -178,8 +194,8 @@ export class AnnulerRdvComponent implements OnInit, AfterViewInit{
         calendarApi.updateSize();
       }, 1000);
     
-      const patientId = 'e30a30f7-37ec-4812-9b4d-020109796f67'; // À remplacer dynamiquement
-      this.rendezVousService.getRendezVousByPatientId(patientId).subscribe((rdvs) => {
+      //const patientId = 'e30a30f7-37ec-4812-9b4d-020109796f67'; // À remplacer dynamiquement
+      this.rendezVousService.getRendezVousByPatientId().subscribe((rdvs) => {
         console.log('liste rdv de l api', rdvs);
         
         this.events = rdvs.map(rdv => ({
@@ -230,6 +246,9 @@ export class AnnulerRdvComponent implements OnInit, AfterViewInit{
   
         // Fermer le modal
         this.closeModal();
+        this.toastMessage.set('Annulation du rendez-vous avec succès.');
+        this.toastType.set('success');
+        this.visible.set(true);
       });
     }
   }
@@ -242,5 +261,19 @@ export class AnnulerRdvComponent implements OnInit, AfterViewInit{
     this.visible_modal = event;
   }
   
+  toggleToast(message: string, type: 'success' | 'error') {
+    this.toastMessage.set(message);
+    this.toastType.set(type);
+    this.visible.update((value) => !value);
+  }
+
+  onVisibleChange($event: boolean) {
+    this.visible.set($event);
+    this.percentage.set(this.visible() ? this.percentage() : 0);
+  }
+
+  onTimerChange($event: number) {
+    this.percentage.set($event * 25);
+  }
   
 }

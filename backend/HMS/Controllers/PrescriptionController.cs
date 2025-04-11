@@ -121,12 +121,14 @@ namespace HMS.Controllers
                     return NotFound();
                 }
 
+              
                 var prescriptions = patient.Prescriptions.Select(pr => new
-                {
-                    DatePrescription = pr.Dateprescription,
-                    MedecinNomComplet = $"{pr.Medecin?.Prenom} {pr.Medecin?.Nom}",
-                    NomsMedicaments = ExtraireNomsMedicaments(pr.ListeMed)
-                }).ToList();
+            {
+                id = pr.Id,
+                DatePrescription = pr.Dateprescription,
+                MedecinNomComplet = $"{pr.Medecin?.Prenom} {pr.Medecin?.Nom}",
+                NomsMedicaments = ExtraireNomsMedicaments(pr.ListeMed)
+            }).ToList();
 
                 return Ok(prescriptions);
             }

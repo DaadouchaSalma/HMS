@@ -13,22 +13,22 @@ export class PersonnelAdminService {
   constructor(private http: HttpClient) {}
 
   addPersonnelAdministrative(personnelAdmin: PersonnelAdmin): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add`, personnelAdmin);
+    return this.http.post(`${this.apiUrl}/add`, personnelAdmin,{ withCredentials: true });
   }
   getPersonnelAByIdAdmin(id: string): Observable<PersonnelAdmin> {
-    return this.http.get<PersonnelAdmin>(`${this.apiUrl}/getA/${id}`);
+    return this.http.get<PersonnelAdmin>(`${this.apiUrl}/getA/${id}`,{ withCredentials: true });
   }
-  getPersonnelAById(id: string): Observable<PersonnelAdmin> {
-    return this.http.get<PersonnelAdmin>(`${this.apiUrl}/get/${id}`);
+  getPersonnelAById(): Observable<PersonnelAdmin> {
+    return this.http.get<PersonnelAdmin>(`${this.apiUrl}/get`,{ withCredentials: true });
   }
-  updatePersonnelA(id: string, updatedPersonnelA: PersonnelAdmin): Observable<any> {
-    return this.http.put(`${this.apiUrl}/editInfo/${id}`, updatedPersonnelA);
+  updatePersonnelA( updatedPersonnelA: PersonnelAdmin): Observable<any> {
+    return this.http.put(`${this.apiUrl}/editInfo`, updatedPersonnelA,{ withCredentials: true });
   }
   deletePersonnelA(id: string) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`,{ withCredentials: true });
   }
   updatePersonnelAdmin(id: string, updatedPersonnelA: PersonnelAdmin): Observable<any> {
-    return this.http.put(`${this.apiUrl}/edit/${id}`, updatedPersonnelA);
+    return this.http.put(`${this.apiUrl}/edit/${id}`, updatedPersonnelA,{ withCredentials: true });
   }
 }
 

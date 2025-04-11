@@ -25,7 +25,7 @@ namespace HMS.Controllers
             _roleManager = roleManager;
         }
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<PersonnelAdministrative>>> GetPersonnelAs()
         {
             var personnelAdministratives = await _adminRepository.GetAll();
@@ -33,7 +33,7 @@ namespace HMS.Controllers
         }
 
         [HttpPost("add")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> addPersonnelAdministrative([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -79,18 +79,18 @@ namespace HMS.Controllers
             return Ok(new { message = "PersonnelAdministratif ajouté avec succès" });
         }
         //hethi pour personnel without id 
-        [HttpGet("get/{id}")]
-        //[Authorize(Roles = "PersonnelAdministratif")]
-        public async Task<ActionResult<PersonnelAdministrative>> GetPersonnelAById(Guid id)
+        [HttpGet("get")]
+        [Authorize(Roles = "PersonnelAdministratif")]
+        public async Task<ActionResult<PersonnelAdministrative>> GetPersonnelAById()
         {
             try
             {
-                /* if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated)
                {
                    return Unauthorized(new { message = "Utilisateur non authentifié" });
-               }*/
+               }
 
-                /* var identityUserId = _userManager.GetUserId(User);
+                 var identityUserId = _userManager.GetUserId(User);
                  if (string.IsNullOrEmpty(identityUserId))
                  {
                      return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
@@ -101,9 +101,9 @@ namespace HMS.Controllers
                  if (personnelA == null)
                  {
                      return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-                 }*/
+                 }
                 //personnelA.Id
-                var personnelAdministrative = await _adminRepository.GetByIdAsync(id);
+                var personnelAdministrative = await _adminRepository.GetByIdAsync(personnelA.Id);
                 return personnelAdministrative != null ? Ok(personnelAdministrative) : NotFound("personnelAdministrative introuvable");
             }
             catch (Exception)
@@ -113,7 +113,7 @@ namespace HMS.Controllers
         }
         //pour l admin with id 
         [HttpGet("getA/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<PersonnelAdministrative>> GetPersonnelAByIdAdmin(Guid id)
         {
             try
@@ -127,16 +127,16 @@ namespace HMS.Controllers
             }
         }
 
-        [HttpPut("editInfo/{id}")]
-        //[Authorize(Roles = "PersonnelAdministratif")]
-        public async Task<IActionResult> UpdatePersonnelA(Guid id, [FromBody] PersonnelAdministrative updatedPersonnelA)
+        [HttpPut("editInfo")]
+        [Authorize(Roles = "PersonnelAdministratif")]
+        public async Task<IActionResult> UpdatePersonnelA([FromBody] PersonnelAdministrative updatedPersonnelA)
         {
-            /* if (!User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
               {
                   return Unauthorized(new { message = "Utilisateur non authentifié" });
-              }*/
+              }
 
-            /* var identityUserId = _userManager.GetUserId(User);
+             var identityUserId = _userManager.GetUserId(User);
              if (string.IsNullOrEmpty(identityUserId))
              {
                  return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
@@ -147,10 +147,10 @@ namespace HMS.Controllers
              if (personnel_a == null)
              {
                  return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-             }*/
+             }
             //personnel_a.Id nhotha f blasset id
 
-            var existingPersonnelA = _adminRepository.GetById(id);
+            var existingPersonnelA = _adminRepository.GetById(personnel_a.Id);
             if (existingPersonnelA == null)
             {
                 return NotFound(new { message = "personnelA non trouvé" });
@@ -191,7 +191,7 @@ namespace HMS.Controllers
             return Ok(new { message = "personnelA mis à jour avec succès", personnelA = existingPersonnelA });
         }
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeletePersonnelA(Guid id)
         {
             var personnelA = await _adminRepository.GetByIdAsync(id);
@@ -222,7 +222,7 @@ namespace HMS.Controllers
 
 
         [HttpPut("edit/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdatePersonnelAdmin(Guid id, [FromBody] PersonnelAdministrative updatedPersonnelA)
         {
             var existingPersonnelA = _adminRepository.GetById(id);

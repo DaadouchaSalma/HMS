@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using HMS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace HMS.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Personnel>>> GetPersonnels()
         {
             return await _context.Personnels.ToListAsync();
@@ -114,7 +116,7 @@ namespace HMS.Controllers
             existingPersonnel.Nom = updatedPersonnel.Nom;
             existingPersonnel.Prenom = updatedPersonnel.Prenom;
             existingPersonnel.Email = updatedPersonnel.Email;
-            //existingPersonnel.Password = updatedPersonnel.Password;
+            existingPersonnel.Password = updatedPersonnel.Password;
             existingPersonnel.Date_Naiss = updatedPersonnel.Date_Naiss;
             existingPersonnel.Date_Emb = updatedPersonnel.Date_Emb;
             existingPersonnel.Salaire = updatedPersonnel.Salaire;
