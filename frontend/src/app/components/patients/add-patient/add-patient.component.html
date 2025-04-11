@@ -36,7 +36,7 @@
   </c-col>
   <c-col [md]="6">
     <label cLabel>Date De Naissance<span style="color: red;"> *</span></label>
-    <c-date-picker closeOnSelect [(ngModel)]="patient.date_Naiss" placeholder="Sélectionnez la date de naissance" name="date_Naiss" required #date_Naiss="ngModel" (ngModelChange)="validateDateNaiss()"/>
+    <c-date-picker closeOnSelect [(ngModel)]="patient.date_Naiss" placeholder="Sélectionnez la date de naissance" name="date_Naiss" [maxDate]="today" required #date_Naiss="ngModel" (ngModelChange)="validateDateNaiss()"/>
     <div *ngIf="date_Naiss.invalid && date_Naiss.touched" style="color: red; padding-left: 2%;">
       <small  ngIf="date_Naiss.errors?.['required']"> La date de naissance est requise.</small>
     </div>

@@ -1,4 +1,4 @@
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { MedNotifsService } from '../../../services/med-notifs.service';
 import { MedNotifs } from '../../../models/medNotifs.model';
@@ -30,7 +30,7 @@ import {
   ProgressComponent,
   SidebarToggleDirective
 } from '@coreui/angular-pro';
-import { NgModel } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { IconDirective, IconSetService } from '@coreui/icons-angular';
 import { AuthService } from '../../../services/auth.service';
 import { cilPowerStandby,
@@ -47,7 +47,7 @@ import { cilPowerStandby,
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective],
+  imports: [FormsModule, CommonModule, ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective],
   providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
@@ -128,12 +128,21 @@ ngOnInit(): void {
     error: (err) => console.error('Error fetching notifications:', err)
   });
   this.loadNotifications();
-      const roles  = this.authService.getUserRoles();
-      if (roles.includes('Patient')) {
-        this.userRole = 'Patient';
-      } else if (roles.includes('Medecin')) {
-        this.userRole = 'Medecin';
-      }  
+  const roles  = this.authService.getUserRoles();
+      
+  if (roles.includes('Patient')) {
+    this.userRole = 'Patient';
+  } else if (roles.includes('Medecin')) {
+    this.userRole = 'Medecin';
+    this.router.navigate(['/personnel/edit-medecin']);
+  }  else if (roles.includes('Pharmacien')) {
+    this.userRole = 'Pharmacien';
+    this.router.navigate(['/personnel/edit-pharmacien']);
+  }  else if (roles.includes('PersonnelAdministrative')) {
+    this.userRole = 'PersonnelAdministrative';
+    this.router.navigate(['/personnel/edit-personnelA']);
+  }  
+  console.log("roles",this.userRole)
 }
 
   sidebarId = input('sidebar1');

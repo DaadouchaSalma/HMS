@@ -18,6 +18,8 @@ import {
 
 import { DefaultAsideComponent, DefaultBreadcrumbComponent, DefaultFooterComponent, DefaultHeaderComponent } from './';
 import { navItems } from './_nav';
+import { AuthService } from '../../services/auth.service';
+import { INavDataWithRoles } from './INavDataWithRoles';
 
 function isOverflown(element: HTMLElement) {
   return (
@@ -52,4 +54,22 @@ function isOverflown(element: HTMLElement) {
 })
 export class DefaultLayoutComponent {
   public navItems = [...navItems];
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    const role = this.authService.getUserRoles(); 
+    this.navItems = this.filterNavItemsByRole(navItems, role);
+  }
+
+  private filterNavItemsByRole(items: INavDataWithRoles[], userRoles: string[]): INavDataWithRoles[] {
+    return items
+      .filter(item =>
+        !item.roles || item.roles.some(role => userRoles.includes(role))
+      )
+      .map(item => ({
+        ...item,
+        children: item.children ? this.filterNavItemsByRole(item.children, userRoles) : undefined
+      }));
+  }
+  
 }
