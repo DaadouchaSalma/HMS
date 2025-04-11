@@ -13,7 +13,7 @@ export const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'reclamationAdd/:id',
+        path: 'reclamationAdd',
         loadComponent: () => import('./reclamation-add/reclamation-add.component').then(m => m.ReclamationAddComponent),
         data: {
           title: 'Ajouter Une Reclamation'

@@ -36,21 +36,21 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'edit-medecin/:id',
+        path: 'edit-medecin',
         loadComponent: () => import('./edit-medecin/edit-medecin.component').then(m => m.EditMedecinComponent),
         data: {
           title: 'Mon Profil'
         }
       },
       {
-        path: 'edit-pharmacien/:id',
+        path: 'edit-pharmacien',
         loadComponent: () => import('./edit-pharmacien/edit-pharmacien.component').then(m => m.EditPharmacienComponent),
         data: {
           title: 'Mon Profil'
         }
       },
       {
-        path: 'edit-personnelA/:id',
+        path: 'edit-personnelA',
         loadComponent: () => import('./edit-personnel-admin/edit-personnel-admin.component').then(m => m.EditPersonnelAdminComponent),
         data: {
           title: 'Mon Profil'

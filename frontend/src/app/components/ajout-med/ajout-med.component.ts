@@ -96,6 +96,7 @@ ngOnInit(): void {
       tap(response => {
         console.log('Medicament added successfully:', response);
         this.toggleToast("Médicament ajouté avec succés!",'success');
+        form.resetForm();
 
         this.medicament = { id: '', nom: '', description: '', nbr_stock: 0, fournisseurId:'' , categorieId:'',
         date_Exp: new Date() }; // Reset form
@@ -112,7 +113,7 @@ ngOnInit(): void {
         console.error('Error adding medicament:', error);
         this.toggleToast('Erreur lors de l\'ajout du médicament!', 'error');
 
-
+        
         return of(null); 
       })
     ).subscribe();

@@ -15,7 +15,7 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'listPrescription/:id',
+        path: 'listPrescription',
         loadComponent: () => import('./list-prescription/list-prescription.component').then(m => m.ListPrescriptionComponent),
         data: {
           title: 'Liste des prescriptions'

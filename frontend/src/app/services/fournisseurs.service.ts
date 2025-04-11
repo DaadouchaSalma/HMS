@@ -12,22 +12,22 @@ export class FournisseursService {
   constructor(private http: HttpClient) { }
 
   getFournisseurs(): Observable<Fournisseur[]> {
-    return this.http.get<Fournisseur[]>(this.apiUrl);
+    return this.http.get<Fournisseur[]>(this.apiUrl,{ withCredentials: true });
   }
 
   getFournisseurById(id: string): Observable<Fournisseur> {
-    return this.http.get<Fournisseur>(`${this.apiUrl}/${id}`);
+    return this.http.get<Fournisseur>(`${this.apiUrl}/${id}`,{ withCredentials: true });
   }
 
   addFournisseur(Fournisseur: Fournisseur): Observable<Fournisseur> {
-    return this.http.post<Fournisseur>(this.apiUrl, Fournisseur);
+    return this.http.post<Fournisseur>(this.apiUrl, Fournisseur,{ withCredentials: true });
   }
   updateFournisseur(id: string, Fournisseur: Fournisseur): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, Fournisseur);
+    return this.http.put<void>(`${this.apiUrl}/${id}`, Fournisseur,{ withCredentials: true });
   }
 
   deleteFournisseur(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`,{ withCredentials: true });
   }
 }
 

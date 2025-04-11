@@ -77,7 +77,7 @@ export const navItems: INavDataWithRoles[] = [
       children: [
         {
           name: 'Ajouter Une Reclamation',
-          url: '/reclamation/reclamationAdd/:id',
+          url: '/reclamation/reclamationAdd',
           icon: 'nav-icon-bullet',
           roles: ['Patient']
         },
@@ -172,7 +172,7 @@ export const navItems: INavDataWithRoles[] = [
   {
     name: 'Rendez-Vous',
     url: '/rendezvous',
-    iconComponent: { name: 'cil-user-plus' },
+    iconComponent: { name: 'cilCalendar' },
     roles: ['Patient'],
     children: [
       {

@@ -25,5 +25,6 @@ namespace HMS.Repositories
         {
             return await _context.Patients.Include(p => p.DossierMedical).FirstOrDefaultAsync(p => p.IdentityUserId == identityUserId);
         }
+
     }
 }

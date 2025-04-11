@@ -120,6 +120,7 @@ export class CategorieComponent implements OnInit{
         tap(response => {
           console.log('Catégorie added successfully:', response);
           this.toggleToast("Catégorie ajouté avec succés!",'success');
+          form.resetForm();
   
           this.categ = { id: '', name: ''}; // Reset form
         }),

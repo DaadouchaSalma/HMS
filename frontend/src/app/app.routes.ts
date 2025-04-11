@@ -36,7 +36,7 @@ export const routes: Routes = [
     component: DefaultLayoutComponent,
     canActivate: [authGuard, roleGuard],
     data: {
-      title: 'Home'
+      title: ''
     },
     children: [
       {

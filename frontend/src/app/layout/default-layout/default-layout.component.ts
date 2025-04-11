@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 import { IconDirective } from '@coreui/icons-angular';
@@ -71,5 +71,4 @@ export class DefaultLayoutComponent {
         children: item.children ? this.filterNavItemsByRole(item.children, userRoles) : undefined
       }));
   }
-  
 }

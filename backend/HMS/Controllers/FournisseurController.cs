@@ -3,9 +3,11 @@ using HMS.Repositories;
 using HMS.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FournisseurController : ControllerBase
@@ -18,7 +20,10 @@ namespace HMS.Controllers
         }
 
         // GET: api/fournisseur
+
         [HttpGet]
+        [Authorize(Roles = "Pharmacien")]
+
         public async Task<IActionResult> GetAll()
         {
             var fournisseurs = await _repository.GetAllAsync();
@@ -27,6 +32,7 @@ namespace HMS.Controllers
 
         // GET: api/fournisseur/{id}
         [HttpGet("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> GetById(Guid id)
         {
             var fournisseur = await _repository.GetByIdAsync(id);
@@ -38,6 +44,7 @@ namespace HMS.Controllers
 
         // POST: api/fournisseur
         [HttpPost]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> Create([FromBody] Fournisseur fournisseur)
         {
             if (fournisseur == null)
@@ -49,6 +56,7 @@ namespace HMS.Controllers
 
         // PUT: api/fournisseur/{id}
         [HttpPut("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> Update(Guid id, [FromBody] Fournisseur fournisseur)
         {
             if (fournisseur == null || id != fournisseur.Id)
@@ -60,6 +68,7 @@ namespace HMS.Controllers
 
         // DELETE: api/fournisseur/{id}
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Pharmacien")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var deleted = await _repository.DeleteAsync(id);

@@ -1,4 +1,5 @@
 ﻿using HMS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ namespace HMS.Controllers
     {
         _context = context;
     }
-
+        [Authorize(Roles = "PersonnelAdministratif")]
         [HttpPost]
         public IActionResult AddAdmission([FromBody] Admission admission)
         {
@@ -68,6 +69,7 @@ namespace HMS.Controllers
         }
 
         //sortiePatient
+        [Authorize(Roles = "PersonnelAdministratif")]
         [HttpPost("sortie/{admissionId}")]
         public IActionResult SortiePatient(Guid admissionId)
         {
@@ -90,6 +92,7 @@ namespace HMS.Controllers
         }
 
         //liste des admissionEnCours
+        [Authorize(Roles = "PersonnelAdministratif")]
         [HttpGet("listeAdmission")]
         public IActionResult GetAdmission()
         {

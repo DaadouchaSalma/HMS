@@ -43,7 +43,7 @@ import { AlertComponent } from '@coreui/angular-pro';
   styleUrl: './update-fournisseur.component.scss'
 })
 export class UpdateFournisseurComponent {
-  fournisseur: Fournisseur = { id: '', nomF: '', numTel: '', adresse: '' };
+  fournisseur: Fournisseur = { id: '', nomF: '', numTel: '', adresse: '', mail:'' };
 
   constructor(private fournisseursService: FournisseursService, private route: ActivatedRoute) {
   }
@@ -67,11 +67,24 @@ export class UpdateFournisseurComponent {
   }
 
   onSubmit(): void {
-    if(this.fournisseur.id!=null)
-    this.fournisseursService.updateFournisseur(this.fournisseur.id, this.fournisseur).subscribe(() => {
-      console.log('Fournisseur updated successfully');
-    });
+    if (this.fournisseur.id != null) {
+      this.fournisseursService.updateFournisseur(this.fournisseur.id, this.fournisseur).subscribe({
+        next: () => {
+          console.log('Fournisseur updated successfully');
+          this.toggleToast("Fournisseur modifié avec succès!", 'success');
+        },
+        error: (err) => {
+          console.error('Error updating fournisseur:', err);
+          this.toggleToast("Erreur lors de la mise à jour du fournisseur.", 'error');
+        }
+      });
+    } else {
+      // Handle the case where the fournisseur.id is null (if necessary)
+      console.error('Fournisseur ID is null');
+      this.toggleToast("Fournisseur introuvable.", 'error');
+    }
   }
+  
 
   position = 'top-end';
   visible = signal(false);
@@ -83,6 +96,15 @@ export class UpdateFournisseurComponent {
     this.toastMessage.set(message);
     this.toastType.set(type);
     this.visible.update(value => !value);
+  }
+
+  onVisibleChange($event: boolean) {
+    this.visible.set($event);
+    this.percentage.set(this.visible() ? this.percentage() : 0);
+  }
+
+  onTimerChange($event: number) {
+    this.percentage.set($event * 25);
   }
 
 }

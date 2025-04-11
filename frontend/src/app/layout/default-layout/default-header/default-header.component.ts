@@ -1,10 +1,11 @@
 import { CommonModule, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, Output, ViewChild ,EventEmitter} from '@angular/core';
 import { MedNotifsService } from '../../../services/med-notifs.service';
 import { MedNotifs } from '../../../models/medNotifs.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {RdvService} from '../../../services/rdv.service';
 import { Router} from '@angular/router';
+import { SidebarComponent, SidebarService } from '@coreui/angular-pro'; // selon ta version
 
 
 
@@ -44,10 +45,11 @@ import { cilPowerStandby,
   cilMoon,
   cilContrast,
   cilAccountLogout } from '@coreui/icons';
+
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [FormsModule, CommonModule, ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective],
+  imports: [FormsModule, CommonModule, ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective,FormsModule,CommonModule],
   providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
@@ -67,8 +69,10 @@ export class DefaultHeaderComponent extends HeaderComponent {
   });
   userRole: string = '';
 
+ 
 
-  constructor(private medNotifsService: MedNotifsService ,private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute) {
+  
+  constructor(private medNotifsService: MedNotifsService ,private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute,private sidebarService: SidebarService) {
     super();
     iconSet.icons = { 
       cilPowerStandby,
@@ -87,17 +91,16 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
 
    loadNotifications() {
-    const patientId = "e30a30f7-37ec-4812-9b4d-020109796f67"
-    if (patientId) {
-    this.rdvService.getNotifications(patientId).subscribe(response => {
+    this.rdvService.getNotifications().subscribe(response => {
       this.notifications = response.map((notif, index) => ({
         title: `Rappel`,
         message: notif
       }));
+      console.log(this.notifications);
     }, error => {
       console.error('Erreur lors du chargement des notifications', error);
     });
-  }
+ 
 }
 
   getProfileRoute(): string {
@@ -118,12 +121,23 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
 
   public Mednotifications: MedNotifs[] = [];
+  public ExpiryNotifications: MedNotifs[] = [];
+  public StockNotifications: MedNotifs[] = [];
+
 
 ngOnInit(): void {
+  this.loadNotifications();
+  
   this.medNotifsService.getMedNotifs().subscribe({
     next: (data) => {
       this.Mednotifications = data;
-      console.log('Fetched notifications:', this.notifications);
+  
+      // Separate notifications
+      this.ExpiryNotifications = data.filter((notif) => notif.message.startsWith('Le'));
+      this.StockNotifications = data.filter((notif) => notif.message.startsWith('Il'));
+  
+      console.log('Le notifications:', this.ExpiryNotifications);
+      console.log('Il notifications:', this.StockNotifications);
     },
     error: (err) => console.error('Error fetching notifications:', err)
   });
@@ -144,6 +158,18 @@ ngOnInit(): void {
   }  
   console.log("roles",this.userRole)
 }
+navigateTo() {
+  if (this.userRole.includes('Medecin')) {
+    this.router.navigate(['/personnel/edit-medecin']);
+  }  else if (this.userRole.includes('Pharmacien')) {
+    this.userRole = 'Pharmacien';
+    this.router.navigate(['/personnel/edit-pharmacien']);
+  }  else if (this.userRole.includes('PersonnelAdministrative')) {
+    this.userRole = 'PersonnelAdministrative';
+    this.router.navigate(['/personnel/edit-personnelA']);
+  }  
+}
+
 
   sidebarId = input('sidebar1');
 

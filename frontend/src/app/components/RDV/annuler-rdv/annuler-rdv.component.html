@@ -21,3 +21,22 @@
       </button>
     </c-modal-footer>
   </c-modal>
+
+  <c-toaster [placement]="position" class="p-3" position="fixed">
+    <c-toast
+      (timer)="onTimerChange($event)"
+      (visibleChange)="onVisibleChange($event)"
+      [visible]="visible()"
+      [style.backgroundColor]="toastType() === 'error' ? '#cf5148' : '#28a745'"
+      [style.color]="'white'"
+    >
+      <c-toast-header>
+        <span *ngIf="toastType() === 'success'">Succès</span>
+        <span *ngIf="toastType() === 'error'">Erreur</span>
+      </c-toast-header>
+      <c-toast-body>
+        <p>{{ toastMessage() }}</p>
+        <c-progress thin [value]="percentage()" [color]="toastType() === 'error' ? 'warning' : 'success'"/>
+      </c-toast-body>
+    </c-toast>
+  </c-toaster>

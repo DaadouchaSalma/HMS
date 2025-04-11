@@ -12,7 +12,7 @@ export class RdvService {
 
   // Méthode pour récupérer la liste des médecins
   getMedecins(): Observable<Medecin[]> {
-      return this.http.get<Medecin[]>('http://localhost:5160/api/medecin');
+      return this.http.get<Medecin[]>('http://localhost:5160/api/medecin',{ withCredentials: true });
     }
 
     addRendezVous(rendezVous: any): Observable<any> {
@@ -20,7 +20,7 @@ export class RdvService {
         ...rendezVous,
         date_RDV: rendezVous.date_RDV, 
         time_RDV: rendezVous.time_RDV 
-      });
+      },{ withCredentials: true });
     }
   
     getDisponibilites(medecinId: string, date_RDV: string): Observable<string[]> {
@@ -35,20 +35,20 @@ export class RdvService {
 
     deleteRendezVous(id: string): Observable<void> {
 
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`,{ withCredentials: true });
   }
-  getRendezVousByPatientId(patientId: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/patient/${patientId}`);
+  getRendezVousByPatientId(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/patient`,{ withCredentials: true });
   }
 
-  getNotifications(patientId: string): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/notifications/${patientId}`);
+  getNotifications(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/notifications`,{ withCredentials: true });
   }
   
 
 
   ajouterALaListeAttente(rdv: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/addAttente`, rdv);
+    return this.http.post(`${this.apiUrl}/addAttente`, rdv,{ withCredentials: true });
   }
 
 }

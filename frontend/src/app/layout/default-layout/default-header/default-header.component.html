@@ -48,6 +48,7 @@
 
       <!--aside toggler-->
       <button
+      *ngIf="userRole == 'Patient'"
       cHeaderToggler
       cSidebarToggle="aside1"
       style="margin-inline-end: -12px"
@@ -55,6 +56,14 @@
     >
       <svg cIcon name="cilUser" size="lg" style="color: #6387c0;"></svg>
     </button>
+    <button
+    *ngIf="userRole === 'Medecin' || userRole === 'Pharmacien' || userRole === 'PersonnelAdministrative'"
+    style="margin-inline-end: -12px"
+    cHeaderToggler
+    (click)="navigateTo()"
+  >
+    <svg cIcon name="cilUser" size="lg" style="color: #6387c0;"></svg>
+  </button>
 
     <c-header-nav class="ms-4">
       <ng-container *ngTemplateOutlet="userDropdown" />
@@ -169,7 +178,7 @@
         </a>
       </li-->
       <li style="margin-top: 5px;">
-        <a cDropdownItem (click)="logout()">
+        <a cDropdownItem (click)="logout()" routerLink="">
           <svg cIcon class="me-1" name="cilAccountLogout"></svg>
           Se Déconnecter
         </a>
@@ -241,27 +250,24 @@
     </button>
     <div cDropdownMenu class="p-0">
       <h6 cDropdownHeader class="bg-body-secondary text-body-secondary fw-semibold rounded-top">
-        <span>Vous avez {{ Mednotifications?.length ?? 0 }} notifications</span>
+        <span>Vous avez {{ ExpiryNotifications?.length ?? 0 }} notifications d'expiration</span>
       </h6>
-      @for (notification of Mednotifications; track notification.id) {
+      @for (notification of ExpiryNotifications; track notification.id) {
         <a cDropdownItem routerLink="">
           <svg cIcon class="me-2 text-info" name="cilBell"></svg>
           {{ notification.message }}
         </a>
       }
-      <!--
-      <h6 cDropdownHeader class="bg-body-secondary text-body-secondary fw-semibold">
-        <span>Server</span>
+      
+      <h6 cDropdownHeader class="bg-body-secondary text-body-secondary fw-semibold rounded-top">
+        <span>Vous avez {{ StockNotifications?.length ?? 0 }} notifications de stock</span>
       </h6>
-      @for (status of newStatus; track status.id; let last = $last) {
-        <a cDropdownItem class="d-block {{last ? 'py-1' : 'py-2'}}" routerLink="">
-          <div class="text-uppercase small fw-semibold mb-1">
-            {{ status.title }}
-          </div>
-          <c-progress thin [value]="status.value" color="{{status.color}}-gradient" />
-          <span class="text-body-secondary small">{{ status.details }}</span>
+      @for (notification of StockNotifications; track notification.id) {
+        <a cDropdownItem routerLink="">
+          <svg cIcon class="me-2 text-info" name="cilBell"></svg>
+          {{ notification.message }}
         </a>
-      }-->
+      }
     </div>
   </c-dropdown>
 </ng-template>

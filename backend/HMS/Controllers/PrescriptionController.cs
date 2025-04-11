@@ -19,12 +19,15 @@ namespace HMS.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
        
         private readonly IMedecinRepository _medecinRepository;
-        public PrescriptionController(IPrescriptionRepository prescriptionRepository, UserManager<ApplicationUser> userManager, ApplicationDbContext context, IMedecinRepository medecinRepository)
+        private readonly IPatientRepository _patientRepository;
+        public PrescriptionController(IPrescriptionRepository prescriptionRepository, UserManager<ApplicationUser> userManager, ApplicationDbContext context, IMedecinRepository medecinRepository, IPatientRepository patientRepository)
         {
             _prescriptionRepository = prescriptionRepository;
             _userManager = userManager;
             _context = context;
             _medecinRepository = medecinRepository;
+            _patientRepository = patientRepository;
+
 
         }
 
@@ -85,29 +88,56 @@ namespace HMS.Controllers
             byte[] pdfBytes = PdfGenerator.FillPrescriptionTemplate(prescription);
             return File(pdfBytes, "application/pdf", "Prescription.pdf");
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPrescriptions(Guid id)
+        [Authorize(Roles = "Patient")]
+        [HttpGet()]
+        public async Task<IActionResult> GetPrescriptions()
         {
-            var patient = await _context.Patients
-                .Include(p => p.Prescriptions)
-                .ThenInclude(pr => pr.Medecin)
-                .FirstOrDefaultAsync(p => p.Id == id);
-
-            if (patient == null)
+            try
             {
-                return NotFound();
-            }
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return Unauthorized(new { message = "Utilisateur non authentifié" });
+                }
 
-            var prescriptions = patient.Prescriptions.Select(pr => new
+
+                var identityUserId = _userManager.GetUserId(User);
+                if (string.IsNullOrEmpty(identityUserId))
+                {
+                    return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
+                }
+
+                var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
+                if (patient == null)
+                {
+                    return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
+                }
+                patient = await _context.Patients
+               .Include(p => p.Prescriptions)
+               .ThenInclude(pr => pr.Medecin)
+               .FirstOrDefaultAsync(p => p.Id == patient.Id);
+
+                if (patient == null)
+                {
+                    return NotFound();
+                }
+
+              
+                var prescriptions = patient.Prescriptions.Select(pr => new
             {
+                id = pr.Id,
                 DatePrescription = pr.Dateprescription,
                 MedecinNomComplet = $"{pr.Medecin?.Prenom} {pr.Medecin?.Nom}",
                 NomsMedicaments = ExtraireNomsMedicaments(pr.ListeMed)
             }).ToList();
 
-            return Ok(prescriptions);
+                return Ok(prescriptions);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
 
         private List<string> ExtraireNomsMedicaments(string listeMedJson)
         {
