@@ -13,7 +13,7 @@ export const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'dossierMListe/:id',
+        path: 'dossierMListe',
         loadComponent: () => import('./dossier-list/dossier-list.component').then(m => m.DossierListComponent),
         data: {
           title: ' '

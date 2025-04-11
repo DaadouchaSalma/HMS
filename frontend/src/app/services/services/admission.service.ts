@@ -12,7 +12,7 @@ export class AdmissionService {
 
   constructor(private http: HttpClient) { }
   addAdmission(admission: Admission): Observable<Admission> {
-    return this.http.post<Admission>(this.apiUrl, admission);
+    return this.http.post<Admission>(this.apiUrl, admission,{ withCredentials: true });
   }
 
   getPatients(): Observable<Patient[]> {
@@ -22,10 +22,10 @@ export class AdmissionService {
     return this.http.get<Chambre[]>(`${this.apiUrl}/chambres/disponibles?service=${service}&niveauEquipement=${niveauEquipement}`);
   }
   getAdmissions(): Observable<Admission[]> {
-    return this.http.get<Admission[]>(`${this.apiUrl}/listeAdmission`);
+    return this.http.get<Admission[]>(`${this.apiUrl}/listeAdmission`,{ withCredentials: true });
   }
 
   sortirPatient(admissionId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/sortie/${admissionId}`, {});
+    return this.http.post(`${this.apiUrl}/sortie/${admissionId}`, {},{ withCredentials: true });
   }
 }

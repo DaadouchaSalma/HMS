@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -19,10 +20,14 @@ namespace HMS.Controllers {
             _context = context;
         }
         //ajout chambre
+        [Authorize(Roles = "PersonnelAdministratif, Admin")]
         [HttpPost]
         public async Task<IActionResult> AddChambre([FromBody] Chambre chambre)
         {
             if (chambre == null) return BadRequest("Données invalides");
+            bool chambreExiste = await _context.Chambres.AnyAsync(c => c.NumeroChambre == chambre.NumeroChambre);
+            if (chambreExiste)
+                return BadRequest("Le numéro de chambre est déjà utilisé.");
 
             _context.Chambres.Add(chambre);
             await _context.SaveChangesAsync();
@@ -30,6 +35,7 @@ namespace HMS.Controllers {
             return Ok(new { message = "Chambre ajoutée avec succès" });
         }
         //toutes le chambres 
+        [Authorize(Roles = "PersonnelAdministratif, Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Chambre>>> GetChambres()
         {
@@ -51,6 +57,7 @@ namespace HMS.Controllers {
         }
 
         //modifier une chambre 
+        [Authorize(Roles = "PersonnelAdministratif, Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateChambre(Guid id, [FromBody] Chambre chambre)
         {

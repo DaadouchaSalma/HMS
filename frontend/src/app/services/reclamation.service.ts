@@ -11,16 +11,16 @@ export class ReclamationService {
   constructor(private http: HttpClient) { }
 //liste des reclamations  
   getAllReclamations(): Observable<Reclamation[]> {
-    return this.http.get<Reclamation[]>(`${this.apiUrl}`);
+    return this.http.get<Reclamation[]>(`${this.apiUrl}`,{ withCredentials: true });
   }
 
  // Ajouter réclamation
-  addReclamation(patientId: string, reclamation: Reclamation): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${patientId}`, reclamation);
+  addReclamation( reclamation: Reclamation): Observable<any> {
+    return this.http.post(`${this.apiUrl}/`, reclamation,{ withCredentials: true });
   }
   // Supprimer réclamation
   deleteReclamation(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`,{ withCredentials: true });
   }
   getChambres(): Observable<{ id: string, numeroChambre: string }[]> {
     return this.http.get<{ id: string, numeroChambre: string }[]>(`${this.apiUrl}`);

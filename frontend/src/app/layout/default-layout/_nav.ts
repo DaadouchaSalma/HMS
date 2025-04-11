@@ -32,19 +32,19 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Liste des prescriptions',
-        url: '/prescription/listPrescription/:id',
+        url: '/prescription/listPrescription',
         icon: 'nav-icon-bullet'
       }
     ]
   },
   {
     name: 'Dossier Medical',
-    url: '/dossierM/dossierMListe/:id',
+    url: '/dossierM/dossierMListe',
     iconComponent: { name: 'cil-notes' },
   },
   {
     name: 'Dossier Medical M',
-    url: '/dossierM/dossierMListeMedecin/:id',
+    url: '/dossierM/dossierMListeMedecin',
     iconComponent: { name: 'cil-notes' },
   },
   
@@ -72,7 +72,7 @@ export const navItems: INavData[] = [
       children: [
         {
           name: 'Ajouter Une Reclamation',
-          url: '/reclamation/reclamationAdd/:id',
+          url: '/reclamation/reclamationAdd',
           icon: 'nav-icon-bullet'
         },
         {

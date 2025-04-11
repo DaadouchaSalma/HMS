@@ -16,8 +16,8 @@ export class PrescriptionService {
     return this.http.post(`${this.apiUrl}/new`, prescription, { withCredentials: true });
   }
   
-  getPrescriptions(patientId: string): Observable<Prescription[]> {
-    return this.http.get<Prescription[]>(`${this.apiUrl}/${patientId}`);
+  getPrescriptions(): Observable<Prescription[]> {
+    return this.http.get<Prescription[]>(`${this.apiUrl}`,{ withCredentials: true });
   }
 
   generatePdf(id: string): Observable<Blob> {

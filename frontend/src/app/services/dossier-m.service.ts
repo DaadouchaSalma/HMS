@@ -11,8 +11,14 @@ export class DossierMService {
 
   constructor(private http: HttpClient) { }
 
-  getDossier(id: string): Observable<DossierMedical> {
-    return this.http.get<DossierMedical>(`${this.apiUrl}/${id}`);
+  getDossier(): Observable<DossierMedical> {
+    return this.http.get<DossierMedical>(`${this.apiUrl}`,{ withCredentials: true });
+  }
+  getDossierM(patientId: string): Observable<DossierMedical> {
+    return this.http.get<DossierMedical>(`${this.apiUrl}/medecin`,{ 
+      params: { patientId },
+      withCredentials: true 
+    });
   }
   ajouterAnalyse(dossierId: string, fichier: File, nom: string): Observable<any> {
     const formData = new FormData();
