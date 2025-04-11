@@ -27,6 +27,7 @@ import { PersonnelAdminService } from '../../../services/personnel-admin.service
   styleUrl: './add-personnel-admin.component.scss'
 })
 export class AddPersonnelAdminComponent {
+  today: Date = new Date();
   personnel: PersonnelAdmin = new PersonnelAdmin();
   position = 'top-end';
   visible = signal(false);
