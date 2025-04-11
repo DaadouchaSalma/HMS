@@ -19,10 +19,10 @@ export class PersonnelService {
     return this.http.post(this.apiUrl, personnel);
   }
   getPersonnels(): Observable<Personnel[]> {
-    return this.http.get<Personnel[]>('http://localhost:5160/api/personnel');
+    return this.http.get<Personnel[]>('http://localhost:5160/api/personnel',{ withCredentials: true });
   }
   getMedecins(): Observable<Medecin[]> {
-    return this.http.get<Medecin[]>('http://localhost:5160/api/medecin');
+    return this.http.get<Medecin[]>('http://localhost:5160/api/medecin',{ withCredentials: true });
   }
   // Get Personnel by ID
   getPersonnelById(id: string): Observable<Personnel> {

@@ -30,9 +30,10 @@ export class UpdateMedecinComponent implements OnInit {
     ngOnInit() {
       const id = this.route.snapshot.paramMap.get('id');
       if (id) {
-        this.medecinService.getMedecinById(id).subscribe({
+        this.medecinService.getMedecinByIdAdmin(id).subscribe({
           next : (data) => (this.medecin = data),
-          error :(error) => this.toggleToast('Erreur lors de la récupération des données', 'error')
+          error :(error) =>{ this.toggleToast('Erreur lors de la récupération des données', 'error');
+            console.log("erreur lors de la recuperation",error)}
       });
       }
     }
@@ -43,14 +44,14 @@ export class UpdateMedecinComponent implements OnInit {
       return `${year}-${month}-${day}`;
     }
 
-    getMedecin(id: string): void {
+    /*getMedecin(id: string): void {
       this.medecinService.getMedecinById(id).subscribe(
         (medecin: Medecin) => {
           this.medecin = medecin;
           console.log('Données récupérées : ', medecin);
         },
       );
-    }
+    }*/
     toggleToast(message: string, type: 'success' | 'error') {
       this.toastMessage.set(message);
       this.toastType.set(type);

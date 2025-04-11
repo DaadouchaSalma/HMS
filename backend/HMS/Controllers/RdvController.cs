@@ -200,17 +200,17 @@ namespace HMS.Controllers
         }*/
         
         [HttpPost("add")]
-        //[Authorize(Roles = "Patient")]
+        [Authorize(Roles = "Patient")]
         public async Task<IActionResult> AddRendezVous([FromBody] RendezVous rdv)
         {
             try
             {
-               /* if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated)
                 {
                     return Unauthorized(new { message = "Utilisateur non authentifié" });
-                }*/
+                }
 
-               /* var identityUserId = _userManager.GetUserId(User);
+               var identityUserId = _userManager.GetUserId(User);
                 if (string.IsNullOrEmpty(identityUserId))
                 {
                     return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
@@ -221,7 +221,7 @@ namespace HMS.Controllers
                 if (patient == null)
                 {
                     return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-                }*/
+                }
 
                 // Vérifier si le créneau est disponible
                 var disponibilites = await _rendezVousRepository.GetHeuresDisponiblesAsync(rdv.MedecinId, rdv.Date_RDV);
@@ -234,7 +234,7 @@ namespace HMS.Controllers
 
 
                 // Ajouter le rendez-vous
-                //rdv.PatientId = patient.Id;
+                rdv.PatientId = patient.Id;
                 await _rendezVousRepository.AddAsync(rdv);
 
                 // Réponse sans boucle infinie
@@ -245,7 +245,7 @@ namespace HMS.Controllers
                     rdv.Time_RDV,
                     rdv.etat,
                     rdv.PatientId,
-                    /*Patient = new
+                    Patient = new
                     {
                         patient.Id,
                         patient.Nom,
@@ -255,7 +255,7 @@ namespace HMS.Controllers
                         patient.Date_Naiss,
                         patient.Telephone,
                         patient.IdentityUserId
-                    },*/
+                    },
                     rdv.MedecinId
                 };
 
@@ -293,7 +293,7 @@ namespace HMS.Controllers
 
         // DELETE: Cancel an appointment
         [HttpDelete("{id}")]
-       // [Authorize(Roles = "Patient")]
+        [Authorize(Roles = "Patient")]
         public async Task<IActionResult> DeleteRendezVous(Guid id)
         {
             // First get the appointment being deleted
@@ -312,16 +312,16 @@ namespace HMS.Controllers
             return NoContent();
         }
 
-        [HttpGet("patient/{patientId}")]
-        //[Authorize(Roles = "Patient")]
-        public async Task<IActionResult> GetMesRendezVous(Guid patientId)
+        [HttpGet("patient")]
+        [Authorize(Roles = "Patient")]
+        public async Task<IActionResult> GetMesRendezVous()
         {
-            /* if (!User.Identity.IsAuthenticated)
+             if (!User.Identity.IsAuthenticated)
                {
                    return Unauthorized(new { message = "Utilisateur non authentifié" });
-               }*/
+               }
 
-            /* var identityUserId = _userManager.GetUserId(User);
+             var identityUserId = _userManager.GetUserId(User);
              if (string.IsNullOrEmpty(identityUserId))
              {
                  return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
@@ -332,12 +332,12 @@ namespace HMS.Controllers
              if (patient == null)
              {
                  return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-             }*/
+             }
             //patient.Id
            
 
            
-            var rendezVous = await _rendezVousRepository.GetRendezVousByPatientIdAsync(patientId);
+            var rendezVous = await _rendezVousRepository.GetRendezVousByPatientIdAsync(patient.Id);
 
             return Ok(rendezVous);
         }
@@ -346,14 +346,30 @@ namespace HMS.Controllers
 
 
         [HttpPost("addAttente")]
+        [Authorize(Roles = "Patient")]
         public async Task<IActionResult> AjouterAListeAttente([FromBody] RendezVous rdv)
         {
-            if (rdv.PatientId == null)
+            if (!User.Identity.IsAuthenticated)
             {
-                return BadRequest("PatientId is required");
+                return Unauthorized(new { message = "Utilisateur non authentifié" });
             }
 
-            await _listeAttenteRepository.AjouterPatientAListeAttente(rdv.PatientId.Value, rdv.MedecinId, rdv.Date_RDV);
+            var identityUserId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(identityUserId))
+            {
+                return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
+            }
+
+            // Vérifier que le patient existe
+            var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
+            if (patient == null)
+            {
+                return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
+            }
+            //patient.Id
+
+
+            await _listeAttenteRepository.AjouterPatientAListeAttente(patient.Id, rdv.MedecinId, rdv.Date_RDV);
 
             return Ok();
 

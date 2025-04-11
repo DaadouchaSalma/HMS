@@ -28,13 +28,15 @@ personnelA: PersonnelAdmin = new PersonnelAdmin();
   constructor(private personnelAService: PersonnelAdminService,private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.personnelAService.getPersonnelAById(id).subscribe({
+    
+    
+      this.personnelAService.getPersonnelAById().subscribe({
         next : (data) => (this.personnelA = data),
-        error :(error) => this.toggleToast('Erreur lors de la récupération des données', 'error')
+        error :(error) => {this.toggleToast('Erreur lors de la récupération des données', 'error')
+          console.log(error)
+        }
     });
-    }
+  
   }
 
   formatDate(date: Date): string {
@@ -62,10 +64,7 @@ personnelA: PersonnelAdmin = new PersonnelAdmin();
   
   
   onSubmit() {
-    if (!this.personnelA.id) {
-      this.toggleToast("L'ID du pharmacien est manquant", "error");
-      return;
-    }
+    
     const updatedpharmacien = {
       ...this.personnelA,
       date_Naiss: this.formatDate(new Date(this.personnelA.date_Naiss)),
@@ -74,7 +73,7 @@ personnelA: PersonnelAdmin = new PersonnelAdmin();
     }
     console.log("Objet envoyé : ", updatedpharmacien);
   
-    this.personnelAService.updatePersonnelA(this.personnelA.id,updatedpharmacien).subscribe({
+    this.personnelAService.updatePersonnelA(updatedpharmacien).subscribe({
       next : (response) =>{ this.toggleToast('Personnel Administrative mis à jour avec succès', 'success') ;
              console.log(response);
       },
