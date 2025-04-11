@@ -130,11 +130,8 @@ export class DossierListComponent implements OnInit {
   }
   
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const dossierId = params.get('id');
-      if (dossierId) {
-        this.dossierService.getDossier(dossierId).subscribe((data) => {
+ngOnInit(): void {
+        this.dossierService.getDossier().subscribe((data) => {
           this.dossier = data;
           console.log('Before parse:', this.dossier.liste_analyse);
           console.log('Before parsing:', this.dossier.liste_analyse);
@@ -144,16 +141,14 @@ this.dossier.liste_analyse = this.dossier.liste_analyse.map((analyse: any) => ({
   ...analyse,
   nom: analyse.nom.replace(/^"|"$/g, '') 
 }));
-
+        
 this.setupTabs();
 console.log('After parsing:', this.dossier.liste_analyse);
 console.log('Type after parsing:', typeof this.dossier.liste_analyse);
           
          
         });
-      }
-    });
-  }
+      }   
   
 
   setupTabs(): void {

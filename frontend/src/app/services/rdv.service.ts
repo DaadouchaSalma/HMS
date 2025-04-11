@@ -41,8 +41,8 @@ export class RdvService {
     return this.http.get<any[]>(`${this.apiUrl}/patient/${patientId}`);
   }
 
-  getNotifications(patientId: string): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/notifications/${patientId}`);
+  getNotifications(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/notifications`,{ withCredentials: true });
   }
   
 

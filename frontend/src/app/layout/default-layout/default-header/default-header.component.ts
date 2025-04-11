@@ -87,17 +87,16 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
 
    loadNotifications() {
-    const patientId = "e30a30f7-37ec-4812-9b4d-020109796f67"
-    if (patientId) {
-    this.rdvService.getNotifications(patientId).subscribe(response => {
+    this.rdvService.getNotifications().subscribe(response => {
       this.notifications = response.map((notif, index) => ({
         title: `Rappel`,
         message: notif
       }));
+      console.log(this.notifications);
     }, error => {
       console.error('Erreur lors du chargement des notifications', error);
     });
-  }
+ 
 }
 
   getProfileRoute(): string {
@@ -120,6 +119,8 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public Mednotifications: MedNotifs[] = [];
 
 ngOnInit(): void {
+  this.loadNotifications();
+  
   this.medNotifsService.getMedNotifs().subscribe({
     next: (data) => {
       this.Mednotifications = data;
@@ -127,7 +128,6 @@ ngOnInit(): void {
     },
     error: (err) => console.error('Error fetching notifications:', err)
   });
-  this.loadNotifications();
       const roles  = this.authService.getUserRoles();
       if (roles.includes('Patient')) {
         this.userRole = 'Patient';
