@@ -4,7 +4,7 @@
     <c-multi-select id="medecin" name="selectedMedecin" [(ngModel)]="selectedMedecin" 
                     [searchable]="true" required (ngModelChange)="onMedecinChange()">
       <c-multi-select-option *ngFor="let medecin of medecins" [value]="medecin.id">
-        {{ medecin.nom }}
+        {{ medecin.nom }} {{medecin.prenom}}
       </c-multi-select-option>
     </c-multi-select>
   </c-col>
@@ -13,7 +13,7 @@
   <c-col [md]="6" [xs]="12">
     <label cLabel for="inputDate">Date du Rendez-Vous<span style="color: red;"> *</span></label>
     <c-date-picker id="inputDate" name="date_RDV" [(ngModel)]="rendezVous.date_RDV" 
-                   closeOnSelect required (dateChange)="onDateChange($event)">
+                   closeOnSelect required (dateChange)="onDateChange($event)" [minDate]="today">
     </c-date-picker>
   </c-col>
 

@@ -36,6 +36,7 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AddRdvComponent implements OnInit{
+  today: Date = new Date();
   time? = '';
   rendezVous: RendezVous = new RendezVous();
   message: string = '';
@@ -53,7 +54,9 @@ export class AddRdvComponent implements OnInit{
     toastMessage = signal(''); 
     toastType = signal('success');
 
-  constructor(private rdvService: RdvService) {}
+  constructor(private rdvService: RdvService) {
+    this.today.setHours(0, 0, 0, 0);
+  }
 
   ngOnInit(): void {
     // Charger la liste des médecins au démarrage du composant
@@ -162,7 +165,7 @@ export class AddRdvComponent implements OnInit{
   ajouterALaListeAttente() {
     // Créer un objet avec les informations nécessaires
     const rdv = {
-      patientId: "1e52f1bf-f923-4952-8fcf-31fb58fe3583",  // Vérifie que patientId est un GUID valide
+      //patientId: "1e52f1bf-f923-4952-8fcf-31fb58fe3583",  // Vérifie que patientId est un GUID valide
       medecinId: this.selectedMedecin,
       date_RDV:this.formatDate(new Date( this.rendezVous.date_RDV )), // S'assurer que date_RDV est bien formatée
       
@@ -171,6 +174,9 @@ export class AddRdvComponent implements OnInit{
     this.rdvService.ajouterALaListeAttente(rdv).subscribe(
       response => {
         this.isModalVisible = false;  // Fermer le modal après la confirmation
+        this.toastMessage.set('Ajout à la liste d\'attente avec succès.');
+        this.toastType.set('success');
+        this.visible.set(true);
       },
       error => {
         this.toastMessage.set('Erreur lors de l\'ajout à la liste d\'attente.');

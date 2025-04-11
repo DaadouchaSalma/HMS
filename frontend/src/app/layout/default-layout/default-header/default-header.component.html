@@ -48,6 +48,7 @@
 
       <!--aside toggler-->
       <button
+      *ngIf="userRole == 'Patient'"
       cHeaderToggler
       cSidebarToggle="aside1"
       style="margin-inline-end: -12px"
@@ -55,6 +56,14 @@
     >
       <svg cIcon name="cilUser" size="lg" style="color: #6387c0;"></svg>
     </button>
+    <button
+    *ngIf="userRole === 'Medecin' || userRole === 'Pharmacien' || userRole === 'PersonnelAdministrative'"
+    style="margin-inline-end: -12px"
+    cHeaderToggler
+    (click)="navigateTo()"
+  >
+    <svg cIcon name="cilUser" size="lg" style="color: #6387c0;"></svg>
+  </button>
 
     <c-header-nav class="ms-4">
       <ng-container *ngTemplateOutlet="userDropdown" />
@@ -169,7 +178,7 @@
         </a>
       </li-->
       <li style="margin-top: 5px;">
-        <a cDropdownItem (click)="logout()">
+        <a cDropdownItem (click)="logout()" routerLink="">
           <svg cIcon class="me-1" name="cilAccountLogout"></svg>
           Se Déconnecter
         </a>

@@ -84,6 +84,16 @@ namespace HMS.Repositories
             // Filtrer les heures disponibles
             var heuresDisponibles = heuresOuverture.Except(rdvs).ToList();
 
+            // Si la date sélectionnée est aujourd'hui, on enlève les heures passées
+            var dateAujourdhui = DateOnly.FromDateTime(DateTime.Now);
+            if (dateRDV == dateAujourdhui)
+            {
+                var heureActuelle = TimeOnly.FromDateTime(DateTime.Now);
+                heuresDisponibles = heuresDisponibles
+                    .Where(h => h > heureActuelle)
+                    .ToList();
+            }
+
             return heuresDisponibles;
         }
 

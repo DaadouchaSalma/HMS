@@ -106,7 +106,7 @@ public class ListeAttenteRepository
                     <p>Nous avons le plaisir de vous informer qu'un créneau avec votre médecin <strong> {patientAttente.Medecin.Nom} {patientAttente.Medecin.Prenom}</strong>  est maintenant disponible :</p>
                     <p><strong>📅 Date : {dateRDV}</strong></p>
                     <p>Nous vous invitons à confirmer votre rendez-vous dès que possible.</p>
-                    <a href='#' class='cta'>Confirmer mon rendez-vous</a>
+                    <a href='http://localhost:4200/#/rendezvous/add-rdv' class='cta'>Confirmer mon rendez-vous</a>
                 </div>
                <div class='signature'>
                             <p><strong>SmartCare</strong> - Votre santé, notre priorité.</p>

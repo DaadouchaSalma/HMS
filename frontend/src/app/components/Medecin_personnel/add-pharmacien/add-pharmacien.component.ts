@@ -66,6 +66,10 @@ export class AddPharmacienComponent {
       this.toggleToast('La date d\'embauche ne peut pas être dans le futur.', 'error');
       return; // Bloque l'envoi des données si la date est incorrecte
     }
+    if (this.validateDateNaiss() === false) {
+      this.toggleToast('La date de naissance ne peut pas être dans le futur.', 'error');
+      return; 
+    }
     if (form.invalid) {
       Object.keys(form.controls).forEach((field) => {
         const control = form.controls[field];
@@ -109,4 +113,38 @@ export class AddPharmacienComponent {
     }else {return true; }
   }
 
+  validateDateNaiss() {
+   
+    if (this.pharmacien.date_Naiss) {
+      const today = new Date().toISOString().split('T')[0];
+      const DateNaiss = new Date(this.pharmacien.date_Naiss).toISOString().split('T')[0]; 
+  
+      if (DateNaiss > today) {
+        return false;
+      }
+      else {return true; }
+    }else {return true; }
+  }
+  passwordErrors: string[] = [];
+
+  validatePassword(password: string) {
+    this.passwordErrors = []; // Réinitialiser les erreurs
+  
+    if (!password) {
+      this.passwordErrors.push("* Le mot de passe est requis.");
+      return;
+    }
+    if (password.length < 6) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins 6 caractères.");
+    }
+    if (!/[A-Z]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins une lettre majuscule.");
+    }
+    if (!/[0-9]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins un chiffre.");
+    }
+    if (!/[^A-Za-z0-9]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins un caractère spécial.");
+    }
+  }
 }

@@ -45,7 +45,7 @@ namespace HMS.Controllers
 
         // Récupérer tous les médecins
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Patient")]
         public async Task<ActionResult<IEnumerable<object>>> GetMedecins()
         {
             var medecins = await _medecinRepository.GetAll();
@@ -71,21 +71,8 @@ namespace HMS.Controllers
             return Ok(medecinsWithPasswordHash);
         }
 
-
-        // Ajouter un médecin
-        /* [HttpPost("add")]
-         public async Task<IActionResult> AddMedecin([FromBody] Medecin medecin)
-         {
-             if (medecin == null) return BadRequest("Données invalides");
-
-             await _medecinRepository.Add(medecin);
-             await _medecinRepository.SaveAsync();
-
-             return Ok(new { message = "Médecin ajouté avec succès" });
-         }*/
-
         [HttpPost("add")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AjouterMedecin([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -134,31 +121,30 @@ namespace HMS.Controllers
             return Ok(new { message = "Médecin ajouté avec succès" });
         }
         //en tant que medecin without id 
-        [HttpGet("get/{id}")]
+        [HttpGet("get")]
         [Authorize(Roles = "Medecin")]
-        public async Task<ActionResult<Medecin>> GetMedecinById(Guid id)
+        public async Task<ActionResult<Medecin>> GetMedecinById()
         {
-            /* if (!User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
                {
                    return Unauthorized(new { message = "Utilisateur non authentifié" });
-               }*/
+               }
 
-            /* var identityUserId = _userManager.GetUserId(User);
+            var identityUserId = _userManager.GetUserId(User);
              if (string.IsNullOrEmpty(identityUserId))
              {
                  return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
              }
 
              // Vérifier que le patient existe
-             var medecin = await _medecinRepository.GetByIdentityUserIdAsync(identityUserId);
-             if (medecin == null)
+             var medecin_db = await _medecinRepository.GetByIdentityUserIdAsync(identityUserId);
+             if (medecin_db == null)
              {
                  return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-             }*/
-            //medecin.Id //fi blasset l id 
+             }
             try
             {
-                var medecin = await _medecinRepository.GetByIdAsync(id);
+                var medecin = await _medecinRepository.GetByIdAsync(medecin_db.Id);
 
                 return medecin != null ? Ok(medecin) : NotFound("Médecin introuvable");
             }
@@ -167,9 +153,10 @@ namespace HMS.Controllers
                 return StatusCode(500, "Une erreur interne est survenue");
             }
         }
+    
         //en tant admin with id 
         [HttpGet("getA/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Medecin>> GetMedecinByIdAdmin(Guid id)
         {
             try
@@ -185,16 +172,16 @@ namespace HMS.Controllers
         }
 
         // en tant que medecin
-        [HttpPut("editInfo/{id}")]
-        //[Authorize(Roles = "Medecin")]
-        public async Task<IActionResult> UpdateMedecin(Guid id, [FromBody] Medecin updatedMedecin)
+        [HttpPut("editInfo")]
+        [Authorize(Roles = "Medecin")]
+        public async Task<IActionResult> UpdateMedecin([FromBody] Medecin updatedMedecin)
         {
-            /* if (!User.Identity.IsAuthenticated)
+             if (!User.Identity.IsAuthenticated)
                {
                    return Unauthorized(new { message = "Utilisateur non authentifié" });
-               }*/
+               }
 
-            /* var identityUserId = _userManager.GetUserId(User);
+             var identityUserId = _userManager.GetUserId(User);
              if (string.IsNullOrEmpty(identityUserId))
              {
                  return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
@@ -205,9 +192,9 @@ namespace HMS.Controllers
              if (medecin == null)
              {
                  return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-             }*/
+             }
             //medecin.Id nhotha f blasset id
-            var existingMedecin = _medecinRepository.GetById(id);
+            var existingMedecin = _medecinRepository.GetById(medecin.Id);
             if (existingMedecin == null)
             {
                 return NotFound(new { message = "Médecin non trouvé" });
@@ -251,7 +238,7 @@ namespace HMS.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteMedecin(Guid id)
         {
             var medecin = await _medecinRepository.GetByIdAsync(id);
@@ -282,7 +269,7 @@ namespace HMS.Controllers
 
         //en tant qu'admin
         [HttpPut("edit/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateMedecinAdmin(Guid id, [FromBody] Medecin updatedMedecin)
         {
             var existingMedecin = _medecinRepository.GetById(id);

@@ -13,21 +13,21 @@ export class MedecinService {
   constructor(private http: HttpClient) {}
 
   addMedecin(medecin: Medecin): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add`, medecin);
+    return this.http.post(`${this.apiUrl}/add`, medecin,{ withCredentials: true });
   }
-  getMedecinById(id: string): Observable<Medecin> {
-    return this.http.get<Medecin>(`${this.apiUrl}/get/${id}`);
+  getMedecinById(): Observable<Medecin> {
+    return this.http.get<Medecin>(`${this.apiUrl}/get`,{ withCredentials: true });
   }
   getMedecinByIdAdmin(id: string): Observable<Medecin> {
-    return this.http.get<Medecin>(`${this.apiUrl}/getA/${id}`);
+    return this.http.get<Medecin>(`${this.apiUrl}/getA/${id}`,{ withCredentials: true });
   }
-  updateMedecin(id: string, updatedMedecin: Medecin): Observable<any> {
-    return this.http.put(`${this.apiUrl}/editInfo/${id}`, updatedMedecin);
+  updateMedecin( updatedMedecin: Medecin): Observable<any> {
+    return this.http.put(`${this.apiUrl}/editInfo`, updatedMedecin,{ withCredentials: true });
   }
   updateMedecinAdmin(id: string, updatedMedecin: Medecin): Observable<any> {
-    return this.http.put(`${this.apiUrl}/eedit/${id}`, updatedMedecin);
+    return this.http.put(`${this.apiUrl}/edit/${id}`, updatedMedecin,{ withCredentials: true });
   }
   deleteMedecin(id: string) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`,{ withCredentials: true });
   }
 }

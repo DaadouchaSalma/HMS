@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule, NgStyle } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
 import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, AlertComponent } from '@coreui/angular-pro';
-import { LoginModel } from 'src/app/models/login.model';
+import { LoginModel } from '../../../models/login.model';
 import { Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
-import { PatientService } from 'src/app/services/patient.service';
+import { PatientService } from '../../../services/patient.service';
 import { cilWarning } from '@coreui/icons';
 
 
@@ -40,6 +40,12 @@ export class LoginComponent {
         } else if (roles.includes('Medecin')) {
             this.router.navigate(['/patient/new']);
         } else if (roles.includes('Admin')) {
+            this.router.navigate(['/personnel/list-personnel']);
+        }else if (roles.includes('PersonnelAdministratif')) {
+          this.router.navigate(['/chambre/chambreList']);
+      }else if (roles.includes('Pharmacien')) {
+        this.router.navigate(['/meds/meds']);
+    } else {
             this.router.navigate(['/dashboard']);
         } else if (roles.includes('Pharmacien')) {
           this.router.navigate(['/meds/meds']);
