@@ -27,7 +27,7 @@
       </c-input-group>
     </form-->
     <c-header-nav class="d-none d-md-flex ms-auto custom-header-nav">
-      <ng-container *ngTemplateOutlet="notifyDropdown" />
+      <ng-container *ngTemplateOutlet="notifyDropdown"/>
       <!--ng-container *ngTemplateOutlet="taskDropdown" /-->
       <ng-container *ngTemplateOutlet="messagesDropdown"/>
     </c-header-nav>
@@ -189,7 +189,7 @@
 
 <ng-template #messagesDropdown>
   <c-dropdown alignment="end" variant="nav-item">
-    <button [caret]="false" cDropdownToggle>
+    <button [caret]="false" cDropdownToggle *ngIf="userRole === 'Patient'">
       <span class="d-inline-block my-1 mx-2 position-relative">
         <svg cIcon name="cilEnvelopeOpen" size="lg" class="hover-icon" style="color: #6387c0;"></svg>
         @if (notifications?.length) {
@@ -233,7 +233,7 @@
 
 <ng-template #notifyDropdown>
   <c-dropdown alignment="end" variant="nav-item">
-    <button [caret]="false" cDropdownToggle>
+    <button [caret]="false" cDropdownToggle *ngIf="userRole === 'Pharmacien'">
       <span class="d-inline-block my-1 mx-2 position-relative">
         <svg cIcon name="cilBell" size="lg" style="color: #6387c0;" class="hover-icon"></svg>
         @if (Mednotifications?.length) {

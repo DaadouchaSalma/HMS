@@ -24,5 +24,9 @@ export class AuthService {
     const roles = localStorage.getItem('userRoles');
     return roles ? JSON.parse(roles) : [];
   }
-   
+
+  isLoggedIn(): boolean {
+    const roles = localStorage.getItem('userRoles');
+    return !!roles;
+  }   
 }

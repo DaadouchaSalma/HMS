@@ -49,7 +49,7 @@ import { cilPowerStandby,
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective,FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule, ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective,FormsModule,CommonModule],
   providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
@@ -141,22 +141,22 @@ ngOnInit(): void {
     },
     error: (err) => console.error('Error fetching notifications:', err)
   });
-
-      const roles  = this.authService.getUserRoles();
+  this.loadNotifications();
+  const roles  = this.authService.getUserRoles();
       
-      if (roles.includes('Patient')) {
-        this.userRole = 'Patient';
-      } else if (roles.includes('Medecin')) {
-        this.userRole = 'Medecin';
-        this.router.navigate(['/personnel/edit-medecin']);
-      }  else if (roles.includes('Pharmacien')) {
-        this.userRole = 'Pharmacien';
-        this.router.navigate(['/personnel/edit-pharmacien']);
-      }  else if (roles.includes('PersonnelAdministrative')) {
-        this.userRole = 'PersonnelAdministrative';
-        this.router.navigate(['/personnel/edit-personnelA']);
-      }  
-      console.log("roles",this.userRole)
+  if (roles.includes('Patient')) {
+    this.userRole = 'Patient';
+  } else if (roles.includes('Medecin')) {
+    this.userRole = 'Medecin';
+    this.router.navigate(['/personnel/edit-medecin']);
+  }  else if (roles.includes('Pharmacien')) {
+    this.userRole = 'Pharmacien';
+    this.router.navigate(['/personnel/edit-pharmacien']);
+  }  else if (roles.includes('PersonnelAdministrative')) {
+    this.userRole = 'PersonnelAdministrative';
+    this.router.navigate(['/personnel/edit-personnelA']);
+  }  
+  console.log("roles",this.userRole)
 }
 navigateTo() {
   if (this.userRole.includes('Medecin')) {

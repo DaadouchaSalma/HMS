@@ -1,22 +1,26 @@
 import { INavData } from '@coreui/angular-pro';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { INavDataWithRoles } from './INavDataWithRoles';
 
-export const navItems: INavData[] = [
+export const navItems: INavDataWithRoles[] = [
 
   {
     name: 'Patient',
     url: '/patient',
     iconComponent: { name: 'cil-user-plus' },
+    roles: ['Medecin', 'Admin', 'PersonnelAdministratif'],
     children: [
       {
         name: 'Ajouter un patient',
         url: '/patient/new',
-        icon: 'nav-icon-bullet'
+        icon: 'nav-icon-bullet',
+        roles: ['Medecin', 'PersonnelAdministratif'],
       },
       {
         name: 'Liste des patients',
         url: '/patient/list',
-        icon: 'nav-icon-bullet'
+        icon: 'nav-icon-bullet',
+        roles: ['Medecin', 'Admin', 'PersonnelAdministratif'],
       }
     ]
   },
@@ -24,16 +28,19 @@ export const navItems: INavData[] = [
     name: 'Prescription',
     url: '/prescription',
     iconComponent: { name: 'cil-notes' },
+    roles: ['Medecin', 'Patient'],
     children: [
       {
         name: 'Ajouter une prescription',
         url: '/prescription/new',
-        icon: 'nav-icon-bullet'
+        icon: 'nav-icon-bullet',
+        roles: ['Medecin'],
       },
       {
         name: 'Liste des prescriptions',
         url: '/prescription/listPrescription',
-        icon: 'nav-icon-bullet'
+        icon: 'nav-icon-bullet',
+        roles: ['Patient'],
       }
     ]
   },
@@ -41,17 +48,14 @@ export const navItems: INavData[] = [
     name: 'Dossier Medical',
     url: '/dossierM/dossierMListe',
     iconComponent: { name: 'cil-notes' },
-  },
-  {
-    name: 'Dossier Medical M',
-    url: '/dossierM/dossierMListeMedecin',
-    iconComponent: { name: 'cil-notes' },
+    roles: ['Patient']
   },
   
   {
     name: 'Chambre',
     url: '/chambre',
     iconComponent: { name: 'cil-home' },
+    roles: ['Admin', 'PersonnelAdministratif'],
     children: [
       {
         name: 'Ajouter Une Chambre',
@@ -69,16 +73,19 @@ export const navItems: INavData[] = [
       name: 'Reclamation',
       url: '/reclamation',
       iconComponent: { name: 'cil-home' },
+      roles: ['Patient', 'PersonnelAdministratif'],
       children: [
         {
           name: 'Ajouter Une Reclamation',
           url: '/reclamation/reclamationAdd',
-          icon: 'nav-icon-bullet'
+          icon: 'nav-icon-bullet',
+          roles: ['Patient']
         },
         {
           name: 'La liste des reclamation',
           url: '/reclamation/reclamationList',
-          icon: 'nav-icon-bullet'
+          icon: 'nav-icon-bullet',
+          roles: ['PersonnelAdministratif']
         },
         
       ]},
@@ -86,16 +93,19 @@ export const navItems: INavData[] = [
       name: 'Admission',
       url: '/admission',
       iconComponent: { name: 'cil-user' },
+      roles: ['PersonnelAdministratif'],
       children: [
         {
           name: 'Ajouter Admission',
           url: '/admission/admissionAdd',
-          icon: 'nav-icon-bullet'
+          icon: 'nav-icon-bullet',
+          roles: ['PersonnelAdministratif'],
         },
         {
           name: 'Liste des admissions actuelles',
           url: '/admission/admissionList',
-          icon: 'nav-icon-bullet'
+          icon: 'nav-icon-bullet',
+          roles: ['PersonnelAdministratif'],
         },
         
       ]},
@@ -103,11 +113,13 @@ export const navItems: INavData[] = [
     name: 'Personnels',
     url: '/personnel',
     iconComponent: { name: 'cil-people' },
+    roles: ['Admin'],
     children: [
       {
         name: 'Liste Des Personnels',
         url: '/personnel/list-personnel',
-        icon: 'nav-icon-bullet'
+        icon: 'nav-icon-bullet',
+        roles: ['Admin'],
       },
     ]
   },
@@ -115,6 +127,7 @@ export const navItems: INavData[] = [
     name: 'Stock Médical',
     url: '/',
     iconComponent: { name: 'cil-medical-cross' },
+    roles: ['Pharmacien'],
     children: [
       {
         name: 'Consulter',
@@ -160,6 +173,7 @@ export const navItems: INavData[] = [
     name: 'Rendez-Vous',
     url: '/rendezvous',
     iconComponent: { name: 'cilCalendar' },
+    roles: ['Patient'],
     children: [
       {
         name: 'Prendre Un Rendez-Vous',
