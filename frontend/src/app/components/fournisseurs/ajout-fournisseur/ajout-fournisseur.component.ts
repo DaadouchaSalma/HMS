@@ -5,23 +5,12 @@ import { FournisseursService } from '../../../services/fournisseurs.service';
 import { Fournisseur } from '../../../models/founisseur.model';
 
 import {
-  BadgeComponent,
+  
   ButtonDirective,
-  CollapseDirective,
-  IColumn,
-  SmartTableComponent,
-  TemplateIdDirective,
   ModalModule
 } from '@coreui/angular-pro';
 import {
-  ButtonCloseDirective,
-  ModalBodyComponent,
   ColComponent,
-  ModalComponent,
-  ModalFooterComponent,
-  ModalHeaderComponent,
-  ModalTitleDirective,
-  ThemeDirective,
   ProgressComponent,
   ToastComponent,
   ToastBodyComponent,
@@ -31,19 +20,11 @@ import {
 import { FormsModule, NgForm } from '@angular/forms';
 import { catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { AlertComponent } from '@coreui/angular-pro';  // Import alert components
 
 @Component({
   selector: 'app-ajout-fournisseur',
-  imports: [BadgeComponent, ButtonDirective, CollapseDirective, SmartTableComponent, TemplateIdDirective, ModalModule,
-    ButtonCloseDirective,
-    ModalBodyComponent,
-    ModalComponent,
-    ModalFooterComponent,
-    ModalHeaderComponent,
-    ModalTitleDirective,
-    ThemeDirective,
-    FormsModule, AlertComponent,ToastBodyComponent,ToastHeaderComponent,ToastModule,
+  imports: [ ButtonDirective,ModalModule,
+    FormsModule,ToastBodyComponent,ToastHeaderComponent,ToastModule,
     CommonModule,ColComponent,ProgressComponent,ToastComponent],
   templateUrl: './ajout-fournisseur.component.html',
   styleUrl: './ajout-fournisseur.component.scss'
@@ -59,15 +40,9 @@ export class AjoutFournisseurComponent {
     nomF: '',
     numTel: '',
     adresse: '',
+    mail:''
 
   };
-
-  columns: IColumn[] = [
-    { key: 'NomF', label: 'Nom' },
-    { key: 'numTel', label: 'Numéro de téléphone' },
-    { key: 'Adresse', label: 'Adresse' },
-    { key: 'show', label: '', _style: { width: '5%' }, filter: false, sorter: false }
-  ];
 
   
   onSubmit(form : NgForm): void {
@@ -86,8 +61,9 @@ export class AjoutFournisseurComponent {
       tap(response => {
         console.log('Fournissuer added successfully:', response);
         this.toggleToast("Fournisseur ajouté avec succés!",'success');
+        form.resetForm();
 
-        this.fournisseur = { id: '', nomF: '', numTel: '',adresse: '' }; // Reset form
+        this.fournisseur = { id: '', nomF: '', numTel: '',adresse: '',mail:'' }; // Reset form
       }),
       catchError(error => {
         console.error('Error adding fournissuer:', error);

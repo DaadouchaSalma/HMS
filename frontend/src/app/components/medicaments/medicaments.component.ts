@@ -62,7 +62,8 @@ export class MedicamentsComponent implements OnInit {
     id: '',
     nomF: '',
     numTel:  '',
-    adresse: ''
+    adresse: '',
+    mail:'',
   }
 
 

@@ -3,6 +3,8 @@ import { DefaultLayoutComponent, EmailLayoutComponent } from './layout';
 import { ChambreAddComponent } from './components/chambre/chambre-add/chambre-add.component';
 import { AddPharmacienComponent } from './components/Medecin_personnel/add-pharmacien/add-pharmacien.component';
 import { MedecinAjoutComponent } from './components/Medecin_personnel/medecin-ajout/medecin-ajout.component';
+import { authGuard } from './auth.guard';
+import { roleGuard } from './role.guard';
 
 
 export const routes: Routes = [
@@ -13,13 +15,14 @@ export const routes: Routes = [
   { path: '', redirectTo: '/add-pharmacien', pathMatch: 'full' },*/
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   
   {
     path: 'apps/email',
     component: EmailLayoutComponent,
+    canActivate: [authGuard, roleGuard],
 
     children: [
       {
@@ -31,27 +34,32 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [authGuard, roleGuard],
     data: {
       title: ''
     },
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
+        loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
 
         path:'dossierM',
-        loadChildren: () => import('./components/dossierM/routes').then((m) => m.routes)
+        loadChildren: () => import('./components/dossierM/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
 
         path:'chambre',
-        loadChildren: () => import('./components/chambre/routes').then((m) => m.routes)
+        loadChildren: () => import('./components/chambre/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path:'reclamation',
-        loadChildren: () => import('./components/reclamation/routes').then((m) => m.routes)
+        loadChildren: () => import('./components/reclamation/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path:'admission',
@@ -59,17 +67,19 @@ export const routes: Routes = [
       },
       {
         path: 'personnel',
-        loadChildren: () => import('./components/Medecin_personnel/routes').then((m) => m.routes)
+        loadChildren: () => import('./components/Medecin_personnel/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
 
       },
       {
         path: 'rendezvous',
-        loadChildren: () => import('./components/RDV/routes').then((m) => m.routes)
-
+        loadChildren: () => import('./components/RDV/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path: 'theme',
-        loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
+        loadChildren: () => import('./views/theme/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path: 'base',
@@ -114,19 +124,23 @@ export const routes: Routes = [
       },
       {
         path: 'patient',
-        loadChildren: () => import('./components/patients/routes').then((m) => m.routes)
+        loadChildren: () => import('./components/patients/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path: 'prescription',
-        loadChildren: () => import('./components/prescription/routes').then((m) => m.routes)
+        loadChildren: () => import('./components/prescription/routes').then((m) => m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path:'meds',
-        loadChildren:() => import('./components/routes').then((m)=> m.routes)
+        loadChildren:() => import('./components/routes').then((m)=> m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path:'dme',
-        loadChildren:() => import('./components/DME/routes').then((m)=> m.routes)
+        loadChildren:() => import('./components/DME/routes').then((m)=> m.routes),
+        data: { roles: ['PersonnelAdministratif'] }
       }
     ]
   }, 

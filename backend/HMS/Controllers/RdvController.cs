@@ -31,25 +31,49 @@ namespace HMS.Controllers
             _listeAttenteRepository = listeAttenteRepository;
              _context = context;
         }
-        
-        [HttpGet("notifications/{patientId}")]
-        public async Task<ActionResult<List<string>>> GetNotifications(Guid patientId)
+        [Authorize(Roles = "Patient")]
+        [HttpGet("notifications")]
+        public async Task<ActionResult<List<string>>> GetNotifications()
         {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-            TimeOnly nowTime = TimeOnly.FromDateTime(DateTime.Now);
+            try
+            {
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return Unauthorized(new { message = "Utilisateur non authentifié" });
+                }
 
-            var notifications = await _context.Rdv
-                .Include(r => r.Medecin)
-                .Where(r =>
-                    r.etat == "En attente" &&
-                    r.PatientId == patientId &&
-                    r.Date_RDV >= today &&
-                    (r.Date_RDV > today || r.Time_RDV > nowTime)
-                )
-                .Select(r => $"Rendez-vous avec Dr. {r.Medecin.Nom} le {r.Date_RDV} à {r.Time_RDV}.")
-                .ToListAsync();
+                var identityUserId = _userManager.GetUserId(User);
+                if (string.IsNullOrEmpty(identityUserId))
+                {
+                    return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
+                }
 
-            return Ok(notifications);
+                var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
+
+                if (patient == null)
+                {
+                    return NotFound(new { message = "Aucun patient trouvé pour cet utilisateur." });
+                }
+                DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+                TimeOnly nowTime = TimeOnly.FromDateTime(DateTime.Now);
+
+                var notifications = await _context.Rdv
+                    .Include(r => r.Medecin)
+                    .Where(r =>
+                       // r.etat == "En attente" &&
+                        r.PatientId == patient.Id &&
+                        r.Date_RDV >= today &&
+                        (r.Date_RDV > today || r.Time_RDV > nowTime)
+                    )
+                    .Select(r => $"Rendez-vous avec Dr. {r.Medecin.Nom} le {r.Date_RDV} à {r.Time_RDV}.")
+                    .ToListAsync();
+
+                return Ok(notifications);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
 
         }
 

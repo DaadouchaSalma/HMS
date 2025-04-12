@@ -30,8 +30,10 @@ export class AddPatientComponent {
   percentage = signal(0);
   toastMessage = signal(''); 
   toastType = signal('success');
+  today: Date = new Date();
 
-  constructor(private patientService: PatientService, private router: Router) {}
+  constructor(private patientService: PatientService, private router: Router) {
+  }
 
   formatDate(date: Date): string {
     const year = date.getFullYear();

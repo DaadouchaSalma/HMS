@@ -150,7 +150,7 @@ namespace HMS.Controllers
             return Ok(patient);
         }
 
-        [Authorize(Roles = "Medecin, PersonnelAdministratif, Pharmacien, Admin")]
+        [Authorize(Roles = "Medecin, PersonnelAdministratif, Admin")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllPatients()
         {

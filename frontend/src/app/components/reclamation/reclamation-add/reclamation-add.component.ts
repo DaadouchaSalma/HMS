@@ -18,7 +18,6 @@ import { Chambre } from '../../../models/chambre.model';
 })
 export class ReclamationAddComponent  implements OnInit {
   reclamationForm: FormGroup;
-  patientId: string | null = null;
   chambres: any[] = [];
   position = 'top-end';
   visible = signal(false);
@@ -50,11 +49,6 @@ export class ReclamationAddComponent  implements OnInit {
   }
 
   ngOnInit(): void {
-    this.patientId = this.activatedRoute.snapshot.paramMap.get('id');
-    if (!this.patientId) {
-      this.router.navigate(['/error']);
-    }
-
     this.reclamationForm = this.fb.group({
       typeProbleme: ['', Validators.required],
       description: ['', Validators.required],
@@ -94,10 +88,8 @@ export class ReclamationAddComponent  implements OnInit {
     }
   
     const reclamation: Reclamation = this.reclamationForm.value;
-    
-    if (this.patientId) {
-      
-      this.reclamationService.addReclamation(this.patientId, reclamation).subscribe({
+       
+      this.reclamationService.addReclamation( reclamation).subscribe({
         next: () => {
           this.toggleToast('Admission ajoutée avec succès !', 'success');
           this.reclamationForm.reset(); 
@@ -106,9 +98,6 @@ export class ReclamationAddComponent  implements OnInit {
           this.toggleToast("Erreur lors de l'ajout de l'admission", 'error');
         }
       });
-    } else {
-      this.toggleToast('Patient ID manquant', 'error');
-    }
   }
 }  
 

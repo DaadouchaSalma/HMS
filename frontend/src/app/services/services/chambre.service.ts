@@ -13,16 +13,16 @@ export class ChambreService {
   constructor(private http: HttpClient) {}
 
   AddChambre(chambre: Chambre): Observable<any> {
-    return this.http.post(this.apiUrl, chambre);
+    return this.http.post(this.apiUrl, chambre,{ withCredentials: true });
   }
   GetChambres(): Observable<Chambre[]> {
-    return this.http.get<Chambre[]>(this.apiUrl);
+    return this.http.get<Chambre[]>(this.apiUrl,{ withCredentials: true });
   }
   GetChambreById(id: string): Observable<Chambre> {
     return this.http.get<Chambre>(`${this.apiUrl}/${id}`);
   }
   
   UpdateChambre(id: string, chambre: Chambre): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, chambre);
+    return this.http.put(`${this.apiUrl}/${id}`, chambre,{ withCredentials: true });
   }
 }

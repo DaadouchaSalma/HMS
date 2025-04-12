@@ -22,9 +22,9 @@ export class ListPrescriptionComponent {
   ) { }
 
   ngOnInit(): void {
-    const patientId = this.route.snapshot.paramMap.get('id');
-    if (patientId) {
-      this.prescriptionService.getPrescriptions(patientId).subscribe(data => {
+   
+    
+      this.prescriptionService.getPrescriptions().subscribe(data => {
         this.prescriptions = data.map(prescription => ({
           ...prescription,
           datePrescription: this.formatDate(new Date (prescription.datePrescription!))
@@ -32,7 +32,7 @@ export class ListPrescriptionComponent {
         }));
         console.log(this.prescriptions)
       });
-    }
+    
   }
   
   formatDate(date: Date): string {
@@ -44,7 +44,19 @@ export class ListPrescriptionComponent {
 
 
   downloadPrescription(prescription: Prescription): void {
+    console.log(prescription);
+    if(prescription.id != null){
+      this.prescriptionService.generatePdf(prescription.id).subscribe(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Prescription.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+      }, error => {
+        console.error('Download failed', error);
+      });
+    }
     
-    console.log('Téléchargement de la prescription:', prescription);
-  }
-}
+  } 
+ }

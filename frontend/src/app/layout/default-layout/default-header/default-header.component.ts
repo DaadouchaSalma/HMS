@@ -49,7 +49,7 @@ import { cilPowerStandby,
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective,FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule, ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective,FormsModule,CommonModule],
   providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
@@ -91,17 +91,16 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
 
    loadNotifications() {
-    const patientId = "e30a30f7-37ec-4812-9b4d-020109796f67"
-    if (patientId) {
-    this.rdvService.getNotifications(patientId).subscribe(response => {
+    this.rdvService.getNotifications().subscribe(response => {
       this.notifications = response.map((notif, index) => ({
         title: `Rappel`,
         message: notif
       }));
+      console.log(this.notifications);
     }, error => {
       console.error('Erreur lors du chargement des notifications', error);
     });
-  }
+ 
 }
 
   getProfileRoute(): string {
@@ -122,31 +121,42 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
 
   public Mednotifications: MedNotifs[] = [];
+  public ExpiryNotifications: MedNotifs[] = [];
+  public StockNotifications: MedNotifs[] = [];
+
 
 ngOnInit(): void {
+  this.loadNotifications();
+  
   this.medNotifsService.getMedNotifs().subscribe({
     next: (data) => {
       this.Mednotifications = data;
-      console.log('Fetched notifications:', this.notifications);
+  
+      // Separate notifications
+      this.ExpiryNotifications = data.filter((notif) => notif.message.startsWith('Le'));
+      this.StockNotifications = data.filter((notif) => notif.message.startsWith('Il'));
+  
+      console.log('Le notifications:', this.ExpiryNotifications);
+      console.log('Il notifications:', this.StockNotifications);
     },
     error: (err) => console.error('Error fetching notifications:', err)
   });
   this.loadNotifications();
-      const roles  = this.authService.getUserRoles();
+  const roles  = this.authService.getUserRoles();
       
-      if (roles.includes('Patient')) {
-        this.userRole = 'Patient';
-      } else if (roles.includes('Medecin')) {
-        this.userRole = 'Medecin';
-        this.router.navigate(['/personnel/edit-medecin']);
-      }  else if (roles.includes('Pharmacien')) {
-        this.userRole = 'Pharmacien';
-        this.router.navigate(['/personnel/edit-pharmacien']);
-      }  else if (roles.includes('PersonnelAdministrative')) {
-        this.userRole = 'PersonnelAdministrative';
-        this.router.navigate(['/personnel/edit-personnelA']);
-      }  
-      console.log("roles",this.userRole)
+  if (roles.includes('Patient')) {
+    this.userRole = 'Patient';
+  } else if (roles.includes('Medecin')) {
+    this.userRole = 'Medecin';
+    this.router.navigate(['/personnel/edit-medecin']);
+  }  else if (roles.includes('Pharmacien')) {
+    this.userRole = 'Pharmacien';
+    this.router.navigate(['/personnel/edit-pharmacien']);
+  }  else if (roles.includes('PersonnelAdministrative')) {
+    this.userRole = 'PersonnelAdministrative';
+    this.router.navigate(['/personnel/edit-personnelA']);
+  }  
+  console.log("roles",this.userRole)
 }
 navigateTo() {
   if (this.userRole.includes('Medecin')) {

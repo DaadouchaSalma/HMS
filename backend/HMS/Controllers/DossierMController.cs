@@ -9,6 +9,8 @@ using SystemTextJson = System.Text.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.StaticFiles;
 using System.Net;
+using HMS.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 
 
@@ -21,15 +23,19 @@ namespace HMS.Controllers
     public class DossierMController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IWebHostEnvironment _env;
         private readonly IDossierMRepository _dossierRepository;
+        private readonly IPatientRepository _patientRepository;
         private static List<DossierM> dossiers = new List<DossierM>();
 
-        public DossierMController(ApplicationDbContext context, IWebHostEnvironment env,IDossierMRepository dossierRepository)
+        public DossierMController(ApplicationDbContext context, IWebHostEnvironment env, UserManager<ApplicationUser> userManager, IDossierMRepository dossierRepository, IPatientRepository patientRepository)
         {
             _context = context;
+            _userManager = userManager;
             _env = env;
              _dossierRepository = dossierRepository;
+            _patientRepository = patientRepository;
         }
          [Authorize(Roles = "Medecin")]
         [HttpPost("new")]
@@ -62,19 +68,61 @@ namespace HMS.Controllers
             return Ok(new { message = "DossierM mis à jour avec succès" });
 
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDossier(Guid id)
+        [Authorize(Roles = "Patient")]
+        [HttpGet()]
+        public async Task<IActionResult> GetDossier()
         {
-            var dossier = await _context.Dossiers
-                .FirstOrDefaultAsync(d => d.Id == id);
-
-            if (dossier == null)
+            try
             {
-                return NotFound();
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return Unauthorized(new { message = "Utilisateur non authentifié" });
+                }
+
+
+                var identityUserId = _userManager.GetUserId(User);
+                if (string.IsNullOrEmpty(identityUserId))
+                {
+                    return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
+                }
+
+                var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
+                if (patient == null)
+                {
+                    return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
+                }
+                var dossier = await _context.Dossiers
+                .FirstOrDefaultAsync(d => d.Id == patient.DossierMedical.Id);
+
+                if (dossier == null)
+                {
+                    return NotFound();
+                }
+                return Ok(dossier);
             }
-            return Ok(dossier);
-            
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+
         }
+        [Authorize(Roles = "Medecin")]
+        [HttpGet("medecin")]
+        public async Task<IActionResult> GetDossierM([FromQuery] Guid patientId)
+        {
+            
+                var dossier = await _context.Dossiers
+                .FirstOrDefaultAsync(d => d.Patient.Id == patientId);
+
+                if (dossier == null)
+                {
+                    return NotFound();
+                }
+                return Ok(dossier);
+            }
+            
+
+        
         [HttpPost("ajouteranalyse")]
         public IActionResult AjouterAnalyse([FromForm] Guid dossierId, [FromForm] IFormFile fichier, [FromForm] string nom)
         {

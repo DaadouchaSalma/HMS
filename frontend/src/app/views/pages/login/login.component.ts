@@ -36,7 +36,7 @@ export class LoginComponent {
         const roles: string[] = response.roles;
         localStorage.setItem('userRoles', JSON.stringify(roles));
         if (roles.includes('Patient')) {
-            this.router.navigate(['/patient/list']);
+            this.router.navigate(['rendezvous/list-rdv']);
         } else if (roles.includes('Medecin')) {
             this.router.navigate(['/patient/new']);
         } else if (roles.includes('Admin')) {
@@ -45,7 +45,8 @@ export class LoginComponent {
           this.router.navigate(['/chambre/chambreList']);
       }else if (roles.includes('Pharmacien')) {
         this.router.navigate(['/meds/meds']);
-    } else {
+    }  else {
+
           console.error('Unknown role, redirecting to default page');
           this.router.navigate(['/login']); 
         }

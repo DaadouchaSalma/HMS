@@ -22,7 +22,7 @@ public class ExpirationCheckService : BackgroundService
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
+            await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             await CheckExpiringMedications();
         }
     }

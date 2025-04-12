@@ -58,8 +58,12 @@ export class ChambreAddComponent {
           this.chambreForm.reset();
           
         },
-        error: () => {
-          this.toggleToast('Erreur lors de l\'ajout de la chambre.', 'error');
+        error: (err) => {
+          if (err.error && err.error === 'Le numéro de chambre est déjà utilisé.') {
+            this.toggleToast('Ce numéro de chambre est déjà utilisé.', 'error');
+          } else {
+            this.toggleToast('Erreur lors de l\'ajout de la chambre.', 'error');
+          }
         }
       });
     }
