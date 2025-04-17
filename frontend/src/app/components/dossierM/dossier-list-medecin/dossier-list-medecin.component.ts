@@ -22,6 +22,7 @@ export class DossierListMedecinComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const patientId = params.get('id');
+      console.log('patient:',patientId)
       if (patientId) {
         this.dossierService.getDossierM(patientId).subscribe((data) => {
           this.dossier = data;

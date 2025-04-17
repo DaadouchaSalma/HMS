@@ -35,7 +35,7 @@ namespace HMS.Controllers {
             return Ok(new { message = "Chambre ajoutée avec succès" });
         }
         //toutes le chambres 
-        [Authorize(Roles = "PersonnelAdministratif, Admin")]
+        [Authorize(Roles = "PersonnelAdministratif, Admin, Patient")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Chambre>>> GetChambres()
         {

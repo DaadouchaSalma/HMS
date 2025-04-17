@@ -36,7 +36,7 @@ export class LoginComponent {
         const roles: string[] = response.roles;
         localStorage.setItem('userRoles', JSON.stringify(roles));
         if (roles.includes('Patient')) {
-            this.router.navigate(['rendezvous/list-rdv']);
+            this.router.navigate(['dossierM/dossierMListe']);
         } else if (roles.includes('Medecin')) {
             this.router.navigate(['/patient/new']);
         } else if (roles.includes('Admin')) {

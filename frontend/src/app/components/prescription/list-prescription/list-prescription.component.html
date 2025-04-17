@@ -1,4 +1,7 @@
 <div class="prescriptions-container">
+  <div *ngIf="prescriptions.length === 0" class="text-center text-muted mt-4">
+    Aucune prescription disponible.
+  </div>
   <c-col  *ngFor="let prescription of prescriptions">
     <c-card class="mb-4 fixed-height-card" style="width: 18rem;">
       <c-card-header>
