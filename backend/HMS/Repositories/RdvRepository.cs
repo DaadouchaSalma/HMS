@@ -130,5 +130,14 @@ namespace HMS.Repositories
                 .Include(r => r.Medecin) // Inclure les détails du médecin
                 .ToListAsync();
         }
+
+        public async Task<bool> ExistsRendezVousAsync(Guid patientId, Guid medecinId, DateOnly date)
+        {
+            return await _context.Rdv
+                .AnyAsync(r => r.PatientId == patientId
+                            && r.MedecinId == medecinId
+                            && r.Date_RDV == date);
+        }
+
     }
 }
