@@ -20,6 +20,9 @@ import { DefaultAsideComponent, DefaultBreadcrumbComponent, DefaultFooterCompone
 import { navItems } from './_nav';
 import { AuthService } from '../../services/auth.service';
 import { INavDataWithRoles } from './INavDataWithRoles';
+import { ChatComponent } from '../../components/chatBot/chat/chat.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 function isOverflown(element: HTMLElement) {
   return (
@@ -33,6 +36,9 @@ function isOverflown(element: HTMLElement) {
   templateUrl: './default-layout.component.html',
   styleUrls: ['./default-layout.component.scss'],
   imports: [
+    CommonModule,
+    FormsModule,
+    ChatComponent,
     SidebarComponent,
     SidebarHeaderComponent,
     SidebarBrandComponent,
@@ -54,11 +60,25 @@ function isOverflown(element: HTMLElement) {
 })
 export class DefaultLayoutComponent {
   public navItems = [...navItems];
-  constructor(private authService: AuthService) {}
+  userRole: string = '';
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    const role = this.authService.getUserRoles(); 
-    this.navItems = this.filterNavItemsByRole(navItems, role);
+    const roles  = this.authService.getUserRoles();
+      
+  if (roles.includes('Patient')) {
+    this.userRole = 'Patient';
+  } else if (roles.includes('Medecin')) {
+    this.userRole = 'Medecin';
+    this.router.navigate(['/personnel/edit-medecin']);
+  }  else if (roles.includes('Pharmacien')) {
+    this.userRole = 'Pharmacien';
+    this.router.navigate(['/personnel/edit-pharmacien']);
+  }  else if (roles.includes('PersonnelAdministrative')) {
+    this.userRole = 'PersonnelAdministrative';
+    this.router.navigate(['/personnel/edit-personnelA']);
+  }  
+    this.navItems = this.filterNavItemsByRole(navItems, roles);
   }
 
   private filterNavItemsByRole(items: INavDataWithRoles[], userRoles: string[]): INavDataWithRoles[] {
