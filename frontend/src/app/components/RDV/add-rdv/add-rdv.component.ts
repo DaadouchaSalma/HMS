@@ -155,7 +155,8 @@ export class AddRdvComponent implements OnInit{
         this.visible.set(true);
       },
       error: (err) => {
-        this.toastMessage.set(err.error.message || 'Erreur lors de la prise de rendez-vous.');
+        const errorMsg = err.error?.message || 'Erreur lors de la prise de rendez-vous.';
+        this.toastMessage.set(errorMsg);
         this.toastType.set('error');
         this.visible.set(true);
       },

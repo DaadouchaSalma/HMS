@@ -95,133 +95,6 @@ namespace HMS.Controllers
             return Ok(rendezVous);
         }
 
-        // POST: Take an appointment if the doctor is available
-        /* [HttpPost("add")]
-         public async Task<IActionResult> PrendreRendezVous([FromBody] RendezVous Rdv)
-         {
-             if (!User.Identity.IsAuthenticated)
-             {
-                 return Unauthorized(new { message = "Utilisateur non authentifié" });
-             }
-
-             var identityUserId = _userManager.GetUserId(User);
-
-             if (string.IsNullOrEmpty(identityUserId))
-             {
-                 return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
-             }
-             Console.WriteLine($"User authenticated: {User.Identity.IsAuthenticated}");
-             Console.WriteLine($"User ID: {_userManager.GetUserId(User)}");
-             //Console.WriteLine($"User ID: {_patientRepository.GetByIdentityUserIdAsync(identityUserId)}");
-             // Find the patient associated with the authenticated user
-             var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
-             if (patient == null)
-             {
-                 return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-             }
-
-             var disponibilites = await _rendezVousRepository.GetDisponibilitesAsync(Rdv.MedecinId, Rdv.Date_RDV, Rdv.Time_RDV);
-             Console.WriteLine($"Disponibilité: {disponibilites.Count()}");
-             foreach (var dispo in disponibilites)
-             {
-                 Console.WriteLine($"Disponibilité : {dispo.MedecinId},{dispo.Date_RDV},{dispo.Time_RDV}");
-             }
-
-             if (disponibilites.Any())
-             {
-                 return BadRequest(new { message = "Le médecin n'est pas disponible à cette date." });
-             }
-
-             var rendezVous = new RendezVous
-             {
-                 Id = Guid.NewGuid(),
-                 Date_RDV = Rdv.Date_RDV,
-                 Time_RDV = Rdv.Time_RDV,
-                 etat = "En attente",
-                 PatientId = patient.Id, // Assign the correct PatientId
-                 MedecinId = Rdv.MedecinId
-             };
-
-             var createdRendezVous = await _rendezVousRepository.AddAsync(rendezVous);
-             return Ok(createdRendezVous);
-         }
-        */
-        /*[HttpPost("add")]
-        public async Task<IActionResult> AddRendezVous([FromBody] RendezVous rdv)
-
-        private readonly IRdvRepository _rendezVousRepository;
-
-        public RdvController(IRdvRepository rendezVousRepository)
-        {
-            _rendezVousRepository = rendezVousRepository;
-        }
-
-        [HttpPost("add")]
-        public async Task<IActionResult> AddRendezVous([FromBody] RendezVous rdv)
-        {
-            try
-            {
-                /* if (!User.Identity.IsAuthenticated)
-                 {
-                     return Unauthorized(new { message = "Utilisateur non authentifié" });
-                 }*/
-
-        /* var identityUserId = _userManager.GetUserId(User);
-         if (string.IsNullOrEmpty(identityUserId))
-         {
-             return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
-         }
-
-         // Vérifier que le patient existe
-         var patient = await _patientRepository.GetByIdentityUserIdAsync(identityUserId);
-         if (patient == null)
-         {
-             return BadRequest(new { message = "Aucun patient trouvé pour cet utilisateur." });
-         }*/
-
-        // Vérifier si le créneau est disponible
-        /* var disponibilites = await _rendezVousRepository.GetHeuresDisponiblesAsync(rdv.MedecinId, rdv.Date_RDV);
-         TimeOnly selectedTime = rdv.Time_RDV; // Pas besoin de conversion en string
-
-         if (!disponibilites.Contains(selectedTime))
-         {
-             return BadRequest(new { message = "Le médecin n'est pas disponible à cette heure." });
-         }
-
-
-         // Ajouter le rendez-vous
-         //rdv.PatientId = patient.Id;
-         await _rendezVousRepository.AddAsync(rdv);
-
-         // Réponse sans boucle infinie
-         var response = new
-         {
-             rdv.Id,
-             rdv.Date_RDV,
-             rdv.Time_RDV,
-             rdv.etat,
-             rdv.PatientId,
-             /*Patient = new
-             {
-                 patient.Id,
-                 patient.Nom,
-                 patient.Prenom,
-                 patient.Grp_Sang,
-                 patient.Email,
-                 patient.Date_Naiss,
-                 patient.Telephone,
-                 patient.IdentityUserId
-             },
-             rdv.MedecinId
-    };
-
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = $"Erreur interne : {ex.Message}" });
-            }
-        }*/
         
         [HttpPost("add")]
         [Authorize(Roles = "Patient")]
@@ -255,7 +128,13 @@ namespace HMS.Controllers
                 {
                     return BadRequest(new { message = "Le médecin n'est pas disponible à cette heure." });
                 }
+                var existingRdv = await _rendezVousRepository
+        .ExistsRendezVousAsync(patient.Id, rdv.MedecinId, rdv.Date_RDV);
 
+                if (existingRdv)
+                {
+                    return BadRequest(new { message = "Vous avez déjà un rendez-vous avec ce médecin à cette date." });
+                }
 
                 // Ajouter le rendez-vous
                 rdv.PatientId = patient.Id;

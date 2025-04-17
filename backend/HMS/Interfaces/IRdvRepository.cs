@@ -17,6 +17,8 @@ namespace HMS.Interfaces
         Task UpdateAsync(RendezVous rendezVous);
         Task DeleteAsync(Guid id);
         Task CheckAndSendFeedbackEmailsAsync();
+        Task<bool> ExistsRendezVousAsync(Guid patientId, Guid medecinId, DateOnly date);
+
     }
 }
 
