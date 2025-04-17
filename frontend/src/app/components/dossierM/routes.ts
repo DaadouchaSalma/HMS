@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
+import { roleGuard } from '../../role.guard';
+import { authGuard } from '../../auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'dossierM'
+      title: 'Dossier Médical '
     },
     children: [
       {
@@ -15,15 +17,19 @@ export const routes: Routes = [
       {
         path: 'dossierMListe',
         loadComponent: () => import('./dossier-list/dossier-list.component').then(m => m.DossierListComponent),
+        canActivate: [authGuard, roleGuard],
         data: {
-          title: ' '
+          title: ' ',
+          roles: ['Patient']
         }
       } ,
       {
         path: 'dossierMListeMedecin/:id',
         loadComponent: () => import('./dossier-list-medecin/dossier-list-medecin.component').then(m => m.DossierListMedecinComponent),
+        canActivate: [authGuard, roleGuard],
         data: {
-          title: ' '
+          title: ' ',
+          roles: ['Medecin']
         }
       } 
       

@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { roleGuard } from '../../role.guard';
+import { authGuard } from '../../auth.guard';
 
 export const routes: Routes = [
   {
@@ -17,8 +19,10 @@ export const routes: Routes = [
       {
         path: 'listPrescription',
         loadComponent: () => import('./list-prescription/list-prescription.component').then(m => m.ListPrescriptionComponent),
+        canActivate: [authGuard, roleGuard],
         data: {
-          title: 'Liste des prescriptions'
+          title: 'Liste des prescriptions',
+          roles: ['Patient']
         }
       }
 
