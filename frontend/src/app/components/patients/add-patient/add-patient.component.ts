@@ -83,9 +83,15 @@ export class AddPatientComponent {
         this.router.navigate(['../dme/new'], { state: { patientId: response.id } });
       },
       error: (err) => {
-        console.error('Erreur lors de l’ajout du patient', err);
-        this.toggleToast("Échec de l'ajout du patient. Veuillez réessayer.", 'error');
-      }
+        const errorCode = err?.error[0]?.code;
+        const errorDescription = err?.error[0]?.description;
+
+        if (errorCode === 'DuplicateUserName') {
+          this.toggleToast("L\'email est déjà utilisé", 'error');
+        } else {
+          this.toggleToast('Une erreur est survenue lors de l\'ajout.', 'error');
+        }
+        }
     });
 
     form.reset();
@@ -104,6 +110,29 @@ export class AddPatientComponent {
 
   onTimerChange($event: number) {
     this.percentage.set($event * 25);
+  }
+
+  passwordErrors: string[] = [];
+
+  validatePassword(password: string) {
+    this.passwordErrors = []; // Réinitialiser les erreurs
+  
+    if (!password) {
+      this.passwordErrors.push("* Le mot de passe est requis.");
+      return;
+    }
+    if (password.length < 6) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins 6 caractères.");
+    }
+    if (!/[A-Z]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins une lettre majuscule.");
+    }
+    if (!/[0-9]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins un chiffre.");
+    }
+    if (!/[^A-Za-z0-9]/.test(password)) {
+      this.passwordErrors.push("Le mot de passe doit contenir au moins un caractère spécial.");
+    }
   }
 
 }

@@ -139,35 +139,41 @@ export const navItems: INavDataWithRoles[] = [
         url: '/meds/ajoutMed',
         icon: 'nav-icon-bullet'
       },
-      {
-        name: 'Fournisseurs',
-        url: '/',
-        iconComponent: { name: 'cilTruck' },
-        children: [
-          {
-            name: 'Consulter',
-            url: '/meds/fournisseurs',
-            icon: 'nav-icon-bullet'
-          },
-          {
-            name: 'Ajouter',
-            url: '/meds/ajoutF',
-            icon: 'nav-icon-bullet'
-          },
-        ]
-      },
-      {
-        name: 'Catégories',
-        url: '/meds/categorie',
-        iconComponent: { name: 'cilTags' },
-      },
-      {
-        name: 'Paniers',
-        url: '/meds/paniers',
-        iconComponent: { name: 'cilCart' },
-      },
+      
 
     ]
+  },
+  {
+    name: 'Fournisseurs',
+    url: '/',
+    iconComponent: { name: 'cilTruck' },
+    roles: ['Pharmacien'],
+    children: [
+      {
+        name: 'Consulter',
+        url: '/meds/fournisseurs',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Ajouter',
+        url: '/meds/ajoutF',
+        icon: 'nav-icon-bullet'
+      },
+    ]
+  },
+  {
+    name: 'Catégories',
+    url: '/meds/categorie',
+    roles: ['Pharmacien'],
+
+    iconComponent: { name: 'cilTags' },
+  },
+  {
+    name: 'Paniers',
+    url: '/meds/paniers',
+    roles: ['Pharmacien'],
+
+    iconComponent: { name: 'cilCart' },
   },
   {
     name: 'Rendez-Vous',
