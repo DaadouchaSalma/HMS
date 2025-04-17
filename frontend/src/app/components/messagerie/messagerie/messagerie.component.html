@@ -1,0 +1,50 @@
+<div class="messaging-layout">
+  <!-- Liste des contacts -->
+  <div class="contacts-panel">
+    <div class="search-bar">
+      <i class="fas fa-search search-icon"></i>
+      <input
+        type="text"
+        placeholder="Rechercher un contact..."
+        [(ngModel)]="searchTerm"
+        (input)="filterContacts()" />
+    </div>
+    <div class="contact"
+      *ngFor="let contact of filteredContacts"
+      (click)="selectContact(contact)"
+      [class.active]="contact.id === selectedUserId">
+      <div class="contact-name">{{ contact.nom }} {{ contact.prenom }}</div>
+    </div>
+
+  </div>
+
+  <!-- Conversation -->
+  <div class="chat-container">
+    <div class="chat-header">
+      <h5>Messagerie</h5>
+      <span class="chat-subtitle">
+        {{ selectedContact?.nom }} {{ selectedContact?.prenom || 'Sélectionnez un contact' }}
+      </span>
+    </div>
+
+    <div class="chat-messages" #messageContainer>
+      <div
+        *ngFor="let msg of messages"
+        [ngClass]="msg.expediteurId === currentUserId ? 'chat-bubble me' : 'chat-bubble other'"
+      >
+        <div class="chat-text">{{ msg.content }}</div>
+        <div class="chat-time">{{ msg.sentAt | date: 'shortTime' }}</div>
+      </div>
+    </div>
+
+    <div class="chat-input" *ngIf="selectedUserId">
+      <input
+        type="text"
+        [(ngModel)]="newMessage"
+        (keyup.enter)="send()"
+        placeholder="Écrivez un message..."
+      />
+      <button (click)="send()">Envoyer</button>
+    </div>
+  </div>
+</div>

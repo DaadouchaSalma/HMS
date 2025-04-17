@@ -8,6 +8,7 @@ using HMS.Services;
 using System.Net.Mail;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Net.Http.Headers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +37,8 @@ builder.Services.AddScoped<SmtpClient>(sp =>
     };
     return smtpClient;
 });
+builder.Services.AddHttpClient<IChatBotMedRepository, ChatBotMedRepository>();
+//builder.Services.AddHttpClient();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddHostedService<RdvBackgroundService>();
 builder.Services.AddScoped<IMedecinRepository, MedecinRepository>();
@@ -44,10 +47,9 @@ builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IRdvRepository, RdvRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IFournisseur, FournisseurRepository>();
-
 builder.Services.AddHostedService<ExpirationCheckService>();
 builder.Services.AddScoped<IPanierRepository, PanierRepository>();
-
+builder.Services.AddScoped<IChatBotMedRepository, ChatBotMedRepository>();
 builder.Services.AddSignalR();
 
 
@@ -60,7 +62,11 @@ builder.Services.AddScoped<IDossierMRepository, DossierMRepository>();
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+});
+
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllersWithViews();
@@ -123,6 +129,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 app.MapHub<NotificationHub>("/notificationHub");
+app.MapHub<MessageHub>("/message");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -140,7 +147,7 @@ app.UseCookiePolicy(new CookiePolicyOptions
 });
 
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseAuthentication();

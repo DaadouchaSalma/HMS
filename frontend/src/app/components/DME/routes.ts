@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '../../auth.guard';
+import { roleGuard } from '../../role.guard';
 
 export const routes: Routes = [
   {
@@ -10,15 +12,19 @@ export const routes: Routes = [
       {
         path: 'new',
         loadComponent: () => import('./add/add.component').then(m => m.AddComponent),
+        canActivate: [authGuard, roleGuard],
         data: {
-          title: 'Ajout d\'un DME'
+          title: 'Ajout d\'un DME',
+          roles: ['Medecin']
         }
       },
       {
         path: 'update',
         loadComponent: () => import('./edit/edit.component').then(m => m.EditComponent),
+        canActivate: [authGuard, roleGuard],
         data: {
-          title: 'Mise à jour d\'un DME'
+          title: 'Mise à jour d\'un DME',
+          roles: ['Medecin']
         }
       }
     ]

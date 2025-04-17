@@ -45,6 +45,7 @@ import { cilPowerStandby,
   cilMoon,
   cilContrast,
   cilAccountLogout } from '@coreui/icons';
+import { ChatComponent } from 'src/app/components/chatBot/chat/chat.component';
 
 @Component({
   selector: 'app-default-header',
