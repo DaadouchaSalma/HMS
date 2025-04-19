@@ -45,7 +45,7 @@ import { cilPowerStandby,
   cilMoon,
   cilContrast,
   cilAccountLogout } from '@coreui/icons';
-import { ChatComponent } from 'src/app/components/chatBot/chat/chat.component';
+//import { ChatComponent } from 'src/app/components/chatBot/chat/chat.component';
 
 @Component({
   selector: 'app-default-header',
@@ -104,14 +104,14 @@ export class DefaultHeaderComponent extends HeaderComponent {
  
 }
 
-  getProfileRoute(): string {
+ /* getProfileRoute(): string {
     if (this.userRole === 'Patient') {
       return '/patient/update';
     } else if (this.userRole === 'Medecin') {
       return '/dashboard';
     }
     return '/patient/list'; 
-  }
+  }*/
 
   logout(): void {
     localStorage.removeItem('userRoles');
@@ -153,8 +153,8 @@ ngOnInit(): void {
   }  else if (roles.includes('Pharmacien')) {
     this.userRole = 'Pharmacien';
     this.router.navigate(['/personnel/edit-pharmacien']);
-  }  else if (roles.includes('PersonnelAdministrative')) {
-    this.userRole = 'PersonnelAdministrative';
+  }  else if (roles.includes('PersonnelAdministratif')) {
+    this.userRole = 'PersonnelAdministratif';
     this.router.navigate(['/personnel/edit-personnelA']);
   }  
   console.log("roles",this.userRole)
@@ -165,8 +165,8 @@ navigateTo() {
   }  else if (this.userRole.includes('Pharmacien')) {
     this.userRole = 'Pharmacien';
     this.router.navigate(['/personnel/edit-pharmacien']);
-  }  else if (this.userRole.includes('PersonnelAdministrative')) {
-    this.userRole = 'PersonnelAdministrative';
+  }  else if (this.userRole.includes('PersonnelAdministratif')) {
+    this.userRole = 'PersonnelAdministratif';
     this.router.navigate(['/personnel/edit-personnelA']);
   }  
 }

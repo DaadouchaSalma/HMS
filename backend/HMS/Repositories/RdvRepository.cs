@@ -41,7 +41,7 @@ namespace HMS.Repositories
             var halfHourAgo = TimeOnly.FromDateTime(DateTime.UtcNow.AddMinutes(-30));
 
             var pastAppointments = await _context.Rdv
-                .Where(r => r.Time_RDV <= halfHourAgo && r.etat == "En attente")
+                .Where(r => r.Time_RDV <= halfHourAgo && r.Date_RDV == DateOnly.FromDateTime(DateTime.Now) && r.etat == "En attente")
                 .Include(r => r.Patient)
                 .ToListAsync();
 

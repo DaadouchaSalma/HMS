@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+/*import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessagerieService } from '../../../services/messagerie.service';
 import { Message } from '../../../models/message.model';
 import { CommonModule } from '@angular/common';
@@ -97,4 +97,4 @@ export class MessagerieComponent implements OnInit {
       (c.nom + ' ' + c.prenom).toLowerCase().includes(term)
     );
   }
-}
+}*/

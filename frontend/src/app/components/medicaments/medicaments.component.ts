@@ -162,15 +162,17 @@ export class MedicamentsComponent implements OnInit {
   selectedId: string | null = null;
 
   // Open modal with the selected medicament ID
-  openDeleteModal(id: string) {
+  openDeleteModal(id: string, event?: MouseEvent) {
+    event?.stopPropagation(); // Prevent event bubbling
     this.selectedId = id;
     this.visible_modal = true;
+    this.cdr.detectChanges(); // Force change detection
   }
-
-  // Close modal and reset selected ID
+  
   closeModal() {
     this.visible_modal = false;
     this.selectedId = null;
+    this.cdr.detectChanges(); // Force change detection
   }
 
   // Confirm deletion

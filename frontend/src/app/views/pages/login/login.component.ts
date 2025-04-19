@@ -34,6 +34,7 @@ export class LoginComponent {
         console.log('Login successful:', response);
         
         const roles: string[] = response.roles;
+        console.log("roleLogin:",roles);
         localStorage.setItem('userRoles', JSON.stringify(roles));
         if (roles.includes('Patient')) {
             this.router.navigate(['dossierM/dossierMListe']);

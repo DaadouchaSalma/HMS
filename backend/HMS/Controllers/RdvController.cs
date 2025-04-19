@@ -60,7 +60,7 @@ namespace HMS.Controllers
                 var notifications = await _context.Rdv
                     .Include(r => r.Medecin)
                     .Where(r =>
-                       // r.etat == "En attente" &&
+                        r.etat == "En attente" &&
                         r.PatientId == patient.Id &&
                         r.Date_RDV >= today &&
                         (r.Date_RDV > today || r.Time_RDV > nowTime)
