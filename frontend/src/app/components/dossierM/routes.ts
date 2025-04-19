@@ -29,7 +29,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: ' ',
-          roles: ['Medecin']
+          roles: ['Medecin','PersonnelAdministratif']
         }
       } 
       

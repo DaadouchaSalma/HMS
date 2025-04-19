@@ -16,7 +16,7 @@
         public string? Statut { get; set; }
         public string? IdentityUserId { get; set; }
         public ApplicationUser? IdentityUser { get; set; }
-        public ICollection<Message> MessagesEnvoyes { get; set; }
-        public ICollection<Message> MessagesRecus { get; set; }
+        public ICollection<Message>? MessagesEnvoyes { get; set; }
+        public ICollection<Message>? MessagesRecus { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace HMS.Controllers
              _dossierRepository = dossierRepository;
             _patientRepository = patientRepository;
         }
-         [Authorize(Roles = "Medecin")]
+         [Authorize(Roles = "Medecin,PersonnelAdministratif")]
         [HttpPost("new")]
         public async Task<IActionResult> CreateDossierM([FromBody] DossierM dossier)
         {
@@ -50,7 +50,7 @@ namespace HMS.Controllers
             return Ok(new { message = "DossierM ajouté avec succès" });
         }
 
-        [Authorize(Roles = "Medecin")]
+        [Authorize(Roles = "Medecin,PersonnelAdministratif")]
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateDossierM(Guid id, [FromBody] DossierM dossierUpdates)
         {
@@ -106,7 +106,7 @@ namespace HMS.Controllers
             }
 
         }
-        [Authorize(Roles = "Medecin")]
+        [Authorize(Roles = "Medecin,PersonnelAdministratif")]
         [HttpGet("medecin")]
         public async Task<IActionResult> GetDossierM([FromQuery] Guid patientId)
         {

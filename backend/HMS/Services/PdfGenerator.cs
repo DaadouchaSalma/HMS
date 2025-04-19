@@ -48,7 +48,7 @@ public class PdfGenerator
             var cleanedJson = JsonSerializer.Deserialize<string>(prescription.ListeMed);
             List<MedicamentDTO> medications = JsonSerializer.Deserialize<List<MedicamentDTO>>(cleanedJson);
 
-            float startY = 600; // Starting Y position
+            float startY = 530; // Starting Y position
             float lineHeight = 60; // Line spacing
 
             foreach (var m in medications)
@@ -56,7 +56,7 @@ public class PdfGenerator
                 string line = $"- {m.Nom}: {m.Dosage}, {m.Frequence} pendant {m.Duree} / {m.InstructionsSpeciales}";
                 document.Add(new Paragraph(line)
                     .SetFont(font)
-                    .SetFontSize(18)
+                    .SetFontSize(16)
                     .SetFixedPosition(40, startY, 500));
                 startY -= lineHeight;
             }

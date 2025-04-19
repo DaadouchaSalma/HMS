@@ -27,7 +27,7 @@
   </c-toast>
 </c-toaster>
 <!-- Delete Confirmation Modal -->
-<c-modal id="deleteModal" [visible]="visible_modal" (visibleChange)="handleLiveDemoChange($event)">
+<c-modal id="deleteModal" [visible]="visible_modal" (visibleChange)="visible_modal = $event">
   <c-modal-header>
     <h5 cModalTitle>Confirmation de suppression</h5>
     <button (click)="closeModal()" cButtonClose></button>

@@ -15,7 +15,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'Ajout d\'un DME',
-          roles: ['Medecin']
+          roles: ['Medecin','PersonnelAdministratif']
         }
       },
       {
@@ -23,8 +23,8 @@ export const routes: Routes = [
         loadComponent: () => import('./edit/edit.component').then(m => m.EditComponent),
         canActivate: [authGuard, roleGuard],
         data: {
-          title: 'Mise à jour d\'un DME',
-          roles: ['Medecin']
+          title: 'Ajout de données cliniques',
+          roles: ['Medecin','PersonnelAdministratif']
         }
       }
     ]
