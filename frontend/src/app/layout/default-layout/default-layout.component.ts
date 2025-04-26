@@ -61,7 +61,7 @@ function isOverflown(element: HTMLElement) {
 export class DefaultLayoutComponent {
   public navItems = [...navItems];
   userRole: string = '';
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, public router: Router) {}
 
   ngOnInit(): void {
     const roles  = this.authService.getUserRoles();

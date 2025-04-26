@@ -88,7 +88,7 @@ namespace HMS.Controllers
         }
 
         [HttpGet("listePerso")]
-        [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien")]
+        [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien, Admin")]
         public async Task<ActionResult<IEnumerable<Personnel>>> GetPersonnels()
         {
             var identityUserId = _userManager.GetUserId(User);

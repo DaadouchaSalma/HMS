@@ -47,4 +47,71 @@
       <button (click)="send()">Envoyer</button>
     </div>
   </div>
+</div-->
+<!-- messagerie.component.html -->
+<div class="messaging-container">
+  <!-- Contacts Sidebar -->
+  <div class="contacts-sidebar" style="background-color: #f2f2f2;">
+    
+    <h3 style="margin-top: 5%;margin-left: 5%;font-weight: bold;">Discussions</h3>
+    <!-- Search Bar -->
+    <div class="search-container p-3">
+      <input type="text" 
+             [(ngModel)]="searchTerm" 
+             (input)="filterContacts()"
+             placeholder="# Rechercher..."
+             class="search-input"
+             style="background-color: #e4e4ef; color: #2B4C8C;">
+    </div>
+
+    <!-- Contacts List -->
+    <div class="contacts-list">
+      <div *ngFor="let contact of filteredContacts" 
+           class="contact-item p-3" 
+           (click)="selectContact(contact)"
+           [class.selected]="selectedUserId === contact.id"
+           style="border-bottom: 1px solid #c0c9dc;">
+        <div class="contact-info" style="margin-bottom: -7%;">
+          <h4 class="contact-name" style="color: #2B4C8C; ">{{contact.prenom}} {{contact.nom}}</h4>
+          <p class="contact-role" style="color: #3E608C;">
+            <i [ngClass]="getTypeIcon(contact.type)"></i>
+            {{getTypeLabel(contact.type)}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Main Area -->
+  <div class="chat-main" *ngIf="selectedContact" style="background-color: #F0F0F2;border-radius: 16px ;">
+    <!-- Chat Header -->
+    <div class="chat-header p-3" style="border-top-right-radius: 16px ;border-top-left-radius: 16px ;" >
+      <h3 style="color: #2B4C8C;">{{selectedContact.nom}} {{selectedContact.prenom}}</h3>
+    </div>
+
+    <!-- Messages Container -->
+    <div #messageContainer class="messages-container">
+      <div *ngFor="let msg of messages" 
+           class="message-bubble"
+           [class.sent]="msg.expediteurId === currentUserId">
+        <p>{{msg.content}}</p>
+        <span class="message-time">{{msg.sentAt | date:'shortTime'}}</span>
+      </div>
+    </div>
+
+    <!-- Message Input -->
+    <div class="message-input-container p-3" style="border-bottom-right-radius: 16px ;border-bottom-left-radius: 16px ;">
+      <input type="text" 
+             [(ngModel)]="newMessage" 
+             (keyup.enter)="send()"
+             placeholder="Votre Message ..."
+             class="message-input">
+      <button (click)="send()" class="send-button">Envoyer</button>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!selectedContact" class="empty-state">
+    <p style="color: #3E608C;">Sélectionnez un contact pour commencer à discuter</p>
+  </div>
 </div>

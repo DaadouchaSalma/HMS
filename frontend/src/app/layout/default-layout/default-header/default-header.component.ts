@@ -6,6 +6,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import {RdvService} from '../../../services/rdv.service';
 import { Router} from '@angular/router';
 import { SidebarComponent, SidebarService } from '@coreui/angular-pro'; // selon ta version
+import { HeaderModule } from '@coreui/angular-pro';
 
 
 
@@ -50,7 +51,7 @@ import { cilPowerStandby,
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  imports: [FormsModule, CommonModule, ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective,FormsModule,CommonModule],
+  imports: [HeaderModule,FormsModule, CommonModule, ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, RouterLink, NgTemplateOutlet, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective, NgStyle, FormDirective,FormsModule,CommonModule],
   providers: [IconSetService]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
@@ -73,7 +74,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
  
 
   
-  constructor(private medNotifsService: MedNotifsService ,private authService: AuthService, private router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute,private sidebarService: SidebarService) {
+  constructor(private medNotifsService: MedNotifsService ,private authService: AuthService, public router: Router, iconSet: IconSetService,private rdvService: RdvService ,  private route: ActivatedRoute,private sidebarService: SidebarService) {
     super();
     iconSet.icons = { 
       cilPowerStandby,
