@@ -48,10 +48,10 @@ export const routes: Routes = [
         path: 'chat',
         loadChildren: () => import('./components/chatBot/routes').then((m) => m.routes),
       },
-      /*{
+      {
         path: 'messagerie',
         loadChildren: () => import('./components/messagerie/routes').then((m) => m.routes),
-      },*/
+      },
       {
 
         path:'dossierM',

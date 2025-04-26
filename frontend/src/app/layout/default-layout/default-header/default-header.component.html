@@ -27,6 +27,10 @@
       </c-input-group>
     </form-->
     <c-header-nav class="d-none d-md-flex ms-auto custom-header-nav">
+      <!-- logo seul (affiché uniquement sur /messagerie/msg) -->
+<div *ngIf="router.url.includes('messagerie/msg')" class="logo-container" style="height: 60px;margin-left: -504%; background-color: #c7d5ea; display: flex; align-items: center; padding-left: 1rem;">
+  <img src="../../../assets/images/logo_smartCare_sansbg (3).png" alt="Logo" height="48">
+</div>
       <ng-container *ngTemplateOutlet="notifyDropdown"/>
       <!--ng-container *ngTemplateOutlet="taskDropdown" /-->
       <ng-container *ngTemplateOutlet="messagesDropdown"/>

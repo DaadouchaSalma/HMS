@@ -67,16 +67,32 @@ public class ChatBotMedRepository : IChatBotMedRepository
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
+    private readonly ApplicationDbContext _dbContext;
 
-    public ChatBotMedRepository(HttpClient httpClient, IConfiguration configuration)
+    public ChatBotMedRepository(HttpClient httpClient, IConfiguration configuration, ApplicationDbContext dbContext)
     {
         _httpClient = httpClient;
         _apiKey = configuration["GeminiApiKey"]; // clé dans appsettings.json
+        _dbContext = dbContext;
+
     }
 
     public async Task<string> GetGeminiResponse(string userMessage)
     {
+        // Fetch all doctors with their services
+        var doctors = _dbContext.Medecins
+            .Select(m => new
+            {
+                m.Id,
+                m.Nom,  // Assuming these properties exist in Personnel base class
+                m.Prenom,
+                m.Grad_med,
+                m.service
+            })
+            .ToList();
+
         var systemPrompt = "Tu es un assistant médical virtuel qui parle uniquement en français. " +
+                        
                        "Tu ne réponds qu'aux questions liées à la santé ou à la médecine. " +
                        "Tu ne donnes jamais de diagnostics précis ni de prescriptions de médicaments. " +
                        "Tu ne remplaces en aucun cas un professionnel de santé. " +

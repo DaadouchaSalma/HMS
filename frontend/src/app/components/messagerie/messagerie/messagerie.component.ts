@@ -1,4 +1,4 @@
-/*import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessagerieService } from '../../../services/messagerie.service';
 import { Message } from '../../../models/message.model';
 import { CommonModule } from '@angular/common';
@@ -39,14 +39,39 @@ export class MessagerieComponent implements OnInit {
     this.loadContacts();
   }
 
+  getTypeLabel(type: number): string {
+    switch (type) {
+      case 0: return 'Administratif';
+      case 1: return 'Médecin';
+      case 2: return 'Pharmacien';
+      case 3:return  'Administrateur';
+      default: return 'Inconnu';
+    }
+  }
+
   getCurrentUserId() {
     this.messageService.getCurrentUser().subscribe({
       next: (user) => {
         this.currentUserId = user.id!;
         console.log('current user: lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll', this.currentUserId)
       },
-      error: (err) => console.error("Erreur récupération de l'utilisateur courant", err)
+      error: (err) => {
+        console.error("Full error object:", err);
+        console.error("Error status:", err.status);
+        console.error("Error message:", err.message);
+        console.error("Error response:", err.error);
+      }
     });
+  }
+
+  getTypeIcon(type: number): string {
+    switch (type) {
+      case 0: return 'fas fa-briefcase'; // Icône utilisateur
+      case 1: return 'fas fa-user-md'; // Icône médecin
+      case 2: return 'fas fa-pills'; // Icône pharmacien
+      case 3: return 'fas fa-user-cog';
+      default: return 'fas fa-question-circle';
+    }
   }
 
   loadContacts(): void {
@@ -69,26 +94,23 @@ export class MessagerieComponent implements OnInit {
     });
   }
 
-  send(): void {
-    if (!this.newMessage.trim()) return;
 
-    this.messageService.sendMessage(this.selectedUserId, this.newMessage).subscribe(() => {
+  scrollToBottom(): void {
+    try {
+      this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+    } catch(err) { }
+  }
+  
+  send() {
+    if (this.newMessage.trim() !== '') {
       this.messages.push({
         content: this.newMessage,
+        expediteurId: this.currentUserId,
         sentAt: new Date()
       });
       this.newMessage = '';
-      this.scrollToBottom();
-    });
-  }
-
-  scrollToBottom(): void {
-    setTimeout(() => {
-      if (this.messageContainer) {
-        this.messageContainer.nativeElement.scrollTop =
-          this.messageContainer.nativeElement.scrollHeight;
-      }
-    }, 100);
+      setTimeout(() => this.scrollToBottom(), 100); // Scroll after sending
+    }
   }
 
   filterContacts() {
@@ -97,4 +119,6 @@ export class MessagerieComponent implements OnInit {
       (c.nom + ' ' + c.prenom).toLowerCase().includes(term)
     );
   }
-}*/
+
+  
+}
