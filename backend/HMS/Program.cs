@@ -9,6 +9,7 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net.Http.Headers;
+using Stripe;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,6 +61,7 @@ builder.Services.AddScoped<IReclamationRepository, ReclamationRepository>();
 builder.Services.AddScoped<ListeAttenteRepository>();
 builder.Services.AddScoped<IDossierMRepository, DossierMRepository>();
 
+
 // Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -67,6 +69,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
 });
 
+builder.Services.AddSingleton(new StripeClient(builder.Configuration["Stripe:SecretKey"]));
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllersWithViews();
