@@ -53,6 +53,10 @@ export const routes: Routes = [
         loadChildren: () => import('./components/messagerie/routes').then((m) => m.routes),
       },
       {
+        path: 'pay',
+        loadChildren: () => import('./components/payment/routes').then((m) => m.routes),
+      },
+      {
 
         path:'dossierM',
         loadChildren: () => import('./components/dossierM/routes').then((m) => m.routes),
