@@ -51,4 +51,8 @@ export class RdvService {
     return this.http.post(`${this.apiUrl}/addAttente`, rdv,{ withCredentials: true });
   }
 
+  getRdvForMedecin() {
+    return this.http.get<any[]>(`${this.apiUrl}/medecinRDV`, { withCredentials: true });
+  }
+
 }

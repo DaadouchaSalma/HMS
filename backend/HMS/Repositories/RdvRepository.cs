@@ -139,5 +139,14 @@ namespace HMS.Repositories
                             && r.Date_RDV == date);
         }
 
+        public async Task<List<RendezVous>> GetRendezVousByMedecinIdAsync(Guid medecinId)
+        {
+            return await _context.Rdv
+                .Include(r => r.Patient) 
+                .Where(r => r.MedecinId == medecinId)
+                .ToListAsync();
+        }
+
+
     }
 }
