@@ -102,7 +102,7 @@ namespace HMS.Controllers
                 return NotFound(new { message = "Personnel non trouvé." });
 
             var personnels = await _context.Personnels
-                .Where(p => p.Id != currentPersonnel.Id)
+                .Where(p => p.Id != currentPersonnel.Id && p.Type != TypePersonnel.Admin)
                 .ToListAsync();
 
             return personnels;
