@@ -4,5 +4,6 @@ export interface Message {
     destinataireId: string;
     content: string;
     sentAt: string;
+    read:boolean;
   }
   

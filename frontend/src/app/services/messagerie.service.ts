@@ -3,6 +3,7 @@ import * as signalR from '@microsoft/signalr';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Personnel } from '../models/personnel.model'
+import { Message } from '../models/message.model';
 
 @Injectable({ providedIn: 'root' })
 export class MessagerieService {
@@ -14,7 +15,7 @@ export class MessagerieService {
   
     connectSignalR(): void {
       this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl('/message', {
+        .withUrl('http://localhost:5160/message', {
           withCredentials: true
         })
         .withAutomaticReconnect()
@@ -55,4 +56,11 @@ export class MessagerieService {
         withCredentials: true
       });
     }
+    getLastMessageWith(contactId: string) {
+      return this.http.get<Message>(`${this.baseUrl}/last/${contactId}`,{withCredentials: true});
+    }
+    markAsRead(messageId: string): Observable<void> {
+      return this.http.post<void>(`${this.baseUrl}/markasread/${messageId}`,{}, {withCredentials: true});
+    }
+    
 }
