@@ -5,4 +5,5 @@ export class  RendezVous {
     etat?: string=''; // Valeur par défaut "En attente"
     patientId?: string='';
     medecinId: string='';
+    patient?: { nom: string; prenom: string }; // ✅ Add this line
   }

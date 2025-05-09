@@ -277,6 +277,23 @@ namespace HMS.Controllers
             return Ok();
 
         }
+
+        [HttpGet("medecinRDV")]
+        [Authorize(Roles = "Medecin")]
+        public async Task<IActionResult> GetRendezVousForMedecin()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized();
+
+            var identityUserId = _userManager.GetUserId(User);
+            var medecin = await _context.Medecins.FirstOrDefaultAsync(m => m.IdentityUserId == identityUserId);
+            if (medecin == null)
+                return NotFound("Medecin introuvable.");
+
+            var rdvs = await _rendezVousRepository.GetRendezVousByMedecinIdAsync(medecin.Id);
+            return Ok(rdvs);
+        }
+
     }
 }
 

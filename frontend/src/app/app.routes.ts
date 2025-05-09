@@ -45,6 +45,11 @@ export const routes: Routes = [
         data: { roles: ['PersonnelAdministratif'] }
       },
       {
+        path: 'dashboardMedecin',
+        loadChildren: () => import('./components/dashboard-medecin/routes').then((m) => m.routes),
+        data: { roles: ['Medecin'] }
+      },
+      {
         path: 'chat',
         loadChildren: () => import('./components/chatBot/routes').then((m) => m.routes),
       },

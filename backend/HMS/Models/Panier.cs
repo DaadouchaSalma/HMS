@@ -26,6 +26,8 @@ namespace HMS.Models
 
             set => MissingMedsJson = JsonSerializer.Serialize(value);
         }
+
+        public float prixPanier {  get; set; }
     }
 
 }
