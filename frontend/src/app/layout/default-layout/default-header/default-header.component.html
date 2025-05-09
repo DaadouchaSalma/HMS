@@ -12,6 +12,7 @@
     >
       <svg cIcon name="cilMenu" size="lg" style="color: #6387c0;"></svg>
     </button>
+    
     <!--form cForm class="d-none d-sm-flex">
       <c-input-group class="border border-light border-opacity-25 rounded" style="border-color: #6387c0 !important;">
         <span cInputGroupText id="search-addon" class="bg-transparent border-0 px-1" >
@@ -28,20 +29,21 @@
     </form-->
     <c-header-nav class="d-none d-md-flex ms-auto custom-header-nav">
       <!-- logo seul (affiché uniquement sur /messagerie/msg) -->
-<div *ngIf="router.url.includes('messagerie/msg')" class="logo-container" style="height: 60px;margin-left: -504%; background-color: #c7d5ea; display: flex; align-items: center; padding-left: 1rem;">
+<div *ngIf="router.url.includes('messagerie/msg')" class="logo-container" style="height: 60px;margin-left: -504%; background-color: #c7d5ea; display: flex; align-items: center; padding-left: 1rem;" [routerLink]="'/dashboard'">
   <img src="../../../assets/images/logo_smartCare_sansbg (3).png" alt="Logo" height="48">
 </div>
       <ng-container *ngTemplateOutlet="notifyDropdown"/>
       <!--ng-container *ngTemplateOutlet="taskDropdown" /-->
       <ng-container *ngTemplateOutlet="messagesDropdown"/>
     </c-header-nav>
-
+    <button cHeaderToggler *ngIf="userRole === 'Medecin' || userRole === 'Pharmacien' || userRole === 'PersonnelAdministratif'"
+    style="margin-inline-end: -12px" [routerLink]="'/messagerie/msg'" class="btn pe-3"><svg cIcon name="cilChatBubble" size="lg" style="color: #6387c0;"></svg></button>
     <c-header-nav class="ms-auto ms-md-0">
       <div class="nav-item py-1">
         <div class="vr h-100 mx-2 text-white text-opacity-50"></div>
       </div>
 
-    
+      
 
       <!--ng-container *ngTemplateOutlet="languageDropdown" /-->
       <ng-container *ngTemplateOutlet="themeDropdown" />
@@ -49,7 +51,7 @@
         <div class="vr h-100 mx-2 text-white text-opacity-50"></div>
       </div>
     </c-header-nav>
-
+    
       <!--aside toggler-->
       <button
       *ngIf="userRole == 'Patient'"
@@ -69,6 +71,8 @@
     <svg cIcon name="cilUser" size="lg" style="color: #6387c0;"></svg>
   </button>
 
+  
+
     <c-header-nav class="ms-4">
       <ng-container *ngTemplateOutlet="userDropdown" />
     </c-header-nav>
@@ -87,7 +91,8 @@
         alt="User avatar"
       /-->
       <svg aria-label="CoreUI Icon Power" cIcon name="cilPowerStandby" size="lg" style="color: #6387c0;"></svg>
-   
+      
+      
     </button>
     <ul cDropdownMenu class="pt-0 w-auto">
       <!--li>

@@ -13,5 +13,6 @@ namespace HMS.Models
         public Personnel? Destinataire { get; set; }
         public string Content { get; set; } = string.Empty;
         public DateTime SentAt { get; set; } = DateTime.UtcNow;
+        public bool Read { get; set; } = false;
     }
 }

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Personnel } from '../../../models/personnel.model';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-messagerie',
@@ -21,10 +22,12 @@ export class MessagerieComponent implements OnInit {
   selectedContact: any = null;
   searchTerm: string = '';
   filteredContacts: Personnel[] = [];
+  unreadMessagesCount: number = 0;
+  activeTab: 'all' | 'unread' = 'all';
 
   @ViewChild('messageContainer') messageContainer!: ElementRef;
 
-  constructor(private messageService: MessagerieService) {}
+  constructor(private messageService: MessagerieService,private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.getCurrentUserId();
@@ -34,9 +37,29 @@ export class MessagerieComponent implements OnInit {
         this.messages.push({ expediteurId: senderId, content, sentAt });
         this.scrollToBottom();
       }
+      const contact = this.contacts.find(c => c.id === senderId);
+  if (contact) {
+    contact.lastMessage = {
+      content: content,
+      sentAt: sentAt,
+      expediteurId: senderId,
+      destinataireId: this.currentUserId,
+      read: false
+    };
+    if (senderId !== this.currentUserId) {
+      this.unreadMessagesCount++;
+    }
+    this.sortContactsByLastMessage();
+    this.filteredContacts = [...this.contacts];
+    this.filterContacts();
+    this.changeDetector.detectChanges();
+
+  }
+  
     });
 
     this.loadContacts();
+    
   }
 
   getTypeLabel(type: number): string {
@@ -74,18 +97,71 @@ export class MessagerieComponent implements OnInit {
     }
   }
 
-  loadContacts(): void {
-    this.messageService.getAllExceptCurrent().subscribe((contacts) => {
-      this.contacts = contacts;
-      this.filteredContacts = contacts;
-    });
-  }
+    loadContacts(): void {
+      this.messageService.getAllExceptCurrent().subscribe((contacts) => {
+        this.contacts = contacts;
+        let loaded = 0;
+        this.unreadMessagesCount = 0; // Réinitialiser le compteur
 
-  selectContact(contact: any): void {
-    this.selectedUserId = contact.id;
-    this.selectedContact = contact;
+    
+        // Pour chaque contact, charger son dernier message
+        contacts.forEach(contact => {
+          this.messageService.getLastMessageWith(contact.id).subscribe({
+            next: (message) => {
+              contact.lastMessage = message;
+              /*if (message && !message.read && message.destinataireId === this.currentUserId) {
+                this.unreadMessagesCount++;
+              }*/
+                if (message && 
+                  !message.read && 
+                  message.destinataireId === this.currentUserId &&
+                  message.expediteurId !== this.currentUserId) {
+                this.unreadMessagesCount++;
+              }
+              loaded++;
+    
+              // Une fois tous les messages chargés, trier et mettre à jour la liste filtrée
+              if (loaded === contacts.length) {
+                this.sortContactsByLastMessage();
+                this.filteredContacts = [...this.contacts];
+              }
+            },
+            error: (err) => {
+              loaded++;
+              console.error('Erreur chargement du dernier message', err);
+            }
+          });
+        });
+      });
+    }
+    sortContactsByLastMessage(): void {
+      this.contacts.sort((a, b) => {
+        const dateA = a.lastMessage?.sentAt ? new Date(a.lastMessage.sentAt).getTime() : 0;
+        const dateB = b.lastMessage?.sentAt ? new Date(b.lastMessage.sentAt).getTime() : 0;
+        return dateB - dateA;
+      });
+    }
+
+    selectContact(contact: any) {
+      this.selectedContact = contact;
+      this.selectedUserId = contact.id;
+      if (contact.lastMessage && 
+        !contact.lastMessage.read && 
+        contact.lastMessage.destinataireId === this.currentUserId) {
+      this.messageService.markAsRead(contact.lastMessage.id).subscribe(() => {
+        contact.lastMessage.read = true;
+        this.unreadMessagesCount--;
+        this.changeDetector.detectChanges();
+      });
+    }
+
+    this.filterContacts();
     this.loadMessages();
-  }
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 100);
+    }
+    
 
   loadMessages(): void {
     this.messageService.getMessagesWith(this.selectedUserId).subscribe((msgs: any) => {
@@ -94,31 +170,103 @@ export class MessagerieComponent implements OnInit {
     });
   }
 
-
   scrollToBottom(): void {
     try {
-      this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
-    } catch(err) { }
+      if (this.messageContainer?.nativeElement) {
+        const element = this.messageContainer.nativeElement;
+        element.scrollTop = element.scrollHeight;
+        
+        // Solution alternative plus robuste
+        setTimeout(() => {
+          element.scroll({
+            top: element.scrollHeight,
+            behavior: 'smooth'
+          });
+        }, 50);
+      }
+    } catch(err) {
+      console.warn('Erreur lors du scroll:', err);
+    }
   }
   
   send() {
     if (this.newMessage.trim() !== '') {
-      this.messages.push({
-        content: this.newMessage,
-        expediteurId: this.currentUserId,
-        sentAt: new Date()
+      this.messageService.sendMessage(this.selectedUserId, this.newMessage).subscribe(() => {
+        const messageContent = this.newMessage;
+        const sentAt = new Date();
+  
+        this.messages.push({
+          content: this.newMessage,
+          expediteurId: this.currentUserId,
+          sentAt: sentAt
+        });
+  
+        this.newMessage = '';
+  
+        // Met à jour le dernier message pour le contact
+        const contact = this.contacts.find(c => c.id === this.selectedUserId);
+        if (contact) {
+          contact.lastMessage = {
+            content: messageContent,
+            sentAt: sentAt,
+            expediteurId: this.currentUserId,
+            destinataireId: this.selectedUserId,
+            read: true // Le message envoyé est considéré comme lu
+          };
+        }
+  
+        this.sortContactsByLastMessage(); // Trie après envoi
+        this.filteredContacts = [...this.contacts]; // Met à jour la liste filtrée
+        this.loadLastMessage(this.selectedUserId)
+        this.changeDetector.detectChanges();
+        this.filterContacts();
+        setTimeout(() => this.scrollToBottom(), 100);
       });
-      this.newMessage = '';
-      setTimeout(() => this.scrollToBottom(), 100); // Scroll after sending
     }
   }
+  
+  loadLastMessage(contactId: string) {
+    this.messageService.getLastMessageWith(contactId).subscribe({
+      next: (message) => {
+        const contact = this.contacts.find(c => c.id === contactId);
+        if (contact) {contact.lastMessage = message;
+          this.sortContactsByLastMessage();
+        this.filteredContacts = [...this.contacts];
+        this.changeDetector.detectChanges();
+        }
+      },
+      error: (err) => console.error('Erreur chargement du dernier message', err)
+    });
+  }
+  
 
-  filterContacts() {
+  /*filterContacts() {
     const term = this.searchTerm.toLowerCase();
     this.filteredContacts = this.contacts.filter(c =>
       (c.nom + ' ' + c.prenom).toLowerCase().includes(term)
     );
-  }
-
+  }*/
+    filterContacts() {
+      const term = this.searchTerm.toLowerCase();
+      let filtered = this.contacts.filter(c =>
+        (c.nom + ' ' + c.prenom).toLowerCase().startsWith(term)
+      );
+    
+      // Filtre supplémentaire pour l'onglet "Non lus"
+      if (this.activeTab === 'unread') {
+        filtered = filtered.filter(c => 
+          c.lastMessage && 
+          !c.lastMessage.read && 
+          c.lastMessage.destinataireId === this.currentUserId &&
+          c.lastMessage.expediteurId !== this.currentUserId
+        );
+      }
+    
+      this.filteredContacts = filtered;
+    }
+    setActiveTab(tab: 'all' | 'unread') {
+      this.activeTab = tab;
+      this.filterContacts();
+    }
   
 }

@@ -45,7 +45,7 @@ import { cilPowerStandby,
   cilSun,
   cilMoon,
   cilContrast,
-  cilAccountLogout } from '@coreui/icons';
+  cilAccountLogout,cilChatBubble } from '@coreui/icons';
 //import { ChatComponent } from 'src/app/components/chatBot/chat/chat.component';
 
 @Component({
@@ -87,7 +87,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
       cilSun,
       cilMoon,
       cilContrast,
-      cilAccountLogout
+      cilAccountLogout,cilChatBubble
     };
   }
 

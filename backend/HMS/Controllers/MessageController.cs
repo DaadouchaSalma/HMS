@@ -125,5 +125,67 @@ namespace HMS.Controllers
 
             return Ok(currentPersonnel);
         }
+
+
+        [HttpGet("last/{contactId}")]
+        [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien")]
+        public async Task<IActionResult> GetLastMessageWithContact(Guid contactId)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized(new { message = "Utilisateur non authentifié" });
+
+            var identityUserId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(identityUserId))
+                return BadRequest(new { message = "Impossible de récupérer l'ID de l'utilisateur connecté." });
+
+            var currentUser = await _context.Personnels
+                .FirstOrDefaultAsync(p => p.IdentityUserId == identityUserId);
+
+            if (currentUser == null)
+                return NotFound(new { message = "Utilisateur introuvable." });
+
+            var contact = await _context.Personnels
+                .FirstOrDefaultAsync(p => p.Id == contactId);
+
+            if (contact == null)
+                return NotFound(new { message = "Contact introuvable." });
+
+            var lastMessage = await _context.Messages
+                .Where(m =>
+                    (m.ExpediteurId == currentUser.Id && m.DestinataireId == contactId) ||
+                    (m.ExpediteurId == contactId && m.DestinataireId == currentUser.Id))
+                .OrderByDescending(m => m.SentAt)
+                .FirstOrDefaultAsync();
+
+            if (lastMessage == null)
+                return NoContent();
+
+            var result = new
+            {
+                Id = lastMessage.Id,
+                Content = lastMessage.Content,
+                SentAt = lastMessage.SentAt,
+                ExpediteurId = lastMessage.ExpediteurId,
+                DestinataireId=lastMessage.DestinataireId,
+                read=lastMessage.Read
+            };
+
+            return Ok(result);
+        }
+
+        [HttpPost("markasread/{messageId}")]
+        [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien")]
+        public async Task<IActionResult> MarkAsRead(Guid messageId)
+        {
+            var message = await _context.Messages.FindAsync(messageId);
+            if (message == null) return NotFound();
+
+            message.Read = true;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
     }
 }

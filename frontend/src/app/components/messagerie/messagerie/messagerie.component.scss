@@ -13,14 +13,22 @@
 .search-input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #a0b5d8;
+  //border: 1px solid #a0b5d8;
   border-radius: 20px;
   outline: none;
+  background-color: #e4e4ef;
+  color: #2B4C8C;
+  border: 1px solid #a0b5d8;
 }
 
+
+
 .contacts-list {
+  background-color: #e4e4ef; // léger contraste avec #d7deed
+  padding: 10px;
   height: calc(100% - 60px);
   overflow-y: auto;
+ 
 }
 /*
 .chat-main {
@@ -33,7 +41,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #e7e1ed;
+  background-color: #d7deed;
+  color: #2B4C8C;
   padding: 12px 20px;
   box-shadow: 0 1px 2px -1px gray;
   z-index: 100;
@@ -45,6 +54,7 @@
   }
 }
 
+
 .messages-container {
   flex: 1;
   padding: 20px;
@@ -54,6 +64,8 @@
   gap: 15px;
   background-color: #e7e1ed;
 }
+
+
 
 .message-bubble {
   max-width: 65%;
@@ -78,6 +90,8 @@
   }
 }
 
+
+
 .message-time {
   font-size: 0.75rem;
   opacity: 0.8;
@@ -90,8 +104,11 @@
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background-color: #e7e1ed;
+  background-color: #e4e4ef;
   box-shadow: 0 -1px 2px -1px gray;
+  input &.selected{
+    border-color: #3E608C;
+  }
 }
 
 .message-input {
@@ -100,7 +117,7 @@
   border: 1px solid #c0c9dc;
   border-radius: 20px;
   font-size: 0.9rem;
-  background: #f9fafc;
+  background: #ffffff;
 }
 
 .send-button {
@@ -115,6 +132,18 @@
   &:hover {
     background-color: #3E608C;
   }
+}
+h3 {
+  color: #2B4C8C;
+  font-weight: bold;
+}
+
+.contact-name {
+  color: #2B4C8C;
+}
+
+.contact-role {
+  color: #3E608C;
 }
 
 
@@ -151,25 +180,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #F0F0F2;
+  //background-color: #F0F0F2;
+  background-color: #f3f3f3;
+  color: #3E608C;
 }
 /* Ajouts/modifications CSS */
 .contact-item {
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid transparent;
-  border-radius: 8px; /* Bordure arrondie de base */
-
+  //border: 1px solid transparent;
+  border-radius: 6px; /* Bordure arrondie de base */
+  background-color: #e4e4ef;
+  //background-color: #e7e1ed;
+  padding: 10px 16px;
+  //border-bottom: 1px solid #d0d3e0;
+  
   &:hover {
-    background-color: #d7deed;
+    background-color: #f3f3f3;
   }
 
-  &.selected-contact {
-    border: 2px solid #6387c0 !important; /* Couleur de votre palette */
+  &.selected {
+    //border: 2px solid #6387c0 !important; /* Couleur de votre palette */
     border-radius: 10px !important; /* Bordure plus prononcée */
-    background-color: #c1cce6;
+    background-color: #f3f3f3 !important;
+    //border: 2px solid #6387c0 !important;
   }
 }
+
 
 /*.contact-name {
   font-weight: 600; 
@@ -185,11 +222,13 @@
 .contact-name {
   font-size: 1rem; // au lieu de grand titre
   font-weight: 600;
+  color: #2B4C8C;
 }
 
 .contact-role {
   font-size: 0.8rem;
   margin-top: 2px;
+  color: #3E608C;
 }
 
 .messaging-container {
@@ -207,11 +246,13 @@
   width: 27%;
   height: 100%;
   overflow-y: auto;
-  background-color: #f3f3f4;
-  border-right: 1px solid #a0b5d8;
+  //background-color: #d7deed;
+  border-right: 1px solid #c0c9dc;
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
 }
+
+
 
 .chat-main {
   flex: 1;
@@ -222,4 +263,41 @@
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
 
+}
+
+.badge {
+  font-size: 0.8rem;
+  margin-left: 5%;
+  vertical-align: middle;
+}
+
+//tabs
+.tabs-container {
+  .tab-button {
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #5f6d86;
+    
+    &.active {
+      color: #2B4C8C;
+      border-bottom-color: #2B4C8C !important;
+      font-weight: 600;
+    }
+    
+    &:hover:not(.active) {
+      background-color: rgba(43, 76, 140, 0.1);
+    }
+    
+    .badge {
+      margin-left: 5px;
+    }
+  }
+}
+.no-messages {
+  color: #5f6d86;
+  font-size: 0.9rem;
+  padding: 20px;
+  text-align: center;
+  //border-top: 1px solid #eee;
+  margin-top: 10px;
 }

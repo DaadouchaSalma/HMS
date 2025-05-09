@@ -1,59 +1,11 @@
-<!--div class="messaging-layout"-->
-  <!-- Liste des contacts -->
-  <!--div class="contacts-panel">
-    <div class="search-bar">
-      <i class="fas fa-search search-icon"></i>
-      <input
-        type="text"
-        placeholder="Rechercher un contact..."
-        [(ngModel)]="searchTerm"
-        (input)="filterContacts()" />
-    </div>
-    <div class="contact"
-      *ngFor="let contact of filteredContacts"
-      (click)="selectContact(contact)"
-      [class.active]="contact.id === selectedUserId">
-      <div class="contact-name">{{ contact.nom }} {{ contact.prenom }}</div>
-    </div>
-
-  </div-->
-
-  <!-- Conversation -->
-  <!--div class="chat-container">
-    <div class="chat-header">
-      <h5>Messagerie</h5>
-      <span class="chat-subtitle">
-        {{ selectedContact?.nom }} {{ selectedContact?.prenom || 'Sélectionnez un contact' }}
-      </span>
-    </div>
-
-    <div class="chat-messages" #messageContainer>
-      <div
-        *ngFor="let msg of messages"
-        [ngClass]="msg.expediteurId === currentUserId ? 'chat-bubble me' : 'chat-bubble other'"
-      >
-        <div class="chat-text">{{ msg.content }}</div>
-        <div class="chat-time">{{ msg.sentAt | date: 'shortTime' }}</div>
-      </div>
-    </div>
-
-    <div class="chat-input" *ngIf="selectedUserId">
-      <input
-        type="text"
-        [(ngModel)]="newMessage"
-        (keyup.enter)="send()"
-        placeholder="Écrivez un message..."
-      />
-      <button (click)="send()">Envoyer</button>
-    </div>
-  </div>
-</div-->
 <!-- messagerie.component.html -->
 <div class="messaging-container">
   <!-- Contacts Sidebar -->
-  <div class="contacts-sidebar" style="background-color: #f2f2f2;">
+  <div class="contacts-sidebar" style="background-color: #e4e4ef	;display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;">
     
-    <h3 style="margin-top: 5%;margin-left: 5%;font-weight: bold;">Discussions</h3>
+    <h3 style="margin-top: 5%;margin-left: 5%;font-weight: bold; font-family: 'Segoe UI', sans-serif;">Discussions<span *ngIf="unreadMessagesCount > 0" class="badge bg-danger">{{unreadMessagesCount}}</span></h3>
     <!-- Search Bar -->
     <div class="search-container p-3">
       <input type="text" 
@@ -63,6 +15,27 @@
              class="search-input"
              style="background-color: #e4e4ef; color: #2B4C8C;">
     </div>
+    <div class="tabs-container px-3" style="display: flex; border-bottom: 1px solid #ddd;">
+      <button 
+        class="tab-button"
+        [class.active]="activeTab === 'all'"
+        (click)="setActiveTab('all')"
+        style="flex: 1; padding: 8px; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;">
+        Tous les messages
+      </button>
+      <button 
+        class="tab-button"
+        [class.active]="activeTab === 'unread'"
+        (click)="setActiveTab('unread')"
+        style="flex: 1; padding: 8px; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;">
+        Non lus <span *ngIf="unreadMessagesCount > 0" class="badge bg-danger" style="font-size: 0.7rem;">{{unreadMessagesCount}}</span>
+      </button>
+    </div>
+    <div *ngIf="activeTab === 'unread' && filteredContacts.length === 0" class="no-messages p-3 text-center">
+      <h5 style="color: #5f6d86;">Aucun message non lu</h5>
+      <p style="color: #5f6d86;">Si vous avez des discussions non lues, elles apparaîtront ici.</p>
+    </div>
+   
 
     <!-- Contacts List -->
     <div class="contacts-list">
@@ -70,13 +43,23 @@
            class="contact-item p-3" 
            (click)="selectContact(contact)"
            [class.selected]="selectedUserId === contact.id"
-           style="border-bottom: 1px solid #c0c9dc;">
+           >
         <div class="contact-info" style="margin-bottom: -7%;">
-          <h4 class="contact-name" style="color: #2B4C8C; ">{{contact.prenom}} {{contact.nom}}</h4>
+          <div style="display: flex;justify-content: space-between; align-items: center;">
+          <h4 class="contact-name" style="color: #2B4C8C; " [style.fontWeight]="contact.lastMessage && !contact.lastMessage.read && contact.lastMessage.expediteurId !== currentUserId ? 'bold' : 'normal'">{{contact.prenom}} {{contact.nom}} </h4>
           <p class="contact-role" style="color: #3E608C;">
             <i [ngClass]="getTypeIcon(contact.type)"></i>
             {{getTypeLabel(contact.type)}}
           </p>
+          </div>
+          <div style="display: flex;justify-content: space-between; align-items: center;">
+          <p class="last-message" style="color: #5f6d86; font-size: 13px;margin-top: -2%;" [style.fontWeight]="contact.lastMessage && !contact.lastMessage.read && contact.lastMessage.expediteurId !== currentUserId ? 'bold' : 'normal'" [style.color]="contact.lastMessage && !contact.lastMessage.read && contact.lastMessage.expediteurId !== currentUserId ? '#3c424f' : '#5f6d86'" >
+            {{ contact.lastMessage?.content?.length > 30 
+              ? (contact.lastMessage.content | slice:0:30) + '...' 
+              : (contact.lastMessage?.content || 'Aucun message') }}
+          </p>
+          <span class="message-time" style="margin-top: -7%;" [style.fontWeight]="contact.lastMessage && !contact.lastMessage.read && contact.lastMessage.expediteurId !== currentUserId ? 'bold' : 'normal'">{{contact.lastMessage?.sentAt | date:'shortTime'}}</span>
+        </div>
         </div>
       </div>
     </div>
