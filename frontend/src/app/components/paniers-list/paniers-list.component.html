@@ -51,6 +51,24 @@
   </c-modal-footer>
 </c-modal>
 
+<!-- Delete Confirmation Modal -->
+<c-modal id="deleteModal" [visible]="visible_modal_supression" (visibleChange)="visible_modal_supression = $event">
+  <c-modal-header>
+    <h5 cModalTitle>Confirmation de suppression</h5>
+    <button (click)="closeModalSuppression()" cButtonClose></button>
+  </c-modal-header>
+  
+  <c-modal-body>Êtes-vous sûr de vouloir supprimer ce panier ?</c-modal-body>
+
+  <c-modal-footer>
+    <button (click)="closeModalSuppression()" cButton color="secondary">
+      Annuler
+    </button>
+    <button (click)="onChangeStatusToSupprime()" cButton color="danger" style="background-color: rgb(196, 57, 57); color: white;">
+      Supprimer
+    </button>
+  </c-modal-footer>
+</c-modal>
 
 <c-smart-table
   [activePage]="1"
@@ -153,6 +171,11 @@
         @case ('valider') {
           <button (click)="openValidationModal(item.panierId)" cButton class="custom-btn" size="sm" variant="outline">
             valider
+          </button>
+        }
+        @case ('delete'){
+          <button style="background-color: rgb(196, 57, 57); border-color: rgb(196, 57, 57);" cButton class="ms-1"  size="sm" (click)="openDeleteModal(item.panierId)">
+            Supprimer
           </button>
         }
         @default {

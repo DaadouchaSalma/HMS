@@ -34,6 +34,10 @@ export class PanierService {
   refreshMissingMeds(): Observable<any> {
     return this.http.post(`${this.apiUrl}/refresh-missing-meds`, {},{ withCredentials: true });
   }
+
+  changePanierStatus(panierId: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${panierId}/status`, {},{ withCredentials: true });
+  }
   
   
 }

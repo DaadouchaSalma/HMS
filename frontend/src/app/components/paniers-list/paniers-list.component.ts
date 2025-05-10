@@ -137,7 +137,8 @@ export class PaniersListComponent {
   { key: 'patientName', label: 'Patient' },  // Assuming 'Patient' has a 'nom' property
   { key: 'patientEmail', label: 'Email' },  // Assuming 'Patient' has an 'Email' property
   { key: 'show', label: '', _style: { width: '5%' }, filter: false, sorter: false },
-  { key: 'valider', label: '', _style: { width: '5%' }, filter: false, sorter: false }
+  { key: 'valider', label: '', _style: { width: '5%' }, filter: false, sorter: false },
+  { key: 'delete', label: '', _style: { width: '5%' }, filter: false, sorter: false }
 ];
 
   panierDetails: any = {};
@@ -203,5 +204,47 @@ export class PaniersListComponent {
       onTimerChange($event: number) {
         this.percentage.set($event * 25);
       }
+
+
+      selectedId: string | null = null;
+      visible_modal_supression: boolean = false;
+    openDeleteModal(id: string, event?: MouseEvent) {
+      event?.stopPropagation(); // Prevent event bubbling
+      this.selectedId = id; // Store the selected panier ID
+      this.visible_modal_supression = true; // Show the modal
+    }
+      onChangeStatusToSupprime() {
+      if (this.selectedId) {
+        // Call the service to change the status or delete the panier
+        this.panierService.changePanierStatus(this.selectedId).subscribe(
+          (response) => {
+            console.log('Panier status changed to supprime:', response);
+            this.toggleToast('Panier supprimé avec succès!', 'success'); // Success message
+            this.fetchPaniers(); // Refresh the panier list
+            this.closeModal(); // Close the modal after deletion
+          },
+          (error) => {
+            console.error('Error changing panier status:', error);
+            this.toggleToast('Erreur lors de la suppression du panier!', 'error'); // Error message
+          }
+        );
+      }
+    }
+    
+
+    closeModalSuppression(): void {
+      this.visible_modal_supression = false; // Hide the modal
+      this.selectedId = null; // Reset the selected ID
+    }
+
+    
+    toggleLiveDemo() {
+      this.visible_modal = !this.visible_modal;
+    }
+  
+    handleLiveDemoChange(event: any) {
+      this.visible_modal = event;
+    }
+      
     
 }

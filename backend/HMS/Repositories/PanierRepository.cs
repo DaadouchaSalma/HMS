@@ -35,10 +35,12 @@ namespace HMS.Repositories
                 var existingMed = _context.Medicaments.FirstOrDefault(m => m.Nom == med.Nom);
                 if (existingMed != null)
                 {
+                    var quantityToAdd = Math.Min(med.Quantite, existingMed.Nbr_stock); // Use the minimum of required and available stock
+
                     var panierItem = new MedPanier
                     {
                         Id = Guid.NewGuid(),
-                        quantity = med.Quantite,
+                        quantity = quantityToAdd,
                         medicamentID = existingMed.Id,
                         Medicament = existingMed,
                         PanierId = panier.Id,
@@ -54,9 +56,11 @@ namespace HMS.Repositories
             return panier;
         }
 
+
         public async Task<List<object>> GetAllPaniersAsync()
         {
             var paniers = await _context.Paniers
+                .Where( p => p.state == "courant" || p.state == "incomplet")
                 .Include(p => p.Patient)
                 .Include(p => p.medPaniers).ThenInclude(mp => mp.Medicament)
                 .ToListAsync();
@@ -103,79 +107,88 @@ namespace HMS.Repositories
                 .ThenInclude(mp => mp.Medicament)
                 .FirstOrDefaultAsync(p => p.Id == panierId);
 
-            if (panier == null)
-            {
-                return null;
-            }
+            if (panier == null) return null;
 
-            var medsList = panier.medPaniers.Select(mp => new MedicamentDTO
-            {
-                Nom = mp.Medicament.Nom,
-                Quantite = mp.quantity
-            }).ToList();
+            var allMedsStillAvailable = true;
+            var updatedMissingMeds = new List<MedicamentDTO>();
 
-            foreach (var m in medsList)
+            // Re-check availability for existing medPaniers
+            foreach (var item in panier.medPaniers)
             {
-                Console.WriteLine($" medicament liiiiiiiiiiiiiiiiiiiiiiiiiiisteeeeeeeeeeeeeee : ,  {m.Nom}, {m.Quantite}");
-            }
-
-            if (medsList.Any())
-            {
-                panier.MissingMeds = CheckMissingMeds(medsList);
-            }
-
-            foreach (var m in panier.MissingMeds)
-            {
-                Console.WriteLine($"missiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing medicament : ,  {m.Nom}, {m.Quantite}");
-            }
-
-            foreach (var panierItem in panier.medPaniers)
-            {
-                var medicament = panierItem.Medicament;
-                if (medicament != null)
+                if (item.Medicament.Nbr_stock < item.quantity)
                 {
-                    if (medicament.Nbr_stock >= panierItem.quantity)
+                    allMedsStillAvailable = false;
+
+                    updatedMissingMeds.Add(new MedicamentDTO
                     {
-                        medicament.Nbr_stock -= panierItem.quantity;
-                        _context.MedPaniers.Remove(panierItem);
-                    }
-                    else
-                    {
-                        panierItem.quantity -= medicament.Nbr_stock;
-                        medicament.Nbr_stock = 0;
-                    }
+                        Nom = item.Medicament.Nom,
+                        Quantite = item.quantity - item.Medicament.Nbr_stock
+                    });
                 }
             }
 
-            if (!panier.MissingMeds.Any())
+            // Check if missing meds are now satisfiable
+            foreach (var missing in panier.MissingMeds)
             {
-                _context.Paniers.Remove(panier);
+                var med = await _context.Medicaments.FirstOrDefaultAsync(m => m.Nom == missing.Nom);
+                if (med == null || med.Nbr_stock < missing.Quantite)
+                {
+                    allMedsStillAvailable = false;
+                    updatedMissingMeds.Add(new MedicamentDTO
+                    {
+                        Nom = missing.Nom,
+                        Quantite = med == null ? missing.Quantite : missing.Quantite - med.Nbr_stock
+                    });
+                }
+            }
+
+            if (allMedsStillAvailable)
+            {
+                // Deduct stock for both medPaniers and missingMeds that were just added
+                foreach (var item in panier.medPaniers)
+                {
+                    var med = item.Medicament;
+                    med.Nbr_stock -= item.quantity;
+                }
+
+                panier.MissingMeds = new List<MedicamentDTO>();
+                panier.state = "valide";
+                panier.DateValidation = DateTime.Now;
+
                 await _context.SaveChangesAsync();
                 return new { message = "Panier validated and deleted as no missing meds." };
             }
-
-            await _context.SaveChangesAsync();
-            return new
+            else
             {
-                message = "Stock validation complete.",
-                missingMeds = panier.MissingMeds
-            };
+                panier.MissingMeds = updatedMissingMeds;
+                panier.state = "incomplet";
+                panier.DateValidation = DateTime.Now;
+                await _context.SaveChangesAsync();
+                return new
+                {
+                    message = "Panier incomplet. Some medications are still missing.",
+                    missingMeds = updatedMissingMeds
+                };
+            }
         }
+
 
 
         public async Task RefreshAllPaniersMissingMedsAsync()
         {
             var paniers = await _context.Paniers
-                            .Include(p => p.medPaniers)
-                            .ThenInclude(mp => mp.Medicament)
-                            .Include(p => p.Patient)
-                            .ToListAsync();
+                .Include(p => p.medPaniers)
+                    .ThenInclude(mp => mp.Medicament)
+                .Include(p => p.Patient)
+                .ToListAsync();
+
             if (paniers == null) return;
-            foreach(var panier in paniers)
+
+            foreach (var panier in paniers)
             {
                 var updatedMissingMeds = new List<MedicamentDTO>();
 
-                // Check for current medPaniers stock issues
+                // Step 1: Update existing medPaniers based on current stock
                 foreach (var item in panier.medPaniers)
                 {
                     var med = await _context.Medicaments.FirstOrDefaultAsync(m => m.Id == item.medicamentID);
@@ -186,6 +199,7 @@ namespace HMS.Repositories
                             Nom = item.Medicament?.Nom ?? "Unknown",
                             Quantite = item.quantity
                         });
+                        item.quantity = 0;
                     }
                     else if (med.Nbr_stock < item.quantity)
                     {
@@ -194,45 +208,62 @@ namespace HMS.Repositories
                             Nom = med.Nom,
                             Quantite = item.quantity - med.Nbr_stock
                         });
+                        item.quantity = med.Nbr_stock;
                     }
                 }
 
-                foreach(var item in panier.MissingMeds)
+                // Step 2: Try fulfilling missing meds with updated stock
+                foreach (var missingItem in panier.MissingMeds.ToList())
                 {
-                     var medicExistant = panier.medPaniers.FirstOrDefault(m => m.Medicament.Nom.Equals(item.Nom, StringComparison.OrdinalIgnoreCase));
-                    if(medicExistant == null)
+                    var med = await _context.Medicaments.FirstOrDefaultAsync(m => m.Nom == missingItem.Nom);
+                    if (med == null || med.Nbr_stock == 0)
                     {
-                        var med = await _context.Medicaments.FirstOrDefaultAsync(m => m.Nom == item.Nom);
-                        if(med != null)
-                        {
-                            panier.medPaniers.Add(new MedPanier
-                            {
-                                PanierId = panier.Id,
-                                medicamentID = med.Id,
-                                quantity = item.Quantite,
-                                Medicament = med
-                            });
-                            if (med.Nbr_stock < item.Quantite)
-                            {
-
-                                item.Quantite = item.Quantite - med.Nbr_stock;
-                                updatedMissingMeds.Add(item);
-                                
-                            }
-
-                        }
-
+                        // Still fully missing
+                        updatedMissingMeds.Add(missingItem);
+                        continue;
                     }
 
+                    var quantityToAdd = Math.Min(missingItem.Quantite, med.Nbr_stock);
+                    var remainingMissing = missingItem.Quantite - quantityToAdd;
 
+                    // Check if it already exists in medPaniers
+                    var existingMedPanier = panier.medPaniers
+                        .FirstOrDefault(mp => mp.Medicament.Nom.Equals(med.Nom, StringComparison.OrdinalIgnoreCase));
+
+                    if (existingMedPanier != null)
+                    {
+                        existingMedPanier.quantity += quantityToAdd;
+                    }
+                    else
+                    {
+                        panier.medPaniers.Add(new MedPanier
+                        {
+                            PanierId = panier.Id,
+                            medicamentID = med.Id,
+                            quantity = quantityToAdd,
+                            Medicament = med
+                        });
+                    }
+
+                    // Add to missing if not fully satisfied
+                    if (remainingMissing > 0)
+                    {
+                        updatedMissingMeds.Add(new MedicamentDTO
+                        {
+                            Nom = med.Nom,
+                            Quantite = remainingMissing
+                        });
+                    }
                 }
-                // Replace MissingMeds with freshly calculated list
+
                 panier.MissingMeds = updatedMissingMeds;
             }
+
             await _context.SaveChangesAsync();
-
-
         }
+
+
+
 
 
 
@@ -323,6 +354,26 @@ namespace HMS.Repositories
             }
 
             return missingMeds;
+        }
+
+
+
+        public async Task<bool> ChangePanierStatusAsync(Guid panierId)
+        {
+            var panier = await _context.Paniers
+                .FirstOrDefaultAsync(p => p.Id == panierId);
+
+            if (panier == null)
+            {
+                return false; 
+            }
+
+            panier.state = "supprime";
+            panier.DateValidation = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+
+            return true; 
         }
     }
 }

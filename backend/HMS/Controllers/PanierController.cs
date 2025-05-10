@@ -72,5 +72,20 @@ namespace HMS.Controllers
             await _panierRepo.RefreshAllPaniersMissingMedsAsync();
             return Ok(new { message = "All paniers updated." });
         }
+
+        [HttpPut("{panierId}/status")]
+        [Authorize(Roles = "Pharmacien")]
+        public async Task<IActionResult> ChangeStatus(Guid panierId)
+        {
+
+            var result = await _panierRepo.ChangePanierStatusAsync(panierId);
+
+            if (!result)
+            {
+                return NotFound("Panier not found.");
+            }
+
+            return Ok(new { message = "Panier status updated successfully." });
+        }
     }
 }

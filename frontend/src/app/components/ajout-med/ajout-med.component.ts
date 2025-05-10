@@ -65,11 +65,11 @@ ngOnInit(): void {
 
 
 
-    isInvalidDate(): boolean {
+  isInvalidDate(): boolean {
       const today = new Date();
       const expirationDate = new Date(this.medicament.date_Exp);
       return expirationDate <= today;
-    }
+  }
   
   onSubmit(form : NgForm): void {
     if (form.invalid) {
