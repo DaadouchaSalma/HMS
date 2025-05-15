@@ -1,0 +1,105 @@
+<div class="home-container">
+  <app-navbar-visiteur></app-navbar-visiteur>
+
+  <!-- breadcrumb -->
+
+  <!-- Breadcrumb Section -->
+<section class="breadcrumb-section">
+  <div class="breadcrumb-image"></div>
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#/accueil">
+            <!--svg class="home-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg-->
+            <img src="/assets/images/interface/accueil.png" alt="" style="height: 19px;">
+          
+          </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          À propos
+        </li>
+      </ol>
+    </nav>
+    <h1 class="page-title">À propos</h1>
+  </div>
+</section>
+  
+  <section class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <!-- Section Images à gauche (plus grande) -->
+        <div class="about-images">
+          <div class="images-grid">
+            <div class="image-container top-image">
+              <img src="/assets/images/interface/about_1.jpg" alt="Équipe médicale 1" class="medical-image">
+            </div>
+            
+            <div class="image-container center-image">
+              <img src="/assets/images/interface/about_2.jpg" alt="Équipe médicale principale" class="medical-image">
+              <div class="experience-card">
+                <div class="years" style="color: #854d82d6;">25+</div>
+                <div class="text" >Ans d'Expérience</div>
+              </div>
+            </div>
+            
+            <div class="image-container bottom-image">
+              <img src="/assets/images/interface/about_5.jpg" alt="Équipe médicale 2" class="medical-image">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Section Texte à droite (centrée verticalement) -->
+        <div class="about-text-wrapper">
+          <div class="about-text">
+            <h2 class="section-subtitle" style="color: #854d82d6;">QUI SOMMES-NOUS ?</h2>
+            <h2 class="section-title">Smart Care, Votre Partenaire Santé de Confiance</h2>
+            
+            <div class="about-description" style="margin-top: 30px;">
+              <p>Chez <strong>Smart Care</strong>, nous croyons que chaque individu mérite un accès rapide, simple et sécurisé à des soins de santé de qualité. Notre plateforme révolutionne la manière dont les patients interagissent avec les services médicaux en mettant la technologie au service du bien-être.</p>
+              
+              <p>Nous construisons un avenir où la santé devient plus accessible, plus humaine et plus intelligente. Avec Smart Care, vous êtes entre de bonnes mains, partout, tout le temps.</p>
+            </div>
+
+            <div class="emergency-contact">
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <div class="contact-info">
+                <h4>Besoin d'une aide urgente ?</h4>
+                <a href="tel:+21670500500">+216 70 500 500</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <section class="why-choose-us">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Pourquoi Nous Choisir ?</h2>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card" *ngFor="let feature of features">
+        <div class="feature-icon">
+          <img [src]="feature.icon" [alt]="feature.title + ' icon'">
+        </div>
+        <h3 class="feature-title">{{feature.title}}</h3>
+        <p class="feature-description">{{feature.description}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer-visiteur></app-footer-visiteur>
+
+<app-chat></app-chat>

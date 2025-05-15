@@ -1,0 +1,85 @@
+  <app-navbar-visiteur></app-navbar-visiteur>
+  <!-- Breadcrumb Section -->
+<section class="breadcrumb-section">
+  <div class="breadcrumb-image"></div>
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#/accueil">
+            <!--svg class="home-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg-->
+            <img src="/assets/images/interface/accueil.png" alt="" style="height: 19px;">
+          
+          </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Actualités & Événements
+        </li>
+      </ol>
+    </nav>
+    <h1 class="page-title">Actualités & Événements</h1>
+    <p style="font-size: 1.2em;
+  margin-bottom: 20px; margin-top: 5px;">Restez informés des dernières nouvelles santé et événements médicaux</p>
+  </div>
+</section>
+<!-- Hero Banner -->
+<!--section class="hero-banner" @fadeIn>
+  <div class="container">
+    <h1>Actualités & Événements</h1>
+    <p>Restez informés des dernières nouvelles santé et événements médicaux</p>
+  </div>
+</section-->
+
+<!-- Contenu principal -->
+<div class="container main-content">
+  <!-- Filtres -->
+  <div class="filters" @fadeIn>
+    <div class="category-filter">
+      <button 
+        *ngFor="let category of categories" 
+        [class.active]="selectedCategory === category"
+        (click)="filterByCategory(category)">
+        {{ category }}
+      </button>
+    </div>
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="Rechercher..." 
+        [(ngModel)]="searchQuery"
+        (input)="filterByCategory(selectedCategory)">
+      <i class="fas fa-search"></i>
+    </div>
+  </div>
+
+  <!-- Liste des actualités -->
+  <div class="news-grid" [@listAnimation]="filteredActualites.length">
+    <!--div class="news-card" *ngFor="let item of filteredActualites" (click)="goToActualite(item.id)"-->
+    <div class="news-card" *ngFor="let item of filteredActualites">
+      <div class="news-image">
+        <img [src]="item.image" [alt]="item.title">
+        <span class="news-category">{{ item.category }}</span>
+      </div>
+      <div class="news-content">
+        <h3>{{ item.title }}</h3>
+        <p class="news-excerpt">{{ item.excerpt }}</p>
+        <div class="news-meta">
+          <span><i class="far fa-calendar"></i> {{ item.date | date:'mediumDate' }}</span>
+          <span *ngIf="item.location"><i class="fas fa-map-marker-alt"></i> {{ item.location }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message si aucun résultat -->
+  <div class="no-results" *ngIf="filteredActualites.length === 0" @fadeIn>
+    <i class="far fa-folder-open"></i>
+    <p>Aucun résultat trouvé pour votre recherche</p>
+  </div>
+</div>
+
+<app-footer-visiteur></app-footer-visiteur>
+<app-chat></app-chat>

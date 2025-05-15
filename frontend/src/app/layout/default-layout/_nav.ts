@@ -47,7 +47,7 @@ export const navItems: INavDataWithRoles[] = [
   {
     name: 'Dossier Medical',
     url: '/dossierM/dossierMListe',
-    iconComponent: { name: 'cil-notes' },
+    iconComponent: { name: 'cil-folder-open' },
     roles: ['Patient']
   },
   
@@ -72,7 +72,7 @@ export const navItems: INavDataWithRoles[] = [
     {
       name: 'Reclamation',
       url: '/reclamation',
-      iconComponent: { name: 'cil-home' },
+      iconComponent: { name: 'cil-warning'},
       roles: ['Patient', 'PersonnelAdministratif'],
       children: [
         {

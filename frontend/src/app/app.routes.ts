@@ -161,6 +161,34 @@ export const routes: Routes = [
     ]
   }, 
   {
+    path: 'accueil',
+    loadComponent: () => import('./components/visiteur/accueil/accueil/accueil.component').then(m => m.AccueilComponent),
+    data: {
+      title: 'Accueil'
+    }
+  },
+   {
+    path: 'about',
+    loadComponent: () => import('./components/visiteur/about/about.component').then(m => m.AboutComponent),
+    data: {
+      title: 'A Propos'
+    }
+  },
+  {
+    path: 'actualite',
+    loadComponent: () => import('./components/visiteur/actualite/actualite.component').then(m => m.ActualiteComponent),
+    data: {
+      title: 'Actualité'
+    }
+  },
+  {
+    path: 'actualites/:id',
+    loadComponent: () => import('./components/visiteur/detail-actualite/detail-actualite.component').then(m => m.DetailActualiteComponent),
+    data: {
+      title: 'Actualité Détail'
+    }
+  },
+  {
     path: '404',
     loadComponent: () => import('./views/pages/page404/page404.component').then(m => m.Page404Component),
     data: {

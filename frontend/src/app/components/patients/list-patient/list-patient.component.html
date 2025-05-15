@@ -22,11 +22,11 @@
           <td>{{ patient.email }}</td>
           <td>{{ patient.telephone }}</td>
           <td>{{ patient.date_Naiss }}</td>
-          <td>{{ patient.grp_Sang }}</td>
+          <td style="text-align: center;">{{ patient.grp_Sang }}</td>
           <td>
-            <i class="fas fa-edit cursor-pointer" style="color: #dd789c;" (click)="editItem(patient.dossierMedical.id)"></i>
+            <i class="fas fa-edit cursor-pointer" style="color: #dd789c;cursor: pointer;" (click)="editItem(patient.dossierMedical.id)"></i>
             &nbsp;&nbsp;&nbsp;
-            <i class="fas fa-eye" style="color: #753f73d6;" [routerLink]="['/dossierM/dossierMListeMedecin', patient.id]"></i>
+            <i class="fas fa-eye" style="color: #753f73d6;cursor: pointer;" [routerLink]="['/dossierM/dossierMListeMedecin', patient.id]"></i>
           </td>
         </tr>
       </ng-container>
