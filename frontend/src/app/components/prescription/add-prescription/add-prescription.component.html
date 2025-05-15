@@ -84,12 +84,12 @@
 
   <label cLabel for="categorie-{{i}}">Catégorie</label>
   
-  <c-multi-select
+<c-multi-select
     cFormControl
     id="categorieId"
     [searchable]="true"
     selectionType="text"
-    [(ngModel)]="med.categorie"
+    [(ngModel)]="med.selectedCategorie"  
     name="categorie-{{i}}"
     required
     #categorieId="ngModel"
@@ -102,20 +102,25 @@
     </c-multi-select-option>
 
     <c-multi-select-option value="Autre">Autre</c-multi-select-option>
-  </c-multi-select>
+</c-multi-select>
 
 
 
 </c-col>
-      <c-col [md]="6" >
-        <label cLabel for="categorie-{{i}}" *ngIf="med.showCustomInput">Nouvelle catégorie</label>
-        <input placeholder="Entrez une nouvelle catégorie" *ngIf="med.showCustomInput"   cFormControl id="categorie{{i}}" type="text" [(ngModel)]="med.categorie" name="customCategorie-{{i}}" class="form-control" />
-      </c-col>
-      <c-col [md]="12">
-        <button cButton type="button" (click)="removeMedication(i)" class="btn btn-secondary px-4 py-2 gap-2" style="background-color: rgb(196, 57, 57); border-color: rgb(196, 57, 57);margin-top: 20px;">
-          <i class="fas fa-trash"></i>
-        </button>
-      </c-col>
+<c-col [md]="6">
+  <label cLabel for="customCategorie-{{i}}" *ngIf="med.showCustomInput">Nouvelle catégorie</label>
+  <input 
+    placeholder="Entrez une nouvelle catégorie" 
+    *ngIf="med.showCustomInput"   
+    cFormControl 
+    id="customCategorie-{{i}}" 
+    type="text" 
+    [(ngModel)]="med.customCategorie" 
+    name="customCategorie-{{i}}" 
+    class="form-control" 
+    (ngModelChange)="onCustomCategoryChange(med)"
+    (blur)="updateFinalCategory(med)" />
+</c-col>
     </div>
   </ng-container>
 
