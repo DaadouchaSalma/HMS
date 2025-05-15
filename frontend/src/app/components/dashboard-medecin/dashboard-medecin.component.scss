@@ -1,0 +1,35 @@
+::ng-deep .progressColorAM .progress-bar {
+  background-color: #dd789c; /* violet personnalisé, remplace par ton code hex ou RGB */
+}
+::ng-deep .progressColorMatin .progress-bar {
+  background-color: #753f73d6; /* violet personnalisé, remplace par ton code hex ou RGB */
+}
+::ng-deep  .matin  {
+  border-left-color: #753f73d6 !important; /* violet personnalisé, remplace par ton code hex ou RGB */
+}
+
+::ng-deep  .midi  {
+  border-left-color: #dd789c !important; /* violet personnalisé, remplace par ton code hex ou RGB */
+}
+
+::ng-deep .fc-event .fc-event-title {
+  color: white !important;
+}
+::ng-deep .fc-event  {
+  
+  background-color: #753f73c1;
+}
+::ng-deep .fc-event .fc-event-time {
+  color: white !important;  
+}
+
+
+
+::ng-deep .fc-event:hover .fc-event-title,
+::ng-deep .fc-event:hover .fc-event-time {
+  color: #753f73c1 !important;
+}
+
+::ng-deep .fc-event{
+  cursor: pointer;
+}

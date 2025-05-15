@@ -6,18 +6,20 @@ namespace HMS.Models
 {
     public class Panier
     {
-        public Guid Id { get; set; } // Unique ID for the cart
+        public Guid Id { get; set; } 
         [ForeignKey("Patient")]
-        public Guid PatientId { get; set; } // Reference to the User who owns the cart
+        public Guid PatientId { get; set; } 
         [JsonIgnore]
         public Patient Patient { get; set; }
+        public string state { get; set; } = "courant";
+        public DateTime? DateValidation { get; set; }
         public ICollection<MedPanier> medPaniers { get; set; } = new List<MedPanier>();
 
-        // Store as a JSON string in NVARCHAR(MAX)
+        
         [Column(TypeName = "nvarchar(max)")]
         public string MissingMedsJson { get; set; } = "[]";
 
-        [NotMapped] // Not mapped directly to the database
+        [NotMapped] 
         public List<MedicamentDTO> MissingMeds
         {
             get => string.IsNullOrEmpty(MissingMedsJson)
@@ -27,7 +29,7 @@ namespace HMS.Models
             set => MissingMedsJson = JsonSerializer.Serialize(value);
         }
 
-        public float prixPanier {  get; set; }
+        
     }
 
 }

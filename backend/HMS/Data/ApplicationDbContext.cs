@@ -12,6 +12,7 @@ public class ApplicationDbContext :  IdentityDbContext<ApplicationUser>
 	public DbSet<Chambre> Chambres { get; set; }
     public DbSet<DossierM> Dossiers { get; set; }
     public DbSet<Facture> Factures { get; set; }
+    public DbSet<MedicamentFactureDetail> MedicamentFactureDetails { get; set; }
     public DbSet<Medecin> Medecins { get; set; }
     public DbSet<Medicament> Medicaments { get; set; }
     public DbSet<Patient> Patients { get; set; }
@@ -50,6 +51,12 @@ public class ApplicationDbContext :  IdentityDbContext<ApplicationUser>
         .WithMany(p => p.MessagesRecus)
         .HasForeignKey(m => m.DestinataireId)
         .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Admission>()
+    .HasOne(a => a.Facture)
+    .WithOne(f => f.Admission)
+    .HasForeignKey<Facture>(f => f.AdmissionId)
+    .OnDelete(DeleteBehavior.Restrict);
+
         /* modelBuilder.Entity<RendezVous>()
              .HasOne(rv => rv.Patient) 
              .WithMany(p => p.RendezVous)
@@ -100,6 +107,7 @@ public class ApplicationDbContext :  IdentityDbContext<ApplicationUser>
             .OnDelete(DeleteBehavior.Restrict);
 
         base.OnModelCreating(modelBuilder);
+
     }
 
     

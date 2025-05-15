@@ -55,6 +55,10 @@ namespace HMS.Repositories
         {
             return await _context.Admins.FirstOrDefaultAsync(m => m.IdentityUserId == identityUserId);
         }
+        public async Task<int> CountAsync()
+        {
+            return await _context.Admins.CountAsync();
+        }
     }
 }
 

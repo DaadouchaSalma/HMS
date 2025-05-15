@@ -163,7 +163,7 @@ console.log('Type after parsing:', typeof this.dossier.liste_analyse);
     return `
       <div class="hist">
         <p class="hist_ma"><i class="fas fa-virus"></i>
-          <strong >Maladies antérieures:</strong> ${this.dossier?.maladies_antérieures?.join(', ') || 'N/A'}
+          <strong >Maladies antérieures:</strong> ${this.dossier?.maladies_anterieures?.join(', ') || 'N/A'}
         </p>
         <p class="hist_mf"><i class="fas fa-dna" ></i>
           <strong >Maladies familiales:</strong> ${this.dossier?.maladies_familiaux?.join(', ') || 'N/A'}

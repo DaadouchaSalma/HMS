@@ -5,6 +5,18 @@ import { INavDataWithRoles } from './INavDataWithRoles';
 export const navItems: INavDataWithRoles[] = [
 
   {
+    name: 'Tableau de bord',
+    url: '/dashboardAdmin',
+    iconComponent: { name: 'cil-speedometer' },
+    roles: ['Admin']
+  },
+  {
+    name: 'Tableau de bord',
+    url: '/dashboardMedecin',
+    iconComponent: { name: 'cil-speedometer' },
+    roles: ['Medecin']
+  },
+  {
     name: 'Patient',
     url: '/patient',
     iconComponent: { name: 'cil-user-plus' },
@@ -47,7 +59,7 @@ export const navItems: INavDataWithRoles[] = [
   {
     name: 'Dossier Medical',
     url: '/dossierM/dossierMListe',
-    iconComponent: { name: 'cil-notes' },
+    iconComponent: { name: 'cil-folder-open' },
     roles: ['Patient']
   },
   
@@ -72,7 +84,7 @@ export const navItems: INavDataWithRoles[] = [
     {
       name: 'Reclamation',
       url: '/reclamation',
-      iconComponent: { name: 'cil-home' },
+      iconComponent: { name: 'cil-warning'},
       roles: ['Patient', 'PersonnelAdministratif'],
       children: [
         {

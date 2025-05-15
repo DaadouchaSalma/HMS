@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using HMS.Interfaces;
 using HMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,7 +16,9 @@ namespace HMS.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        
+        private readonly IPersonnelRepository _personnelRepository;
+
+
 
         public PersonnelController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
                               RoleManager<IdentityRole> roleManager
@@ -132,7 +135,14 @@ namespace HMS.Controllers
         }
 
 
+        [HttpGet("count")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetMedecinCount()
+        {
+            var count = await _personnelRepository.CountAsync();
 
+            return Ok(count);
+        }
 
 
 

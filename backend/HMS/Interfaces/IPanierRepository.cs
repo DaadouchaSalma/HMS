@@ -14,5 +14,8 @@ namespace HMS.Repositories
         Task<object> ValidatePanierAsync(Guid panierId);
         Task RefreshAllPaniersMissingMedsAsync();
         Task MarkMedicamentAsMissingInPaniersAsync(Guid medicamentId);
+        Task<bool> ChangePanierStatusAsync(Guid panierId);
+        List<MonthlyMeds> GetMonthlyMedCounts(List<Panier> paniers);
+
     }
 }

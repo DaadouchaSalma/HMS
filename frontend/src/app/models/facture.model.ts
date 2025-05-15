@@ -1,5 +1,5 @@
 import { Admission } from "./admission.model";
-//import { MedicamentFactureDetail } from "./medicamentFactureDetail.model";
+import { MedicamentFactureDetail } from "./medicamentFactureDetail.model";
 import { Patient } from "./patient.model";
 
 export interface Facture {
@@ -12,6 +12,6 @@ export interface Facture {
   totalGeneral: number;
   admission?:Admission;
   admissionId: string;
-  //medicamentsDetails: MedicamentFactureDetail[];
   status: string;
+  medicamentsDetails: MedicamentFactureDetail[];
 }

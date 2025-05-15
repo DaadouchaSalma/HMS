@@ -24,7 +24,7 @@ namespace HMS.Controllers
 
         // GET: api/Categorie
         [HttpGet]
-        [Authorize(Roles = "Pharmacien")]
+        [Authorize(Roles = "Pharmacien ,Medecin")]
         public async Task<ActionResult<IEnumerable<CategorieMedicament>>> GetCategories()
         {
             return await _context.categories.ToListAsync();

@@ -17,5 +17,7 @@ namespace HMS.Interfaces
 
         void Delete(Pharmacien pharmacien);
         Task<Pharmacien> GetByIdentityUserIdAsync(string identityUserId);
+        Task<int> CountAsync();
+
     }
 }

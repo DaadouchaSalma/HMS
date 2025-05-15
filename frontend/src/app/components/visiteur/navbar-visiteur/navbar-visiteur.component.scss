@@ -1,0 +1,333 @@
+.hero-section {
+      padding: 5rem 0;
+      background: linear-gradient(to right, #f8f9fa 50%, #e9f7fe 50%);
+    }
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: #6c757d;
+      margin-bottom: 2rem;
+    }
+    .search-box {
+      border-radius: 10px;
+      border: none;
+    }
+    .consult-card {
+      transition: transform 0.3s ease;
+      border-radius: 10px;
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+    .quick-consult-section {
+      background-color: #f8f9fa;
+    }
+
+
+
+
+
+
+.home-container {
+  font-family: 'Segoe UI', sans-serif;
+  //padding: 20px;
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0c60df;
+
+      span {
+        color: #06c;
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          background: #0cf;
+        }
+      }
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+
+      a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+         &:hover {
+          color: #854d82d6; /* Changement de couleur au survol (bleu par défaut) */
+          text-decoration: none; /* Soulignement au survol */
+          /* Autres effets possibles : */
+          /* transform: translateY(-2px); */
+          /* opacity: 0.8; */
+        }
+      }
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+
+      .register,
+      .login {
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .register {
+        background: #0c1f2c;
+        color: #fff;
+      }
+
+      .login {
+        background: #00aaff;
+        color: white;
+      }
+    }
+  }
+
+  .hero-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    background: linear-gradient(rgba(255, 255, 255, 0.526), rgba(255, 255, 255, 0.526)), 
+              url('/assets/images/interface/vecteezy_doctor-icon-virtual-screen-health-care-and-medical-on_12604205.jpg') no-repeat center center;
+    background-size: cover;
+    //color: $dark-text;
+    //text-align: center;
+    padding: 8rem 0 4rem;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+
+    .hero-text {
+      flex: 1;
+      padding-left:10%;
+      h1 {
+        font-size: 48px;
+        font-weight: bold;
+
+        span {
+          color: #0c60df;
+        }
+      }
+
+      /*p {
+        font-size: 18px;
+        margin: 10px 0 30px;
+      }
+*/
+      .start-consult {
+        background: linear-gradient(to right, #0dccea, #0d70ea);
+        padding: 12px 24px;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+    .hero-text p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  font-weight: bold;
+  padding: 15px 30px;
+  margin: 10px;
+  border-radius: 8px;
+  font-size: 1em;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  width: 200px;
+  border-color:#2B4C8C ;
+  background-color: #2B4C8C;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #163e8e;
+}
+
+.btn-secondary {
+  width: 250px;
+  background-color: #f1f1f1;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+    .hero-image {
+      position: relative;
+
+      img {
+        max-height: 400px;
+        border-radius: 12px;
+      }
+
+      .doctor-card {
+        position: absolute;
+        top: 30px;
+        right: 7px;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        gap: 10px;
+
+        .name {
+          font-weight: bold;
+        }
+
+        .title {
+          font-size: 13px;
+          color: #555;
+        }
+
+        .book {
+          background: #007bff;
+          color: white;
+          padding: 4px 10px;
+          border: none;
+          border-radius: 5px;
+          font-size: 12px;
+          margin-top: 5px;
+        }
+      }
+
+      .meet-doctors {
+        animation: floatUpDown 3s ease-in-out infinite;
+        position: absolute;
+        //bottom: 10px;
+        right: 200px;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 60px;
+        margin-right: 30px;
+
+        .avatars {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+
+          img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+          }
+
+          span {
+            background: #2B4C8C;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 50px;
+            font-size: 12px;
+          }
+        }
+      }
+      .check-card {
+        animation: floatUpDown 3s ease-in-out infinite;
+          margin-top: -200px;
+          margin-bottom: 40px;
+          display: inline-flex;
+          align-items: center;
+          background-color: #f5f9ff;
+          border-radius: 12px;
+          padding: 8px 14px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          transition: all 0.3s ease;
+          cursor: pointer;
+
+          .icon {
+            background-color: #2B4C8C;
+            color: #fff;
+            border-radius: 6px;
+            padding: 4px;
+            font-size: 12px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+          }
+
+          &:hover {
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+          }
+      }
+    }
+    
+  }
+
+  .search-box {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+
+    input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 30px;
+      border: 1px solid #ccc;
+    }
+
+    .search-btn {
+      background: linear-gradient(to right, #0dccea, #0d70ea);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); // monte
+  }
+  100% {
+    transform: translateY(0); // redescend
+  }
+}
