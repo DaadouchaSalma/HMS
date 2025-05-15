@@ -77,7 +77,7 @@
   <!-- Right Column: Progress Bars (Reduced Height) -->
   <c-col [lg]="6">
     <c-card class="h-100" style="max-height: 700px;">  <!-- Set fixed min-height -->
-      <c-card-header class="py-2 px-3 fs-5">RDVs - Matin & Soir (Semaine Dernière)</c-card-header>
+      <c-card-header class="py-2 px-3 fs-5">RDVs - Matin & Après midi (Semaine Prochaine)</c-card-header>
       <c-card-body class="p-3">  <!-- Reduced padding -->
         <c-row class="mb-2">  <!-- Reduced margin-bottom -->
           <c-col [xs]="6">
@@ -88,7 +88,7 @@
           </c-col>
           <c-col [xs]="6">
             <div class="border-start border-start-4 border-start-danger py-1 px-2">  <!-- Reduced padding -->
-              <div class="text-body-secondary small">RDVs Soir</div>
+              <div class="text-body-secondary small">RDVs Après midi</div>
               <div class="fs-5 fw-semibold">{{ eveningRDVTotal | number }}</div>
             </div>
           </c-col>

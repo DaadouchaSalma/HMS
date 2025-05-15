@@ -26,6 +26,8 @@ import {
   ChartData,
   ChartOptions,
 } from 'chart.js';
+import { Chart, ChartTypeRegistry } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 export interface IChartProps {
   data?: ChartData;
@@ -64,6 +66,8 @@ export class DashboardAdminComponent implements OnInit {
   public bubbleChartType: ChartType = 'bubble';
   @ViewChild('bubbleChart') bubbleChart?: BaseChartDirective;
 
+  public barChartPlugins = [ChartDataLabels];
+
   // Doughnut Chart
   @ViewChild('doughnutChart') doughnutChart?: BaseChartDirective;
   public doughnutChartLabels: string[] = ['Occupée', 'Disponible', 'En maintenance'];
@@ -71,8 +75,8 @@ export class DashboardAdminComponent implements OnInit {
     labels: this.doughnutChartLabels,
     datasets: [{
       data: [0, 0, 0],
-      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+      backgroundColor: ['#854d82d6', '#a0b5d8', '#3E608C'],
+      hoverBackgroundColor: ['#854d82d6', '#a0b5d8', '#3E608C']
     }]
   };
   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
@@ -102,6 +106,7 @@ export class DashboardAdminComponent implements OnInit {
 medsChartOptions: ChartOptions<'line'> = {
   responsive: true,
   maintainAspectRatio: false,
+
   plugins: {
     legend: {
       position: 'top',
@@ -118,15 +123,15 @@ medsChartOptions: ChartOptions<'line'> = {
           const dataIndex = context.dataIndex;
           const monthlyData = this.monthlyMedsData[dataIndex]; // Assuming you store the raw data
           
-          if (datasetLabel.includes('Validated')) {
+          if (datasetLabel.includes('Validés')) {
             return [
               `${datasetLabel}: ${context.parsed.y}`,
-              `Top Category: ${monthlyData.topValidatedCategory}`
+              `1ère catégorie: ${monthlyData.topValidatedCategory}`
             ];
           } else {
             return [
               `${datasetLabel}: ${context.parsed.y}`,
-              `Top Category: ${monthlyData.topMissingCategory}`
+              `1ère catégorie: ${monthlyData.topMissingCategory}`
             ];
           }
         },
@@ -137,7 +142,7 @@ medsChartOptions: ChartOptions<'line'> = {
     x: {
       title: {
         display: true,
-        text: 'Month'
+        text: 'Mois'
       },
       ticks: {
         callback: (value, index) => {
@@ -145,14 +150,14 @@ medsChartOptions: ChartOptions<'line'> = {
           if (!rawMonth) return value;
 
           const date = new Date(`${rawMonth}-01`);
-          return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+          return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'short' });
         }
       }
     },
     y: {
       title: {
         display: true,
-        text: 'Number of Medications'
+        text: 'Nombre des médicaments'
       },
       beginAtZero: true,
       ticks: {
@@ -170,41 +175,60 @@ doctorServiceChartData: ChartData<'bar'> = {
 };
 
 doctorServiceChartOptions: ChartOptions<'bar'> = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false
-    },
-    tooltip: {
-      callbacks: {
-        label: (context) => {
-          return `${context.parsed.y} doctors`;
-        }
-      }
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+    padding: {
+      top: 22  // Add padding at the top of the chart
     }
   },
-  scales: {
-    x: {
-      grid: {
+    plugins: {
+      legend: {
         display: false
       },
-      ticks: {
-        color: getStyle('--cui-body-color')
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            return `${context.parsed.y} médecins`;
+          }
+        }
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'top',
+        color: '#495057', // Fallback color if CSS var fails
+        font: {
+          weight: 'bold',
+          size: 12
+        },
+        formatter: (value: number) => {
+          return value.toString();
+        }
       }
     },
-    y: {
-      beginAtZero: true,
-      grid: {
-        color: getStyle('--cui-border-color-translucent')
+    scales: {
+      x: {
+        grid: {
+          display: false
+        },
+        ticks: {
+          color: '#495057' // Fallback color
+        }
       },
-      ticks: {
-        color: getStyle('--cui-body-color'),
-        stepSize: 1
+      y: {
+        beginAtZero: true,
+        grid: {
+          display: false
+        },
+        ticks: {
+          display: false
+        },
+        display: false
       }
     }
-  }
-};
+  };
+
+  
 
   constructor(
     private chambreService: ChambreService,
@@ -264,6 +288,14 @@ private calculateTotalPersonnel(): void {
     this.pharmacienPercentage = Math.round((this.PharmacienCount / this.totalPersonnelCount) * 100);
     this.adminPercentage = Math.round((this.AdminiCount / this.totalPersonnelCount) * 100);
 
+  }
+}
+
+getWidgetValueColor(val: number): string {
+  if (val === 1) {
+    return 'red';
+  } else {
+    return 'black';
   }
 }
 
@@ -380,20 +412,20 @@ private initReclamationChart(
       datasets: [
         {
           label: currentYear.toString(),
-          backgroundColor: getStyle('--cui-purple'), // Purple for current year
+          backgroundColor: '#dd789c' , // Purple for current year
           borderRadius: 6,
           borderSkipped: false,
           data: currentYearData,
-          barPercentage: 0.4,
+          barPercentage: 0.9,
           categoryPercentage: 0.4
         },
         {
           label: previousYear.toString(),
-          backgroundColor: getStyle('--cui-gray-300'), // Grey for previous year
+          backgroundColor: '#d7deed', // Grey for previous year
           borderRadius: 6,
           borderSkipped: false,
           data: previousYearData,
-          barPercentage: 0.4,
+          barPercentage: 0.9,
           categoryPercentage: 0.4
         }
       ]
@@ -415,7 +447,7 @@ private initReclamationChart(
           callbacks: {
             label: (context: any) => {
               const label = context.dataset.label || '';
-              return `${label}: ${context.parsed.y} reclamations`;
+              return `${label}: ${context.parsed.y} réclamations`;
             }
           }
         }
@@ -488,15 +520,26 @@ private initReclamationChart(
   };
 
   // Color mapping for blood groups
-  bloodGroupColors: Record<string, string> = {
-    'A+': 'rgb(255, 99, 132)',
-    'A-': 'rgb(255, 159, 64)',
-    'B+': 'rgb(75, 192, 192)',
-    'B-': 'rgb(54, 162, 235)',
-    'AB+': 'rgb(153, 102, 255)',
-    'AB-': 'rgb(201, 203, 207)',
+  /*bloodGroupColors: Record<string, string> = {
+    'O-': 'rgb(50, 205, 50)',
     'O+': 'rgb(255, 205, 86)',
-    'O-': 'rgb(50, 205, 50)'
+    'A-': 'rgb(255, 159, 64)',
+    'A+': 'rgb(255, 99, 132)',
+    'B-': 'rgb(54, 162, 235)',
+    'B+': 'rgb(75, 192, 192)',
+    'AB-': 'rgb(201, 203, 207)',
+    'AB+': 'rgb(153, 102, 255)',    
+  };*/
+
+  bloodGroupColors: Record<string, string> = {
+    'O-': '#dd789c',
+    'O+': '#832144',
+    'A-': '#753f73d6',
+    'A+': '#cba4c8',
+    'B-': '#3E608C',
+    'B+': '#3e4d8c',
+    'AB-': '#3a6e76',
+    'AB+': '#61a7b1',    
   };
 
   // Shape mapping for sexes
@@ -533,7 +576,7 @@ loadPatientData(): void {
         
         if (sexPatients.length > 0) {
           this.bubbleData.datasets.push({
-            label: `${group} ${sex === 'M' ? 'Male' : 'Female'}`,
+            label: `${group} ${sex === 'M' ? 'Masculin' : 'Féminin'}`,
             data: sexPatients.map(p => {
               const y = this.getBloodGroupPosition(p.groupeSanguin);
               if (y === -1) return null; // skip invalid blood groups
@@ -566,8 +609,8 @@ loadPatientData(): void {
 
  private calculateBubbleSize(count: number): number {
   // Scale more aggressively: base size 10, increase by 4 per count
-  const baseSize = 10;
-  const scale = 5; // increase more per patient in group
+  const baseSize = 8;
+  const scale = 2; // increase more per patient in group
   return Math.min(40, Math.max(10, baseSize + count * scale));
 }
 
@@ -591,7 +634,7 @@ private calculateAge(dateString: string): number {
       x: {
         title: {
           display: true,
-          text: 'Age'
+          text: 'Âge'
         },
         min: 0,
         max: 100
@@ -599,7 +642,7 @@ private calculateAge(dateString: string): number {
       y: {
         title: {
           display: true,
-          text: 'Blood Group'
+          text: 'Groupe Sanguin'
         },
         ticks: {
           callback: (value) => this.getBloodGroupLabel(value)
@@ -650,18 +693,18 @@ loadMedicationData(): void {
 
     this.medsChartData.datasets = [
       {
-        label: 'Validated Medications',
+        label: 'Médicaments validés',
         data: monthlyData.map(item => item.validatedMedsCount),
-        borderColor: '#4bc0c0',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: '#8c9cc2 ',
+        backgroundColor: 'rgba(140, 156, 194, 0.55)',
         tension: 0.4,
         fill: true
       },
       {
-        label: 'Missing Medications',
+        label: 'Médicaments Manquants',
         data: monthlyData.map(item => item.missingMedsCount),
-        borderColor: '#ff6384',
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: '#ad6780',
+        backgroundColor: 'rgba(173, 103, 128, 0.5)',
         tension: 0.4,
         fill: true
       }
@@ -723,13 +766,13 @@ private transformDoctorServiceData(serviceCounts: { [key: string]: number }): vo
 
 private getServiceColor(index: number): string {
   const colors = [
-    getStyle('--cui-primary') || '#321fdb',    // default color if undefined
-    getStyle('--cui-success') || '#2eb85c',
-    getStyle('--cui-info') || '#39f',
-    getStyle('--cui-warning') || '#f9b115',
-    getStyle('--cui-danger') || '#e55353',
-    getStyle('--cui-secondary') || '#9da5b1',
-    getStyle('--cui-dark') || '#636f83'
+     '#dd789c',    // default color if undefined
+    '#bf8b9e',
+     '#cba4c8',
+     '#3E608C',
+    '#61a7b1',
+    '#753f73d6',
+    '#636f83'
   ];
   return colors[index % colors.length];
 }
