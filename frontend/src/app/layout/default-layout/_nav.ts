@@ -5,6 +5,18 @@ import { INavDataWithRoles } from './INavDataWithRoles';
 export const navItems: INavDataWithRoles[] = [
 
   {
+    name: 'Tableau de bord',
+    url: '/dashboardAdmin',
+    iconComponent: { name: 'cil-speedometer' },
+    roles: ['Admin']
+  },
+  {
+    name: 'Tableau de bord',
+    url: '/dashboardMedecin',
+    iconComponent: { name: 'cil-speedometer' },
+    roles: ['Medecin']
+  },
+  {
     name: 'Patient',
     url: '/patient',
     iconComponent: { name: 'cil-user-plus' },

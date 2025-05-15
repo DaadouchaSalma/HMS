@@ -38,7 +38,8 @@ type BrandData = {
 })
 export class DashboardMedecinComponent implements OnInit {
   
-
+  today = new Date();
+  todayStr: string = this.today.toISOString().replace(/T.*$/, '');
 
   constructor(private rdvService: RdvService,private router: Router) {}
 
@@ -47,6 +48,7 @@ export class DashboardMedecinComponent implements OnInit {
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
+    initialDate: this.todayStr,
     initialView: 'dayGridMonth',
     editable: false,
     selectable: false, 
@@ -87,7 +89,7 @@ brandData: any[] = [];
     const events: EventInput[] = rendezVousList.map(rdv => ({
       title: ` ${rdv.patient?.nom?.toUpperCase() ?? ''} ${rdv.patient?.prenom ?? ''}`,
       start: `${rdv.date_RDV}T${rdv.time_RDV}`,
-      color: rdv.etat === 'En attente' ? 'orange' : 'green',
+      color: '#753f73c1',
       extendedProps: {
         patientId: rdv.patientId
       }
@@ -113,7 +115,7 @@ brandData: any[] = [];
       { title: 'Rendez-vous aujourd\'hui', value: this.getNombreRDVsAujourdHui(rendezVousList) },
       { title: 'Prochain Rendez-vous ', value: this.getNextRdv(rendezVousList)?.time_RDV }
     ],
-    capBg: { '--cui-card-cap-bg': 'var(--cui-warning)' },
+    capBg: { '--cui-card-cap-bg': '#dd789c' },
     data: {
       labels: [...this.labels],
       datasets: [{
@@ -234,19 +236,19 @@ getNombreRDVsAujourdHui(rdvs: RendezVous[]): number {
 
   generateSalesChart(rdvs: RendezVous[]): any {
     const monthlyCounts = this.getMonthlyRDVCounts(rdvs);
-    const primaryRGB = getStyle('--cui-primary-rgb') || '0, 80, 255';
-    const primaryColor = getStyle('--cui-primary') || '#0050ff';
+    const primaryRGB = 'rgb(140, 156, 194)';
+    const primaryColor = '#753f73d6';
   
     return {
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: ['Jan', 'Fev', 'Mars', 'Avr', 'Mai', 'Juin', 'Jui', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
         datasets: [
           {
             label: 'RDV par mois',
             data: monthlyCounts,
             tension: 0.4,
             fill: true,
-            backgroundColor: `rgba(${primaryRGB}, 0.1)`,
+            backgroundColor: `rgba(117, 63, 115, 0.43)`,
             borderColor: primaryColor,
             pointRadius: 5,               // <-- Bigger points
             pointHoverRadius: 7,         // <-- Bigger hover area
