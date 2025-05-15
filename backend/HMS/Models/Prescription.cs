@@ -14,6 +14,7 @@ namespace HMS.Models
         [JsonIgnore]
         public Patient? Patient { get; set; }
         public DateTime Dateprescription { get; set; } = DateTime.Now;
+        public string? categorie { get; set; }
 
     }
 }

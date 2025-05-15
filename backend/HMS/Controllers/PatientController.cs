@@ -168,5 +168,26 @@ namespace HMS.Controllers
         {
             return View();
         }
+
+
+
+        [HttpGet("info")]
+        [HttpGet("Admin")]
+        public async Task<ActionResult<IEnumerable<PatientDTO>>> GetAllPatientInfo()
+        {
+            var patients = await _context.Dossiers
+                .Include(d => d.Patient) // include the related Patient
+                .Select(d => new PatientDTO
+                {
+                    PatientId = d.PatientId,
+                    GroupeSanguin = d.Patient.Grp_Sang,
+                    DateNaissance = d.Patient.Date_Naiss,
+                    Sexe = d.sexe
+                })
+                .ToListAsync();
+
+            return Ok(patients);
+        }
+
     }
 }

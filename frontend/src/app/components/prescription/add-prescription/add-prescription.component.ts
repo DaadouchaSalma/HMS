@@ -8,7 +8,8 @@ import { ButtonModule, ColComponent, ColDirective, FormFeedbackComponent, FormLa
 import { signal } from '@angular/core';
 import { DatePickerComponent as DatePickerComponent_1 } from '@coreui/angular-pro';
 import { PanierService } from '../../../services/panier.service';
-
+import { CategorieService } from '../../../services/categorie.service'; // adjust path
+import { CategorieMedicament } from '../../../models/categorie.model'; // adjust path
 
 @Component({
   selector: 'app-add-prescription',
@@ -25,20 +26,23 @@ export class AddPrescriptionComponent implements OnInit {
   };
   patients: any[] = [];
   medications = [
-    { nom: '', dosage: '', quantite: '', frequence: '', duree: '', voieAdministration: '', InstructionsSpeciales: '' } 
+    { nom: '', dosage: '', quantite: '', frequence: '', duree: '', voieAdministration: '', InstructionsSpeciales: '', categorie: '', showCustomInput: false } 
   ];
   position = 'top-end';
   visible = signal(false);
   percentage = signal(0);
   toastMessage = signal(''); 
   toastType = signal('success');
+  categories: CategorieMedicament[] = []; // original full objects
 
-  constructor(private prescriptionService: PrescriptionService, private patientService: PatientService, private route: ActivatedRoute,
+
+  constructor(private categorieService : CategorieService, private prescriptionService: PrescriptionService, private patientService: PatientService, private route: ActivatedRoute,
     private panierService : PanierService
   ) {}
   
   ngOnInit() {
     this.loadPatients();
+    this.loadCategories();
   }
 
   loadPatients() {
@@ -54,10 +58,22 @@ export class AddPrescriptionComponent implements OnInit {
       error: (err) => console.error('Error fetching patients', err),
     });
   }
-  
+loadCategories(): void {
+  this.categorieService.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data;
+        console.log("categories",this.categories);
+      },
+      error: (err) => console.error('Error fetching categories:', err)
+    });
+}
+
+  onCategorieChange(med: any) {
+  med.showCustomInput = med.categorie === 'Autre';
+}
   
   addMedication() {
-    this.medications.push({ nom: '', dosage: '', quantite: '', frequence: '', duree: '', voieAdministration: '', InstructionsSpeciales: '' });
+    this.medications.push({ nom: '', dosage: '', quantite: '', frequence: '', duree: '', voieAdministration: '', InstructionsSpeciales: '', categorie: '' , showCustomInput: false});
   }
 
   removeMedication(index: number) {
