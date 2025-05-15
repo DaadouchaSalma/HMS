@@ -27,4 +27,8 @@ export class PatientService {
     return this.http.get<any[]>(`${this.apiUrl}/all`, { withCredentials: true });
   }
 
+  getBubblePatients() : Observable <any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/info`, { withCredentials: true })
+  }
+
 }

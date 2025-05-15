@@ -1,9 +1,11 @@
 using HMS.Interfaces;
 using HMS.Models;
+using iText.Kernel.Counter.Context;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 namespace HMS.Controllers
 {
@@ -14,15 +16,19 @@ namespace HMS.Controllers
         private readonly IMedecinRepository _medecinRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        
+        private readonly ApplicationDbContext _context;
+
+
         public MedecinController(IMedecinRepository medecinRepository, UserManager<ApplicationUser> userManager,
-                              RoleManager<IdentityRole> roleManager
+                              RoleManager<IdentityRole> roleManager, ApplicationDbContext context
                               )
         {
             _medecinRepository = medecinRepository;
             _userManager = userManager;
             _roleManager = roleManager;
-          
+            _context = context;
+
+
         }
 
         /*[HttpGet]
@@ -314,6 +320,40 @@ namespace HMS.Controllers
 
             return Ok(new { message = "Médecin mis à jour avec succès", medecin = existingMedecin });
         }
+
+        [HttpGet("count")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetMedecinCount()
+        {
+            var count = await _medecinRepository.CountAsync();
+            Console.WriteLine($"nombre medecins = {count}");
+
+            return Ok(count);
+        }
+
+        [HttpGet("medecin-count-by-service")]
+        public ActionResult<Dictionary<string, int>> GetMedecinCountByService()
+        {
+            var serviceCounts = _context.Medecins
+                .Where(m => m.service != null)
+                .GroupBy(m => m.service)
+                .Select(g => new { Service = g.Key!, Count = g.Count() })
+                .ToList();
+
+            var allServices = new List<string>
+    {
+        "Chirurgie", "Cardiologie", "Pédiatrie", "Gynécologie",
+        "Neurologie", "Psychiatrie", "Orthopédie"
+    };
+
+            var result = allServices.ToDictionary(
+                service => service,
+                service => serviceCounts.FirstOrDefault(c => c.Service == service)?.Count ?? 0
+            );
+
+            return Ok(result);
+        }
+
 
 
 

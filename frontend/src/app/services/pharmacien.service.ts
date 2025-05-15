@@ -30,4 +30,7 @@ export class PharmacienService {
   updatePharmacienAdmin(id: string, updatedPharmacien: Pharmacien): Observable<any> {
     return this.http.put(`${this.apiUrl}/edit/${id}`, updatedPharmacien,{ withCredentials: true });
 }
+  getPharmacienCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/count`, { withCredentials: true });
+  }
 }

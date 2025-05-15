@@ -1,54 +1,128 @@
-<c-col [lg]="6">
-  <c-card class="mb-4">
-    <c-card-body class="p-4">
-      <c-row>
-        <c-col>
-          <h5 cCardTitle class="fs-4 fw-semibold">
-            RDVs Mensuels
-          </h5>
-          <h6 cCardSubtitle class="fw-normal text-body-secondary">
-            Répartition Jan - Déc
-          </h6>
+<!-- Main Row: Chart + Progress Bars -->
+ <div style="max-height: 600px; height: 100%; overflow: hidden;">
+<c-row class="align-items-stretch">
+  <!-- Left Column: Chart + Stats Cards -->
+  <c-col [lg]="6" class="d-flex flex-column">
+    <!-- Stats Cards Row -->
+    <c-row class="mb-3">  <!-- Reduced margin-bottom -->
+      <!-- Brand Data Card -->
+      @if (brandData.length > 0) {
+        <c-col sm="6">
+          <c-widget-stat-d
+            class="h-100"
+            [color]="brandData[0].color ?? ''"
+            [style]="brandData[0].capBg ?? null"
+            [values]="brandData[0].values"
+          >
+            <svg [name]="brandData[0].icon" cIcon class="my-3 text-white" height="36"></svg>  <!-- Reduced icon size and margin -->
+            @if (withCharts) {
+              <c-chart
+                #chart="cChart"
+                [data]="brandData[0].data"
+                [options]="chartOptions"
+                class="position-absolute w-100 h-100"
+                type="line"
+              >
+                {{ chart.id }}
+              </c-chart>
+            }
+          </c-widget-stat-d>
         </c-col>
-      </c-row>
-    </c-card-body>
+      }
 
-    
+      <!-- Occupation Rate Card -->
+      <c-col sm="6">
+        <c-widget-stat-a
+          class="h-100"
+          [title]="'Taux d\'occupation aujourd\'hui'"
+          color="info-gradient"
+        >
+          <ng-template cTemplateId="widgetValueTemplate">
+            <span>{{ tauxOccupationAujourdHui }}%</span>
+            <span class="fs-6 fw-normal text-nowrap">
+              ({{ tauxOccupationAujourdHui > 50 ? '+' : '' }}{{ tauxOccupationAujourdHui }}%
+              <svg cIcon [name]="tauxOccupationAujourdHui > 50 ? 'cilArrowTop' : 'cilArrowBottom'"></svg>)
+            </span>
+          </ng-template>
+          <ng-template cTemplateId="widgetChartTemplate">
+            <c-chart [data]="data[2]" [options]="options[2]" class="mt-2" height="50" type="line"></c-chart>  <!-- Reduced chart height -->
+          </ng-template>
+        </c-widget-stat-a>
+      </c-col>
+    </c-row>
 
-    <c-chart
-      type="line"
-      height="150"
-      id="salesChart"
-      class="mt-3"
-      [data]="salesChart?.data"
-      [options]="salesChart?.options">
-    </c-chart>
-  </c-card>
-</c-col>
-
-<c-card class="w-75 mx-auto my-4 shadow-sm">
-  <c-card-header class="py-2 px-3 fs-5">Mes Rendez-vous</c-card-header>
-  <c-card-body class="p-3">
-    <div style="max-height: 600px; overflow-y: auto;">
-      <full-calendar #calendar [options]="calendarOptions"></full-calendar>
-    </div>
-  </c-card-body>
-</c-card>
-
-<c-row>
-  <c-col [xs]="6">
-    <div class="border-start border-start-4 border-start-info py-1 px-3 mb-3">
-      <div class="text-body-secondary small">Rendez-vous before 12pm</div>
-      <div class="fs-5 fw-semibold">{{ rdvBeforeNoon.length }}</div>
-
-    </div>
+    <!-- Monthly RDVs Chart -->
+    <c-card class="flex-grow-1" style="min-height: 200px;">  <!-- Set fixed min-height -->
+      <c-card-body class="p-3 d-flex flex-column">  <!-- Reduced padding -->
+        <c-row>
+          <c-col>
+            <h5 cCardTitle class="fs-4 fw-semibold">RDVs Mensuels</h5>
+            <h6 cCardSubtitle class="fw-normal text-body-secondary">Répartition Jan - Déc</h6>
+          </c-col>
+        </c-row>
+        <div class="flex-grow-1">
+          <c-chart
+            type="line"
+            height="100%"
+            id="salesChart"
+            class="mt-2"  
+            [data]="salesChart?.data"
+            [options]="salesChart?.options">
+          </c-chart>
+        </div>
+      </c-card-body>
+    </c-card>
   </c-col>
-  <c-col [xs]="6">
-    <div class="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-      <div class="text-body-secondary small">Rendez-vous after 12pm</div>
-      <div class="fs-5 fw-semibold">{{ rdvAfterNoon.length }}</div>
-    </div>
+
+  <!-- Right Column: Progress Bars (Reduced Height) -->
+  <c-col [lg]="6">
+    <c-card class="h-100" style="max-height: 700px;">  <!-- Set fixed min-height -->
+      <c-card-header class="py-2 px-3 fs-5">RDVs - Matin & Soir (Semaine Dernière)</c-card-header>
+      <c-card-body class="p-3">  <!-- Reduced padding -->
+        <c-row class="mb-2">  <!-- Reduced margin-bottom -->
+          <c-col [xs]="6">
+            <div class="border-start border-start-4 border-start-info py-1 px-2">  <!-- Reduced padding -->
+              <div class="text-body-secondary small">RDVs Matin</div>
+              <div class="fs-5 fw-semibold">{{ morningRDVTotal | number }}</div>
+            </div>
+          </c-col>
+          <c-col [xs]="6">
+            <div class="border-start border-start-4 border-start-danger py-1 px-2">  <!-- Reduced padding -->
+              <div class="text-body-secondary small">RDVs Soir</div>
+              <div class="fs-5 fw-semibold">{{ eveningRDVTotal | number }}</div>
+            </div>
+          </c-col>
+        </c-row>
+
+        <!-- Progress Bars with reduced spacing -->
+        <div class="progress-bars-container" style="max-height: 1000px; overflow-y: auto;">  <!-- Reduced max-height -->
+          @for (item of progressGroupExample1; track index; let index = $index) {
+            <div class="progress-group mb-5">  <!-- Reduced margin-bottom -->
+              <div class="progress-group-prepend">
+                <span class="text-body-secondary small">{{ item.title }}</span>
+              </div>
+              <div class="progress-group-bars">
+                <c-progress thin [value]="item.value1" color="info-gradient" aria-label="Matin" />
+                <c-progress thin [value]="item.value2" color="danger-gradient" aria-label="Soir" />
+              </div>
+            </div>
+          }
+        </div>
+      </c-card-body>
+    </c-card>
   </c-col>
-  
 </c-row>
-    
+</div>
+<!-- Full-width Calendar Row -->
+<c-row>
+  <c-col>
+    <c-card class="w-100 mx-auto my-4 shadow-sm">
+      <c-card-header class="py-2 px-3 fs-5">Mes Rendez-vous</c-card-header>
+      <c-card-body class="p-3">
+        <div style="max-height: 600px; overflow-y: auto;">
+          <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

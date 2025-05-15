@@ -44,6 +44,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
         data: { roles: ['PersonnelAdministratif'] }
       },
+            {
+        path: 'dashboardAdmin',
+        loadChildren: () => import('./components/dashboard-admin/routes').then((m) => m.routes),
+        data: { roles: ['Admin'] }
+      },
       {
         path: 'dashboardMedecin',
         loadChildren: () => import('./components/dashboard-medecin/routes').then((m) => m.routes),

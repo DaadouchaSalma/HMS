@@ -16,6 +16,7 @@ namespace HMS.Interfaces
         Task<Medecin> GetByIdentityUserIdAsync(string identityUserId);
         Task<Medecin?> GetByIdAsync(Guid id);
         void Delete(Medecin medecin);
+        Task<int> CountAsync();
 
     }
 }

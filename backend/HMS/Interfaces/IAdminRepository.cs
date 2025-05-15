@@ -18,6 +18,8 @@ namespace HMS.Interfaces
         void Delete(PersonnelAdministrative personnelAdministrative);
 
         Task<PersonnelAdministrative> GetByIdentityUserIdAsync(string identityUserId);
-        
+        Task<int> CountAsync();
+
+
     }
 }

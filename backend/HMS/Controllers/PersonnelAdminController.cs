@@ -266,5 +266,15 @@ namespace HMS.Controllers
             return Ok(new { message = "personnelA mis à jour avec succès", personnelA = existingPersonnelA });
         }
 
+        [HttpGet("count")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetMedecinCount()
+        {
+            var count = await _adminRepository.CountAsync();
+            Console.WriteLine($"nombre medecins = {count}");
+
+            return Ok(count);
+        }
+
     }
 }
