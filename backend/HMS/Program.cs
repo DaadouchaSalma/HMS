@@ -60,6 +60,8 @@ builder.Services.AddSignalR();
 builder.Services.AddScoped<IReclamationRepository, ReclamationRepository>();
 builder.Services.AddScoped<ListeAttenteRepository>();
 builder.Services.AddScoped<IDossierMRepository, DossierMRepository>();
+builder.Services.AddScoped<IFactureRepository, FactureRepository>();
+builder.Services.AddScoped<FactureService>();
 
 
 // Add services to the container.

@@ -162,7 +162,7 @@ export const routes: Routes = [
   }, 
   {
     path: '404',
-    loadComponent: () => import('./views/pages/page404/page404.component').then(m => m.Page404Component),
+    loadComponent: () => import('./components/facture/generer-pdf/generer-pdf.component').then(m => m.GenererPdfComponent),
     data: {
       title: 'Page 404'
     }
