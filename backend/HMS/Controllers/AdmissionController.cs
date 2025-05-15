@@ -1,4 +1,5 @@
 ﻿using HMS.Models;
+using HMS.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,13 @@ namespace HMS.Controllers
     {
 
     private readonly ApplicationDbContext _context;
+        private readonly FactureService _factureService;
 
-        public AdmissionController(ApplicationDbContext context)
+        public AdmissionController(ApplicationDbContext context,FactureService factureService)
     {
         _context = context;
-    }
+        _factureService = factureService;
+        }
         [Authorize(Roles = "PersonnelAdministratif")]
         [HttpPost]
         public IActionResult AddAdmission([FromBody] Admission admission)
@@ -71,25 +74,30 @@ namespace HMS.Controllers
         //sortiePatient
         [Authorize(Roles = "PersonnelAdministratif")]
         [HttpPost("sortie/{admissionId}")]
-        public IActionResult SortiePatient(Guid admissionId)
+        public async Task<IActionResult> SortiePatient(Guid admissionId)
         {
-            var admission = _context.Admissions.FirstOrDefault(a => a.Id == admissionId);
-            if (admission == null) return NotFound("Admission introuvable.");
+            var admission = await _context.Admissions.FirstOrDefaultAsync(a => a.Id == admissionId);
+            if (admission == null)
+                return NotFound("Admission introuvable.");
 
             // Mettre à jour l'admission
             admission.Statut = "Terminée";
-            admission.DateSortie = DateTime.Now; 
+            admission.DateSortie = DateTime.Now;
 
             // Libérer la chambre
-            var chambre = _context.Chambres.FirstOrDefault(c => c.Id == admission.ChambreId);
+            var chambre = await _context.Chambres.FirstOrDefaultAsync(c => c.Id == admission.ChambreId);
             if (chambre != null)
             {
                 chambre.statut = "Disponible";
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
+            await _factureService.GenererFactureAsync(admission.Id);
+
             return Ok();
         }
+
 
         //liste des admissionEnCours
         [Authorize(Roles = "PersonnelAdministratif")]
