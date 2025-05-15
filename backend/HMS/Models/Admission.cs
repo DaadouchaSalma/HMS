@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HMS.Models
 {
@@ -20,6 +20,5 @@ namespace HMS.Models
         public string Motif { get; set; }
         [JsonIgnore]
         public Facture? Facture { get; set; }
-
     }
 }

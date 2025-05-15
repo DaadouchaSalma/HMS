@@ -1,0 +1,83 @@
+<div class="row align-items-center g-2">  <!-- Added align-items-center and reduced gap -->
+  <!-- Status Filter -->
+  <div class="col-auto">  <!-- Changed to col-auto for content-based width -->
+    <div class="filter-group d-flex align-items-center gap-2">  <!-- Added flex alignment -->
+      <c-dropdown variant="btn-group">
+        <button cButton cDropdownToggle color="secondary" class="py-1" style="background-color: #854d82d6; border-color: #854d82d6; width: 150px;">
+          {{ selectedStatus || 'Statut' }}
+        </button>
+        <ul cDropdownMenu>
+          <li><button cDropdownItem (click)="selectStatus('Tous')">Tous</button></li>
+          <li><button cDropdownItem (click)="selectStatus('Payée')">Payée</button></li>
+          <li><button cDropdownItem (click)="selectStatus('Non Payée')">Non Payée</button></li>
+        </ul>
+      </c-dropdown>
+    </div>
+  </div>
+
+  <!-- Date Range Filter -->
+  <div class="col-auto">
+    <div class="filter-group d-flex align-items-center gap-2">
+      <c-date-range-picker
+        [ranges]="customRanges"
+        rangesButtonsColor="primary"
+        [(ngModel)]="dateRange"
+        (ngModelChange)="applyFilter()"
+        closeOnSelect="true"
+        class="py-1"
+        style="width: 250px;"
+      />
+    </div>
+  </div>
+
+  <!-- Reset Button -->
+  <div class="col-auto">
+    <button cButton color="light" (click)="resetFilters()" class="py-1 px-2" >
+      <i class="fa-solid fa-rotate-right fa-lg" style="color: rgb(196, 57, 57);;"></i>
+    </button>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="card-header" style="background-color: #6387c0; color: white;">
+    <h4>Historique des Factures</h4>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead style="background-color: #a0b5d8;">
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Total TTC (TND)</th>
+            <th>Statut</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let facture of filteredFactures">
+            <td>{{ facture.id | slice:0:8 | uppercase }}</td>
+            <td>{{ facture.dateFacture | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ facture.totalGeneral }}</td>
+            <td>
+                <c-badge 
+                    [class]="getStatutClass(facture.status)"
+                    shape="rounded-pill"
+                    class="d-inline-flex align-items-center">
+                    <i [class]="'bi ' + getStatutIcon(facture.status)"></i>
+                    {{ facture.status }}
+                </c-badge>
+            </td>
+            <td>
+            <div class="d-flex gap-2">
+                <button class="btn btn-icon" title="Télécharger" style="height: 19; padding: 0 1rem;">
+                    <i class="fa-solid fa-download"></i>
+                </button>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

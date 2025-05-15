@@ -12,5 +12,6 @@ export interface Facture {
   totalGeneral: number;
   admission?:Admission;
   admissionId: string;
+  status: string;
   medicamentsDetails: MedicamentFactureDetail[];
 }

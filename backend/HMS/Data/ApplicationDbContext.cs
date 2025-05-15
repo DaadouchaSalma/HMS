@@ -100,6 +100,11 @@ public class ApplicationDbContext :  IdentityDbContext<ApplicationUser>
         // Configurer TPT (Table Per Type)
         modelBuilder.Entity<Medecin>().ToTable("Medecins");
         modelBuilder.Entity<Pharmacien>().ToTable("Pharmaciens");
+        modelBuilder.Entity<Admission>()
+            .HasOne(a => a.Facture)
+            .WithOne(f => f.Admission)
+            .HasForeignKey<Facture>(f => f.AdmissionId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         base.OnModelCreating(modelBuilder);
 
