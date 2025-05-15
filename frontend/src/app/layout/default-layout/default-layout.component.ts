@@ -70,13 +70,13 @@ export class DefaultLayoutComponent {
     this.userRole = 'Patient';
   } else if (roles.includes('Medecin')) {
     this.userRole = 'Medecin';
-    this.router.navigate(['/personnel/edit-medecin']);
+    //this.router.navigate(['/personnel/edit-medecin']);
   }  else if (roles.includes('Pharmacien')) {
     this.userRole = 'Pharmacien';
-    this.router.navigate(['/personnel/edit-pharmacien']);
+    //this.router.navigate(['/personnel/edit-pharmacien']);
   }  else if (roles.includes('PersonnelAdministrative')) {
     this.userRole = 'PersonnelAdministrative';
-    this.router.navigate(['/personnel/edit-personnelA']);
+    //this.router.navigate(['/personnel/edit-personnelA']);
   }  
     this.navItems = this.filterNavItemsByRole(navItems, roles);
   }
