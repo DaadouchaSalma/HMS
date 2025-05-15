@@ -13,10 +13,12 @@ import { DropdownModule, SidebarModule } from '@coreui/angular-pro';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
+    provideCharts(withDefaultRegisterables()),
     provideRouter(routes,
       withRouterConfig({
         onSameUrlNavigation: 'reload'

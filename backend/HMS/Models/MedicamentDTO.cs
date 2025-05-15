@@ -26,6 +26,9 @@ namespace HMS.Models
 
         [JsonPropertyName("InstructionsSpeciales")]
         public string InstructionsSpeciales { get; set; }
+
+        [JsonPropertyName("categorie")]
+        public string? Categorie { get; set; }
     }
 
 }

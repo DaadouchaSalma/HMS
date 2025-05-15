@@ -35,7 +35,7 @@ namespace HMS.Repositories
                 var existingMed = _context.Medicaments.FirstOrDefault(m => m.Nom == med.Nom);
                 if (existingMed != null)
                 {
-                    var quantityToAdd = Math.Min(med.Quantite, existingMed.Nbr_stock); // Use the minimum of required and available stock
+                    var quantityToAdd = Math.Min(med.Quantite, existingMed.Nbr_stock); 
 
                     var panierItem = new MedPanier
                     {
@@ -79,7 +79,7 @@ namespace HMS.Repositories
                 {
                     medID = m.ID,
                     MedName = m.Nom,
-                    quantity = m.Quantite
+                    quantity = m.Quantite,
                 })
             }).Cast<object>().ToList();
         }
@@ -121,8 +121,10 @@ namespace HMS.Repositories
 
                     updatedMissingMeds.Add(new MedicamentDTO
                     {
+                        ID = item.Medicament.Id.ToString(),
                         Nom = item.Medicament.Nom,
-                        Quantite = item.quantity - item.Medicament.Nbr_stock
+                        Quantite = item.quantity - item.Medicament.Nbr_stock, 
+                        Categorie = item.Medicament.categorie?.Name 
                     });
                 }
             }
@@ -137,7 +139,8 @@ namespace HMS.Repositories
                     updatedMissingMeds.Add(new MedicamentDTO
                     {
                         Nom = missing.Nom,
-                        Quantite = med == null ? missing.Quantite : missing.Quantite - med.Nbr_stock
+                        Quantite = med == null ? missing.Quantite : missing.Quantite - med.Nbr_stock,
+                        Categorie = missing.Categorie ?? "autre"
                     });
                 }
             }
@@ -197,7 +200,8 @@ namespace HMS.Repositories
                         updatedMissingMeds.Add(new MedicamentDTO
                         {
                             Nom = item.Medicament?.Nom ?? "Unknown",
-                            Quantite = item.quantity
+                            Quantite = item.quantity,
+                            Categorie = item.Medicament.categorie.Name ?? "autre" // include category name
                         });
                         item.quantity = 0;
                     }
@@ -206,7 +210,8 @@ namespace HMS.Repositories
                         updatedMissingMeds.Add(new MedicamentDTO
                         {
                             Nom = med.Nom,
-                            Quantite = item.quantity - med.Nbr_stock
+                            Quantite = item.quantity - med.Nbr_stock,
+                            Categorie = med.categorie?.Name ?? "autre"
                         });
                         item.quantity = med.Nbr_stock;
                     }
@@ -251,7 +256,8 @@ namespace HMS.Repositories
                         updatedMissingMeds.Add(new MedicamentDTO
                         {
                             Nom = med.Nom,
-                            Quantite = remainingMissing
+                            Quantite = remainingMissing,
+                            Categorie = med.categorie?.Name ?? "autre"
                         });
                     }
                 }
@@ -310,7 +316,9 @@ namespace HMS.Repositories
                             mmpu.Add(new MedicamentDTO
                             {
                                 Nom = medToRemove.Medicament?.Nom ?? "[Unknown]",
-                                Quantite = medToRemove.quantity
+                                Quantite = medToRemove.quantity,
+                                Categorie = medToRemove.Medicament.categorie?.Name ?? "autre"
+                                
                             });
                         }
 
@@ -345,11 +353,11 @@ namespace HMS.Repositories
                 var medDb = _context.Medicaments.FirstOrDefault(m => m.Nom == med.Nom);
                 if (medDb == null)
                 {
-                    missingMeds.Add(new MedicamentDTO { Nom = med.Nom, Quantite = med.Quantite });
+                    missingMeds.Add(new MedicamentDTO { Nom = med.Nom, Quantite = med.Quantite, Categorie = med.Categorie });
                 }
                 else if (medDb.Nbr_stock < med.Quantite)
                 {
-                    missingMeds.Add(new MedicamentDTO { Nom = med.Nom, Quantite = med.Quantite - medDb.Nbr_stock });
+                    missingMeds.Add(new MedicamentDTO { Nom = med.Nom, Quantite = med.Quantite - medDb.Nbr_stock , Categorie = med.Categorie});
                 }
             }
 
@@ -375,5 +383,70 @@ namespace HMS.Repositories
 
             return true; 
         }
+
+        public List<MonthlyMeds> GetMonthlyMedCounts(List<Panier> paniers)
+        {
+            return paniers
+                .Where(p => (p.state == "valide" || p.state == "incomplet") && p.DateValidation.HasValue)
+                .GroupBy(p => new DateTime(p.DateValidation.Value.Year, p.DateValidation.Value.Month, 1))
+                .OrderBy(g => g.Key)
+                .Select(g =>
+                {
+                    // Count validated meds per category
+                    var validatedCategoryCounts = g
+                        .Where(p => p.medPaniers != null)
+                        .SelectMany(p => p.medPaniers)
+                        .GroupBy(mp => mp.Medicament?.categorie?.Name ?? "autre")
+                        .ToDictionary(
+                            grp => grp.Key,
+                            grp => grp.Sum(mp => mp.quantity)
+                        );
+
+                    var topValidatedCategory = validatedCategoryCounts
+                        .OrderByDescending(kvp => kvp.Value)
+                        .FirstOrDefault().Key ?? "aucune";
+
+                    int validatedMeds = validatedCategoryCounts.Values.Sum();
+
+                    // Count missing meds per category
+                    var missingCategoryCounts = g
+                        .Where(p => p.state == "incomplet")
+                        .SelectMany(p =>
+                        {
+                            try
+                            {
+                                return JsonSerializer.Deserialize<List<MedicamentDTO>>(p.MissingMedsJson) ?? new List<MedicamentDTO>();
+                            }
+                            catch
+                            {
+                                return new List<MedicamentDTO>();
+                            }
+                        })
+                        .GroupBy(m => m.Categorie ?? "autre")
+                        .ToDictionary(
+                            grp => grp.Key,
+                            grp => grp.Sum(m => m.Quantite)
+                        );
+
+                    var topMissingCategory = missingCategoryCounts
+                        .OrderByDescending(kvp => kvp.Value)
+                        .FirstOrDefault().Key ?? "aucune";
+
+                    int missingMeds = missingCategoryCounts.Values.Sum();
+
+                    return new MonthlyMeds
+                    {
+                        Month = g.Key.ToString("yyyy-MM"),
+                        ValidatedMedsCount = validatedMeds,
+                        MissingMedsCount = missingMeds,
+                        TopValidatedCategory = topValidatedCategory,
+                        TopMissingCategory = topMissingCategory
+                    };
+                })
+                .ToList();
+        }
+
+
+
     }
 }

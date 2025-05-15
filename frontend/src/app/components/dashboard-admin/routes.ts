@@ -5,11 +5,11 @@ import { roleGuard } from '../../role.guard';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./dashboard-medecin.component').then(m => m.DashboardMedecinComponent),
+    loadComponent: () => import('./dashboard-admin.component').then(m => m.DashboardAdminComponent),
     canActivate: [authGuard, roleGuard],
     data: {
-      title: 'Tableau de bord',
-      roles: ['Medecin']
+      title: 'Dashboard',
+      roles: ['Admin']
     },
   }
 ];

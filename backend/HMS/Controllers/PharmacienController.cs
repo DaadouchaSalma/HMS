@@ -279,5 +279,15 @@ namespace HMS.Controllers
             return Ok(new { message = "pharmacien mis à jour avec succès", pharmacien = existingPharmacien });
         }
 
+        [HttpGet("count")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetMedecinCount()
+        {
+            var count = await _pharmacienRepository.CountAsync();
+            Console.WriteLine($"nombre medecins = {count}");
+
+            return Ok(count);
+        }
+
     }
 }

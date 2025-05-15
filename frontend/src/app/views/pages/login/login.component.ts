@@ -39,9 +39,9 @@ export class LoginComponent {
         if (roles.includes('Patient')) {
             this.router.navigate(['dossierM/dossierMListe']);
         } else if (roles.includes('Medecin')) {
-            this.router.navigate(['/patient/new']);
+            this.router.navigate(['/dashboardMedecin']);
         } else if (roles.includes('Admin')) {
-            this.router.navigate(['/personnel/list-personnel']);
+            this.router.navigate(['/dashboardAdmin']);
         }else if (roles.includes('PersonnelAdministratif')) {
           this.router.navigate(['/chambre/chambreList']);
       }else if (roles.includes('Pharmacien')) {

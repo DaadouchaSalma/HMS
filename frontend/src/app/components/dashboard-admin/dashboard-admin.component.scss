@@ -1,0 +1,17 @@
+.custom-card-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rem; 
+  justify-content: center;
+  margin: 0 auto;  
+  max-width: 100%;
+}
+
+::ng-deep c-widget-stat-c .text-body-secondary {
+  color: #2B4C8C !important;
+}
+
+::ng-deep .custom-progress .progress-bar {
+  background-color: #dd789c; /* violet personnalisé, remplace par ton code hex ou RGB */
+}
+
