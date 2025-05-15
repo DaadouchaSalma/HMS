@@ -60,6 +60,10 @@ namespace HMS.Repositories
         {
             _context.Medecins.Remove(medecin);
         }
+        public async Task<int> CountAsync()
+        {
+            return await _context.Medecins.CountAsync();
+        }
 
     }
 }

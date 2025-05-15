@@ -59,6 +59,11 @@ namespace HMS.Repositories
         {
             return await _context.Pharmaciens.FirstOrDefaultAsync(m => m.IdentityUserId == identityUserId);
         }
+
+        public async Task<int> CountAsync()
+        {
+            return await _context.Pharmaciens.CountAsync();
+        }
     }
 }
 

@@ -44,6 +44,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
         data: { roles: ['PersonnelAdministratif'] }
       },
+            {
+        path: 'dashboardAdmin',
+        loadChildren: () => import('./components/dashboard-admin/routes').then((m) => m.routes),
+        data: { roles: ['Admin'] }
+      },
       {
         path: 'dashboardMedecin',
         loadChildren: () => import('./components/dashboard-medecin/routes').then((m) => m.routes),
@@ -160,6 +165,34 @@ export const routes: Routes = [
       }
     ]
   }, 
+  {
+    path: 'accueil',
+    loadComponent: () => import('./components/visiteur/accueil/accueil/accueil.component').then(m => m.AccueilComponent),
+    data: {
+      title: 'Accueil'
+    }
+  },
+   {
+    path: 'about',
+    loadComponent: () => import('./components/visiteur/about/about.component').then(m => m.AboutComponent),
+    data: {
+      title: 'A Propos'
+    }
+  },
+  {
+    path: 'actualite',
+    loadComponent: () => import('./components/visiteur/actualite/actualite.component').then(m => m.ActualiteComponent),
+    data: {
+      title: 'Actualité'
+    }
+  },
+  {
+    path: 'actualites/:id',
+    loadComponent: () => import('./components/visiteur/detail-actualite/detail-actualite.component').then(m => m.DetailActualiteComponent),
+    data: {
+      title: 'Actualité Détail'
+    }
+  },
   {
     path: '404',
     loadComponent: () => import('./components/facture/generer-pdf/generer-pdf.component').then(m => m.GenererPdfComponent),

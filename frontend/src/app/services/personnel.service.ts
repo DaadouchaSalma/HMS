@@ -39,4 +39,8 @@ export class PersonnelService {
   editPersonnel(id: string, updatedPersonnel: Personnel): Observable<any> {
     return this.http.put(`http://localhost:5160/api/personnel/editInfo/${id}`, updatedPersonnel);
   }
+
+    getPersonnelCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/count`, { withCredentials: true });
+  }
 }

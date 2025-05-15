@@ -26,7 +26,7 @@ namespace HMS.Controllers {
 
         }
         //liste Reclamation 
-        [Authorize(Roles = "PersonnelAdministratif")]
+        [Authorize(Roles = "PersonnelAdministratif, Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Reclamation>>> GetAll()
         {

@@ -30,6 +30,9 @@ export class PersonnelAdminService {
   updatePersonnelAdmin(id: string, updatedPersonnelA: PersonnelAdmin): Observable<any> {
     return this.http.put(`${this.apiUrl}/edit/${id}`, updatedPersonnelA,{ withCredentials: true });
   }
+  getAdminCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/count`, { withCredentials: true });
+  }
 }
 
   

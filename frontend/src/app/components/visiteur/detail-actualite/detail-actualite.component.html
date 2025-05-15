@@ -1,0 +1,67 @@
+<!-- Breadcrumb -->
+<nav class="breadcrumb" @fadeIn>
+  <a routerLink="/">Accueil</a>
+  <span>></span>
+  <a routerLink="/actualites">Actualités</a>
+  <span>></span>
+  <span class="current">{{ actualite?.title }}</span>
+</nav>
+
+<!-- Contenu principal -->
+<main class="detail-container" *ngIf="actualite" @fadeIn>
+  <!-- Article principal -->
+  <article class="main-article">
+    <div class="article-header">
+      <span class="category-badge">{{ actualite.category }}</span>
+      <h1>{{ actualite.title }}</h1>
+      
+      <div class="meta">
+        <div class="author">
+          <img [src]="actualite.authorImage" alt="{{ actualite.author }}">
+          <span>{{ actualite.author }}</span>
+        </div>
+        <div class="date-location">
+          <span><i class="far fa-calendar"></i> {{ actualite.date | date:'fullDate' }}</span>
+          <span *ngIf="actualite.location"><i class="fas fa-map-marker-alt"></i> {{ actualite.location }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="featured-image">
+      <img [src]="actualite.image" [alt]="actualite.title">
+    </div>
+    
+    <div class="article-content" [innerHTML]="actualite.content"></div>
+    
+    <!-- Partage social -->
+    <div class="social-share" @slideIn>
+      <span>Partager :</span>
+      <button (click)="shareOnSocial('facebook')"><i class="fab fa-facebook-f"></i></button>
+      <button (click)="shareOnSocial('twitter')"><i class="fab fa-twitter"></i></button>
+      <button (click)="shareOnSocial('linkedin')"><i class="fab fa-linkedin-in"></i></button>
+    </div>
+  </article>
+  
+  <!-- Actualités connexes -->
+  <aside class="related-articles" *ngIf="relatedActualites.length > 0" @slideIn>
+    <h3>Actualités connexes</h3>
+    
+    <div class="related-grid">
+      <div class="related-card" *ngFor="let item of relatedActualites" [routerLink]="['/actualites', item.id]">
+        <img [src]="item.image" [alt]="item.title">
+        <div class="related-content">
+          <h4>{{ item.title | truncate:50 }}</h4>
+          <span class="related-date">{{ item.date | date:'shortDate' }}</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<!-- Message si non trouvé -->
+<div class="not-found" *ngIf="!actualite" @fadeIn>
+  <i class="far fa-frown"></i>
+  <h2>Actualité non trouvée</h2>
+  <p>L'article que vous recherchez n'existe pas ou a été déplacé.</p>
+  <a routerLink="/actualites" class="back-button">Retour aux actualités</a>
+</div>

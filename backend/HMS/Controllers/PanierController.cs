@@ -2,6 +2,8 @@
 using HMS.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace HMS.Controllers
 {
@@ -11,10 +13,13 @@ namespace HMS.Controllers
     public class PanierController : ControllerBase
     {
         private readonly IPanierRepository _panierRepo;
+        private readonly ApplicationDbContext _context;
 
-        public PanierController(IPanierRepository panierRepo)
+
+        public PanierController(IPanierRepository panierRepo , ApplicationDbContext context)
         {
             _panierRepo = panierRepo;
+            _context = context;
         }
 
         [HttpPost("add")]
@@ -87,5 +92,18 @@ namespace HMS.Controllers
 
             return Ok(new { message = "Panier status updated successfully." });
         }
+
+        [HttpGet("meds-per-month")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetMedsPerMonth()
+        {
+            var paniers = _context.Paniers
+                .Include(p => p.medPaniers)
+                .ToList();
+
+            var result = _panierRepo.GetMonthlyMedCounts(paniers);
+            return Ok(result);
+        }
+
     }
 }

@@ -12,7 +12,7 @@
         <p><strong>Médicaments :</strong></p>
       </c-card-body>
 
-      <ul [flush]="true" cListGroup>
+      <ul [flush]="true" cListGroup style="height: 100px;">
         <li cListGroupItem *ngFor="let medicament of prescription.nomsMedicaments.slice(0, 2)">
           {{ medicament }}
         </li>

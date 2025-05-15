@@ -4,8 +4,136 @@
   color: white !important;
   border-color: #6387c0 !important;
 }
+</style>
+<style>
+  /* Couleurs principales */
+  :root {
+    --primary-color: #6387c0;
+    --danger-color: #c43939;
+    --success-color: #28a745;
+    --light-gray: #f8f9fa;
+    --border-color: #dee2e6;
+  }
 
+  /* Style général de la table */
+  .table-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+  }
 
+  /* En-tête de la table */
+  c-smart-table {
+    --c-table-header-bg: var(--primary-color);
+    --c-table-header-color: white;
+    --c-table-border-color: var(--border-color);
+  }
+
+  /* Boutons personnalisés */
+  .custom-btn-1 {
+   background-color: #c1cce6 ; 
+   border-color:  #c1cce6 ; 
+   color: black;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-btn-1:hover {
+     opacity: 0.9;
+    transform: translateY(-1px);
+    background-color: #c1cce6 ;   
+    border-color:  #c1cce6 ; 
+    color: black;
+  }
+   .custom-btn-2 {
+    background-color:#3E608C; 
+    border-color: #3E608C;
+    color: white;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-btn-2:hover {
+     opacity: 0.9;
+    transform: translateY(-1px);
+    background-color: #345073;
+  }
+.supp {
+    color: white;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  .supp:hover{
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  /* Détails des paniers */
+  .details-container {
+    background-color: var(--light-gray);
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 10px;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .details-container h5 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+  }
+
+  .med-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .med-list li {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background-color: white;
+    border-radius: 4px;
+    border-left: 3px solid var(--success-color);
+  }
+
+  .missing-med-list li {
+    border-left-color: var(--danger-color);
+  }
+
+  /* Filtres et recherche */
+  .table-filter-container {
+    margin-bottom: 20px;
+  }
+
+  /* Modals */
+  .modal-header {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 6px 6px 0 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .details-container .row > div {
+      margin-bottom: 15px;
+    }
+  }
+
+  /* Icônes */
+  .fa-pills {
+    color: var(--primary-color);
+  }
+
+  .fa-ban {
+    color: var(--danger-color);
+  }
 </style>
 <c-toaster [placement]="position" class="p-3" position="fixed">
   <c-toast
@@ -45,7 +173,7 @@
     <button (click)="closeModal()" cButton color="secondary">
       Annuler
     </button>
-    <button (click)="confirmValidation()" cButton color="success">
+    <button (click)="confirmValidation()" cButton  style="background-color:#3E608C ;border-color:#3E608C ;">
       Valider
     </button>
   </c-modal-footer>
@@ -81,7 +209,7 @@
   [tableProps]="{ hover: true, striped: true, responsive: true }"
   [tableBodyProps]="{ align: 'middle' }"
   noItemsLabel=" Aucun panier trouvé"
-  tableFilterLabel = "filtrer"
+  tableFilterLabel = "Filtrer"
   tableFilterPlaceholder="Entrer Lettre"
   cleaner
   clickableRows
@@ -164,17 +292,17 @@
     <td>
       @switch (columnName) {
         @case ('show') {
-          <button (click)="toggleDetails(item.panierId)" cButton class="custom-btn" size="sm" variant="outline">
+          <button (click)="toggleDetails(item.panierId)" cButton class="custom-btn-1" size="sm" variant="outline" >
             Détails
           </button>
         }
         @case ('valider') {
-          <button (click)="openValidationModal(item.panierId)" cButton class="custom-btn" size="sm" variant="outline">
-            valider
+          <button (click)="openValidationModal(item.panierId)" cButton class="custom-btn-2" size="sm" variant="outline">
+            Valider
           </button>
         }
         @case ('delete'){
-          <button style="background-color: rgb(196, 57, 57); border-color: rgb(196, 57, 57);" cButton class="ms-1"  size="sm" (click)="openDeleteModal(item.panierId)">
+          <button style="background-color: rgb(196, 57, 57); border-color: rgb(196, 57, 57);" cButton class="ms-1 supp"  size="sm" (click)="openDeleteModal(item.panierId)">
             Supprimer
           </button>
         }
