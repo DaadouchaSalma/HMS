@@ -1,4 +1,6 @@
-﻿namespace HMS.Models
+﻿using System.Text.Json.Serialization;
+
+namespace HMS.Models
 {
     public class Admission
 
@@ -16,5 +18,7 @@
         public DateTime? DateSortie { get; set; } 
         public string? Statut { get; set; } 
         public string Motif { get; set; }
+        [JsonIgnore]
+        public Facture? Facture { get; set; }
     }
 }

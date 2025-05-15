@@ -70,12 +70,10 @@ export const routes: Routes = [
 
         path:'chambre',
         loadChildren: () => import('./components/chambre/routes').then((m) => m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path:'reclamation',
         loadChildren: () => import('./components/reclamation/routes').then((m) => m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
       },
       {
         path:'admission',
@@ -84,13 +82,15 @@ export const routes: Routes = [
       {
         path: 'personnel',
         loadChildren: () => import('./components/Medecin_personnel/routes').then((m) => m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
 
       },
       {
         path: 'rendezvous',
         loadChildren: () => import('./components/RDV/routes').then((m) => m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
+      },
+      {
+        path: 'facture',
+        loadChildren: () => import('./components/facture/routes').then((m) => m.routes),
       },
       {
         path: 'theme',

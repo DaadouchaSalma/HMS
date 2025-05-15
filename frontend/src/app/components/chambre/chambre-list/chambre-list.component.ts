@@ -54,6 +54,4 @@ export class ChambreListComponent {
     }
   }
   
-  
-  
 }

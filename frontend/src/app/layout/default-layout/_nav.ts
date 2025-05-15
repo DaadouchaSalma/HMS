@@ -187,11 +187,23 @@ export const navItems: INavDataWithRoles[] = [
         icon: 'nav-icon-bullet'
       },
       {
-        name: 'Ma liste Des Rendez-Vous',
+        name: 'Ma Liste Des Rendez-Vous',
         url: '/rendezvous/list-rdv',
         icon: 'nav-icon-bullet'
-      },
+      }
     ]
+  },
+  {
+    name: 'Factures',
+    url: '/facture/historique',
+    iconComponent: { name: 'cilMoney' },
+    roles: ['Patient'],
+  },
+  {
+    name: 'Factures',
+    url: '/facture/historiquePayment',
+    iconComponent: { name: 'cilMoney' },
+    roles: ['Admin'],
   },
  /*{
     name: 'Dashboard',

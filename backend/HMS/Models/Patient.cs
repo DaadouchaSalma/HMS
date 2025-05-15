@@ -18,6 +18,7 @@ namespace HMS.Models
         public ApplicationUser? IdentityUser { get; set; }
         [JsonIgnore]
         public ICollection<RendezVous>? RendezVous { get; set; } = new List<RendezVous>();
+        [JsonIgnore]
         public Facture? Facture { get; set; }
         public DossierM? DossierMedical { get; set; }
         public ICollection<Prescription>? Prescriptions { get; set; } = new List<Prescription>();
