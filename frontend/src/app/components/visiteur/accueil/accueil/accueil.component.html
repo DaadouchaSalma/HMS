@@ -1,0 +1,136 @@
+<div class="home-container">
+  <app-navbar-visiteur></app-navbar-visiteur>
+
+  <div class="hero-section">
+    <div class="hero-text">
+  <h1>Rejoignez <span style="color: #2B4C8C;">Smart Care</span></h1>
+  <p>Votre santé, notre priorité. Accédez à des soins de qualité en quelques clics.</p>
+  <p>Connectez-vous si vous êtes déjà inscrit, ou prenez rendez-vous facilement !</p>
+  <div class="hero-buttons">
+    <a href="/#/login" class="btn btn-primary"><i class="fas fa-solid fa-lock" style="margin-right: 2%;"></i> Se connecter</a>
+    <a href="tel:+216XXXXXXXX" class="btn btn-secondary"><i class="fas fa-solid fa-phone" style="margin-right: 2%;"></i>Prendre rendez-vous</a>
+  </div>
+</div>
+    <div class="hero-image">
+      <!--img src="assets/images/interface/vecteezy_doctor-icon-virtual-screen-health-care-and-medical-on_12604205.jpg" alt="Doctor" /-->
+      <div class="check-card">
+        <div class="icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <span class="label">{{ label }}</span>
+      </div>
+      <div class="meet-doctors">
+        <p>Meet Our Doctors</p>
+        <div class="avatars">
+          <img src="assets/images/avatars/1.jpg" />
+          <img src="assets/images/avatars/2.jpg" />
+          <img src="assets/images/avatars/3.jpg" />
+          <img src="assets/images/avatars/4.jpg" />
+          <span>12k</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="how-it-works-section">
+  <div class="container">
+    <div class="content-wrapper">
+      <div class="image-container">
+        <img src="/assets/images/interface/it_works.png" alt="Processus de consultation médicale" class="featured-image">
+      </div>
+      
+      <div class="steps-container">
+        <h2 class="section-title" >Rejoignez SmartCare maintenant !</h2>
+        <p class="section-subtitle" style="color: #854d82d6;">Accédez à des soins modernes et personnalisés, simplement.</p>
+        
+        <div class="steps-grid"> <!-- Changé de steps-list à steps-grid -->
+          <div class="step-item" *ngFor="let step of steps">
+            <div class="step-icon" >
+              <img [src]="step.icon" [alt]="step.title">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">{{step.title}}</h3>
+              <p class="step-description">{{step.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="specialities-section">
+  <div class="background-image"></div>
+  <div class="overlay"></div>
+  
+  <div class="container">
+    <h2 class="section-title">Spécialités</h2>
+    
+    <div class="slider-wrapper">
+      <button class="nav-arrow left-arrow" (click)="scroll(-1)" style="background-color: #2B4C8C;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      
+      <div class="slider-container">
+        <div class="specialities-track" #track>
+          
+          <div class="speciality-card" *ngFor="let speciality of duplicatedSpecialities; let i = index" 
+               [attr.data-index]="i % specialities.length" style="border-color: #2B4C8C;">
+            <div class="speciality-icon">
+              <img [src]="speciality.icon" [alt]="speciality.name + ' icon'">
+            </div>
+            <h3 class="speciality-name">{{speciality.name}}</h3>
+          </div>
+        </div>
+      </div>
+      
+      <button class="nav-arrow right-arrow" (click)="scroll(1)" style="background-color: #2B4C8C;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!--div class="see-all">
+      <button class="see-all-button">Voir toutes les spécialités</button>
+    </div-->
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="faq-content">
+   
+    <h2 class="faq-heading">Foire Aux Questions</h2>
+
+    <div class="accordion">
+  <div class="item" [class.open]="faq.open" *ngFor="let faq of faqs; let i = index">
+  <div class="question" (click)="toggle(i)">
+    {{ faq.question }}
+    <span class="toggle">{{ faq.open ? '-' : '+' }}</span>
+  </div>
+  <div class="answer" *ngIf="faq.open">
+    {{ faq.answer }}
+  </div>
+</div>
+</div>
+
+  </div>
+
+  <div class="faq-image">
+    <img src="/assets/images/interface/qst_4-removebg-preview.png" alt="Illustration médecin FAQ" />
+    <div class="happy-box">
+      😊 <b style="font-size: medium;">95k+</b><br />
+      Patients satisfaits
+    </div>
+  </div>
+</section>
+
+<app-footer-visiteur></app-footer-visiteur>
+
+<app-chat></app-chat>
+
+
