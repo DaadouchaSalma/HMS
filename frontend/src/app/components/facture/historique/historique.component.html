@@ -71,7 +71,7 @@
                 <button class="btn btn-icon" [disabled]="facture.status === 'Payée'" (click)="checkout(facture.totalGeneral, facture.id)" style="height: 20px; padding: 0 1rem; margin-left: 0px;">
                     <i class="fa-solid fa-credit-card"></i>
                 </button>
-                <button class="btn btn-icon" title="Télécharger" style="height: 19; padding: 0 1rem;">
+                <button class="btn btn-icon" title="Télécharger" (click)="generatePDF(facture.id)" style="height: 19; padding: 0 1rem;">
                     <i class="fa-solid fa-download"></i>
                 </button>
             </div>

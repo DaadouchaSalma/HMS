@@ -12,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { loadStripe } from '@stripe/stripe-js';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { GenererPdfComponent } from '../generer-pdf/generer-pdf.component';
 
 @Component({
   selector: 'app-historique',
@@ -133,6 +134,17 @@ getStatutClass(statut: string): string {
     if (result.error) {
       console.error(result.error.message);
     }
+  }
+
+  generatePDF(factureId: string): void {
+    this.http.post<Facture>(`http://localhost:5160/api/facture/generer/${factureId}`, {}).subscribe({
+      next: (facture) => {
+        this.factureService.generatePdf(facture);
+      },
+      error: (err) => {
+        console.error('Erreur lors de la génération de la facture :', err);
+      }
+    });
   }
 
 }

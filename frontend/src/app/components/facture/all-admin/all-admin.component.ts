@@ -11,6 +11,7 @@ import { BadgeComponent, BadgeModule, ButtonModule, ColComponent, DatePickerComp
   RowComponent,
   DateRangePickerComponent} from '@coreui/angular-pro';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-all-admin',
@@ -31,7 +32,7 @@ export class AllAdminComponent implements OnInit {
   selectedStatus: string = '';
   dateRange: { startDate: Date | null, endDate: Date | null } = { startDate: null, endDate: null };
   
-  constructor(private factureService: FactureService) {}
+  constructor(private factureService: FactureService, private http: HttpClient) {}
   
   ngOnInit(): void {
     this.factureService.getFactures().subscribe({
@@ -169,5 +170,16 @@ resetFilters() {
           return 'bi-question-circle';
       }
     }
+
+    generatePDF(factureId: string): void {
+    this.http.post<Facture>(`http://localhost:5160/api/facture/generer/${factureId}`, {}).subscribe({
+      next: (facture) => {
+        this.factureService.generatePdf(facture);
+      },
+      error: (err) => {
+        console.error('Erreur lors de la génération de la facture :', err);
+      }
+    });
+  }
 
 }
