@@ -8,7 +8,7 @@ export const routes: Routes = [
     loadComponent: () => import('./dashboard-medecin.component').then(m => m.DashboardMedecinComponent),
     canActivate: [authGuard, roleGuard],
     data: {
-      title: 'Dashboard',
+      title: 'Tableau de bord',
       roles: ['Medecin']
     },
   }
