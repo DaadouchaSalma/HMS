@@ -68,8 +68,28 @@ loadCategories(): void {
     });
 }
 
-  onCategorieChange(med: any) {
-  med.showCustomInput = med.categorie === 'Autre';
+
+onCategorieChange(med: any) {
+  med.showCustomInput = med.selectedCategorie === 'Autre';
+  if (!med.showCustomInput) {
+    // When selecting a normal category
+    med.categorie = med.selectedCategorie;
+    med.customCategorie = '';
+  }
+}
+
+updateFinalCategory(med: any) {
+  if (med.showCustomInput) {
+    // Only update if we're in "Autre" mode
+    med.categorie = med.customCategorie;
+  }
+}
+
+// Also update when the custom category changes
+onCustomCategoryChange(med: any) {
+  if (med.showCustomInput) {
+    med.categorie = med.customCategorie;
+  }
 }
   
   addMedication() {
