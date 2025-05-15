@@ -50,6 +50,7 @@
     "@stripe/stripe-js": "^7.2.0",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.9",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^4.1.0",
     "lodash-es": "^4.17.21",
     "marked": "^4.3.0",

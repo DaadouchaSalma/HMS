@@ -215,6 +215,7 @@ export const iconSubset = {
   cilChatBubble,
   logo,
   signet,
+  
 };
 
 export enum IconSubset {
