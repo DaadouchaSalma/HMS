@@ -44,7 +44,7 @@ namespace HMS.Controllers
 
 
 
-        [Authorize(Roles = "Medecin, PersonnelAdministratif")]
+        [Authorize(Roles = "Medecin, PersonnelAdministrative")]
         [HttpPost("new")]
 
         public async Task<IActionResult> AjouterPatient([FromBody] RegisterModel model)
@@ -150,7 +150,7 @@ namespace HMS.Controllers
             return Ok(patient);
         }
 
-        [Authorize(Roles = "Medecin, PersonnelAdministratif, Admin")]
+        [Authorize(Roles = "Medecin, PersonnelAdministrative, Admin")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllPatients()
         {

@@ -20,19 +20,19 @@ export const navItems: INavDataWithRoles[] = [
     name: 'Patient',
     url: '/patient',
     iconComponent: { name: 'cil-user-plus' },
-    roles: ['Medecin', 'Admin', 'PersonnelAdministratif'],
+    roles: ['Medecin', 'Admin', 'PersonnelAdministrative'],
     children: [
       {
         name: 'Ajouter un patient',
         url: '/patient/new',
         icon: 'nav-icon-bullet',
-        roles: ['Medecin', 'PersonnelAdministratif'],
+        roles: ['Medecin', 'PersonnelAdministrative'],
       },
       {
         name: 'Liste des patients',
         url: '/patient/list',
         icon: 'nav-icon-bullet',
-        roles: ['Medecin', 'Admin', 'PersonnelAdministratif'],
+        roles: ['Medecin', 'Admin', 'PersonnelAdministrative'],
       }
     ]
   },
@@ -67,7 +67,7 @@ export const navItems: INavDataWithRoles[] = [
     name: 'Chambre',
     url: '/chambre',
     iconComponent: { name: 'cil-home' },
-    roles: ['Admin', 'PersonnelAdministratif'],
+    roles: ['Admin', 'PersonnelAdministrative'],
     children: [
       {
         name: 'Ajouter Une Chambre',
@@ -85,7 +85,7 @@ export const navItems: INavDataWithRoles[] = [
       name: 'Reclamation',
       url: '/reclamation',
       iconComponent: { name: 'cil-warning'},
-      roles: ['Patient', 'PersonnelAdministratif'],
+      roles: ['Patient', 'PersonnelAdministrative'],
       children: [
         {
           name: 'Ajouter Une Reclamation',
@@ -97,7 +97,7 @@ export const navItems: INavDataWithRoles[] = [
           name: 'La liste des reclamation',
           url: '/reclamation/reclamationList',
           icon: 'nav-icon-bullet',
-          roles: ['PersonnelAdministratif']
+          roles: ['PersonnelAdministrative']
         },
         
       ]},
@@ -105,19 +105,19 @@ export const navItems: INavDataWithRoles[] = [
       name: 'Admission',
       url: '/admission',
       iconComponent: { name: 'cil-user' },
-      roles: ['PersonnelAdministratif'],
+      roles: ['PersonnelAdministrative'],
       children: [
         {
           name: 'Ajouter Admission',
           url: '/admission/admissionAdd',
           icon: 'nav-icon-bullet',
-          roles: ['PersonnelAdministratif'],
+          roles: ['PersonnelAdministrative'],
         },
         {
           name: 'Liste des admissions actuelles',
           url: '/admission/admissionList',
           icon: 'nav-icon-bullet',
-          roles: ['PersonnelAdministratif'],
+          roles: ['PersonnelAdministrative'],
         },
         
       ]},

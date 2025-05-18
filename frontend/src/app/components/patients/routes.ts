@@ -15,7 +15,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'Ajout d\'un Patient',
-          roles: ['Medecin', 'PersonnelAdministratif']
+          roles: ['Medecin', 'PersonnelAdministrative']
         }
       },
       {
@@ -33,7 +33,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'Liste des Patients',
-          roles: ['Medecin', 'PersonnelAdministratif', 'Admin']
+          roles: ['Medecin', 'PersonnelAdministrative', 'Admin']
         }
       }
     ]

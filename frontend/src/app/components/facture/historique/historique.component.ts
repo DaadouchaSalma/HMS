@@ -94,6 +94,8 @@ resetFilters() {
 
 getStatutClass(statut: string): string {
     switch (statut) {
+      case 'En attente':
+        return 'badge-nonpayee';
       case 'Non Payée':
         return 'badge-nonpayee';
       case 'Payée':
@@ -106,6 +108,8 @@ getStatutClass(statut: string): string {
   getStatutIcon(statut: string): string {
     //const status = statut?.toLowerCase();
     switch (statut) {
+      case 'En attente':
+        return 'bi-x-circle';
       case 'Payée': 
         return 'bi-check-circle';
       case 'Non Payée':

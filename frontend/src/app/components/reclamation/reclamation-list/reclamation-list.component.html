@@ -1,5 +1,5 @@
 <table cTable cAlign="middle" [cBorder]="1" bordered class="text-center custom-table" >
-  <thead cTableColor="light" cAlign="middle" style="border-radius: 5px; " >
+  <thead cTableColor="light" cAlign="middle" style="border-radius: 5px;" >
     <tr>
       <th>Nom</th>
       <th>Prénom</th>
@@ -13,7 +13,7 @@
   <tbody>
     <ng-container *ngFor="let reclamation of allReclamations; let i = index">
       <tr>
-        <td>{{ reclamation.patient?.nom }}</td>
+        <td style="width:90px;">{{ reclamation.patient?.nom }}</td>
         <td>{{ reclamation.patient?.prenom }}</td>
         <td>{{ reclamation.patient?.email }}</td>
         <td>{{ reclamation.typeProbleme }}</td>
@@ -21,7 +21,7 @@
         <td>{{ reclamation.dateSoumission | date: 'dd/MM/yyyy' }}</td> <!-- Format de la date -->
         <td>
           <button cButton color="danger" (click)="confirmSupprimer(reclamation)">
-            Supprimer
+           <i class="fas fa-trash"></i>
           </button>
         </td>
       </tr>

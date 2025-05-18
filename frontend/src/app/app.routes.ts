@@ -42,7 +42,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
+        data: { roles: ['PersonnelAdministrative'] }
       },
             {
         path: 'dashboardAdmin',
@@ -100,7 +100,7 @@ export const routes: Routes = [
       {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
+        data: { roles: ['PersonnelAdministrative'] }
       },
       {
         path: 'base',
@@ -146,22 +146,22 @@ export const routes: Routes = [
       {
         path: 'patient',
         loadChildren: () => import('./components/patients/routes').then((m) => m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
+        data: { roles: ['PersonnelAdministrative'] }
       },
       {
         path: 'prescription',
         loadChildren: () => import('./components/prescription/routes').then((m) => m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
+        data: { roles: ['PersonnelAdministrative'] }
       },
       {
         path:'meds',
         loadChildren:() => import('./components/routes').then((m)=> m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
+        data: { roles: ['PersonnelAdministrative'] }
       },
       {
         path:'dme',
         loadChildren:() => import('./components/DME/routes').then((m)=> m.routes),
-        data: { roles: ['PersonnelAdministratif'] }
+        data: { roles: ['PersonnelAdministrative'] }
       }
     ]
   }, 

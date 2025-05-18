@@ -123,7 +123,7 @@ app.UseStaticFiles();
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    string[] roles = { "PersonnelAdministratif", "Medecin", "Pharmacien", "Patient", "Admin" };
+    string[] roles = { "PersonnelAdministrative", "Medecin", "Pharmacien", "Patient", "Admin" };
 
     foreach (var role in roles)
     {

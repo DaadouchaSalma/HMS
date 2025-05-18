@@ -42,7 +42,7 @@ export class LoginComponent {
             this.router.navigate(['/dashboardMedecin']);
         } else if (roles.includes('Admin')) {
             this.router.navigate(['/dashboardAdmin']);
-        }else if (roles.includes('PersonnelAdministratif')) {
+        }else if (roles.includes('PersonnelAdministrative')) {
           this.router.navigate(['/chambre/chambreList']);
       }else if (roles.includes('Pharmacien')) {
         this.router.navigate(['/meds/meds']);

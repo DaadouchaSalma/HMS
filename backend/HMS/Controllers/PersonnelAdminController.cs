@@ -71,16 +71,16 @@ namespace HMS.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
 
-            await _userManager.AddToRoleAsync(user, "PersonnelAdministratif");
+            await _userManager.AddToRoleAsync(user, "PersonnelAdministrative");
 
             await _adminRepository.Add(personnelA);
             await _adminRepository.SaveAsync();
 
-            return Ok(new { message = "PersonnelAdministratif ajouté avec succès" });
+            return Ok(new { message = "PersonnelAdministrative ajouté avec succès" });
         }
         //hethi pour personnel without id 
         [HttpGet("get")]
-        [Authorize(Roles = "PersonnelAdministratif")]
+        [Authorize(Roles = "PersonnelAdministrative")]
         public async Task<ActionResult<PersonnelAdministrative>> GetPersonnelAById()
         {
             try
@@ -128,7 +128,7 @@ namespace HMS.Controllers
         }
 
         [HttpPut("editInfo")]
-        [Authorize(Roles = "PersonnelAdministratif")]
+        [Authorize(Roles = "PersonnelAdministrative")]
         public async Task<IActionResult> UpdatePersonnelA([FromBody] PersonnelAdministrative updatedPersonnelA)
         {
             if (!User.Identity.IsAuthenticated)

@@ -21,7 +21,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'Ajouter Une Chambre',
-          roles: ['PersonnelAdministratif','Admin']
+          roles: ['PersonnelAdministrative','Admin']
         }
       },
       {
@@ -30,7 +30,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'La Liste des chambres',
-          roles: ['PersonnelAdministratif','Admin']
+          roles: ['PersonnelAdministrative','Admin']
         }
       },
       {
@@ -39,7 +39,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'Modifier une chambre',
-          roles: ['PersonnelAdministratif','Admin']
+          roles: ['PersonnelAdministrative','Admin']
         }
       }
       
