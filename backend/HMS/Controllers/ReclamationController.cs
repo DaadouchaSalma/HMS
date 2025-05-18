@@ -26,7 +26,7 @@ namespace HMS.Controllers {
 
         }
         //liste Reclamation 
-        [Authorize(Roles = "PersonnelAdministratif, Admin")]
+        [Authorize(Roles = "PersonnelAdministrative, Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Reclamation>>> GetAll()
         {
@@ -85,7 +85,7 @@ namespace HMS.Controllers {
         }
 
         //supprimer reclamation 
-        [Authorize(Roles = "PersonnelAdministratif")]
+        [Authorize(Roles = "PersonnelAdministrative")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

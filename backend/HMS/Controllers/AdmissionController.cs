@@ -20,7 +20,7 @@ namespace HMS.Controllers
         _context = context;
         _factureService = factureService;
         }
-        [Authorize(Roles = "PersonnelAdministratif")]
+        [Authorize(Roles = "PersonnelAdministrative")]
         [HttpPost]
         public IActionResult AddAdmission([FromBody] Admission admission)
         {
@@ -72,7 +72,7 @@ namespace HMS.Controllers
         }
 
         //sortiePatient
-        [Authorize(Roles = "PersonnelAdministratif")]
+        [Authorize(Roles = "PersonnelAdministrative")]
         [HttpPost("sortie/{admissionId}")]
         public async Task<IActionResult> SortiePatient(Guid admissionId)
         {
@@ -100,7 +100,7 @@ namespace HMS.Controllers
 
 
         //liste des admissionEnCours
-        [Authorize(Roles = "PersonnelAdministratif")]
+        [Authorize(Roles = "PersonnelAdministrative")]
         [HttpGet("listeAdmission")]
         public IActionResult GetAdmission()
         {

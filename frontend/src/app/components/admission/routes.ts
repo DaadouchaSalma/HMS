@@ -20,7 +20,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'Ajouter Une Admission ',
-          roles: ['PersonnelAdministratif']
+          roles: ['PersonnelAdministrative']
         }
       } ,
       {
@@ -29,7 +29,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'Admissions Actuelles ',
-          roles: ['PersonnelAdministratif']
+          roles: ['PersonnelAdministrative']
         }
       } 
     ]

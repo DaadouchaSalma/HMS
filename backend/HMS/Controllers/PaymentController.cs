@@ -37,7 +37,7 @@ namespace HMS.Controllers
                         Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
-                            Name = "Consultation médicale"
+                            Name = "Facture d'hospitalisation"
                         },
                     },
                     Quantity = 1,

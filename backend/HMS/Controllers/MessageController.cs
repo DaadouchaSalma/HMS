@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HMS.Controllers
 {
-    [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien")]
+    [Authorize(Roles = "PersonnelAdministrative, Medecin, Pharmacien")]
     [Route("api/[controller]")]
     [ApiController]
     public class MessageController : Controller
@@ -88,7 +88,7 @@ namespace HMS.Controllers
         }
 
         [HttpGet("listePerso")]
-        [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien, Admin")]
+        [Authorize(Roles = "PersonnelAdministrative, Medecin, Pharmacien, Admin")]
         public async Task<ActionResult<IEnumerable<Personnel>>> GetPersonnels()
         {
             var identityUserId = _userManager.GetUserId(User);
@@ -109,7 +109,7 @@ namespace HMS.Controllers
         }
 
         [HttpGet("me")]
-        [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien")]
+        [Authorize(Roles = "PersonnelAdministrative, Medecin, Pharmacien")]
         public async Task<IActionResult> GetCurrentUser()
         {
             var identityUserId = _userManager.GetUserId(User);
@@ -128,7 +128,7 @@ namespace HMS.Controllers
 
 
         [HttpGet("last/{contactId}")]
-        [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien")]
+        [Authorize(Roles = "PersonnelAdministrative, Medecin, Pharmacien")]
         public async Task<IActionResult> GetLastMessageWithContact(Guid contactId)
         {
             if (!User.Identity.IsAuthenticated)
@@ -174,7 +174,7 @@ namespace HMS.Controllers
         }
 
         [HttpPost("markasread/{messageId}")]
-        [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien")]
+        [Authorize(Roles = "PersonnelAdministrative, Medecin, Pharmacien")]
         public async Task<IActionResult> MarkAsRead(Guid messageId)
         {
             var message = await _context.Messages.FindAsync(messageId);

@@ -36,7 +36,7 @@
       <!--ng-container *ngTemplateOutlet="taskDropdown" /-->
       <ng-container *ngTemplateOutlet="messagesDropdown"/>
     </c-header-nav>
-    <button cHeaderToggler *ngIf="userRole === 'Medecin' || userRole === 'Pharmacien' || userRole === 'PersonnelAdministratif'"
+    <button cHeaderToggler *ngIf="userRole === 'Medecin' || userRole === 'Pharmacien' || userRole === 'PersonnelAdministrative'"
     style="margin-inline-end: -12px" [routerLink]="'/messagerie/msg'" class="btn pe-3"><svg cIcon name="cilChatBubble" size="lg" style="color: #6387c0;"></svg></button>
     <c-header-nav class="ms-auto ms-md-0">
       <div class="nav-item py-1">
@@ -63,7 +63,7 @@
       <svg cIcon name="cilUser" size="lg" style="color: #6387c0;"></svg>
     </button>
     <button
-    *ngIf="userRole === 'Medecin' || userRole === 'Pharmacien' || userRole === 'PersonnelAdministratif'"
+    *ngIf="userRole === 'Medecin' || userRole === 'Pharmacien' || userRole === 'PersonnelAdministrative'"
     style="margin-inline-end: -12px"
     cHeaderToggler
     (click)="navigateTo()"

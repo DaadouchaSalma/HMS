@@ -28,7 +28,7 @@ export const routes: Routes = [
         canActivate: [authGuard, roleGuard],
         data: {
           title: 'La Liste des reclamations',
-          roles: ['PersonnelAdministratif']
+          roles: ['PersonnelAdministrative']
         }
       } 
     ]

@@ -4,7 +4,7 @@ using HMS.Models;
 
 namespace HMS.Hubs
 {
-    [Authorize(Roles = "PersonnelAdministratif, Medecin, Pharmacien")]
+    [Authorize(Roles = "PersonnelAdministrative, Medecin, Pharmacien")]
     public class MessageHub : Hub
     {
         public async Task SendMessage(string senderId, string receiverId, string message)

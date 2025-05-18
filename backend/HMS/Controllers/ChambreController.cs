@@ -20,7 +20,7 @@ namespace HMS.Controllers {
             _context = context;
         }
         //ajout chambre
-        [Authorize(Roles = "PersonnelAdministratif, Admin")]
+        [Authorize(Roles = "PersonnelAdministrative, Admin")]
         [HttpPost]
         public async Task<IActionResult> AddChambre([FromBody] Chambre chambre)
         {
@@ -35,7 +35,7 @@ namespace HMS.Controllers {
             return Ok(new { message = "Chambre ajoutée avec succès" });
         }
         //toutes le chambres 
-        [Authorize(Roles = "PersonnelAdministratif, Admin, Patient")]
+        [Authorize(Roles = "PersonnelAdministrative, Admin, Patient")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Chambre>>> GetChambres()
         {
@@ -57,7 +57,7 @@ namespace HMS.Controllers {
         }
 
         //modifier une chambre 
-        [Authorize(Roles = "PersonnelAdministratif, Admin")]
+        [Authorize(Roles = "PersonnelAdministrative, Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateChambre(Guid id, [FromBody] Chambre chambre)
         {
